@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxury — Inicio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="luxury-bg text-light">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-3 border-bottom border-secondary border-opacity-25">
+        <div class="container">
+            <a class="navbar-brand brand-logo" href="index.html">LUXURY</a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3 text-uppercase fs-7 tracking-wider">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="verano.html">Verano</a></li>
+                    <li class="nav-item"><a class="nav-link" href="primavera.html">Primavera</a></li>
+                    <li class="nav-item"><a class="nav-link" href="invierno.html">Invierno</a></li>
+                    <li class="nav-item"><a class="nav-link" href="otono.html">Otoño</a></li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html">
+                            <i class="bi bi-bag"></i> Carrito (<span class="cart-count">0</span>)
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Ingresar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero-section text-center">
+        <div class="gold-line-vertical mx-auto"></div>
+        <span class="text-gold text-uppercase tracking-widest fs-7">Maison Luxury</span>
+        <h1 class="display-4 luxury-title fst-italic mt-2">Descubre tu fragancia</h1>
+        <div class="gold-divider mx-auto my-3"></div>
+        <p class="text-gold-light fw-light">Curaduría de fragancias para cada estación del año</p>
+        <a href="#estaciones" class="btn btn-luxury mt-4">Explorar colecciones</a>
+    </section>
+
+    <section class="manifest-section text-center">
+        <blockquote class="manifest-quote">"No vendemos perfumes, te ayudamos a encontrar el tuyo."</blockquote>
+    </section>
+
+    <section class="container py-5" id="estaciones">
+        <h2 class="section-label text-center mb-4">Explora por estación</h2>
+        <div class="season-grid">
+            <article class="season-card"><a href="verano.html" class="season-link"><img src="img/Verano.jpg" class="season-img" alt="Verano"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-sun"></i><h3 class="season-title">Verano</h3></div></a></article>
+            <article class="season-card"><a href="primavera.html" class="season-link"><img src="img/primavera.jpg" class="season-img" alt="Primavera"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-flower1"></i><h3 class="season-title">Primavera</h3></div></a></article>
+            <article class="season-card"><a href="invierno.html" class="season-link"><img src="img/invierno.jpg" class="season-img" alt="Invierno"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-snow2"></i><h3 class="season-title">Invierno</h3></div></a></article>
+            <article class="season-card"><a href="otono.html" class="season-link"><img src="img/otono.jpg" class="season-img" alt="Otoño"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-tree"></i><h3 class="season-title">Otoño</h3></div></a></article>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="text-center mb-4">
+            <span class="text-gold text-uppercase tracking-widest fs-7">Nuestra tienda</span>
+            <h2 class="luxury-title mt-2">Los más buscados</h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card luxury-card h-100 border-0">
+                    <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Aqua Vitae"></div>
+                    <div class="card-body text-center p-4">
+                        <h3 class="card-title h5 luxury-title">Aqua Vitae</h3>
+                        <p class="card-text text-gold-light fs-7 my-2">Fresco · Cítrico · Ligero</p>
+                        <a href="producto.html?id=1" class="btn btn-luxury w-100">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card luxury-card h-100 border-0">
+                    <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Fleur de Sol"></div>
+                    <div class="card-body text-center p-4">
+                        <h3 class="card-title h5 luxury-title">Fleur de Sol</h3>
+                        <p class="card-text text-gold-light fs-7 my-2">Floral · Dulce · Fresco</p>
+                        <a href="producto.html?id=2" class="btn btn-luxury w-100">Descubrir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="site-footer mt-5">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-12 col-md-5">
+                <span class="brand-logo d-block mb-2">LUXURY</span>
+                <p class="footer-text">Curaduría de fragancias por estación, pensada para acompañarte todo el año.</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h4 class="footer-heading">Colecciones</h4>
+                <ul class="footer-list">
+                    <li><a href="verano.html">Verano</a></li>
+                    <li><a href="primavera.html">Primavera</a></li>
+                    <li><a href="invierno.html">Invierno</a></li>
+                    <li><a href="otono.html">Otoño</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-4">
+                <h4 class="footer-heading">Sitio</h4>
+                <ul class="footer-list">
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="login.html">Ingresar</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <span>© 2026 Luxury — Proyecto académico Full Stack 2</span>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/javas.js"></script>
+</body>
+</html>
