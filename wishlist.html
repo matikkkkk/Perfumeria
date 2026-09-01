@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luxury — Wishlist</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="luxury-bg text-light">
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-3 border-bottom border-secondary border-opacity-25 sticky-top">
+        <div class="container">
+            <a class="navbar-brand brand-logo d-flex align-items-center gap-2" href="index.html"><span class="brand-mark-mini">ML</span> MAISON LUXURY</a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3 text-uppercase fs-7 tracking-wider">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="productos.html" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                        <ul class="dropdown-menu dropdown-menu-luxury" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="productos.html"><span class="dropdown-item-title">Todos</span><span class="dropdown-item-sub">Catálogo completo</span></a></li>
+                            <li><a class="dropdown-item" href="productos.html?genero=hombre"><span class="dropdown-item-title">Perfumes Hombre</span><span class="dropdown-item-sub">Fragancias masculinas</span></a></li>
+                            <li><a class="dropdown-item" href="productos.html?genero=mujer"><span class="dropdown-item-title">Perfumes Mujer</span><span class="dropdown-item-sub">Fragancias femeninas</span></a></li>
+                            <li><a class="dropdown-item" href="productos.html?genero=unisex"><span class="dropdown-item-title">Perfumes Unisex</span><span class="dropdown-item-sub">Para todos</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link btn-diccionario-nav" href="#" data-bs-toggle="modal" data-bs-target="#diccionarioModal"><i class="bi bi-stars"></i> Diccionario</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wishlist.html">
+                            <i class="bi bi-heart"></i> <span class="wishlist-count">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html">
+                            <i class="bi bi-bag"></i> Carrito (<span class="cart-count">0</span>)
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Ingresar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container py-5 my-4">
+    <div class="text-center mb-5">
+        <span class="text-gold text-uppercase tracking-widest fs-7">Mis favoritos</span>
+        <h1 class="display-5 luxury-title fst-italic mt-2">Wishlist</h1>
+        <div class="gold-divider mx-auto my-3"></div>
+        <p class="text-gold-light fw-light">Fragancias guardadas</p>
+    </div>
+
+    <div id="wishlistVacio" class="text-center py-5 d-none">
+        <i class="bi bi-heart wishlist-empty-icon"></i>
+        <p class="luxury-title fst-italic h4 mt-3 mb-1">Tu wishlist está vacía</p>
+        <p class="text-gold-light">Guarda las fragancias que te enamoran con el corazón en cada producto</p>
+        <a href="productos.html" class="btn btn-luxury mt-3">Explorar fragancias</a>
+    </div>
+
+    <div class="row g-4 justify-content-center" id="wishlistGrid"></div>
+</main>
+<footer class="site-footer mt-5">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-12 col-md-5">
+                <span class="brand-logo d-block mb-2">LUXURY</span>
+                <p class="footer-text">Curaduría de fragancias por estación, pensada para acompañarte todo el año.</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h4 class="footer-heading">Categorías</h4>
+                <ul class="footer-list">
+                    <li><a href="productos.html?genero=hombre">Perfumes Hombre</a></li>
+                    <li><a href="productos.html?genero=mujer">Perfumes Mujer</a></li>
+                    <li><a href="productos.html?genero=unisex">Perfumes Unisex</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-4">
+                <h4 class="footer-heading">Sitio</h4>
+                <ul class="footer-list">
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="login.html">Ingresar</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <span>© 2026 Luxury — Proyecto académico Full Stack 2</span>
+        </div>
+    </div>
+</footer>
+
+<div class="modal fade" id="diccionarioModal" tabindex="-1" aria-labelledby="diccionarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content diccionario-modal-content">
+            <div class="modal-header border-0">
+                <div>
+                    <span class="text-gold text-uppercase tracking-widest fs-7">Referencia</span>
+                    <h2 class="luxury-title fst-italic h3 mt-1 mb-0" id="diccionarioModalLabel">Diccionario Olfativo</h2>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="diccionarioBuscador" class="form-control form-luxury mb-3" placeholder="Buscar término...">
+                <div class="diccionario-lista">
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Oud / Agarwood</h4>
+                        <p class="diccionario-definicion">La resina más preciada del mundo. Se forma en el árbol Aquilaria cuando este sufre una infección. Solo el 2% de los árboles la produce naturalmente.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Fougère</h4>
+                        <p class="diccionario-definicion">Familia olfativa clásica masculina. Del francés "helecho". Combina lavanda, cumarina y musgo de roble.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Chypre</h4>
+                        <p class="diccionario-definicion">Familia clásica que nació en Chipre. Bergamota en salida, floral en corazón, musgo de roble y labdanum en el fondo.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Sillage</h4>
+                        <p class="diccionario-definicion">La estela que deja el perfume al caminar. Un buen sillage significa que el aroma persiste en el aire mucho después de que la persona se va.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Notas de salida</h4>
+                        <p class="diccionario-definicion">Los primeros aromas que percibes al aplicar el perfume. Suelen durar entre 5 y 15 minutos antes de dar paso al corazón.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Notas de corazón</h4>
+                        <p class="diccionario-definicion">El alma del perfume. Aparecen cuando las notas de salida se disipan y definen su carácter durante varias horas.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Notas de fondo</h4>
+                        <p class="diccionario-definicion">Las notas más profundas y duraderas del perfume. Pueden persistir en la piel varias horas después de la aplicación.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Concentración (EDT / EDP / Parfum)</h4>
+                        <p class="diccionario-definicion">Indica el porcentaje de esencia pura en el frasco: EDT (5-15%), EDP (15-20%) y Parfum (20-30%), de menor a mayor intensidad y duración.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Familia olfativa</h4>
+                        <p class="diccionario-definicion">Categoría que agrupa los perfumes según su aroma dominante: floral, amaderado, cítrico, oriental, acuático, gourmand, entre otras.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Gourmand</h4>
+                        <p class="diccionario-definicion">Familia olfativa que evoca aromas dulces y comestibles, como vainilla, caramelo, café o chocolate.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Perfume nicho</h4>
+                        <p class="diccionario-definicion">Fragancias de producción limitada, creadas por casas independientes con ingredientes poco convencionales y fuera del circuito masivo.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Perfume árabe / oriental</h4>
+                        <p class="diccionario-definicion">Fragancias intensas y especiadas, tradicionalmente elaboradas con oud, ámbar, azafrán y almizcle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/javas.js"></script>
+</body>
+</html>

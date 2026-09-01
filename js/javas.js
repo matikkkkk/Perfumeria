@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    actualizarContador();
+    actualizarContadorWishlist();
     if (document.getElementById("productosGrid")) {
         inicializarFiltrosProductos();
     }
@@ -13,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (document.getElementById("destacadosGrid")) {
         renderDestacados();
+    }
+
+    if (document.getElementById("wishlistGrid")) {
+        mostrarWishlist();
     }
 });
 
@@ -404,4 +410,103 @@ function inicializarFiltrosProductos() {
     }
 
     renderProductosFiltrados();
+}
+
+function mostrarToast(mensaje, tipo) {
+    var contenedor = document.getElementById("toastContenedor");
+    if (!contenedor) {
+        contenedor = document.createElement("div");
+        contenedor.id = "toastContenedor";
+        contenedor.style.position = "fixed";
+        contenedor.style.bottom = "20px";
+        contenedor.style.right = "20px";
+        contenedor.style.zIndex = "9999";
+        document.body.appendChild(contenedor);
+    }
+
+    var toast = document.createElement("div");
+    toast.className = "toast-luxury" + (tipo === "aviso" ? " toast-luxury--aviso" : "");
+    toast.textContent = mensaje;
+    contenedor.appendChild(toast);
+
+    setTimeout(function () {
+        toast.remove();
+    }, 3000);
+}
+
+
+
+function actualizarContador() {
+    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    var cantidad = 0;
+    carrito.forEach(function (p) {
+        cantidad += p.cantidad;
+    });
+
+    document.querySelectorAll(".cart-count").forEach(function (elemento) {
+        elemento.textContent = cantidad;
+    });
+}
+
+function obtenerWishlist() {
+    return JSON.parse(localStorage.getItem("wishlist") || "[]");
+}
+
+function estaEnWishlist(id) {
+    return obtenerWishlist().indexOf(id) !== -1;
+}
+
+function toggleWishlist(id) {
+    var lista = obtenerWishlist();
+    var indice = lista.indexOf(id);
+
+    if (indice === -1) {
+        lista.push(id);
+    } else {
+        lista.splice(indice, 1);
+    }
+
+    localStorage.setItem("wishlist", JSON.stringify(lista));
+    actualizarContadorWishlist();
+
+    var activo = estaEnWishlist(id);
+    document.querySelectorAll('.wishlist-heart[data-id="' + id + '"]').forEach(function (boton) {
+        boton.classList.toggle("activo", activo);
+        boton.innerHTML = '<i class="bi ' + (activo ? "bi-heart-fill" : "bi-heart") + '"></i>';
+    });
+
+    if (document.getElementById("wishlistGrid")) {
+        mostrarWishlist();
+    }
+}
+
+function actualizarContadorWishlist() {
+    var cantidad = obtenerWishlist().length;
+    document.querySelectorAll(".wishlist-count").forEach(function (elemento) {
+        elemento.textContent = cantidad;
+    });
+}
+
+function mostrarWishlist() {
+    var contenedor = document.getElementById("wishlistGrid");
+    var vacio = document.getElementById("wishlistVacio");
+    if (!contenedor) return;
+
+    var ids = obtenerWishlist();
+    var lista = obtenerLista().filter(function (p) { return ids.indexOf(p.id) !== -1; });
+
+    if (lista.length === 0) {
+        contenedor.innerHTML = "";
+        contenedor.classList.add("d-none");
+        if (vacio) vacio.classList.remove("d-none");
+        return;
+    }
+
+    contenedor.classList.remove("d-none");
+    if (vacio) vacio.classList.add("d-none");
+
+    contenedor.innerHTML = "";
+    lista.forEach(function (p) {
+        contenedor.innerHTML += crearTarjeta(p);
+    });
 }
