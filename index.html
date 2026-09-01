@@ -19,7 +19,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent py-3 border-bottom border-secondary border-opacity-25">
         <div class="container">
-            <a class="navbar-brand brand-logo" href="index.html">LUXURY</a>
+            <a class="navbar-brand brand-logo d-flex align-items-center gap-2" href="index.html"><span class="brand-mark-mini">ML</span> MAISON LUXURY</a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
@@ -28,14 +28,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3 text-uppercase fs-7 tracking-wider">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="verano.html">Verano</a></li>
-                    <li class="nav-item"><a class="nav-link" href="primavera.html">Primavera</a></li>
-                    <li class="nav-item"><a class="nav-link" href="invierno.html">Invierno</a></li>
-                    <li class="nav-item"><a class="nav-link" href="otono.html">Otoño</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="productos.html" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                        <ul class="dropdown-menu dropdown-menu-luxury" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="productos.html"><span class="dropdown-item-title">Todos</span><span class="dropdown-item-sub">Catálogo completo</span></a></li>
+                            <li><a class="dropdown-item" href="productos.html?genero=hombre"><span class="dropdown-item-title">Perfumes Hombre</span><span class="dropdown-item-sub">Fragancias masculinas</span></a></li>
+                            <li><a class="dropdown-item" href="productos.html?genero=mujer"><span class="dropdown-item-title">Perfumes Mujer</span><span class="dropdown-item-sub">Fragancias femeninas</span></a></li>
+                            <li><a class="dropdown-item" href="productos.html?genero=unisex"><span class="dropdown-item-title">Perfumes Unisex</span><span class="dropdown-item-sub">Para todos</span></a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link btn-diccionario-nav" href="#" data-bs-toggle="modal" data-bs-target="#diccionarioModal"><i class="bi bi-stars"></i> Diccionario</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="wishlist.html">
+                            <i class="bi bi-heart"></i> <span class="wishlist-count">0</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="carrito.html">
                             <i class="bi bi-bag"></i> Carrito (<span class="cart-count">0</span>)
@@ -50,26 +60,135 @@
 
 <main>
     <section class="hero-section text-center">
-        <div class="gold-line-vertical mx-auto"></div>
+        <div class="brand-mark mx-auto">
+            <span class="brand-mark-letters">M<span class="brand-mark-l">L</span></span>
+            <span class="brand-mark-caption">Maison<br>Luxury</span>
+        </div>
         <span class="text-gold text-uppercase tracking-widest fs-7">Maison Luxury</span>
         <h1 class="display-4 luxury-title fst-italic mt-2">Descubre tu fragancia</h1>
         <div class="gold-divider mx-auto my-3"></div>
         <p class="text-gold-light fw-light">Curaduría de fragancias para cada estación del año</p>
-        <a href="#estaciones" class="btn btn-luxury mt-4">Explorar colecciones</a>
+        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+            <a href="#colecciones" class="btn btn-luxury">Explorar</a>
+            <a href="#" class="btn btn-luxury" data-bs-toggle="modal" data-bs-target="#diccionarioModal"><i class="bi bi-stars"></i> Diccionario Olfativo</a>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="text-center mb-4">
+            <span class="section-label d-block">Recién llegados</span>
+            <h2 class="luxury-title mt-2 fst-italic">Nuevos Lanzamientos</h2>
+        </div>
+        <div id="carruselLanzamientos" class="carousel slide launch-carousel" data-bs-ride="carousel" data-bs-interval="6000">
+            <div class="carousel-inner" id="carruselLanzamientosInner"></div>
+            <button class="carousel-control-prev carousel-control-luxury" type="button" data-bs-target="#carruselLanzamientos" data-bs-slide="prev">
+                <i class="bi bi-chevron-left"></i>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next carousel-control-luxury" type="button" data-bs-target="#carruselLanzamientos" data-bs-slide="next">
+                <i class="bi bi-chevron-right"></i>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+            <div class="carousel-indicators carousel-indicators-luxury">
+                <button type="button" data-bs-target="#carruselLanzamientos" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#carruselLanzamientos" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carruselLanzamientos" data-bs-slide-to="2"></button>
+            </div>
+        </div>
     </section>
 
     <section class="manifest-section text-center">
-        <blockquote class="manifest-quote">"No vendemos perfumes, te ayudamos a encontrar el tuyo."</blockquote>
+        <blockquote class="manifest-quote">"Cada fragancia cuenta una historia. ¿Cuál será la tuya?"</blockquote>
     </section>
 
-    <section class="container py-5" id="estaciones">
-        <h2 class="section-label text-center mb-4">Explora por estación</h2>
-        <div class="season-grid">
-            <article class="season-card"><a href="verano.html" class="season-link"><img src="img/Verano.jpg" class="season-img" alt="Verano"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-sun"></i><h3 class="season-title">Verano</h3></div></a></article>
-            <article class="season-card"><a href="primavera.html" class="season-link"><img src="img/primavera.jpg" class="season-img" alt="Primavera"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-flower1"></i><h3 class="season-title">Primavera</h3></div></a></article>
-            <article class="season-card"><a href="invierno.html" class="season-link"><img src="img/invierno.jpg" class="season-img" alt="Invierno"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-snow2"></i><h3 class="season-title">Invierno</h3></div></a></article>
-            <article class="season-card"><a href="otono.html" class="season-link"><img src="img/otono.jpg" class="season-img" alt="Otoño"><div class="season-overlay"></div><div class="season-content"><i class="bi bi-tree"></i><h3 class="season-title">Otoño</h3></div></a></article>
+    <section class="container py-5" id="colecciones">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="section-label d-block">Colección Mujer</span>
+                <h2 class="luxury-title mt-2 fst-italic">Ideal para Ellas</h2>
+            </div>
+            <a href="productos.html?genero=mujer" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
         </div>
+        <div id="carruselMujer" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner" id="carruselMujerInner"></div>
+        </div>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselMujer" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
+            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselMujer" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="section-label d-block">Colección Hombre</span>
+                <h2 class="luxury-title mt-2 fst-italic">Ideal para Ellos</h2>
+            </div>
+            <a href="productos.html?genero=hombre" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
+        </div>
+        <div id="carruselHombre" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner" id="carruselHombreInner"></div>
+        </div>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselHombre" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
+            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselHombre" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="section-label d-block">Colección Unisex</span>
+                <h2 class="luxury-title mt-2 fst-italic">Ideal para Todos</h2>
+            </div>
+            <a href="productos.html?genero=unisex" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
+        </div>
+        <div id="carruselUnisex" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-inner" id="carruselUnisexInner"></div>
+        </div>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselUnisex" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
+            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselUnisex" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="text-center mb-5">
+            <span class="text-gold text-uppercase tracking-widest fs-7">Suscripción mensual</span>
+            <h2 class="luxury-title fst-italic mt-2">La Maison Monthly</h2>
+            <p class="text-gold-light fw-light mx-auto" style="max-width:560px;">Recibe fragancias exclusivas en tu puerta cada mes, curadas según tu perfil, con empaque de lujo.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-12 col-md-4">
+                <div class="monthly-card">
+                    <span class="monthly-plan-label">Plan</span>
+                    <h3 class="monthly-plan-name">Découverte</h3>
+                    <div class="monthly-price">$19.990 <small>/ mes</small></div>
+                    <p class="monthly-includes">2 muestras de 5ml + tarjeta de notas</p>
+                    <a href="contacto.html" class="btn btn-luxury w-100">Suscribirse</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="monthly-card monthly-card--recomendado">
+                    <span class="monthly-badge">Recomendado</span>
+                    <span class="monthly-plan-label">Plan</span>
+                    <h3 class="monthly-plan-name">Maison</h3>
+                    <div class="monthly-price">$34.990 <small>/ mes</small></div>
+                    <p class="monthly-includes">4 muestras + 1 tamaño viaje 15ml</p>
+                    <a href="contacto.html" class="btn btn-luxury w-100">Suscribirse</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="monthly-card">
+                    <span class="monthly-plan-label">Plan</span>
+                    <h3 class="monthly-plan-name">Impérial</h3>
+                    <div class="monthly-price">$59.990 <small>/ mes</small></div>
+                    <p class="monthly-includes">5ml x 3 + frasco completo a elegir</p>
+                    <a href="contacto.html" class="btn btn-luxury w-100">Suscribirse</a>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-gold-light fs-7 mt-4">Cancela cuando quieras · Sin permanencia · Próxima caja el 1 de cada mes</p>
     </section>
 
     <section class="container py-5">
@@ -77,25 +196,61 @@
             <span class="text-gold text-uppercase tracking-widest fs-7">Nuestra tienda</span>
             <h2 class="luxury-title mt-2">Los más buscados</h2>
         </div>
-        <div class="row g-4 justify-content-center">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card luxury-card h-100 border-0">
-                    <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Aqua Vitae"></div>
-                    <div class="card-body text-center p-4">
-                        <h3 class="card-title h5 luxury-title">Aqua Vitae</h3>
-                        <p class="card-text text-gold-light fs-7 my-2">Fresco · Cítrico · Ligero</p>
-                        <a href="producto.html?id=1" class="btn btn-luxury w-100">Descubrir</a>
-                    </div>
+        <div class="row g-4 justify-content-center" id="destacadosGrid"></div>
+    </section>
+
+    <section class="container py-5" id="preguntas-frecuentes">
+        <div class="text-center mb-4">
+            <span class="section-label d-block">Soporte</span>
+            <h2 class="luxury-title mt-2 fst-italic">Preguntas Frecuentes</h2>
+        </div>
+        <div class="accordion accordion-luxury mx-auto" id="faqAccordion" style="max-width: 760px;">
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeading1">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">¿Qué tipos de perfumes ofrecen en Luxury?</button>
+                </h3>
+                <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Trabajamos fragancias organizadas por estación del año, familia olfativa y género: opciones ligeras para verano, florales de primavera, amaderadas de otoño e intensas de invierno, tanto para hombre, mujer como unisex.</div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card luxury-card h-100 border-0">
-                    <div class="card-img-wrapper"><img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Fleur de Sol"></div>
-                    <div class="card-body text-center p-4">
-                        <h3 class="card-title h5 luxury-title">Fleur de Sol</h3>
-                        <p class="card-text text-gold-light fs-7 my-2">Floral · Dulce · Fresco</p>
-                        <a href="producto.html?id=2" class="btn btn-luxury w-100">Descubrir</a>
-                    </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeading2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">¿Los perfumes que venden son originales?</button>
+                </h3>
+                <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Sí, todos nuestros productos son 100% originales y cuentan con garantía de autenticidad.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeading3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">¿Cómo puedo realizar un pedido?</button>
+                </h3>
+                <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Debes registrarte o iniciar sesión, elegir tus productos, añadirlos al carrito y finalizar la compra desde la página del carrito.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeading4">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">¿Cuáles son los métodos de pago disponibles?</button>
+                </h3>
+                <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Este es un proyecto académico de demostración, por lo que la compra se registra internamente sin procesar pagos reales.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeading5">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">¿Puedo devolver un perfume si no me gusta?</button>
+                </h3>
+                <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Aceptamos devoluciones dentro de los 30 días siguientes a la compra, siempre que el frasco esté sellado y sin uso.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="faqHeading6">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">¿Hacen envíos a regiones?</button>
+                </h3>
+                <div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Sí, realizamos envíos a todas las regiones del país a través de nuestros couriers asociados.</div>
                 </div>
             </div>
         </div>
@@ -109,12 +264,11 @@
                 <p class="footer-text">Curaduría de fragancias por estación, pensada para acompañarte todo el año.</p>
             </div>
             <div class="col-6 col-md-3">
-                <h4 class="footer-heading">Colecciones</h4>
+                <h4 class="footer-heading">Categorías</h4>
                 <ul class="footer-list">
-                    <li><a href="verano.html">Verano</a></li>
-                    <li><a href="primavera.html">Primavera</a></li>
-                    <li><a href="invierno.html">Invierno</a></li>
-                    <li><a href="otono.html">Otoño</a></li>
+                    <li><a href="productos.html?genero=hombre">Perfumes Hombre</a></li>
+                    <li><a href="productos.html?genero=mujer">Perfumes Mujer</a></li>
+                    <li><a href="productos.html?genero=unisex">Perfumes Unisex</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-4">
@@ -127,11 +281,90 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center mt-4 pt-4 border-top border-secondary border-opacity-25">
+            <div class="col-12 col-md-6 text-center">
+                <h4 class="footer-heading">Newsletter</h4>
+                <p class="footer-text mb-3">Entérate antes que nadie de nuevos lanzamientos y ediciones limitadas.</p>
+                <form id="newsletterForm" class="d-flex gap-2 justify-content-center flex-wrap" novalidate>
+                    <input type="email" id="newsletterEmail" class="form-control form-luxury" style="max-width:280px;" placeholder="tu@correo.com" required>
+                    <button type="submit" class="btn btn-luxury">Suscribirse</button>
+                </form>
+                <small id="newsletterMensaje" class="d-block mt-2"></small>
+            </div>
+        </div>
         <div class="footer-bottom text-center">
             <span>© 2026 Luxury — Proyecto académico Full Stack 2</span>
         </div>
     </div>
 </footer>
+
+<div class="modal fade" id="diccionarioModal" tabindex="-1" aria-labelledby="diccionarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content diccionario-modal-content">
+            <div class="modal-header border-0">
+                <div>
+                    <span class="text-gold text-uppercase tracking-widest fs-7">Referencia</span>
+                    <h2 class="luxury-title fst-italic h3 mt-1 mb-0" id="diccionarioModalLabel">Diccionario Olfativo</h2>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="diccionarioBuscador" class="form-control form-luxury mb-3" placeholder="Buscar término...">
+                <div class="diccionario-lista">
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Oud / Agarwood</h4>
+                        <p class="diccionario-definicion">La resina más preciada del mundo. Se forma en el árbol Aquilaria cuando este sufre una infección. Solo el 2% de los árboles la produce naturalmente.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Fougère</h4>
+                        <p class="diccionario-definicion">Familia olfativa clásica masculina. Del francés "helecho". Combina lavanda, cumarina y musgo de roble.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Chypre</h4>
+                        <p class="diccionario-definicion">Familia clásica que nació en Chipre. Bergamota en salida, floral en corazón, musgo de roble y labdanum en el fondo.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Sillage</h4>
+                        <p class="diccionario-definicion">La estela que deja el perfume al caminar. Un buen sillage significa que el aroma persiste en el aire mucho después de que la persona se va.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Notas de salida</h4>
+                        <p class="diccionario-definicion">Los primeros aromas que percibes al aplicar el perfume. Suelen durar entre 5 y 15 minutos antes de dar paso al corazón.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Notas de corazón</h4>
+                        <p class="diccionario-definicion">El alma del perfume. Aparecen cuando las notas de salida se disipan y definen su carácter durante varias horas.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Notas de fondo</h4>
+                        <p class="diccionario-definicion">Las notas más profundas y duraderas del perfume. Pueden persistir en la piel varias horas después de la aplicación.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Concentración (EDT / EDP / Parfum)</h4>
+                        <p class="diccionario-definicion">Indica el porcentaje de esencia pura en el frasco: EDT (5-15%), EDP (15-20%) y Parfum (20-30%), de menor a mayor intensidad y duración.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Familia olfativa</h4>
+                        <p class="diccionario-definicion">Categoría que agrupa los perfumes según su aroma dominante: floral, amaderado, cítrico, oriental, acuático, gourmand, entre otras.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Gourmand</h4>
+                        <p class="diccionario-definicion">Familia olfativa que evoca aromas dulces y comestibles, como vainilla, caramelo, café o chocolate.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Perfume nicho</h4>
+                        <p class="diccionario-definicion">Fragancias de producción limitada, creadas por casas independientes con ingredientes poco convencionales y fuera del circuito masivo.</p>
+                    </div>
+                    <div class="diccionario-item">
+                        <h4 class="diccionario-termino">Perfume árabe / oriental</h4>
+                        <p class="diccionario-definicion">Fragancias intensas y especiadas, tradicionalmente elaboradas con oud, ámbar, azafrán y almizcle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/data.js"></script>
 <script src="js/javas.js"></script>

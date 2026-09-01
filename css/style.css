@@ -6,6 +6,18 @@
     text-transform: uppercase;
 }
 
+/* ===== Alineación del nav ===== */
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
 :root {
     --bg-dark: #0d0f12;
     --card-bg: #14171d;
@@ -24,7 +36,7 @@ body.luxury-bg {
 .luxury-title {
     font-family: 'Playfair Display', serif;
     letter-spacing: 0.5px;
-    /* elegir buen color de titulo*/
+    color: #f4ecd8;
 }
 
 .brand-logo {
@@ -38,10 +50,10 @@ body.luxury-bg {
 /* Detalles Dorados */
 .text-gold { color: var(--gold); }
 .text-gold-light { color: var(--text-muted); }
-.gold-text { color: var(--gold) !important; }
 .tracking-wider { letter-spacing: 2px; }
 .tracking-widest { letter-spacing: 4px; }
 .fs-7 { font-size: 0.8rem; }
+.card-brand { color: var(--gold); letter-spacing: 0.08em; opacity: 0.85; }
 
 .gold-divider {
     width: 50px;
@@ -67,6 +79,57 @@ body.luxury-bg {
 .card-img-wrapper {
     height: 280px;
     overflow: hidden;
+    position: relative;
+}
+
+.card-badge {
+    position: absolute;
+    top: 12px;
+    z-index: 2;
+    background: rgba(13, 15, 18, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-light);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 2px;
+}
+
+.card-badge--left { left: 12px; }
+.card-badge--right { right: 12px; }
+
+.card-badge--ml {
+    top: auto;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    background: rgba(212, 175, 55, 0.18);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.toast-luxury {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    animation: toastFadeIn 0.3s ease;
+}
+
+.toast-luxury--aviso {
+    border-color: #e07a5f;
+}
+
+@keyframes toastFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .card-img-top {
@@ -104,20 +167,11 @@ body.luxury-bg {
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
-/* Home */
-
 /* ===== Hero ===== */
 .hero-section {
     padding: 80px 20px 60px;
     background: var(--card-bg);
     border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-}
-
-.gold-line-vertical {
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(var(--gold), transparent);
-    margin-bottom: 16px;
 }
 
 /* ===== Franja / manifiesto ===== */
@@ -137,7 +191,7 @@ body.luxury-bg {
     line-height: 1.6;
 }
 
-/*  Section label reutilizable  */
+/* Section label reutilizable */
 .section-label {
     font-size: 0.7rem;
     letter-spacing: 3px;
@@ -145,72 +199,7 @@ body.luxury-bg {
     color: var(--text-muted);
 }
 
-/* Explora por estación  */
-.season-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-}
-
-.season-card {
-    position: relative;
-    height: 180px;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.season-link {
-    display: block;
-    height: 100%;
-    text-decoration: none;
-}
-
-.season-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.season-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 12, 15, 0.5);
-    transition: background 0.3s ease;
-}
-
-.season-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
-    text-align: center;
-    border-top: 1px solid rgba(212, 175, 55, 0.4);
-}
-
-.season-content i {
-    color: var(--gold);
-    font-size: 1.2rem;
-}
-
-.season-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: #f5f0e6;
-    margin-top: 6px;
-    letter-spacing: 0.5px;
-}
-
-.season-card:hover .season-img {
-    transform: scale(1.08);
-}
-
-.season-card:hover .season-overlay {
-    background: rgba(10, 12, 15, 0.3);
-}
-
-/*Footer  */
+/* Footer */
 .site-footer {
     background: var(--card-bg);
     border-top: 1px solid rgba(212, 175, 55, 0.15);
@@ -239,18 +228,9 @@ body.luxury-bg {
     font-size: 0.8rem;
 }
 
-.footer-list li {
-    margin-bottom: 8px;
-}
-
-.footer-list a {
-    color: var(--text-muted);
-    text-decoration: none;
-}
-
-.footer-list a:hover {
-    color: var(--gold);
-}
+.footer-list li { margin-bottom: 8px; }
+.footer-list a { color: var(--text-muted); text-decoration: none; }
+.footer-list a:hover { color: var(--gold); }
 
 .footer-bottom {
     border-top: 1px solid rgba(212, 175, 55, 0.1);
@@ -264,67 +244,13 @@ body.luxury-bg {
     letter-spacing: 0.5px;
 }
 
-/* Responsive  */
 @media (max-width: 768px) {
-    .season-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .hero-section {
         padding: 60px 16px 40px;
     }
 }
 
-/*  Nav interna de sectores  */
-.sector-nav {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-}
 
-.sector-link {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
-    padding-bottom: 4px;
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.sector-link:hover {
-    color: var(--gold);
-    border-bottom-color: var(--gold);
-}
-
-.sector-section {
-    scroll-margin-top: 90px;
-}
-
-/* Grupos de filtro (intensidad / olor) */
-.filtro-grupo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.filtro-etiqueta {
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-right: 4px;
-}
-
-.filtro-btn.activo {
-    background: var(--gold);
-    color: var(--bg-dark);
-}
-/* ===== Elementos agregados para la evaluación ===== */
 .form-luxury {
     background: var(--card-bg);
     color: #e0e0e0;
@@ -332,90 +258,421 @@ body.luxury-bg {
     border-radius: 4px;
     padding: 12px 14px;
 }
+
 .form-luxury:focus {
     background: var(--card-bg);
     color: #fff;
     border-color: var(--gold);
     box-shadow: 0 0 0 .15rem rgba(212,175,55,.15);
 }
-.form-label-luxury {
-    color: var(--gold-light);
-    font-size: .8rem;
-    letter-spacing: 1px;
-}
-.error {
-    color: #ff8c8c;
-    font-size: .75rem;
-    margin-top: 5px;
-}
-.ok {
-    color: #9be7a5;
-    font-size: .85rem;
-}
-.cart-item, .admin-item {
+
+/* Dropdown "Productos" del nav */
+.dropdown-menu-luxury {
     background: var(--card-bg);
-    border: 1px solid rgba(212,175,55,.15);
-    padding: 15px;
-    margin-bottom: 12px;
+    border: 1px solid rgba(212,175,55,.2);
+    border-radius: 4px;
+    padding: 10px 0;
+    min-width: 220px;
 }
-.cart-item img {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
+
+.dropdown-menu-luxury .dropdown-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 20px;
 }
-.qty-btn {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 2px 9px;
-}
-.table-luxury {
-    --bs-table-bg: var(--card-bg);
-    --bs-table-color: #e0e0e0;
-    --bs-table-border-color: rgba(212,175,55,.15);
-}
-.alert-luxury {
-    background: rgba(212,175,55,.08);
-    color: var(--gold-light);
-    border: 1px solid rgba(212,175,55,.3);
-}
-.admin-menu {
-    background: var(--card-bg);
-    border-right: 1px solid rgba(212,175,55,.15);
-    min-height: 70vh;
-}
-.admin-menu a {
-    display: block;
+
+.dropdown-menu-luxury .dropdown-item-title {
     color: var(--text-muted);
-    text-decoration: none;
-    padding: 12px 18px;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
-.admin-menu a:hover, .admin-menu a.active {
+
+.dropdown-menu-luxury .dropdown-item-sub {
+    color: rgba(160,165,177,.6);
+    font-size: .72rem;
+}
+
+.dropdown-menu-luxury .dropdown-item:hover .dropdown-item-title,
+.dropdown-menu-luxury .dropdown-item:hover .dropdown-item-sub {
     color: var(--gold);
-    background: rgba(212,175,55,.05);
 }
-.stat-card {
+
+.dropdown-menu-luxury .dropdown-item:hover {
+    background: rgba(212,175,55,.06);
+}
+
+/* ===== Carrusel Nuevos Lanzamientos ===== */
+.launch-carousel {
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
     background: var(--card-bg);
-    border: 1px solid rgba(212,175,55,.15);
-    padding: 24px;
-    text-align: center;
 }
-.stat-number {
+
+.launch-slide { min-height: 420px; }
+.launch-img-wrapper { height: 420px; overflow: hidden; }
+.launch-img { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel-indicators-luxury button {
+    background-color: var(--gold);
+    opacity: 0.35;
+}
+
+.carousel-indicators-luxury button.active { opacity: 1; }
+
+/* ===== Controles de carrusel ===== */
+.carousel-control-luxury {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(13, 15, 18, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold);
+    opacity: 1;
+    font-size: 1.1rem;
+}
+
+.carousel-control-luxury.carousel-control-prev { left: 16px; }
+.carousel-control-luxury.carousel-control-next { right: 16px; }
+
+.carousel-control-luxury:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+}
+
+.btn-carousel-nav {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold);
+    border-radius: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-carousel-nav:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+}
+
+/* ===== Preguntas frecuentes ===== */
+.accordion-luxury {
+    --bs-accordion-bg: transparent;
+    --bs-accordion-border-color: rgba(212, 175, 55, 0.15);
+    --bs-accordion-border-radius: 0;
+    --bs-accordion-btn-color: #f5f0e6;
+    --bs-accordion-btn-bg: transparent;
+    --bs-accordion-active-color: var(--gold);
+    --bs-accordion-active-bg: transparent;
+    --bs-accordion-btn-focus-border-color: rgba(212, 175, 55, 0.4);
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-body-color: var(--text-muted);
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23d4af37'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-luxury .accordion-button {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+}
+
+/* ===== Chips: humor, ocasión, notas olfativas ===== */
+.mood-chip-list, .occasion-chip-list, .nota-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mood-chip {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--mood-color, var(--gold));
+    color: var(--mood-color, var(--gold-light));
+    background: var(--mood-bg, rgba(212, 175, 55, 0.12));
+}
+
+.mood-chip--poderoso { --mood-color: #c0392b; --mood-bg: rgba(192, 57, 43, 0.15); }
+.mood-chip--romantico { --mood-color: #e6779a; --mood-bg: rgba(230, 119, 154, 0.15); }
+.mood-chip--fresco { --mood-color: #4fb0c6; --mood-bg: rgba(79, 176, 198, 0.15); }
+.mood-chip--misterioso { --mood-color: #8e6fd8; --mood-bg: rgba(142, 111, 216, 0.15); }
+.mood-chip--relajado { --mood-color: #6fb56f; --mood-bg: rgba(111, 181, 111, 0.15); }
+.mood-chip--elegante { --mood-color: var(--gold); --mood-bg: rgba(212, 175, 55, 0.12); }
+
+.inspirado-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.72rem;
+    border-top: 1px dashed rgba(212, 175, 55, 0.3);
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+    padding: 6px 4px;
+    margin: 8px 0;
+}
+
+.inspirado-mini-label { color: var(--gold); text-transform: uppercase; letter-spacing: 0.03em; }
+.inspirado-mini-label em { font-style: italic; color: #f5f0e6; }
+.inspirado-mini-precios s { color: var(--text-muted); margin-right: 6px; }
+.inspirado-mini-precios { color: var(--gold-light); font-weight: 600; }
+
+/* ===== Botón Diccionario en la navegación ===== */
+.btn-diccionario-nav {
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+    padding: 4px 14px !important;
+    color: var(--gold) !important;
+    transition: all 0.25s ease;
+}
+
+.btn-diccionario-nav:hover {
+    background: var(--gold);
+    color: #14171d !important;
+}
+
+/* ===== Marca "ML" (nav + hero) ===== */
+.brand-mark-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    color: var(--gold);
+}
+
+.brand-mark {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.brand-mark-letters {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--gold);
+    display: flex;
+}
+
+.brand-mark-letters .brand-mark-l {
+    margin-left: -0.15em;
+    margin-top: 0.5em;
+}
+
+.brand-mark-caption {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    margin-top: -14px;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ===== Fondo con patrón (Hero Home) ===== */
+.hero-section {
+    position: relative;
+    background-color: var(--bg-dark);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ctext x='6' y='34' font-family='Georgia,serif' font-size='36' fill='rgba(212,175,55,0.05)'%3EM%3C/text%3E%3Ctext x='96' y='26' font-size='15' fill='rgba(212,175,55,0.14)'%3E%2B%3C/text%3E%3Ctext x='52' y='78' font-size='13' fill='rgba(212,175,55,0.14)'%3E%E2%9C%A6%3C/text%3E%3Ctext x='122' y='98' font-size='15' fill='rgba(212,175,55,0.12)'%3E%E2%97%86%3C/text%3E%3Ctext x='14' y='140' font-size='13' fill='rgba(212,175,55,0.12)'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 160px 160px;
+    padding: 90px 20px 70px;
+}
+
+/* ===== Wishlist ===== */
+.wishlist-heart {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13, 15, 18, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 50%;
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.wishlist-heart:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.wishlist-heart.activo {
+    color: #e0567c;
+    border-color: #e0567c;
+}
+
+/* ===== Diccionario Olfativo (modal) ===== */
+.diccionario-modal-content {
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 4px;
+    color: #e0e0e0;
+}
+
+.diccionario-modal-content .modal-header { padding: 24px 28px 0; }
+.diccionario-modal-content .modal-body {
+    padding: 20px 28px 28px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.diccionario-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+.diccionario-termino {
     font-family: 'Playfair Display', serif;
     color: var(--gold);
-    font-size: 2rem;
+    font-size: 1rem;
+    margin-bottom: 6px;
 }
-.badge-luxury {
-    border: 1px solid var(--gold);
+
+.diccionario-definicion {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* ===== La Maison Monthly (suscripción) ===== */
+.monthly-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 4px;
+    padding: 36px 28px;
+    height: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.monthly-card--recomendado {
+    border-color: var(--gold);
+    transform: scale(1.03);
+}
+
+.monthly-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--bg-dark);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.monthly-plan-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.monthly-plan-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 4px 0 14px;
+}
+
+.monthly-price {
+    font-family: 'Playfair Display', serif;
     color: var(--gold);
-    padding: 4px 8px;
-    font-size: .7rem;
+    font-size: 2.1rem;
 }
-.blog-card img {
-    height: 220px;
-    object-fit: cover;
+
+.monthly-price small {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+.monthly-includes {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 14px 0 22px;
+}
+
+@media (max-width: 991px) {
+    .monthly-card--recomendado { transform: none; }
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        margin-top: 16px;
+        border-top: 1px solid rgba(212, 175, 55, 0.15);
+        padding-top: 16px;
+    }
+    .navbar-nav {
+        align-items: flex-start;
+        gap: 4px !important;
+    }
+    .navbar-nav .nav-link {
+        width: 100%;
+        padding: 10px 4px !important;
+    }
+    .launch-slide { min-height: auto; }
+    .launch-img-wrapper { height: 260px; }
+    .launch-img { height: 100%; width: 100%; object-fit: cover; }
+}
+
 @media (max-width: 768px) {
-    .season-grid { grid-template-columns: repeat(2, 1fr); }
-    .admin-menu { min-height: auto; border-right: 0; border-bottom: 1px solid rgba(212,175,55,.15); }
+    .navbar-brand.brand-logo { font-size: 1.15rem; letter-spacing: 2px; }
+    .brand-mark-mini { width: 26px; height: 26px; }
+    .hero-section { text-align: center; }
+    h1.display-4.luxury-title { font-size: 2rem; }
+    .gold-divider { margin-left: auto; margin-right: auto; }
+    .card-img-wrapper { height: 210px; }
+    .card-badge { font-size: 0.62rem; padding: 2px 8px; }
+    .card-title.luxury-title { font-size: 1.05rem; }
+    .price { font-size: 1.15rem !important; }
+    .btn-luxury { font-size: 0.7rem; padding: 9px 14px; letter-spacing: 1.5px; }
+    .diccionario-modal-content { margin: 0 8px; }
+    .site-footer { text-align: center; }
+    .footer-heading { margin-top: 12px; }
 }
+
+@media (max-width: 575px) {
+    .hero-section { padding: 48px 12px 32px; }
+    h1.display-4.luxury-title { font-size: 1.6rem; }
+    .card-img-wrapper { height: 240px; }
+    .btn-luxury.w-100.mb-2,
+    .btn-luxury.btn-luxury--primary.w-100 { padding: 10px 12px; }
+}
+
