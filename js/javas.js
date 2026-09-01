@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById("productosGrid")) {
+        inicializarFiltrosProductos();
+    }
+
     if (document.getElementById("carruselLanzamientosInner")) {
         inicializarNuevosLanzamientos();
     }
@@ -289,4 +293,115 @@ function renderDestacados() {
             return crearTarjeta(p);
         })
         .join("");
+}
+
+function leerFiltrosMarcados() {
+    var grupos = {};
+
+    document.querySelectorAll(".filtro-check-list").forEach(function (lista) {
+        var grupo = lista.dataset.grupo;
+        var marcados = Array.prototype.slice
+            .call(lista.querySelectorAll("input[type=checkbox]:checked"))
+            .map(function (input) {
+                return input.value;
+            });
+        grupos[grupo] = marcados;
+    });
+
+    return grupos;
+}
+
+function ordenarProductos(lista, orden) {
+    var copia = lista.slice();
+
+    if (orden === "precio-asc") {
+        copia.sort(function (a, b) {
+            return a.precio - b.precio;
+        });
+    } else if (orden === "precio-desc") {
+        copia.sort(function (a, b) {
+            return b.precio - a.precio;
+        });
+    } else if (orden === "nombre-az") {
+        copia.sort(function (a, b) {
+            return a.nombre.localeCompare(b.nombre, "es");
+        });
+    }
+
+    return copia;
+}
+
+function renderProductosFiltrados() {
+    var contenedor = document.getElementById("productosGrid");
+    var resultado = document.getElementById("productosResultado");
+    var lista = obtenerLista();
+
+    var genero = new URLSearchParams(window.location.search).get("genero");
+    if (genero) {
+        lista = lista.filter(function (p) {
+            return p.genero === genero;
+        });
+    }
+
+    var filtros = leerFiltrosMarcados();
+
+    ["humor", "estacion", "tipo", "concentracion", "familia", "ml"].forEach(function (grupo) {
+        var seleccion = filtros[grupo];
+        if (seleccion && seleccion.length > 0) {
+            lista = lista.filter(function (p) {
+                var valor = grupo === "ml" ? String(p.ml) : p[grupo];
+                if (Array.isArray(valor)) {
+                    return seleccion.some(function (v) {
+                        return valor.indexOf(v) !== -1;
+                    });
+                }
+                return seleccion.indexOf(valor) !== -1;
+            });
+        }
+    });
+
+    var ordenarSelect = document.getElementById("ordenarSelect");
+    lista = ordenarProductos(lista, ordenarSelect ? ordenarSelect.value : "destacados");
+
+    contenedor.innerHTML = "";
+    lista.forEach(function (p) {
+        contenedor.innerHTML += crearTarjeta(p);
+    });
+
+    if (resultado) {
+        resultado.textContent = lista.length + (lista.length === 1 ? " producto encontrado" : " productos encontrados");
+    }
+}
+
+function inicializarFiltrosProductos() {
+    var parametros = new URLSearchParams(window.location.search);
+    var estacionUrl = parametros.get("estacion");
+
+    if (estacionUrl) {
+        var checkEstacion = document.querySelector('.filtro-check-list[data-grupo="estacion"] input[value="' + estacionUrl + '"]');
+        if (checkEstacion) checkEstacion.checked = true;
+    }
+
+    document.querySelectorAll(".filtro-check-list input[type=checkbox]").forEach(function (input) {
+        input.addEventListener("change", renderProductosFiltrados);
+    });
+
+    var ordenarSelect = document.getElementById("ordenarSelect");
+    if (ordenarSelect) {
+        ordenarSelect.addEventListener("change", renderProductosFiltrados);
+    }
+
+    var limpiar = document.getElementById("limpiarFiltros");
+    if (limpiar) {
+        limpiar.addEventListener("click", function () {
+            document.querySelectorAll(".filtro-check-list input[type=checkbox]").forEach(function (input) {
+                input.checked = false;
+            });
+            if (ordenarSelect) ordenarSelect.value = "destacados";
+            history.replaceState(null, "", window.location.pathname);
+            renderProductosFiltrados();
+        });
+    }
+
+    renderProductosFiltrados();
 }
