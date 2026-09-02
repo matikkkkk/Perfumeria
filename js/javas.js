@@ -1,8 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     actualizarContador();
     actualizarContadorWishlist();
+    inicializarDiccionario();
+    inicializarNewsletter();
+
     if (document.getElementById("productosGrid")) {
         inicializarFiltrosProductos();
+    }
+
+    if (document.getElementById("detalleProducto")) {
+        mostrarDetalle();
     }
 
     if (document.getElementById("carruselLanzamientosInner")) {
@@ -508,5 +515,204 @@ function mostrarWishlist() {
     contenedor.innerHTML = "";
     lista.forEach(function (p) {
         contenedor.innerHTML += crearTarjeta(p);
+    });
+}
+
+function mostrarDetalle() {
+    var id = new URLSearchParams(window.location.search).get("id");
+    var producto = obtenerLista().find(function (p) {
+        return p.id === id;
+    });
+    var contenedor = document.getElementById("detalleProducto");
+
+    if (!producto) {
+        contenedor.innerHTML = '<div class="alert alert-luxury">Producto no encontrado.</div>';
+        return;
+    }
+
+    var breadcrumbNombre = document.getElementById("breadcrumbActual");
+    if (breadcrumbNombre) breadcrumbNombre.textContent = producto.nombre;
+
+    var agotado = producto.stock <= 0;
+    var alertaStock = agotado
+        ? '<div class="alert alert-luxury py-2 px-3 mb-3 d-inline-block">Producto agotado por el momento.</div>'
+        : producto.stock <= producto.stockCritico
+        ? '<div class="alert alert-luxury py-2 px-3 mb-3 d-inline-block">Quedan pocas unidades disponibles.</div>'
+        : "";
+
+    var opcionesCantidad = "";
+    for (var i = 1; i <= Math.min(producto.stock, 10); i++) {
+        opcionesCantidad += '<option value="' + i + '">' + i + "</option>";
+    }
+
+    var moods = (producto.humor || []).map(chipHumor).join("");
+    var notas = notasPlanas(producto).map(chipNota).join("");
+
+    contenedor.innerHTML =
+        '<div class="row g-5">' +
+        '<div class="col-md-6">' +
+        '<div class="product-gallery-main"><img src="' +
+        producto.imagen +
+        '" class="img-fluid rounded" alt="' +
+        producto.nombre +
+        '"></div>' +
+        "</div>" +
+        '<div class="col-md-6">' +
+        '<div class="mb-2">' +
+        '<span class="text-gold text-uppercase tracking-wider fs-7">' +
+        producto.estacion.toUpperCase() +
+        "</span> " +
+        '<span class="badge-pill-luxury">' +
+        (CONCENTRACION_LABELS[producto.concentracion] || "") +
+        "</span> " +
+        '<span class="badge-pill-luxury badge-pill-luxury--muted">' +
+        (TIPO_LABELS[producto.tipo] || "") +
+        "</span> " +
+        '<span class="badge-pill-luxury"><i class="bi bi-cloud-fill"></i> ' +
+        producto.ml +
+        " ML</span>" +
+        "</div>" +
+        '<span class="d-block fs-7 text-uppercase tracking-wider text-gold-light">' +
+        (producto.marca || "") +
+        "</span>" +
+        '<h1 class="display-5 luxury-title mt-1">' +
+        producto.nombre +
+        "</h1>" +
+        '<h2 class="price">$' +
+        producto.precio.toLocaleString("es-CL") +
+        "</h2>" +
+        '<div class="mood-chip-list mb-3">' +
+        moods +
+        "</div>" +
+        alertaStock +
+        '<p class="text-gold-light">' +
+        producto.descripcion +
+        "</p>" +
+        (notas
+            ? '<h6 class="fs-7 text-uppercase text-gold tracking-wider mt-4 mb-2">Notas olfativas</h6><div class="nota-chip-list mb-4">' +
+              notas +
+              "</div>"
+            : "") +
+        (agotado
+            ? '<button class="btn btn-luxury w-100" disabled>Sin stock</button>'
+            : '<div class="d-flex align-items-center gap-3 mb-3 flex-wrap">' +
+              '<label class="fs-7 text-uppercase text-gold-light mb-0">Cantidad</label>' +
+              '<select id="cantidadProducto" class="form-select form-luxury w-auto">' +
+              opcionesCantidad +
+              "</select>" +
+              '<span class="fs-7 text-gold-light">Stock: ' +
+              producto.stock +
+              " uds.</span>" +
+              "</div>" +
+              '<button class="btn btn-luxury w-100" onclick="agregarCarritoConCantidad(\'' +
+              producto.id +
+              "')\">Añadir al carrito</button>") +
+        "</div>" +
+        "</div>" +
+        renderInspiradoEn(producto, false) +
+        renderPiramideOlfativa(producto) +
+        renderMaridaje(producto);
+}
+
+function renderPiramideOlfativa(producto) {
+    if (!producto.notas) return "";
+
+    var etapas = [
+        { key: "salida", label: "Salida", tiempo: "Primeras 15 min", ancho: 55 },
+        { key: "corazon", label: "Corazón", tiempo: "15 min – 4 horas", ancho: 78 },
+        { key: "fondo", label: "Fondo", tiempo: "4+ horas", ancho: 100 },
+    ];
+
+    var visual = etapas
+        .map(function (e) {
+            return '<div class="piramide-nivel" style="width:' + e.ancho + '%">' + e.label.toUpperCase() + "</div>";
+        })
+        .join("");
+
+    var info = etapas
+        .map(function (e) {
+            var chips = (producto.notas[e.key] || []).map(chipNota).join("");
+            return (
+                '<div class="piramide-etapa-card">' +
+                '<span class="fs-7 text-uppercase text-gold tracking-wider">' +
+                e.label.toUpperCase() +
+                '<span class="text-gold-light text-lowercase ms-2">' +
+                e.tiempo +
+                "</span></span>" +
+                '<div class="nota-chip-list mt-2">' +
+                chips +
+                "</div>" +
+                "</div>"
+            );
+        })
+        .join("");
+
+    return (
+        '<section class="piramide-section mt-5 pt-5 border-top border-secondary border-opacity-25">' +
+        '<div class="row g-5">' +
+        '<div class="col-md-5">' +
+        '<span class="text-gold text-uppercase tracking-wider fs-7">Pirámide olfativa</span>' +
+        '<h3 class="luxury-title fst-italic mb-4">Arquitectura del Aroma</h3>' +
+        '<div class="piramide-visual">' +
+        visual +
+        "</div>" +
+        "</div>" +
+        '<div class="col-md-7 d-flex flex-column gap-3 justify-content-center">' +
+        info +
+        "</div>" +
+        "</div></section>"
+    );
+}
+
+function renderMaridaje(producto) {
+    var ocasiones = (producto.maridaje || []).map(chipOcasion).join("");
+    var moods = (producto.humor || []).map(chipHumor).join("");
+    if (!ocasiones && !moods) return "";
+
+    return (
+        '<section class="maridaje-section mt-5 pt-5 border-top border-secondary border-opacity-25">' +
+        '<span class="text-gold text-uppercase tracking-wider fs-7">Maridaje</span>' +
+        '<h3 class="luxury-title fst-italic mb-4">Ideal Para</h3>' +
+        '<div class="occasion-chip-list mb-3">' +
+        ocasiones +
+        "</div>" +
+        '<div class="mood-chip-list">' +
+        moods +
+        "</div>" +
+        "</section>"
+    );
+}
+
+function inicializarNewsletter() {
+    var form = document.getElementById("newsletterForm");
+    if (!form) return;
+
+    form.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        var email = document.getElementById("newsletterEmail").value.trim();
+        var mensaje = document.getElementById("newsletterMensaje");
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            mensaje.textContent = "Ingresa un correo válido.";
+            mensaje.className = "d-block mt-2 text-danger";
+            return;
+        }
+
+        mensaje.textContent = "¡Gracias por suscribirte!";
+        mensaje.className = "d-block mt-2 text-success";
+        form.reset();
+    });
+}
+
+function inicializarDiccionario() {
+    var buscador = document.getElementById("diccionarioBuscador");
+    if (!buscador) return;
+
+    buscador.addEventListener("input", function () {
+        var texto = buscador.value.trim().toLowerCase();
+        document.querySelectorAll(".diccionario-item").forEach(function (item) {
+            var coincide = item.textContent.toLowerCase().indexOf(texto) !== -1;
+            item.style.display = coincide ? "" : "none";
+        });
     });
 }
