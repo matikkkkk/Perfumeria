@@ -715,4 +715,32 @@ function inicializarDiccionario() {
             item.style.display = coincide ? "" : "none";
         });
     });
+    
+} 
+function validarCorreo(correo) {
+    return /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo);
+}
+
+function calcularDigitoVerificador(cuerpoRun) {
+    var suma = 0;
+    var multiplo = 2;
+
+    for (var i = cuerpoRun.length - 1; i >= 0; i--) {
+        suma += parseInt(cuerpoRun.charAt(i), 10) * multiplo;
+        multiplo = multiplo === 7 ? 2 : multiplo + 1;
+    }
+
+    var resto = 11 - (suma % 11);
+    if (resto === 11) return "0";
+    if (resto === 10) return "K";
+    return String(resto);
+}
+
+function validarRun(run) {
+    run = run.toUpperCase().replace(/\./g, "").replace(/-/g, "");
+    if (!/^[0-9]{7,8}[0-9K]$/.test(run)) return false;
+
+    var cuerpo = run.slice(0, -1);
+    var dv = run.slice(-1);
+    return calcularDigitoVerificador(cuerpo) === dv;
 }
