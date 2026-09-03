@@ -1479,3 +1479,41 @@ body.luxury-bg {
     font-size: 0.8rem;
 }
 
+/* ===== Admin ===== */
+.table-luxury {
+    --bs-table-bg: var(--card-bg);
+    --bs-table-color: #e0e0e0;
+    --bs-table-border-color: rgba(212,175,55,.15);
+}
+.admin-menu {
+    background: var(--card-bg);
+    border-right: 1px solid rgba(212,175,55,.15);
+    min-height: 70vh;
+}
+.admin-menu a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 12px 18px;
+}
+.admin-menu a:hover, .admin-menu a.active {
+    color: var(--gold);
+    background: rgba(212,175,55,.05);
+}
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(212,175,55,.15);
+    padding: 24px;
+    text-align: center;
+}
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 2rem;
+}
+.badge-luxury {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 4px 8px;
+    font-size: .7rem;
+}
