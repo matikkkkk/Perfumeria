@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("wishlistGrid")) {
         mostrarWishlist();
     }
+    if (document.getElementById("region")) {
+        cargarRegiones("region", "comuna");
+    }
+
 });
 
 
@@ -966,4 +970,28 @@ function finalizarCompra() {
     localStorage.removeItem("cuponAplicado");
     alert("Compra registrada correctamente.");
     window.location.href = "index.html";
+}
+function cargarRegiones(idRegion, idComuna) {
+    var region = document.getElementById(idRegion);
+    var comuna = document.getElementById(idComuna);
+
+    region.innerHTML = '<option value="">Seleccione región</option>';
+
+    regiones.forEach(function (r) {
+        region.innerHTML += '<option value="' + r.nombre + '">' + r.nombre + "</option>";
+    });
+
+    region.addEventListener("change", function () {
+        comuna.innerHTML = '<option value="">Seleccione comuna</option>';
+
+        var seleccion = regiones.find(function (r) {
+            return r.nombre === region.value;
+        });
+
+        if (seleccion) {
+            seleccion.comunas.forEach(function (c) {
+                comuna.innerHTML += '<option value="' + c + '">' + c + "</option>";
+            });
+        }
+    });
 }
