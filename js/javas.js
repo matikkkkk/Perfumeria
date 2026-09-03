@@ -912,3 +912,58 @@ function eliminarCarrito(indice) {
     mostrarCarrito();
     actualizarContador();
 }
+var CUPONES = {
+    LUXURY10: 0.1,
+    BIENVENIDO15: 0.15,
+};
+
+function aplicarCupon() {
+    var input = document.getElementById("cuponInput");
+    var mensaje = document.getElementById("cuponMensaje");
+    var codigo = input.value.trim().toUpperCase();
+
+    if (!codigo) {
+        mensaje.textContent = "Ingresa un código de cupón.";
+        mensaje.className = "d-block mt-1 text-danger";
+        return;
+    }
+
+    if (!CUPONES.hasOwnProperty(codigo)) {
+        localStorage.removeItem("cuponAplicado");
+        mensaje.textContent = "Cupón no válido.";
+        mensaje.className = "d-block mt-1 text-danger";
+        mostrarCarrito();
+        return;
+    }
+
+    localStorage.setItem("cuponAplicado", codigo);
+    mensaje.textContent = "Cupón aplicado: " + CUPONES[codigo] * 100 + "% de descuento.";
+    mensaje.className = "d-block mt-1 text-success";
+    mostrarCarrito();
+}
+
+function finalizarCompra() {
+    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    if (carrito.length === 0) {
+        alert("El carrito está vacío.");
+        return;
+    }
+
+    var ordenes = JSON.parse(localStorage.getItem("ordenes") || "[]");
+    ordenes.push({
+        id: ordenes.length + 1,
+        fecha: new Date().toLocaleString("es-CL"),
+        productos: carrito,
+        total: carrito.reduce(function (suma, p) {
+            return suma + p.precio * p.cantidad;
+        }, 0),
+        estado: "Pendiente",
+    });
+
+    localStorage.setItem("ordenes", JSON.stringify(ordenes));
+    localStorage.removeItem("carrito");
+    localStorage.removeItem("cuponAplicado");
+    alert("Compra registrada correctamente.");
+    window.location.href = "index.html";
+}
