@@ -1441,3 +1441,41 @@ body.luxury-bg {
     padding: 10px 12px;
   }
 }
+
+/* ===== Nosotros ===== */
+.about-value-card {
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 28px 22px;
+    text-align: center;
+    height: 100%;
+}
+.about-value-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+}
+.about-value-card p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+}
+.team-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    margin-bottom: 16px;
+}
+.team-name {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.team-role {
+    color: var(--gold-light);
+    font-size: 0.8rem;
+}
+
