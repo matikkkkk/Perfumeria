@@ -30,6 +30,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("region")) {
         cargarRegiones("region", "comuna");
     }
+    var registro = document.getElementById("registroForm");
+    if (registro) {
+        registro.addEventListener("submit", registrarUsuario);
+        activarValidacionEnVivo(registro);
+    }
+
+    var login = document.getElementById("loginForm");
+    if (login) {
+        login.addEventListener("submit", iniciarSesion);
+        activarValidacionEnVivo(login);
+    }
 
 });
 
@@ -994,4 +1005,188 @@ function cargarRegiones(idRegion, idComuna) {
             });
         }
     });
+}
+var reglasCampos = {
+    run: function (valor) {
+        if (!valor) return "El RUN es obligatorio.";
+        if (!validarRun(valor.toUpperCase().replace(/\./g, "").replace(/-/g, "")))
+            return "RUN inválido. Verifica el dígito verificador (sin puntos ni guion, ej: 19011022K).";
+        return "";
+    },
+    nombre: function (valor) {
+        if (!valor) return "El nombre es obligatorio.";
+        if (valor.length > 50) return "Máximo 50 caracteres.";
+        return "";
+    },
+    apellidos: function (valor) {
+        if (!valor) return "Los apellidos son obligatorios.";
+        if (valor.length > 100) return "Máximo 100 caracteres.";
+        return "";
+    },
+    correo: function (valor) {
+        if (!valor) return "El correo es obligatorio.";
+        if (valor.length > 100) return "Máximo 100 caracteres.";
+        if (!validarCorreo(valor)) return "Solo correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
+        return "";
+    },
+    password: function (valor) {
+        if (valor.length < 4 || valor.length > 10) return "Entre 4 y 10 caracteres.";
+        return "";
+    },
+    passwordConfirm: function (valor, formulario) {
+        if (valor !== formulario.password.value) return "Las contraseñas no coinciden.";
+        return "";
+    },
+    direccion: function (valor) {
+        if (!valor) return "La dirección es obligatoria.";
+        if (valor.length > 300) return "Máximo 300 caracteres.";
+        return "";
+    },
+};
+
+function mostrarError(input, mensaje) {
+    input.classList.add("is-invalid");
+    var contenedor = input.closest("div");
+    var error = contenedor ? contenedor.querySelector(".error") : null;
+
+    if (!error) {
+        error = document.createElement("div");
+        error.className = "error";
+        contenedor.appendChild(error);
+    }
+
+    error.textContent = mensaje;
+    error.style.display = "block";
+}
+
+function limpiarError(input) {
+    input.classList.remove("is-invalid");
+    var contenedor = input.closest("div");
+    var error = contenedor ? contenedor.querySelector(".error") : null;
+    if (error) error.style.display = "none";
+}
+
+function validarCampo(input) {
+    var regla = reglasCampos[input.name];
+    if (!regla) return true;
+
+    var mensaje = regla(input.value.trim(), input.form);
+
+    if (mensaje) {
+        mostrarError(input, mensaje);
+        return false;
+    }
+
+    limpiarError(input);
+    return true;
+}
+
+function activarValidacionEnVivo(formulario) {
+    if (!formulario) return;
+
+    Array.prototype.forEach.call(formulario.querySelectorAll("input, textarea"), function (input) {
+        input.addEventListener("blur", function () {
+            validarCampo(input);
+        });
+        input.addEventListener("input", function () {
+            if (input.classList.contains("is-invalid")) validarCampo(input);
+        });
+    });
+}
+
+function registrarUsuario(evento) {
+    evento.preventDefault();
+
+    var formulario = evento.target;
+    var run = formulario.run.value.toUpperCase().replace(/\./g, "").replace(/-/g, "");
+    var correo = formulario.correo.value.trim();
+    var nombre = formulario.nombre.value.trim();
+    var apellidos = formulario.apellidos.value.trim();
+    var direccion = formulario.direccion.value.trim();
+    var password = formulario.password.value;
+    var passwordConfirm = formulario.passwordConfirm.value;
+
+    if (!validarRun(run)) {
+        alert("El RUN no es válido (verifica el dígito verificador). Formato sin puntos ni guion, por ejemplo 19011022K.");
+        return;
+    }
+
+    if (!validarCorreo(correo)) {
+        alert("El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+        return;
+    }
+
+    if (!nombre || nombre.length > 50 || !apellidos || apellidos.length > 100) {
+        alert("Revise nombre y apellidos.");
+        return;
+    }
+
+    if (password.length < 4 || password.length > 10) {
+        alert("La contraseña debe tener entre 4 y 10 caracteres.");
+        return;
+    }
+
+    if (password !== passwordConfirm) {
+        alert("Las contraseñas no coinciden.");
+        return;
+    }
+
+    if (!direccion || direccion.length > 300) {
+        alert("La dirección es obligatoria y permite máximo 300 caracteres.");
+        return;
+    }
+
+    var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    lista.push({
+        run: run,
+        nombre: nombre,
+        apellidos: apellidos,
+        correo: correo,
+        password: password,
+        fechaNacimiento: formulario.fechaNacimiento.value,
+        tipo: "Cliente",
+        region: formulario.region.value,
+        comuna: formulario.comuna.value,
+        direccion: direccion,
+    });
+
+    localStorage.setItem("usuarios", JSON.stringify(lista));
+    alert("Usuario registrado correctamente.");
+    formulario.reset();
+}
+
+function iniciarSesion(evento) {
+    evento.preventDefault();
+
+    var correo = evento.target.correo.value.trim();
+    var password = evento.target.password.value;
+
+    if (!correo || correo.length > 100 || !validarCorreo(correo)) {
+        alert("Ingrese un correo válido.");
+        return;
+    }
+
+    if (password.length < 4 || password.length > 10) {
+        alert("La contraseña debe tener entre 4 y 10 caracteres.");
+        return;
+    }
+
+    var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    var usuario = lista.find(function (u) {
+        return u.correo.toLowerCase() === correo.toLowerCase();
+    });
+
+    if (!usuario) {
+        alert("Usuario no encontrado.");
+        return;
+    }
+
+    if (usuario.password !== password) {
+        alert("Contraseña incorrecta.");
+        return;
+    }
+
+    localStorage.setItem("usuarioActual", JSON.stringify(usuario));
+    alert("Inicio de sesión correcto.");
+    window.location.href = "index.html";
 }
