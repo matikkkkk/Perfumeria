@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("wishlistGrid")) {
         mostrarWishlist();
     }
+    
+    if (document.getElementById("carritoLista")) {
+    mostrarCarrito();
+    }
+    
     if (document.getElementById("region")) {
         cargarRegiones("region", "comuna");
     }
