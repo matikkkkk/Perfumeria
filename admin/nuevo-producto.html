@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Luxury Admin — Nuevo producto</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body class="luxury-bg text-light">
+        <header>
+            <nav class="navbar navbar-dark bg-transparent py-3 border-bottom border-secondary border-opacity-25">
+                <div class="container">
+                    <a class="navbar-brand brand-logo" href="index.html">LUXURY ADMIN</a>
+                    <a class="btn btn-luxury" href="../index.html">Tienda</a>
+                </div>
+            </nav>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <aside class="col-md-3 col-lg-2 admin-menu py-4">
+                    <a href="index.html">Inicio</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="nuevo-producto.html">Nuevo producto</a>
+                    <a href="usuarios.html">Usuarios</a>
+                    <a href="nuevo-usuario.html">Nuevo usuario</a>
+                    <a href="ordenes.html">Órdenes</a>
+                    <a href="../login.html">Cerrar sesión</a>
+                </aside>
+                <main class="col-md-9 col-lg-10 p-4 p-md-5">
+                    <h1 class="display-5 luxury-title">Nuevo producto / Editar producto</h1>
+                    <p class="text-gold-light">Formulario de mantenimiento de productos.</p>
+                    <form id="productoForm" class="luxury-card p-4 mt-4">
+                        <input type="hidden" name="idProducto" />
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Código producto</label
+                                ><input name="codigo" class="form-control form-luxury" minlength="3" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Marca</label
+                                ><input
+                                    name="marca"
+                                    class="form-control form-luxury"
+                                    maxlength="60"
+                                    placeholder="Ej: Maison Luxury"
+                                    required
+                                />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Nombre</label
+                                ><input name="nombre" class="form-control form-luxury" maxlength="100" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-luxury">Descripción</label
+                                ><textarea
+                                    name="descripcion"
+                                    class="form-control form-luxury"
+                                    maxlength="500"
+                                ></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Precio</label
+                                ><input
+                                    name="precio"
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    class="form-control form-luxury"
+                                    required
+                                />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Stock</label
+                                ><input name="stock" type="number" min="0" class="form-control form-luxury" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Stock crítico</label
+                                ><input name="stockCritico" type="number" min="0" class="form-control form-luxury" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Categoría</label
+                                ><select name="categoria" class="form-select form-luxury">
+                                    <option value="ligeros">Ligeros</option>
+                                    <option value="moderados">Moderados</option>
+                                    <option value="intensos">Intensos</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Familia olfativa</label
+                                ><select name="familia" class="form-select form-luxury">
+                                    <option value="citrico">Cítrico</option>
+                                    <option value="floral">Floral</option>
+                                    <option value="oriental">Oriental</option>
+                                    <option value="amaderado">Amaderado</option>
+                                    <option value="acuatico">Acuático</option>
+                                    <option value="gourmand">Gourmand</option>
+                                    <option value="especiado">Especiado</option>
+                                    <option value="frutal">Frutal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Estación</label
+                                ><select name="estacion" class="form-select form-luxury">
+                                    <option value="verano">Verano</option>
+                                    <option value="primavera">Primavera</option>
+                                    <option value="otono">Otoño</option>
+                                    <option value="invierno">Invierno</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Género</label
+                                ><select name="genero" class="form-select form-luxury">
+                                    <option value="unisex">Unisex</option>
+                                    <option value="hombre">Hombre</option>
+                                    <option value="mujer">Mujer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Tipo de perfume</label
+                                ><select name="tipo" class="form-select form-luxury">
+                                    <option value="disenador">Diseñador</option>
+                                    <option value="nicho">Nicho</option>
+                                    <option value="arabe">Árabe</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Concentración</label
+                                ><select name="concentracion" class="form-select form-luxury">
+                                    <option value="edt">EDT</option>
+                                    <option value="edp">EDP</option>
+                                    <option value="parfum">Parfum</option>
+                                    <option value="edc">EDC</option>
+                                    <option value="eau_cologne">Eau de Cologne</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label-luxury">Estado de ánimo</label
+                                ><input
+                                    name="humor"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: elegante, romantico"
+                                />
+                                <div class="fs-7 text-gold-light mt-1">
+                                    Separados por coma. Opciones: poderoso, romantico, fresco, misterioso, relajado,
+                                    elegante.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <hr class="border-secondary border-opacity-25 my-2" />
+                                <h5 class="luxury-title fst-italic">Notas olfativas (pirámide)</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Notas de salida</label
+                                ><input
+                                    name="notasSalida"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: Bergamota, Limón"
+                                />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Notas de corazón</label
+                                ><input
+                                    name="notasCorazon"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: Jazmín, Rosa"
+                                />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Notas de fondo</label
+                                ><input
+                                    name="notasFondo"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: Ámbar, Sándalo"
+                                />
+                            </div>
+                            <div class="col-12 fs-7 text-gold-light mt-n2 mb-2">
+                                Cada campo, separado por coma. Se usan en la pirámide olfativa de la ficha de producto.
+                            </div>
+
+                            <div class="col-12">
+                                <hr class="border-secondary border-opacity-25 my-2" />
+                                <h5 class="luxury-title fst-italic">Maridaje (ocasiones)</h5>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-luxury">Ocasiones ideales</label
+                                ><input
+                                    name="maridaje"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: gala, noche_especial"
+                                />
+                                <div class="fs-7 text-gold-light mt-1">
+                                    Separadas por coma. Códigos válidos: noche_especial, dia_a_dia, trabajo_reuniones,
+                                    cita_romantica, playa, gala, boda, evento_exclusivo.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <hr class="border-secondary border-opacity-25 my-2" />
+                                <h5 class="luxury-title fst-italic">Inspirado en (solo tipo Árabe)</h5>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Marca de referencia</label
+                                ><input
+                                    name="inspiradoMarca"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: Tom Ford"
+                                />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Nombre de referencia</label
+                                ><input
+                                    name="inspiradoNombre"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: Tobacco Vanille"
+                                />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label-luxury">Precio original referencia</label
+                                ><input
+                                    name="inspiradoPrecio"
+                                    type="number"
+                                    min="0"
+                                    class="form-control form-luxury"
+                                    placeholder="Ej: 380000"
+                                />
+                            </div>
+                            <div class="col-12 fs-7 text-gold-light mt-n2 mb-2">
+                                Solo se muestra el banner "Inspirado en" si el tipo de perfume es Árabe y estos 3 campos
+                                están completos.
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label-luxury">Imagen</label
+                                ><input name="imagen" class="form-control form-luxury" placeholder="URL opcional" />
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button class="btn btn-luxury px-5" type="submit">Guardar producto</button>
+                            </div>
+                        </div>
+                    </form>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", cargarProductoEditar);
+                    </script>
+                </main>
+            </div>
+        </div>
+        <footer class="site-footer">
+            <div class="container text-center">
+                <span>© 2026 Luxury — Sistema administrativo</span>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../js/data.js"></script>
+        <script src="../js/javas.js"></script>
+        <script src="../js/admin.js"></script>
+    </body>
+</html>
