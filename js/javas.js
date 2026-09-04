@@ -47,6 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
         activarValidacionEnVivo(login);
     }
 
+    var contacto = document.getElementById("contactoForm");
+    if (contacto) {
+        contacto.addEventListener("submit", enviarContacto);
+        activarValidacionEnVivo(contacto);
+    }
+
+
 });
 
 
@@ -1194,4 +1201,39 @@ function iniciarSesion(evento) {
     localStorage.setItem("usuarioActual", JSON.stringify(usuario));
     alert("Inicio de sesión correcto.");
     window.location.href = "index.html";
+}
+
+function enviarContacto(evento) {
+    evento.preventDefault();
+
+    var nombre = evento.target.nombre.value.trim();
+    var correo = evento.target.correo.value.trim();
+    var comentario = evento.target.comentario.value.trim();
+
+    if (!nombre || nombre.length > 100) {
+        alert("El nombre es obligatorio y permite máximo 100 caracteres.");
+        return;
+    }
+
+    if (!validarCorreo(correo) || correo.length > 100) {
+        alert("Ingrese un correo válido.");
+        return;
+    }
+
+    if (!comentario || comentario.length > 500) {
+        alert("El comentario es obligatorio y permite máximo 500 caracteres.");
+        return;
+    }
+
+    var mensajes = JSON.parse(localStorage.getItem("mensajes") || "[]");
+    mensajes.push({
+        nombre: nombre,
+        correo: correo,
+        comentario: comentario,
+        fecha: new Date().toLocaleString("es-CL"),
+    });
+    localStorage.setItem("mensajes", JSON.stringify(mensajes));
+
+    alert("Mensaje enviado correctamente.");
+    evento.target.reset();
 }
