@@ -879,28 +879,31 @@ function mostrarCarrito() {
         var importe = p.precio * p.cantidad;
         subtotal += importe;
 
-        lista.innerHTML +=
-            '<div class="cart-item row align-items-center">' +
-            '<div class="col-3"><img src="' +
+                lista.innerHTML +=
+            '<div class="cart-item">' +
+            '<div class="cart-item-img"><img src="' +
             p.imagen +
-            '" class="img-fluid" alt="' +
+            '" alt="' +
             p.nombre +
             '"></div>' +
-            '<div class="col-4"><h3 class="h6 luxury-title">' +
+            '<div class="cart-item-info"><h3 class="cart-item-name">' +
             p.nombre +
-            '</h3><span class="text-gold-light">$' +
+            '</h3><span class="cart-item-price">$' +
             p.precio.toLocaleString("es-CL") +
-            "</span></div>" +
-            '<div class="col-3"><button class="qty-btn" onclick="cambiarCantidad(' +
+            " c/u</span></div>" +
+            '<div class="cart-item-qty"><button class="qty-btn" onclick="cambiarCantidad(' +
             indice +
-            ',-1)">-</button> ' +
+            ',-1)">-</button><span class="qty-value">' +
             p.cantidad +
-            ' <button class="qty-btn" onclick="cambiarCantidad(' +
+            '</span><button class="qty-btn" onclick="cambiarCantidad(' +
             indice +
             ',1)">+</button></div>' +
-            '<div class="col-2 text-end"><button class="btn btn-sm btn-outline-danger" onclick="eliminarCarrito(' +
+            '<div class="cart-item-subtotal">$' +
+            importe.toLocaleString("es-CL") +
+            "</div>" +
+            '<button class="cart-item-remove" onclick="eliminarCarrito(' +
             indice +
-            ')">X</button></div></div>';
+            ')" aria-label="Eliminar"><i class="bi bi-trash"></i></button></div>';
     });
 
     var cuponCodigo = localStorage.getItem("cuponAplicado");
