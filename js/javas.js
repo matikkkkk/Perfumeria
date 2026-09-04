@@ -921,9 +921,24 @@ function mostrarCarrito() {
 
 function cambiarCantidad(indice, cambio) {
     var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
-    carrito[indice].cantidad += cambio;
+    var item = carrito[indice];
+    if (!item) return;
 
-    if (carrito[indice].cantidad <= 0) {
+    if (cambio > 0) {
+        var producto = obtenerLista().find(function (p) {
+            return p.id === item.id;
+        });
+        var stockDisponible = producto ? producto.stock : Infinity;
+
+        if (item.cantidad >= stockDisponible) {
+            mostrarToast("No hay más stock disponible de " + item.nombre + ".", "aviso");
+            return;
+        }
+    }
+
+    item.cantidad += cambio;
+
+    if (item.cantidad <= 0) {
         carrito.splice(indice, 1);
     }
 
