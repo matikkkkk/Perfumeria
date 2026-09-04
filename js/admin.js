@@ -2,14 +2,25 @@ document.addEventListener("DOMContentLoaded", function () {
     protegerAdmin();
 
     if (document.getElementById("adminProductos")) listarProductosAdmin();
+    if (document.getElementById("adminUsuarios")) listarUsuariosAdmin();
+    if (document.getElementById("adminOrdenes")) listarOrdenesAdmin();
 
     var formProducto = document.getElementById("productoForm");
     if (formProducto) {
         formProducto.addEventListener("submit", guardarProducto);
     }
 
+    var formUsuario = document.getElementById("usuarioAdminForm");
+    if (formUsuario) {
+        cargarRegiones("region", "comuna");
+        formUsuario.addEventListener("submit", guardarUsuarioAdmin);
+        cargarUsuarioEditar();
+    }
+
     if (document.getElementById("productoDetalleAdmin")) mostrarProductoDetalleAdmin();
+    if (document.getElementById("usuarioDetalle")) mostrarUsuarioDetalle();
 });
+
 function protegerAdmin() {
     var usuario = JSON.parse(localStorage.getItem("usuarioActual") || "null");
 
@@ -199,4 +210,138 @@ function mostrarProductoDetalleAdmin() {
             : "—") +
         '</dd>' +
         '</dl></div></div>';
+}
+function listarUsuariosAdmin() {
+    var tabla = document.getElementById("adminUsuarios");
+    var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    tabla.innerHTML = "";
+
+    lista.forEach(function (u) {
+        tabla.innerHTML +=
+            '<tr><td>' + u.run + '</td><td>' + u.nombre + ' ' + u.apellidos + '</td><td>' + u.correo + '</td><td>' + u.tipo + '</td><td>' + u.region + '</td><td>' + u.comuna + '</td>' +
+            '<td><a class="btn btn-sm btn-outline-light me-1" href="usuario-detalle.html?run=' + u.run + '">Ver</a> <a class="btn btn-sm btn-luxury" href="nuevo-usuario.html?run=' + u.run + '">Editar</a></td></tr>';
+    });
+}
+
+function mostrarUsuarioDetalle() {
+    var run = new URLSearchParams(window.location.search).get("run");
+    var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    var usuario = lista.find(function (u) { return u.run === run; });
+    var contenedor = document.getElementById("usuarioDetalle");
+    if (!contenedor) return;
+
+    if (!usuario) {
+        contenedor.innerHTML = '<div class="alert alert-luxury">Usuario no encontrado.</div>';
+        return;
+    }
+
+    contenedor.innerHTML =
+        '<dl class="row mb-0">' +
+        '<dt class="col-sm-3">RUN</dt><dd class="col-sm-9">' + usuario.run + '</dd>' +
+        '<dt class="col-sm-3">Nombre</dt><dd class="col-sm-9">' + usuario.nombre + ' ' + usuario.apellidos + '</dd>' +
+        '<dt class="col-sm-3">Correo</dt><dd class="col-sm-9">' + usuario.correo + '</dd>' +
+        '<dt class="col-sm-3">Fecha nacimiento</dt><dd class="col-sm-9">' + (usuario.fechaNacimiento || "—") + '</dd>' +
+        '<dt class="col-sm-3">Tipo</dt><dd class="col-sm-9">' + usuario.tipo + '</dd>' +
+        '<dt class="col-sm-3">Región</dt><dd class="col-sm-9">' + usuario.region + '</dd>' +
+        '<dt class="col-sm-3">Comuna</dt><dd class="col-sm-9">' + usuario.comuna + '</dd>' +
+        '<dt class="col-sm-3">Dirección</dt><dd class="col-sm-9">' + usuario.direccion + '</dd>' +
+        '</dl>';
+}
+
+function cargarUsuarioEditar() {
+    var run = new URLSearchParams(window.location.search).get("run");
+    if (!run) return;
+
+    var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    var usuario = lista.find(function (u) { return u.run === run; });
+    if (!usuario) return;
+
+    var f = document.getElementById("usuarioAdminForm");
+    f.runOriginal.value = usuario.run;
+    f.run.value = usuario.run;
+    f.run.readOnly = true;
+    f.nombre.value = usuario.nombre;
+    f.apellidos.value = usuario.apellidos;
+    f.correo.value = usuario.correo;
+    f.fechaNacimiento.value = usuario.fechaNacimiento || "";
+    f.tipo.value = usuario.tipo;
+
+    var aplicarComuna = function () {
+        f.region.value = usuario.region;
+        f.region.dispatchEvent(new Event("change"));
+        setTimeout(function () { f.comuna.value = usuario.comuna; }, 0);
+    };
+    setTimeout(aplicarComuna, 0);
+
+    f.direccion.value = usuario.direccion;
+
+    document.querySelector("h1.luxury-title").textContent = "Editar usuario";
+    var boton = f.querySelector("button[type=submit]");
+    if (boton) boton.textContent = "Guardar cambios";
+}
+
+function guardarUsuarioAdmin(evento) {
+    evento.preventDefault();
+
+    var f = evento.target;
+    var runOriginal = f.runOriginal ? f.runOriginal.value : "";
+    var esEdicion = Boolean(runOriginal);
+    var run = f.run.value.toUpperCase().replace(/\./g, "").replace(/-/g, "");
+
+    if (!validarRun(run)) {
+        alert("RUN inválido.");
+        return;
+    }
+
+    if (!validarCorreo(f.correo.value)) {
+        alert("Correo inválido.");
+        return;
+    }
+
+    var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
+    var identificadorBusqueda = esEdicion ? runOriginal : run;
+
+    if (!esEdicion && lista.some(function (u) { return u.run === run; })) {
+        alert("Ya existe un usuario registrado con ese RUN.");
+        return;
+    }
+
+    var usuario = {
+        run:run,
+        nombre:f.nombre.value.trim(),
+        apellidos:f.apellidos.value.trim(),
+        correo:f.correo.value.trim(),
+        fechaNacimiento:f.fechaNacimiento.value,
+        tipo:f.tipo.value,
+        region:f.region.value,
+        comuna:f.comuna.value,
+        direccion:f.direccion.value.trim()
+    };
+
+    var posicion = lista.findIndex(function (u) { return u.run === identificadorBusqueda; });
+
+    if (posicion >= 0) {
+        lista[posicion] = usuario;
+    } else {
+        lista.push(usuario);
+    }
+
+    localStorage.setItem("usuarios", JSON.stringify(lista));
+    alert(esEdicion ? "Usuario actualizado correctamente." : "Usuario creado correctamente.");
+    window.location.href = "usuarios.html";
+}
+
+function listarOrdenesAdmin() {
+    var tabla = document.getElementById("adminOrdenes");
+    var lista = JSON.parse(localStorage.getItem("ordenes") || "[]");
+    tabla.innerHTML = "";
+
+    if (lista.length === 0) {
+        tabla.innerHTML = '<tr><td colspan="5" class="text-center text-gold-light">No existen órdenes registradas.</td></tr>';
+        return;
+    }
+
+    lista.forEach(function (o) {
+        tabla.innerHTML += '<tr><td>#' + o.id + '</td><td>' + o.fecha + '</td><td>' + o.productos.length + '</td><td>$' + o.total.toLocaleString("es-CL") + '</td><td>' + o.estado + '</td></tr>';
+    });
 }
