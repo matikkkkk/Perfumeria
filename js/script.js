@@ -1106,7 +1106,12 @@ function iniciarSesion(evento) {
 
     localStorage.setItem("usuarioActual", JSON.stringify(usuario));
     alert("Inicio de sesión correcto.");
-    window.location.href = "index.html";
+
+    if (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor") {
+        window.location.href = "admin/index.html";
+    } else {
+        window.location.href = "index.html";
+    }
 }
 
 
