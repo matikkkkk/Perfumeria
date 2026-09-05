@@ -1,3 +1,6 @@
+/* ==========================================================================
+   INICIALIZACIÓN GENERAL
+   ========================================================================== */
 document.addEventListener("DOMContentLoaded", function () {
     actualizarContador();
     actualizarContadorWishlist();
@@ -27,11 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("wishlistGrid")) {
         mostrarWishlist();
     }
-    
+
     if (document.getElementById("carritoLista")) {
     mostrarCarrito();
     }
-    
+
     if (document.getElementById("region")) {
         cargarRegiones("region", "comuna");
     }
@@ -57,7 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
+/* ==========================================================================
+   UTILIDADES Y DICCIONARIOS DE DATOS
+   ========================================================================== */
 function obtenerLista() {
     return typeof obtenerProductos === "function" ? obtenerProductos() : productos;
 }
@@ -120,6 +125,11 @@ function notasPlanas(producto) {
         .concat(producto.notas.corazon || [])
         .concat(producto.notas.fondo || []);
 }
+
+
+/* ==========================================================================
+   RENDERIZADO DE PRODUCTOS (tarjetas, slides, secciones de detalle)
+   ========================================================================== */
 function renderInspiradoEn(producto, compacto) {
     if (producto.tipo !== "arabe" || !producto.inspiradoEn) return "";
     var info = producto.inspiradoEn;
@@ -335,6 +345,10 @@ function renderDestacados() {
         .join("");
 }
 
+
+/* ==========================================================================
+   CATÁLOGO Y FILTROS (página productos.html)
+   ========================================================================== */
 function leerFiltrosMarcados() {
     var grupos = {};
 
@@ -446,105 +460,10 @@ function inicializarFiltrosProductos() {
     renderProductosFiltrados();
 }
 
-function mostrarToast(mensaje, tipo) {
-    var contenedor = document.getElementById("toastContenedor");
-    if (!contenedor) {
-        contenedor = document.createElement("div");
-        contenedor.id = "toastContenedor";
-        contenedor.style.position = "fixed";
-        contenedor.style.bottom = "20px";
-        contenedor.style.right = "20px";
-        contenedor.style.zIndex = "9999";
-        document.body.appendChild(contenedor);
-    }
 
-    var toast = document.createElement("div");
-    toast.className = "toast-luxury" + (tipo === "aviso" ? " toast-luxury--aviso" : "");
-    toast.textContent = mensaje;
-    contenedor.appendChild(toast);
-
-    setTimeout(function () {
-        toast.remove();
-    }, 3000);
-}
-
-
-
-function actualizarContador() {
-    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
-    var cantidad = 0;
-    carrito.forEach(function (p) {
-        cantidad += p.cantidad;
-    });
-
-    document.querySelectorAll(".cart-count").forEach(function (elemento) {
-        elemento.textContent = cantidad;
-    });
-}
-
-function obtenerWishlist() {
-    return JSON.parse(localStorage.getItem("wishlist") || "[]");
-}
-
-function estaEnWishlist(id) {
-    return obtenerWishlist().indexOf(id) !== -1;
-}
-
-function toggleWishlist(id) {
-    var lista = obtenerWishlist();
-    var indice = lista.indexOf(id);
-
-    if (indice === -1) {
-        lista.push(id);
-    } else {
-        lista.splice(indice, 1);
-    }
-
-    localStorage.setItem("wishlist", JSON.stringify(lista));
-    actualizarContadorWishlist();
-
-    var activo = estaEnWishlist(id);
-    document.querySelectorAll('.wishlist-heart[data-id="' + id + '"]').forEach(function (boton) {
-        boton.classList.toggle("activo", activo);
-        boton.innerHTML = '<i class="bi ' + (activo ? "bi-heart-fill" : "bi-heart") + '"></i>';
-    });
-
-    if (document.getElementById("wishlistGrid")) {
-        mostrarWishlist();
-    }
-}
-
-function actualizarContadorWishlist() {
-    var cantidad = obtenerWishlist().length;
-    document.querySelectorAll(".wishlist-count").forEach(function (elemento) {
-        elemento.textContent = cantidad;
-    });
-}
-
-function mostrarWishlist() {
-    var contenedor = document.getElementById("wishlistGrid");
-    var vacio = document.getElementById("wishlistVacio");
-    if (!contenedor) return;
-
-    var ids = obtenerWishlist();
-    var lista = obtenerLista().filter(function (p) { return ids.indexOf(p.id) !== -1; });
-
-    if (lista.length === 0) {
-        contenedor.innerHTML = "";
-        contenedor.classList.add("d-none");
-        if (vacio) vacio.classList.remove("d-none");
-        return;
-    }
-
-    contenedor.classList.remove("d-none");
-    if (vacio) vacio.classList.add("d-none");
-
-    contenedor.innerHTML = "";
-    lista.forEach(function (p) {
-        contenedor.innerHTML += crearTarjeta(p);
-    });
-}
-
+/* ==========================================================================
+   DETALLE DE PRODUCTO (página producto.html)
+   ========================================================================== */
 function mostrarDetalle() {
     var id = new URLSearchParams(window.location.search).get("id");
     var producto = obtenerLista().find(function (p) {
@@ -710,67 +629,89 @@ function renderMaridaje(producto) {
     );
 }
 
-function inicializarNewsletter() {
-    var form = document.getElementById("newsletterForm");
-    if (!form) return;
 
-    form.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        var email = document.getElementById("newsletterEmail").value.trim();
-        var mensaje = document.getElementById("newsletterMensaje");
-
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            mensaje.textContent = "Ingresa un correo válido.";
-            mensaje.className = "d-block mt-2 text-danger";
-            return;
-        }
-
-        mensaje.textContent = "¡Gracias por suscribirte!";
-        mensaje.className = "d-block mt-2 text-success";
-        form.reset();
-    });
+/* ==========================================================================
+   WISHLIST
+   ========================================================================== */
+function obtenerWishlist() {
+    return JSON.parse(localStorage.getItem("wishlist") || "[]");
 }
 
-function inicializarDiccionario() {
-    var buscador = document.getElementById("diccionarioBuscador");
-    if (!buscador) return;
-
-    buscador.addEventListener("input", function () {
-        var texto = buscador.value.trim().toLowerCase();
-        document.querySelectorAll(".diccionario-item").forEach(function (item) {
-            var coincide = item.textContent.toLowerCase().indexOf(texto) !== -1;
-            item.style.display = coincide ? "" : "none";
-        });
-    });
-    
-} 
-function validarCorreo(correo) {
-    return /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo);
+function estaEnWishlist(id) {
+    return obtenerWishlist().indexOf(id) !== -1;
 }
 
-function calcularDigitoVerificador(cuerpoRun) {
-    var suma = 0;
-    var multiplo = 2;
+function toggleWishlist(id) {
+    var lista = obtenerWishlist();
+    var indice = lista.indexOf(id);
 
-    for (var i = cuerpoRun.length - 1; i >= 0; i--) {
-        suma += parseInt(cuerpoRun.charAt(i), 10) * multiplo;
-        multiplo = multiplo === 7 ? 2 : multiplo + 1;
+    if (indice === -1) {
+        lista.push(id);
+    } else {
+        lista.splice(indice, 1);
     }
 
-    var resto = 11 - (suma % 11);
-    if (resto === 11) return "0";
-    if (resto === 10) return "K";
-    return String(resto);
+    localStorage.setItem("wishlist", JSON.stringify(lista));
+    actualizarContadorWishlist();
+
+    var activo = estaEnWishlist(id);
+    document.querySelectorAll('.wishlist-heart[data-id="' + id + '"]').forEach(function (boton) {
+        boton.classList.toggle("activo", activo);
+        boton.innerHTML = '<i class="bi ' + (activo ? "bi-heart-fill" : "bi-heart") + '"></i>';
+    });
+
+    if (document.getElementById("wishlistGrid")) {
+        mostrarWishlist();
+    }
 }
 
-function validarRun(run) {
-    run = run.toUpperCase().replace(/\./g, "").replace(/-/g, "");
-    if (!/^[0-9]{7,8}[0-9K]$/.test(run)) return false;
-
-    var cuerpo = run.slice(0, -1);
-    var dv = run.slice(-1);
-    return calcularDigitoVerificador(cuerpo) === dv;
+function actualizarContadorWishlist() {
+    var cantidad = obtenerWishlist().length;
+    document.querySelectorAll(".wishlist-count").forEach(function (elemento) {
+        elemento.textContent = cantidad;
+    });
 }
+
+function mostrarWishlist() {
+    var contenedor = document.getElementById("wishlistGrid");
+    var vacio = document.getElementById("wishlistVacio");
+    if (!contenedor) return;
+
+    var ids = obtenerWishlist();
+    var lista = obtenerLista().filter(function (p) { return ids.indexOf(p.id) !== -1; });
+
+    if (lista.length === 0) {
+        contenedor.innerHTML = "";
+        contenedor.classList.add("d-none");
+        if (vacio) vacio.classList.remove("d-none");
+        return;
+    }
+
+    contenedor.classList.remove("d-none");
+    if (vacio) vacio.classList.add("d-none");
+
+    contenedor.innerHTML = "";
+    lista.forEach(function (p) {
+        contenedor.innerHTML += crearTarjeta(p);
+    });
+}
+
+
+/* ==========================================================================
+   CARRITO Y CUPONES
+   ========================================================================== */
+function actualizarContador() {
+    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    var cantidad = 0;
+    carrito.forEach(function (p) {
+        cantidad += p.cantidad;
+    });
+
+    document.querySelectorAll(".cart-count").forEach(function (elemento) {
+        elemento.textContent = cantidad;
+    });
+}
+
 function agregarCarrito(id) {
     var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
     var producto = obtenerLista().find(function (p) {
@@ -957,6 +898,7 @@ function eliminarCarrito(indice) {
     mostrarCarrito();
     actualizarContador();
 }
+
 var CUPONES = {
     LUXURY10: 0.1,
     BIENVENIDO15: 0.15,
@@ -1012,6 +954,39 @@ function finalizarCompra() {
     alert("Compra registrada correctamente.");
     window.location.href = "index.html";
 }
+
+
+/* ==========================================================================
+   AUTENTICACIÓN Y USUARIOS (registro, login, validación de RUN/correo)
+   ========================================================================== */
+function validarCorreo(correo) {
+    return /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i.test(correo);
+}
+
+function calcularDigitoVerificador(cuerpoRun) {
+    var suma = 0;
+    var multiplo = 2;
+
+    for (var i = cuerpoRun.length - 1; i >= 0; i--) {
+        suma += parseInt(cuerpoRun.charAt(i), 10) * multiplo;
+        multiplo = multiplo === 7 ? 2 : multiplo + 1;
+    }
+
+    var resto = 11 - (suma % 11);
+    if (resto === 11) return "0";
+    if (resto === 10) return "K";
+    return String(resto);
+}
+
+function validarRun(run) {
+    run = run.toUpperCase().replace(/\./g, "").replace(/-/g, "");
+    if (!/^[0-9]{7,8}[0-9K]$/.test(run)) return false;
+
+    var cuerpo = run.slice(0, -1);
+    var dv = run.slice(-1);
+    return calcularDigitoVerificador(cuerpo) === dv;
+}
+
 function cargarRegiones(idRegion, idComuna) {
     var region = document.getElementById(idRegion);
     var comuna = document.getElementById(idComuna);
@@ -1034,93 +1009,6 @@ function cargarRegiones(idRegion, idComuna) {
                 comuna.innerHTML += '<option value="' + c + '">' + c + "</option>";
             });
         }
-    });
-}
-var reglasCampos = {
-    run: function (valor) {
-        if (!valor) return "El RUN es obligatorio.";
-        if (!validarRun(valor.toUpperCase().replace(/\./g, "").replace(/-/g, "")))
-            return "RUN inválido. Verifica el dígito verificador (sin puntos ni guion, ej: 19011022K).";
-        return "";
-    },
-    nombre: function (valor) {
-        if (!valor) return "El nombre es obligatorio.";
-        if (valor.length > 50) return "Máximo 50 caracteres.";
-        return "";
-    },
-    apellidos: function (valor) {
-        if (!valor) return "Los apellidos son obligatorios.";
-        if (valor.length > 100) return "Máximo 100 caracteres.";
-        return "";
-    },
-    correo: function (valor) {
-        if (!valor) return "El correo es obligatorio.";
-        if (valor.length > 100) return "Máximo 100 caracteres.";
-        if (!validarCorreo(valor)) return "Solo correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
-        return "";
-    },
-    password: function (valor) {
-        if (valor.length < 4 || valor.length > 10) return "Entre 4 y 10 caracteres.";
-        return "";
-    },
-    passwordConfirm: function (valor, formulario) {
-        if (valor !== formulario.password.value) return "Las contraseñas no coinciden.";
-        return "";
-    },
-    direccion: function (valor) {
-        if (!valor) return "La dirección es obligatoria.";
-        if (valor.length > 300) return "Máximo 300 caracteres.";
-        return "";
-    },
-};
-
-function mostrarError(input, mensaje) {
-    input.classList.add("is-invalid");
-    var contenedor = input.closest("div");
-    var error = contenedor ? contenedor.querySelector(".error") : null;
-
-    if (!error) {
-        error = document.createElement("div");
-        error.className = "error";
-        contenedor.appendChild(error);
-    }
-
-    error.textContent = mensaje;
-    error.style.display = "block";
-}
-
-function limpiarError(input) {
-    input.classList.remove("is-invalid");
-    var contenedor = input.closest("div");
-    var error = contenedor ? contenedor.querySelector(".error") : null;
-    if (error) error.style.display = "none";
-}
-
-function validarCampo(input) {
-    var regla = reglasCampos[input.name];
-    if (!regla) return true;
-
-    var mensaje = regla(input.value.trim(), input.form);
-
-    if (mensaje) {
-        mostrarError(input, mensaje);
-        return false;
-    }
-
-    limpiarError(input);
-    return true;
-}
-
-function activarValidacionEnVivo(formulario) {
-    if (!formulario) return;
-
-    Array.prototype.forEach.call(formulario.querySelectorAll("input, textarea"), function (input) {
-        input.addEventListener("blur", function () {
-            validarCampo(input);
-        });
-        input.addEventListener("input", function () {
-            if (input.classList.contains("is-invalid")) validarCampo(input);
-        });
     });
 }
 
@@ -1221,6 +1109,102 @@ function iniciarSesion(evento) {
     window.location.href = "index.html";
 }
 
+
+/* ==========================================================================
+   VALIDACIÓN GENÉRICA DE FORMULARIOS (reglas, errores, validación en vivo)
+   ========================================================================== */
+var reglasCampos = {
+    run: function (valor) {
+        if (!valor) return "El RUN es obligatorio.";
+        if (!validarRun(valor.toUpperCase().replace(/\./g, "").replace(/-/g, "")))
+            return "RUN inválido. Verifica el dígito verificador (sin puntos ni guion, ej: 19011022K).";
+        return "";
+    },
+    nombre: function (valor) {
+        if (!valor) return "El nombre es obligatorio.";
+        if (valor.length > 50) return "Máximo 50 caracteres.";
+        return "";
+    },
+    apellidos: function (valor) {
+        if (!valor) return "Los apellidos son obligatorios.";
+        if (valor.length > 100) return "Máximo 100 caracteres.";
+        return "";
+    },
+    correo: function (valor) {
+        if (!valor) return "El correo es obligatorio.";
+        if (valor.length > 100) return "Máximo 100 caracteres.";
+        if (!validarCorreo(valor)) return "Solo correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
+        return "";
+    },
+    password: function (valor) {
+        if (valor.length < 4 || valor.length > 10) return "Entre 4 y 10 caracteres.";
+        return "";
+    },
+    passwordConfirm: function (valor, formulario) {
+        if (valor !== formulario.password.value) return "Las contraseñas no coinciden.";
+        return "";
+    },
+    direccion: function (valor) {
+        if (!valor) return "La dirección es obligatoria.";
+        if (valor.length > 300) return "Máximo 300 caracteres.";
+        return "";
+    },
+};
+
+function mostrarError(input, mensaje) {
+    input.classList.add("is-invalid");
+    var contenedor = input.closest("div");
+    var error = contenedor ? contenedor.querySelector(".error") : null;
+
+    if (!error) {
+        error = document.createElement("div");
+        error.className = "error";
+        contenedor.appendChild(error);
+    }
+
+    error.textContent = mensaje;
+    error.style.display = "block";
+}
+
+function limpiarError(input) {
+    input.classList.remove("is-invalid");
+    var contenedor = input.closest("div");
+    var error = contenedor ? contenedor.querySelector(".error") : null;
+    if (error) error.style.display = "none";
+}
+
+function validarCampo(input) {
+    var regla = reglasCampos[input.name];
+    if (!regla) return true;
+
+    var mensaje = regla(input.value.trim(), input.form);
+
+    if (mensaje) {
+        mostrarError(input, mensaje);
+        return false;
+    }
+
+    limpiarError(input);
+    return true;
+}
+
+function activarValidacionEnVivo(formulario) {
+    if (!formulario) return;
+
+    Array.prototype.forEach.call(formulario.querySelectorAll("input, textarea"), function (input) {
+        input.addEventListener("blur", function () {
+            validarCampo(input);
+        });
+        input.addEventListener("input", function () {
+            if (input.classList.contains("is-invalid")) validarCampo(input);
+        });
+    });
+}
+
+
+/* ==========================================================================
+   CONTACTO Y NEWSLETTER
+   ========================================================================== */
 function enviarContacto(evento) {
     evento.preventDefault();
 
@@ -1254,4 +1238,69 @@ function enviarContacto(evento) {
 
     alert("Mensaje enviado correctamente.");
     evento.target.reset();
+}
+
+function inicializarNewsletter() {
+    var form = document.getElementById("newsletterForm");
+    if (!form) return;
+
+    form.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        var email = document.getElementById("newsletterEmail").value.trim();
+        var mensaje = document.getElementById("newsletterMensaje");
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            mensaje.textContent = "Ingresa un correo válido.";
+            mensaje.className = "d-block mt-2 text-danger";
+            return;
+        }
+
+        mensaje.textContent = "¡Gracias por suscribirte!";
+        mensaje.className = "d-block mt-2 text-success";
+        form.reset();
+    });
+}
+
+
+/* ==========================================================================
+   DICCIONARIO OLFATIVO (modal de búsqueda)
+   ========================================================================== */
+function inicializarDiccionario() {
+    var buscador = document.getElementById("diccionarioBuscador");
+    if (!buscador) return;
+
+    buscador.addEventListener("input", function () {
+        var texto = buscador.value.trim().toLowerCase();
+        document.querySelectorAll(".diccionario-item").forEach(function (item) {
+            var coincide = item.textContent.toLowerCase().indexOf(texto) !== -1;
+            item.style.display = coincide ? "" : "none";
+        });
+    });
+
+}
+
+
+/* ==========================================================================
+   NOTIFICACIONES (toast genérico usado por carrito y wishlist)
+   ========================================================================== */
+function mostrarToast(mensaje, tipo) {
+    var contenedor = document.getElementById("toastContenedor");
+    if (!contenedor) {
+        contenedor = document.createElement("div");
+        contenedor.id = "toastContenedor";
+        contenedor.style.position = "fixed";
+        contenedor.style.bottom = "20px";
+        contenedor.style.right = "20px";
+        contenedor.style.zIndex = "9999";
+        document.body.appendChild(contenedor);
+    }
+
+    var toast = document.createElement("div");
+    toast.className = "toast-luxury" + (tipo === "aviso" ? " toast-luxury--aviso" : "");
+    toast.textContent = mensaje;
+    contenedor.appendChild(toast);
+
+    setTimeout(function () {
+        toast.remove();
+    }, 3000);
 }
