@@ -1,5 +1,5 @@
 /* ==========================================================================
-   INICIALIZACIÓN GENERAL
+    INICIALIZACIÓN GENERAL
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", function () {
     actualizarContador();
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* ==========================================================================
-   UTILIDADES Y DICCIONARIOS DE DATOS
+    UTILIDADES Y DICCIONARIOS DE DATOS
    ========================================================================== */
 function obtenerLista() {
     return typeof obtenerProductos === "function" ? obtenerProductos() : productos;
@@ -354,12 +354,10 @@ function leerFiltrosMarcados() {
 
     document.querySelectorAll(".filtro-check-list").forEach(function (lista) {
         var grupo = lista.dataset.grupo;
-        var marcados = Array.prototype.slice
-            .call(lista.querySelectorAll("input[type=checkbox]:checked"))
-            .map(function (input) {
-                return input.value;
-            });
-        grupos[grupo] = marcados;
+        var checks = lista.querySelectorAll("input[type=checkbox]:checked");
+        grupos[grupo] = Array.from(checks, function (input) {
+            return input.value;
+        });
     });
 
     return grupos;
@@ -462,7 +460,7 @@ function inicializarFiltrosProductos() {
 
 
 /* ==========================================================================
-   DETALLE DE PRODUCTO (página producto.html)
+    DETALLE DE PRODUCTO (página producto.html)
    ========================================================================== */
 function mostrarDetalle() {
     var id = new URLSearchParams(window.location.search).get("id");
