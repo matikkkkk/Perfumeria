@@ -1018,43 +1018,20 @@ function registrarUsuario(evento) {
     evento.preventDefault();
 
     var formulario = evento.target;
+    var esValido = true;
+
+    Array.prototype.forEach.call(formulario.querySelectorAll("input[name]"), function (input) {
+        if (reglasCampos[input.name] && !validarCampo(input)) esValido = false;
+    });
+
+    if (!esValido) return;
+
     var run = formulario.run.value.toUpperCase().replace(/\./g, "").replace(/-/g, "");
     var correo = formulario.correo.value.trim();
     var nombre = formulario.nombre.value.trim();
     var apellidos = formulario.apellidos.value.trim();
     var direccion = formulario.direccion.value.trim();
     var password = formulario.password.value;
-    var passwordConfirm = formulario.passwordConfirm.value;
-
-    if (!validarRun(run)) {
-        alert("El RUN no es válido (verifica el dígito verificador). Formato sin puntos ni guion, por ejemplo 19011022K.");
-        return;
-    }
-
-    if (!validarCorreo(correo)) {
-        alert("El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com.");
-        return;
-    }
-
-    if (!nombre || nombre.length > 50 || !apellidos || apellidos.length > 100) {
-        alert("Revise nombre y apellidos.");
-        return;
-    }
-
-    if (password.length < 4 || password.length > 10) {
-        alert("La contraseña debe tener entre 4 y 10 caracteres.");
-        return;
-    }
-
-    if (password !== passwordConfirm) {
-        alert("Las contraseñas no coinciden.");
-        return;
-    }
-
-    if (!direccion || direccion.length > 300) {
-        alert("La dirección es obligatoria y permite máximo 300 caracteres.");
-        return;
-    }
 
     var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
     lista.push({
@@ -1078,18 +1055,17 @@ function registrarUsuario(evento) {
 function iniciarSesion(evento) {
     evento.preventDefault();
 
-    var correo = evento.target.correo.value.trim();
-    var password = evento.target.password.value;
+    var formulario = evento.target;
+    var esValido = true;
 
-    if (!correo || correo.length > 100 || !validarCorreo(correo)) {
-        alert("Ingrese un correo válido.");
-        return;
-    }
+    Array.prototype.forEach.call(formulario.querySelectorAll("input[name]"), function (input) {
+        if (reglasCampos[input.name] && !validarCampo(input)) esValido = false;
+    });
 
-    if (password.length < 4 || password.length > 10) {
-        alert("La contraseña debe tener entre 4 y 10 caracteres.");
-        return;
-    }
+    if (!esValido) return;
+
+    var correo = formulario.correo.value.trim();
+    var password = formulario.password.value;
 
     var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
     var usuario = lista.find(function (u) {
@@ -1097,12 +1073,12 @@ function iniciarSesion(evento) {
     });
 
     if (!usuario) {
-        alert("Usuario no encontrado.");
+        mostrarError(formulario.correo, "Usuario no encontrado.");
         return;
     }
 
     if (usuario.password !== password) {
-        alert("Contraseña incorrecta.");
+        mostrarError(formulario.password, "Contraseña incorrecta.");
         return;
     }
 
@@ -1215,36 +1191,46 @@ function activarValidacionEnVivo(formulario) {
 function enviarContacto(evento) {
     evento.preventDefault();
 
-    var nombre = evento.target.nombre.value.trim();
-    var correo = evento.target.correo.value.trim();
-    var comentario = evento.target.comentario.value.trim();
+    var formulario = evento.target;
+    var nombre = formulario.nombre;
+    var correo = formulario.correo;
+    var comentario = formulario.comentario;
+    var esValido = true;
 
-    if (!nombre || nombre.length > 100) {
-        alert("El nombre es obligatorio y permite máximo 100 caracteres.");
-        return;
+    if (!nombre.value.trim() || nombre.value.trim().length > 100) {
+        mostrarError(nombre, "El nombre es obligatorio y permite máximo 100 caracteres.");
+        esValido = false;
+    } else {
+        limpiarError(nombre);
     }
 
-    if (!validarCorreo(correo) || correo.length > 100) {
-        alert("Ingrese un correo válido.");
-        return;
+    if (!validarCorreo(correo.value.trim()) || correo.value.trim().length > 100) {
+        mostrarError(correo, "Ingrese un correo válido (@duoc.cl, @profesor.duoc.cl o @gmail.com).");
+        esValido = false;
+    } else {
+        limpiarError(correo);
     }
 
-    if (!comentario || comentario.length > 500) {
-        alert("El comentario es obligatorio y permite máximo 500 caracteres.");
-        return;
+    if (!comentario.value.trim() || comentario.value.trim().length > 500) {
+        mostrarError(comentario, "El comentario es obligatorio y permite máximo 500 caracteres.");
+        esValido = false;
+    } else {
+        limpiarError(comentario);
     }
+
+    if (!esValido) return;
 
     var mensajes = JSON.parse(localStorage.getItem("mensajes") || "[]");
     mensajes.push({
-        nombre: nombre,
-        correo: correo,
-        comentario: comentario,
+        nombre: nombre.value.trim(),
+        correo: correo.value.trim(),
+        comentario: comentario.value.trim(),
         fecha: new Date().toLocaleString("es-CL"),
     });
     localStorage.setItem("mensajes", JSON.stringify(mensajes));
 
     alert("Mensaje enviado correctamente.");
-    evento.target.reset();
+    formulario.reset();
 }
 
 function inicializarNewsletter() {

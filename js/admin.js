@@ -75,30 +75,75 @@ function guardarProducto(evento) {
     var f = evento.target;
     var lista = obtenerProductos();
     var id = f.idProducto.value || String(Date.now());
+    var esValido = true;
+
+    if (f.codigo.value.trim().length < 3) {
+        mostrarError(f.codigo, "El código debe tener al menos 3 caracteres.");
+        esValido = false;
+    } else {
+        limpiarError(f.codigo);
+    }
+
+    if (!f.marca.value.trim()) {
+        mostrarError(f.marca, "La marca es obligatoria.");
+        esValido = false;
+    } else {
+        limpiarError(f.marca);
+    }
+
+    if (!f.nombre.value.trim() || f.nombre.value.trim().length > 100) {
+        mostrarError(f.nombre, "El nombre es obligatorio y permite máximo 100 caracteres.");
+        esValido = false;
+    } else {
+        limpiarError(f.nombre);
+    }
+
+    if (Number(f.precio.value) < 0) {
+        mostrarError(f.precio, "El precio no puede ser negativo.");
+        esValido = false;
+    } else {
+        limpiarError(f.precio);
+    }
+
+    if (Number(f.stock.value) < 0) {
+        mostrarError(f.stock, "El stock no puede ser negativo.");
+        esValido = false;
+    } else {
+        limpiarError(f.stock);
+    }
+
+    if (Number(f.stockCritico.value || 0) < 0) {
+        mostrarError(f.stockCritico, "El stock crítico no puede ser negativo.");
+        esValido = false;
+    } else {
+        limpiarError(f.stockCritico);
+    }
+
+    if (!esValido) return;
 
     var producto = {
-        id:id,
-        codigo:f.codigo.value.trim(),
-        marca:f.marca.value.trim(),
-        nombre:f.nombre.value.trim(),
-        descripcion:f.descripcion.value.trim(),
-        precio:Number(f.precio.value),
-        stock:Number(f.stock.value),
-        stockCritico:Number(f.stockCritico.value || 0),
-        categoria:f.categoria.value,
-        familia:f.familia.value,
-        estacion:f.estacion.value,
-        genero:f.genero.value,
-        tipo:f.tipo.value,
-        concentracion:f.concentracion.value,
-        humor:f.humor.value.split(",").map(function (h) { return h.trim().toLowerCase(); }).filter(function (h) { return h.length > 0; }),
-        maridaje:f.maridaje.value.split(",").map(function (h) { return h.trim().toLowerCase(); }).filter(function (h) { return h.length > 0; }),
-        notas:{
-            salida:f.notasSalida.value.split(",").map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; }),
-            corazon:f.notasCorazon.value.split(",").map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; }),
-            fondo:f.notasFondo.value.split(",").map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; })
+        id: id,
+        codigo: f.codigo.value.trim(),
+        marca: f.marca.value.trim(),
+        nombre: f.nombre.value.trim(),
+        descripcion: f.descripcion.value.trim(),
+        precio: Number(f.precio.value),
+        stock: Number(f.stock.value),
+        stockCritico: Number(f.stockCritico.value || 0),
+        categoria: f.categoria.value,
+        familia: f.familia.value,
+        estacion: f.estacion.value,
+        genero: f.genero.value,
+        tipo: f.tipo.value,
+        concentracion: f.concentracion.value,
+        humor: f.humor.value.split(",").map(function (h) { return h.trim().toLowerCase(); }).filter(function (h) { return h.length > 0; }),
+        maridaje: f.maridaje.value.split(",").map(function (h) { return h.trim().toLowerCase(); }).filter(function (h) { return h.length > 0; }),
+        notas: {
+            salida: f.notasSalida.value.split(",").map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; }),
+            corazon: f.notasCorazon.value.split(",").map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; }),
+            fondo: f.notasFondo.value.split(",").map(function (n) { return n.trim(); }).filter(function (n) { return n.length > 0; })
         },
-        imagen:f.imagen.value || "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80"
+        imagen: f.imagen.value || "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80"
     };
 
     var inspMarca = f.inspiradoMarca.value.trim();
@@ -106,17 +151,7 @@ function guardarProducto(evento) {
     var inspPrecio = Number(f.inspiradoPrecio.value);
 
     if (producto.tipo === "arabe" && inspMarca && inspNombre && inspPrecio > 0) {
-        producto.inspiradoEn = { marca:inspMarca, nombre:inspNombre, precioOriginal:inspPrecio };
-    }
-
-    if (producto.codigo.length < 3 || !producto.marca || !producto.nombre || producto.nombre.length > 100) {
-        alert("Revise código, marca y nombre.");
-        return;
-    }
-
-    if (producto.precio < 0 || producto.stock < 0 || producto.stockCritico < 0) {
-        alert("Precio y stock no pueden ser negativos.");
-        return;
+        producto.inspiradoEn = { marca: inspMarca, nombre: inspNombre, precioOriginal: inspPrecio };
     }
 
     var posicion = lista.findIndex(function (p) { return p.id === id; });
@@ -284,38 +319,36 @@ function guardarUsuarioAdmin(evento) {
     evento.preventDefault();
 
     var f = evento.target;
+    var esValido = true;
+
+    Array.prototype.forEach.call(f.querySelectorAll("input[name]"), function (input) {
+        if (reglasCampos[input.name] && !validarCampo(input)) esValido = false;
+    });
+
+    if (!esValido) return;
+
     var runOriginal = f.runOriginal ? f.runOriginal.value : "";
     var esEdicion = Boolean(runOriginal);
     var run = f.run.value.toUpperCase().replace(/\./g, "").replace(/-/g, "");
-
-    if (!validarRun(run)) {
-        alert("RUN inválido.");
-        return;
-    }
-
-    if (!validarCorreo(f.correo.value)) {
-        alert("Correo inválido.");
-        return;
-    }
 
     var lista = JSON.parse(localStorage.getItem("usuarios") || "[]");
     var identificadorBusqueda = esEdicion ? runOriginal : run;
 
     if (!esEdicion && lista.some(function (u) { return u.run === run; })) {
-        alert("Ya existe un usuario registrado con ese RUN.");
+        mostrarError(f.run, "Ya existe un usuario registrado con ese RUN.");
         return;
     }
 
     var usuario = {
-        run:run,
-        nombre:f.nombre.value.trim(),
-        apellidos:f.apellidos.value.trim(),
-        correo:f.correo.value.trim(),
-        fechaNacimiento:f.fechaNacimiento.value,
-        tipo:f.tipo.value,
-        region:f.region.value,
-        comuna:f.comuna.value,
-        direccion:f.direccion.value.trim()
+        run: run,
+        nombre: f.nombre.value.trim(),
+        apellidos: f.apellidos.value.trim(),
+        correo: f.correo.value.trim(),
+        fechaNacimiento: f.fechaNacimiento.value,
+        tipo: f.tipo.value,
+        region: f.region.value,
+        comuna: f.comuna.value,
+        direccion: f.direccion.value.trim()
     };
 
     var posicion = lista.findIndex(function (u) { return u.run === identificadorBusqueda; });
