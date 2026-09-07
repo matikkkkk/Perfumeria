@@ -446,13 +446,17 @@ function inicializarFiltrosProductos() {
     var limpiar = document.getElementById("limpiarFiltros");
     if (limpiar) {
         limpiar.addEventListener("click", function () {
-            document.querySelectorAll(".filtro-check-list input[type=checkbox]").forEach(function (input) {
-                input.checked = false;
-            });
-            if (ordenarSelect) ordenarSelect.value = "destacados";
-            history.replaceState(null, "", window.location.pathname);
-            renderProductosFiltrados();
+        document.querySelectorAll(".filtro-check-list input[type=checkbox]").forEach(function (input) {
+            input.checked = false;
         });
+        if (ordenarSelect) ordenarSelect.value = "destacados";
+    
+        var generoActual = new URLSearchParams(window.location.search).get("genero");
+        var nuevaUrl = window.location.pathname + (generoActual ? "?genero=" + generoActual : "");
+        history.replaceState(null, "", nuevaUrl);
+    
+        renderProductosFiltrados();
+    });
     }
 
     renderProductosFiltrados();
