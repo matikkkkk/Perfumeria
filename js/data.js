@@ -69,7 +69,7 @@ if (usuarios.length === 0) {
     usuarios.push({
         run:"15234567K",
         nombre:"Valentina",
-        apellidos:"Vendedor Rojas",
+        apellidos:"Rojas",
         correo:"vendedor@duoc.cl",
         password:"vende123",
         fechaNacimiento:"1995-04-12",
@@ -81,7 +81,7 @@ if (usuarios.length === 0) {
     usuarios.push({
         run:"20987654K",
         nombre:"Camila",
-        apellidos:"Cliente Soto",
+        apellidos:"Soto",
         correo:"cliente@gmail.com",
         password:"cliente123",
         fechaNacimiento:"2000-08-30",
