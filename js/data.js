@@ -66,6 +66,30 @@ if (usuarios.length === 0) {
         comuna:"Santiago",
         direccion:"Casa matriz Luxury"
     });
+    usuarios.push({
+        run:"15234567K",
+        nombre:"Valentina",
+        apellidos:"Vendedor Rojas",
+        correo:"vendedor@duoc.cl",
+        password:"vende123",
+        fechaNacimiento:"1995-04-12",
+        tipo:"Vendedor",
+        region:"Región Metropolitana",
+        comuna:"Providencia",
+        direccion:"Sucursal Providencia 123"
+    });
+    usuarios.push({
+        run:"20987654K",
+        nombre:"Camila",
+        apellidos:"Cliente Soto",
+        correo:"cliente@gmail.com",
+        password:"cliente123",
+        fechaNacimiento:"2000-08-30",
+        tipo:"Cliente",
+        region:"Valparaíso",
+        comuna:"Viña del Mar",
+        direccion:"Av. Perú 456"
+    });
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 }
 
