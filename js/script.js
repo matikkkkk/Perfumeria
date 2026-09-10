@@ -2,6 +2,7 @@
     INICIALIZACIÓN GENERAL
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", function () {
+    actualizarNavbarSesion();  
     actualizarContador();
     actualizarContadorWishlist();
     inicializarDiccionario();
@@ -1296,4 +1297,44 @@ function mostrarToast(mensaje, tipo) {
     setTimeout(function () {
         toast.remove();
     }, 3000);
+}
+
+/* ==========================================================================
+   Validacion usuario actual
+   ========================================================================== */
+
+
+function obtenerUsuarioActual() {
+    return JSON.parse(localStorage.getItem("usuarioActual") || "null");
+}
+
+function actualizarNavbarSesion() {
+    var contenedor = document.getElementById("navAuth");
+    if (!contenedor) return;
+
+    var usuario = obtenerUsuarioActual();
+
+    if (!usuario) {
+        contenedor.innerHTML = '<a class="nav-link" href="login.html">Ingresar</a>';
+        return;
+    }
+
+    var nombre = usuario.nombre || usuario.correo || "Mi cuenta";
+
+    contenedor.classList.add("dropdown");
+    contenedor.innerHTML =
+        '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+            '<i class="bi bi-person-circle"></i> ' + nombre +
+        '</a>' +
+        '<ul class="dropdown-menu dropdown-menu-luxury dropdown-menu-end">' +
+            (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor"
+                ? '<li><a class="dropdown-item" href="admin/index.html">Panel Admin</a></li>'
+                : "") +
+            '<li><a class="dropdown-item" href="#" onclick="cerrarSesion(); return false;">Cerrar sesión</a></li>' +
+        '</ul>';
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("usuarioActual");
+    window.location.href = "index.html";
 }
