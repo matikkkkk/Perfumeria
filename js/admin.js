@@ -21,6 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("usuarioDetalle")) mostrarUsuarioDetalle();
 });
 
+function cerrarSesionAdmin() {
+    localStorage.removeItem("usuarioActual");
+    window.location.href = "../index.html";
+}
+
 function protegerAdmin() {
     var usuario = JSON.parse(localStorage.getItem("usuarioActual") || "null");
 

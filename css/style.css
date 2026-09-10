@@ -9,6 +9,9 @@
 /* ===== Alineación del nav ===== */
 .navbar-nav {
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 8px;
 }
 
 .navbar-nav .nav-link {
@@ -257,6 +260,11 @@ body.luxury-bg {
     border: 1px solid rgba(212,175,55,.25);
     border-radius: 4px;
     padding: 12px 14px;
+}
+
+.form-luxury::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
 }
 
 .form-luxury:focus {
@@ -658,15 +666,6 @@ body.luxury-bg {
   font-weight: 500;
   letter-spacing: 5px;
   text-transform: uppercase;
-}
-.navbar-nav {
-  align-items: center;
-}
-.navbar-nav .nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
 }
 :root {
   --bg-dark: #0d0f12;
@@ -1499,6 +1498,15 @@ body.luxury-bg {
 .admin-menu a:hover, .admin-menu a.active {
     color: var(--gold);
     background: rgba(212,175,55,.05);
+}
+.admin-menu a.logout-link {
+    color: #c0392b;
+    border-top: 1px solid rgba(212,175,55,.15);
+    margin-top: 8px;
+}
+.admin-menu a.logout-link:hover {
+    color: #e05a48;
+    background: rgba(192,57,43,.08);
 }
 .stat-card {
     background: var(--card-bg);

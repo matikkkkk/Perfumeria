@@ -1243,11 +1243,11 @@ function inicializarNewsletter() {
         var email = document.getElementById("newsletterEmail").value.trim();
         var mensaje = document.getElementById("newsletterMensaje");
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            mensaje.textContent = "Ingresa un correo válido.";
+        if (!validarCorreo(email)) {
+            mensaje.textContent = "Ingresa un correo válido (@duoc.cl, @profesor.duoc.cl o @gmail.com).";
             mensaje.className = "d-block mt-2 text-danger";
             return;
-        }
+}
 
         mensaje.textContent = "¡Gracias por suscribirte!";
         mensaje.className = "d-block mt-2 text-success";
