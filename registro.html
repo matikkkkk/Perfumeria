@@ -23,12 +23,26 @@
         <div class="container">
             <a class="navbar-brand brand-logo d-flex align-items-center gap-2" href="index.html"><span class="brand-mark-mini">ML</span></a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-flex align-items-center gap-1 order-lg-3">
+                <button class="nav-icon-btn" type="button" id="btnBuscarNav" aria-label="Buscar" aria-expanded="false" aria-controls="navSearchBox">
+                    <i class="bi bi-search"></i>
+                </button>
+                <a class="nav-icon-btn position-relative" href="wishlist.html" aria-label="Wishlist">
+                    <i class="bi bi-heart"></i>
+                    <span class="nav-icon-badge wishlist-count">0</span>
+                </a>
+                <a class="nav-icon-btn position-relative" href="carrito.html" aria-label="Carrito">
+                    <i class="bi bi-bag"></i>
+                    <span class="nav-icon-badge cart-count">0</span>
+                </a>
+                <div class="dropdown" id="navAuth"><a class="nav-icon-btn" href="login.html" aria-label="Ingresar"><i class="bi bi-person"></i></a></div>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3 text-uppercase fs-7 tracking-wider">
+            <div class="collapse navbar-collapse order-lg-2" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0 gap-lg-3 text-uppercase fs-7 tracking-wider">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="productos.html" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
@@ -43,18 +57,16 @@
                     <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
                     <li class="nav-item"><a class="nav-link btn-diccionario-nav" href="#" data-bs-toggle="modal" data-bs-target="#diccionarioModal"><i class="bi bi-stars"></i> Diccionario</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="wishlist.html">
-                            <i class="bi bi-heart"></i> <span class="wishlist-count">0</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito.html">
-                            <i class="bi bi-bag"></i> Carrito (<span class="cart-count">0</span>)
-                        </a>
-                    </li>
-                    <li class="nav-item" id="navAuth"><a class="nav-link" href="login.html">Ingresar</a></li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="nav-search-box collapse" id="navSearchBox">
+            <div class="container py-3">
+                <form id="navSearchForm" class="d-flex gap-2" role="search">
+                    <input type="text" id="navSearchInput" class="form-control form-luxury" placeholder="Buscar perfumes, marcas..." autocomplete="off">
+                    <button type="submit" class="btn btn-luxury"><i class="bi bi-search"></i></button>
+                </form>
             </div>
         </div>
     </nav>

@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     actualizarContadorWishlist();
     inicializarDiccionario();
     inicializarNewsletter();
+    inicializarBusquedaNav();
 
     if (document.getElementById("productosGrid")) {
         inicializarFiltrosProductos();
@@ -34,6 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (document.getElementById("carritoLista")) {
     mostrarCarrito();
+    }
+
+    if (document.getElementById("pagoForm")) {
+        inicializarPago();
+    }
+
+    if (document.getElementById("confirmacionPago")) {
+        mostrarConfirmacionPago();
     }
 
     if (document.getElementById("region")) {
@@ -393,6 +402,14 @@ function renderProductosFiltrados() {
     if (genero) {
         lista = lista.filter(function (p) {
             return p.genero === genero;
+        });
+    }
+
+    var buscar = new URLSearchParams(window.location.search).get("buscar");
+    if (buscar) {
+        var textoBuscar = buscar.trim().toLowerCase();
+        lista = lista.filter(function (p) {
+            return (p.nombre + " " + p.marca).toLowerCase().indexOf(textoBuscar) !== -1;
         });
     }
 
@@ -932,7 +949,7 @@ function aplicarCupon() {
     mostrarCarrito();
 }
 
-function finalizarCompra() {
+function irAPagar() {
     var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
 
     if (carrito.length === 0) {
@@ -940,22 +957,201 @@ function finalizarCompra() {
         return;
     }
 
+    window.location.href = "pago.html";
+}
+
+
+/* ==========================================================================
+   PASARELA DE PAGO (simulada)
+   ========================================================================== */
+function inicializarPago() {
+    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    if (carrito.length === 0) {
+        window.location.href = "carrito.html";
+        return;
+    }
+
+    renderResumenPago();
+
+    var form = document.getElementById("pagoForm");
+    form.addEventListener("submit", procesarPago);
+    activarValidacionEnVivo(form);
+
+    var inputTarjeta = document.getElementById("numeroTarjeta");
+    if (inputTarjeta) {
+        inputTarjeta.addEventListener("input", function () {
+            var limpio = inputTarjeta.value.replace(/\D/g, "").slice(0, 19);
+            inputTarjeta.value = limpio.replace(/(.{4})/g, "$1 ").trim();
+        });
+    }
+
+    var inputVencimiento = document.getElementById("vencimiento");
+    if (inputVencimiento) {
+        inputVencimiento.addEventListener("input", function () {
+            var limpio = inputVencimiento.value.replace(/\D/g, "").slice(0, 4);
+            inputVencimiento.value = limpio.length > 2 ? limpio.slice(0, 2) + "/" + limpio.slice(2) : limpio;
+        });
+    }
+
+    var inputCvv = document.getElementById("cvv");
+    if (inputCvv) {
+        inputCvv.addEventListener("input", function () {
+            inputCvv.value = inputCvv.value.replace(/\D/g, "").slice(0, 4);
+        });
+    }
+}
+
+function renderResumenPago() {
+    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    var lista = document.getElementById("resumenLista");
+    if (!lista) return;
+
+    var subtotalElemento = document.getElementById("resumenSubtotal");
+    var lineaDescuento = document.getElementById("resumenDescuentoLinea");
+    var totalElemento = document.getElementById("resumenTotal");
+
+    var subtotal = 0;
+    lista.innerHTML = "";
+
+    carrito.forEach(function (p) {
+        var importe = p.precio * p.cantidad;
+        subtotal += importe;
+        lista.innerHTML +=
+            '<div class="resumen-item">' +
+            '<span class="resumen-item-nombre">' + p.nombre + ' <span class="text-gold-light">x' + p.cantidad + '</span></span>' +
+            '<span class="resumen-item-precio">$' + importe.toLocaleString("es-CL") + '</span>' +
+            '</div>';
+    });
+
+    var cuponCodigo = localStorage.getItem("cuponAplicado");
+    var descuento = cuponCodigo && CUPONES[cuponCodigo] ? subtotal * CUPONES[cuponCodigo] : 0;
+    var total = subtotal - descuento;
+
+    subtotalElemento.textContent = "$" + subtotal.toLocaleString("es-CL");
+
+    if (descuento > 0) {
+        document.getElementById("resumenDescuento").textContent = "-$" + descuento.toLocaleString("es-CL");
+        lineaDescuento.style.display = "flex";
+    } else {
+        lineaDescuento.style.display = "none";
+    }
+
+    totalElemento.textContent = "$" + total.toLocaleString("es-CL");
+
+    var cuponInput = document.getElementById("cuponInputPago");
+    if (cuponInput && cuponCodigo) cuponInput.value = cuponCodigo;
+}
+
+function aplicarCuponPago() {
+    var input = document.getElementById("cuponInputPago");
+    var mensaje = document.getElementById("cuponMensajePago");
+    var codigo = input.value.trim().toUpperCase();
+
+    if (!codigo) {
+        mensaje.textContent = "Ingresa un código de cupón.";
+        mensaje.className = "d-block mt-1 text-danger";
+        return;
+    }
+
+    if (!CUPONES.hasOwnProperty(codigo)) {
+        localStorage.removeItem("cuponAplicado");
+        mensaje.textContent = "Cupón no válido.";
+        mensaje.className = "d-block mt-1 text-danger";
+        renderResumenPago();
+        return;
+    }
+
+    localStorage.setItem("cuponAplicado", codigo);
+    mensaje.textContent = "Cupón aplicado: " + CUPONES[codigo] * 100 + "% de descuento.";
+    mensaje.className = "d-block mt-1 text-success";
+    renderResumenPago();
+}
+
+function procesarPago(evento) {
+    evento.preventDefault();
+
+    var formulario = evento.target;
+    var carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    if (carrito.length === 0) {
+        alert("El carrito está vacío.");
+        window.location.href = "productos.html";
+        return;
+    }
+
+    var camposValidos = true;
+    Array.prototype.forEach.call(formulario.querySelectorAll("input, select"), function (campo) {
+        if (reglasCampos[campo.name] && !validarCampo(campo)) {
+            camposValidos = false;
+        }
+    });
+
+    if (!camposValidos) return;
+
+    var subtotal = carrito.reduce(function (suma, p) {
+        return suma + p.precio * p.cantidad;
+    }, 0);
+    var cuponCodigo = localStorage.getItem("cuponAplicado");
+    var descuento = cuponCodigo && CUPONES[cuponCodigo] ? subtotal * CUPONES[cuponCodigo] : 0;
+    var total = subtotal - descuento;
+
     var ordenes = JSON.parse(localStorage.getItem("ordenes") || "[]");
-    ordenes.push({
+    var numeroTarjeta = formulario.numeroTarjeta.value.replace(/\s+/g, "");
+
+    var orden = {
         id: ordenes.length + 1,
         fecha: new Date().toLocaleString("es-CL"),
         productos: carrito,
-        total: carrito.reduce(function (suma, p) {
-            return suma + p.precio * p.cantidad;
-        }, 0),
-        estado: "Pendiente",
-    });
+        subtotal: subtotal,
+        descuento: descuento,
+        cupon: cuponCodigo || null,
+        total: total,
+        estado: "Pagado",
+        envio: {
+            region: formulario.region.value,
+            comuna: formulario.comuna.value,
+            direccion: formulario.direccion.value.trim(),
+        },
+        pago: {
+            metodo: "Tarjeta",
+            tarjetaFinal: numeroTarjeta.slice(-4),
+        },
+    };
 
+    ordenes.push(orden);
     localStorage.setItem("ordenes", JSON.stringify(ordenes));
+    localStorage.setItem("ultimaOrden", JSON.stringify(orden));
     localStorage.removeItem("carrito");
     localStorage.removeItem("cuponAplicado");
-    alert("Compra registrada correctamente.");
-    window.location.href = "index.html";
+
+    window.location.href = "pago-confirmado.html";
+}
+
+function mostrarConfirmacionPago() {
+    var orden = JSON.parse(localStorage.getItem("ultimaOrden") || "null");
+
+    if (!orden) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    document.getElementById("confNumeroOrden").textContent = "#LUX-" + String(orden.id).padStart(4, "0");
+    document.getElementById("confFecha").textContent = orden.fecha;
+    document.getElementById("confTotal").textContent = "$" + orden.total.toLocaleString("es-CL");
+    document.getElementById("confDireccion").textContent =
+        orden.envio.direccion + ", " + orden.envio.comuna + ", " + orden.envio.region;
+    document.getElementById("confTarjeta").textContent = "•••• •••• •••• " + orden.pago.tarjetaFinal;
+
+    var lista = document.getElementById("confLista");
+    lista.innerHTML = "";
+    orden.productos.forEach(function (p) {
+        lista.innerHTML +=
+            '<div class="resumen-item">' +
+            '<span class="resumen-item-nombre">' + p.nombre + ' <span class="text-gold-light">x' + p.cantidad + '</span></span>' +
+            '<span class="resumen-item-precio">$' + (p.precio * p.cantidad).toLocaleString("es-CL") + '</span>' +
+            '</div>';
+    });
 }
 
 
@@ -1133,6 +1329,35 @@ var reglasCampos = {
         if (valor.length > 300) return "Máximo 300 caracteres.";
         return "";
     },
+    region: function (valor) {
+        if (!valor) return "Selecciona una región.";
+        return "";
+    },
+    comuna: function (valor) {
+        if (!valor) return "Selecciona una comuna.";
+        return "";
+    },
+    numeroTarjeta: function (valor) {
+        var limpio = valor.replace(/\s+/g, "");
+        if (!limpio) return "El número de tarjeta es obligatorio.";
+        if (!/^[0-9]{13,19}$/.test(limpio)) return "Ingresa un número de tarjeta válido.";
+        return "";
+    },
+    nombreTarjeta: function (valor) {
+        if (!valor) return "El nombre en la tarjeta es obligatorio.";
+        if (valor.length > 100) return "Máximo 100 caracteres.";
+        return "";
+    },
+    vencimiento: function (valor) {
+        if (!valor) return "La fecha de vencimiento es obligatoria.";
+        if (!/^(0[1-9]|1[0-2])\/[0-9]{2}$/.test(valor)) return "Formato inválido. Usa MM/AA.";
+        return "";
+    },
+    cvv: function (valor) {
+        if (!valor) return "El CVV es obligatorio.";
+        if (!/^[0-9]{3,4}$/.test(valor)) return "El CVV debe tener 3 o 4 dígitos.";
+        return "";
+    },
 };
 
 function mostrarError(input, mensaje) {
@@ -1175,7 +1400,7 @@ function validarCampo(input) {
 function activarValidacionEnVivo(formulario) {
     if (!formulario) return;
 
-    Array.prototype.forEach.call(formulario.querySelectorAll("input, textarea"), function (input) {
+    Array.prototype.forEach.call(formulario.querySelectorAll("input, textarea, select"), function (input) {
         input.addEventListener("blur", function () {
             validarCampo(input);
         });
@@ -1257,6 +1482,40 @@ function inicializarNewsletter() {
 
 
 /* ==========================================================================
+   BÚSQUEDA EN EL NAV
+   ========================================================================== */
+function inicializarBusquedaNav() {
+    var boton = document.getElementById("btnBuscarNav");
+    var caja = document.getElementById("navSearchBox");
+    var form = document.getElementById("navSearchForm");
+    var input = document.getElementById("navSearchInput");
+    if (!boton || !caja || !form || !input) return;
+
+    var cajaBS = new bootstrap.Collapse(caja, { toggle: false });
+
+    boton.addEventListener("click", function () {
+        cajaBS.toggle();
+        var expandido = boton.getAttribute("aria-expanded") === "true";
+        boton.setAttribute("aria-expanded", String(!expandido));
+        if (!expandido) {
+            setTimeout(function () {
+                input.focus();
+            }, 150);
+        }
+    });
+
+    var textoUrl = new URLSearchParams(window.location.search).get("buscar");
+    if (textoUrl) input.value = textoUrl;
+
+    form.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        var texto = input.value.trim();
+        window.location.href = "productos.html" + (texto ? "?buscar=" + encodeURIComponent(texto) : "");
+    });
+}
+
+
+/* ==========================================================================
    DICCIONARIO OLFATIVO (modal de búsqueda)
    ========================================================================== */
 function inicializarDiccionario() {
@@ -1315,18 +1574,18 @@ function actualizarNavbarSesion() {
     var usuario = obtenerUsuarioActual();
 
     if (!usuario) {
-        contenedor.innerHTML = '<a class="nav-link" href="login.html">Ingresar</a>';
+        contenedor.innerHTML = '<a class="nav-icon-btn" href="login.html" aria-label="Ingresar" title="Ingresar"><i class="bi bi-person"></i></a>';
         return;
     }
 
     var nombre = usuario.nombre || usuario.correo || "Mi cuenta";
 
-    contenedor.classList.add("dropdown");
     contenedor.innerHTML =
-        '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
-            '<i class="bi bi-person-circle"></i> ' + nombre +
+        '<a class="nav-icon-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="' + nombre + '" title="' + nombre + '">' +
+            '<i class="bi bi-person-fill"></i>' +
         '</a>' +
         '<ul class="dropdown-menu dropdown-menu-luxury dropdown-menu-end">' +
+            '<li><span class="dropdown-item-text fs-7 text-gold-light">' + nombre + '</span></li>' +
             (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor"
                 ? '<li><a class="dropdown-item" href="admin/index.html">Panel Admin</a></li>'
                 : "") +

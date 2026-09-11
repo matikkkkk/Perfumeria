@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luxury — Contacto</title>
+    <title>Luxury — Pago</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,28 +72,82 @@
 
 <main class="container py-5 my-4">
     <div class="text-center mb-5">
-        <span class="text-gold text-uppercase tracking-widest fs-7">Escríbenos</span>
-        <h1 class="display-5 luxury-title mt-2">Contacto</h1>
+        <span class="text-gold text-uppercase tracking-widest fs-7">Paso final</span>
+        <h1 class="display-5 luxury-title mt-2">Finalizar compra</h1>
         <div class="gold-divider mx-auto my-3"></div>
     </div>
 
-    <form id="contactoForm" class="luxury-card p-4 p-md-5 mx-auto" style="max-width:800px;">
-        <div class="mb-3">
-            <label class="form-label-luxury">Nombre</label>
-            <input class="form-control form-luxury" name="nombre" maxlength="100" required>
+    <form id="pagoForm" class="row g-4" novalidate>
+        <div class="col-12 col-lg-7">
+            <div class="luxury-card p-4 p-md-5 mb-4">
+                <h3 class="luxury-title h5 mb-3"><i class="bi bi-truck"></i> Dirección de envío</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label-luxury">Región</label>
+                        <select class="form-select form-luxury" name="region" id="region" required></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label-luxury">Comuna</label>
+                        <select class="form-select form-luxury" name="comuna" id="comuna" required>
+                            <option value="">Seleccione comuna</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label-luxury">Dirección</label>
+                        <input class="form-control form-luxury" name="direccion" maxlength="300" placeholder="Calle, número, depto." required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="luxury-card p-4 p-md-5">
+                <h3 class="luxury-title h5 mb-3"><i class="bi bi-credit-card"></i> Datos de la tarjeta</h3>
+                <p class="fs-7 text-gold-light mb-3">Pago simulado con fines académicos. No se procesan pagos reales.</p>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label-luxury">Número de tarjeta</label>
+                        <input class="form-control form-luxury" name="numeroTarjeta" id="numeroTarjeta" maxlength="23" placeholder="4051 8856 0044 0000" required />
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label-luxury">Nombre en la tarjeta</label>
+                        <input class="form-control form-luxury" name="nombreTarjeta" maxlength="100" placeholder="Como aparece en la tarjeta" required />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label-luxury">Vencimiento</label>
+                        <input class="form-control form-luxury" name="vencimiento" id="vencimiento" maxlength="5" placeholder="MM/AA" required />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label-luxury">CVV</label>
+                        <input class="form-control form-luxury" name="cvv" id="cvv" maxlength="4" placeholder="123" required />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label-luxury">Correo</label>
-            <input type="email" class="form-control form-luxury" name="correo" maxlength="100" required>
+
+        <div class="col-12 col-lg-5">
+            <div class="luxury-card p-4 p-md-5">
+                <h3 class="luxury-title h5 mb-3">Resumen del pedido</h3>
+                <div id="resumenLista" class="mb-3"></div>
+
+                <div class="mb-3 text-start">
+                    <label class="fs-7 text-uppercase text-gold-light mb-1 d-block">Cupón de descuento</label>
+                    <div class="input-group">
+                        <input type="text" id="cuponInputPago" class="form-control form-luxury" placeholder="Ej: LUXURY10">
+                        <button class="btn btn-outline-luxury" type="button" onclick="aplicarCuponPago()">Aplicar</button>
+                    </div>
+                    <small id="cuponMensajePago" class="d-block mt-1"></small>
+                </div>
+
+                <p class="d-flex justify-content-between mb-1"><span>Subtotal</span><span id="resumenSubtotal">$0</span></p>
+                <p class="d-flex justify-content-between mb-1 text-gold" id="resumenDescuentoLinea" style="display:none;"><span>Descuento</span><span id="resumenDescuento">-$0</span></p>
+                <h2 class="price my-3" id="resumenTotal">$0</h2>
+
+                <button class="btn btn-luxury w-100" type="submit"><i class="bi bi-lock-fill"></i> Confirmar pago</button>
+                <a href="carrito.html" class="d-block text-center fs-7 text-gold-light mt-3 text-decoration-none">Volver al carrito</a>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label-luxury">Comentario</label>
-            <textarea class="form-control form-luxury" name="comentario" rows="6" maxlength="500" required></textarea>
-            <div class="text-end text-gold-light fs-7 mt-1">Máximo 500 caracteres</div>
-        </div>
-        <button class="btn btn-luxury w-100" type="submit">Enviar mensaje</button>
     </form>
 </main>
+
 <footer class="site-footer mt-5">
     <div class="container">
         <div class="row gy-4">
@@ -124,73 +178,6 @@
         </div>
     </div>
 </footer>
-
-<div class="modal fade" id="diccionarioModal" tabindex="-1" aria-labelledby="diccionarioModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content diccionario-modal-content">
-            <div class="modal-header border-0">
-                <div>
-                    <span class="text-gold text-uppercase tracking-widest fs-7">Referencia</span>
-                    <h2 class="luxury-title fst-italic h3 mt-1 mb-0" id="diccionarioModalLabel">Diccionario Olfativo</h2>
-                </div>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="diccionarioBuscador" class="form-control form-luxury mb-3" placeholder="Buscar término...">
-                <div class="diccionario-lista">
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Oud / Agarwood</h4>
-                        <p class="diccionario-definicion">La resina más preciada del mundo. Se forma en el árbol Aquilaria cuando este sufre una infección. Solo el 2% de los árboles la produce naturalmente.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Fougère</h4>
-                        <p class="diccionario-definicion">Familia olfativa clásica masculina. Del francés "helecho". Combina lavanda, cumarina y musgo de roble.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Chypre</h4>
-                        <p class="diccionario-definicion">Familia clásica que nació en Chipre. Bergamota en salida, floral en corazón, musgo de roble y labdanum en el fondo.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Sillage</h4>
-                        <p class="diccionario-definicion">La estela que deja el perfume al caminar. Un buen sillage significa que el aroma persiste en el aire mucho después de que la persona se va.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Notas de salida</h4>
-                        <p class="diccionario-definicion">Los primeros aromas que percibes al aplicar el perfume. Suelen durar entre 5 y 15 minutos antes de dar paso al corazón.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Notas de corazón</h4>
-                        <p class="diccionario-definicion">El alma del perfume. Aparecen cuando las notas de salida se disipan y definen su carácter durante varias horas.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Notas de fondo</h4>
-                        <p class="diccionario-definicion">Las notas más profundas y duraderas del perfume. Pueden persistir en la piel varias horas después de la aplicación.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Concentración (EDT / EDP / Parfum)</h4>
-                        <p class="diccionario-definicion">Indica el porcentaje de esencia pura en el frasco: EDT (5-15%), EDP (15-20%) y Parfum (20-30%), de menor a mayor intensidad y duración.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Familia olfativa</h4>
-                        <p class="diccionario-definicion">Categoría que agrupa los perfumes según su aroma dominante: floral, amaderado, cítrico, oriental, acuático, gourmand, entre otras.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Gourmand</h4>
-                        <p class="diccionario-definicion">Familia olfativa que evoca aromas dulces y comestibles, como vainilla, caramelo, café o chocolate.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Perfume nicho</h4>
-                        <p class="diccionario-definicion">Fragancias de producción limitada, creadas por casas independientes con ingredientes poco convencionales y fuera del circuito masivo.</p>
-                    </div>
-                    <div class="diccionario-item">
-                        <h4 class="diccionario-termino">Perfume árabe / oriental</h4>
-                        <p class="diccionario-definicion">Fragancias intensas y especiadas, tradicionalmente elaboradas con oud, ámbar, azafrán y almizcle.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/data.js"></script>
