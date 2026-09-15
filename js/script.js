@@ -243,6 +243,234 @@ function crearTarjeta(p) {
     );
 }
 
+function crearTarjetaMujer(p) {
+    var alertaStock = p.stock <= p.stockCritico
+        ? '<span class="badge bg-danger mb-2 d-inline-block">¡Últimas unidades!</span>'
+        : "";
+    var moods = (p.humor || []).map(chipHumor).join("");
+    var enWishlist = estaEnWishlist(p.id);
+
+    return (
+        '<div class="col-12 col-md-6 col-lg-3">' +
+        '<article class="card luxury-card h-100 border-0">' +
+        '<span class="card-badge card-badge--left">' +
+        (CONCENTRACION_LABELS[p.concentracion] || "") +
+        "</span>" +
+        '<span class="card-badge card-badge--right">' +
+        (TIPO_LABELS[p.tipo] || "") +
+        "</span>" +
+        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
+        '<div class="card-img-wrapper">' +
+        '<span class="card-badge card-badge--ml"><i class="bi bi-cloud-fill"></i> ' +
+        p.ml +
+        " ML</span>" +
+        '<img src="' +
+        p.imagen +
+        '" class="card-img-top" alt="' +
+        p.nombre +
+        '"></div>' +
+        '<div class="card-body text-center p-4 d-flex flex-column justify-content-between">' +
+        '<div>' +
+        alertaStock +
+        '<span class="fs-7 text-uppercase text-gold-light tracking-wider d-block">' +
+        p.estacion +
+        " · " +
+        (FAMILIA_LABELS[p.familia] || p.familia) +
+        "</span>" +
+        '<span class="card-brand d-block fs-7 text-uppercase tracking-wider">' +
+        (p.marca || "") +
+        "</span>" +
+        '<h3 class="card-title h5 luxury-title">' +
+        p.nombre +
+        "</h3>" +
+        '<div class="mood-chip-list justify-content-center mb-2">' +
+        moods +
+        "</div>" +
+        "</div>" +
+        '<div><span class="price d-block fs-5 my-3">$' +
+        p.precio.toLocaleString("es-CL") +
+        "</span>" +
+        '<a href="producto.html?id=' +
+        p.id +
+        '" class="btn btn-luxury w-100 mb-2">Descubrir</a>' +
+        '<button class="btn btn-luxury btn-luxury--primary w-100" onclick="agregarCarrito(\'' +
+        p.id +
+        "')\">Añadir</button></div>" +
+        "</div></article></div>"
+    );
+}
+
+function crearTarjetaHombre(p) {
+    var alertaStock = p.stock <= p.stockCritico
+        ? '<span class="badge bg-danger mb-2 d-inline-block">¡Últimas unidades!</span>'
+        : "";
+    var moods = (p.humor || []).map(chipHumor).join("");
+    var enWishlist = estaEnWishlist(p.id);
+
+    return (
+        '<div class="col-12 col-md-6 col-lg-3">' +
+        '<article class="card luxury-card h-100 border-0">' +
+        '<span class="card-badge card-badge--left">' +
+        (CONCENTRACION_LABELS[p.concentracion] || "") +
+        "</span>" +
+        '<span class="card-badge card-badge--right">' +
+        (TIPO_LABELS[p.tipo] || "") +
+        "</span>" +
+        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
+        '<div class="card-img-wrapper">' +
+        '<span class="card-badge card-badge--ml"><i class="bi bi-cloud-fill"></i> ' +
+        p.ml +
+        " ML</span>" +
+        '<img src="' +
+        p.imagen +
+        '" class="card-img-top" alt="' +
+        p.nombre +
+        '"></div>' +
+        '<div class="card-body text-center p-4 d-flex flex-column justify-content-between">' +
+        '<div>' +
+        alertaStock +
+        '<span class="fs-7 text-uppercase text-gold-light tracking-wider d-block">' +
+        p.estacion +
+        " · " +
+        (FAMILIA_LABELS[p.familia] || p.familia) +
+        "</span>" +
+        '<span class="card-brand d-block fs-7 text-uppercase tracking-wider">' +
+        (p.marca || "") +
+        "</span>" +
+        '<h3 class="card-title h5 luxury-title">' +
+        p.nombre +
+        "</h3>" +
+        '<div class="mood-chip-list justify-content-center mb-2">' +
+        moods +
+        "</div>" +
+        "</div>" +
+        '<div><span class="price d-block fs-5 my-3">$' +
+        p.precio.toLocaleString("es-CL") +
+        "</span>" +
+        '<a href="producto.html?id=' +
+        p.id +
+        '" class="btn btn-luxury w-100 mb-2">Descubrir</a>' +
+        '<button class="btn btn-luxury btn-luxury--primary w-100" onclick="agregarCarrito(\'' +
+        p.id +
+        "')\">Añadir</button></div>" +
+        "</div></article></div>"
+    );
+}
+
+function crearTarjetaUnisex(p) {
+    var alertaStock = p.stock <= p.stockCritico
+        ? '<span class="badge bg-danger mb-2 d-inline-block">¡Últimas unidades!</span>'
+        : "";
+    var moods = (p.humor || []).map(chipHumor).join("");
+    var enWishlist = estaEnWishlist(p.id);
+
+    return (
+        '<div class="col-12 col-md-6 col-lg-3">' +
+        '<article class="card luxury-card h-100 border-0">' +
+        '<span class="card-badge card-badge--left">' +
+        (CONCENTRACION_LABELS[p.concentracion] || "") +
+        "</span>" +
+        '<span class="card-badge card-badge--right">' +
+        (TIPO_LABELS[p.tipo] || "") +
+        "</span>" +
+        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
+        '<div class="card-img-wrapper">' +
+        '<span class="card-badge card-badge--ml"><i class="bi bi-cloud-fill"></i> ' +
+        p.ml +
+        " ML</span>" +
+        '<img src="' +
+        p.imagen +
+        '" class="card-img-top" alt="' +
+        p.nombre +
+        '"></div>' +
+        '<div class="card-body text-center p-4 d-flex flex-column justify-content-between">' +
+        '<div>' +
+        alertaStock +
+        '<span class="fs-7 text-uppercase text-gold-light tracking-wider d-block">' +
+        p.estacion +
+        " · " +
+        (FAMILIA_LABELS[p.familia] || p.familia) +
+        "</span>" +
+        '<span class="card-brand d-block fs-7 text-uppercase tracking-wider">' +
+        (p.marca || "") +
+        "</span>" +
+        '<h3 class="card-title h5 luxury-title">' +
+        p.nombre +
+        "</h3>" +
+        '<div class="mood-chip-list justify-content-center mb-2">' +
+        moods +
+        "</div>" +
+        "</div>" +
+        '<div><span class="price d-block fs-5 my-3">$' +
+        p.precio.toLocaleString("es-CL") +
+        "</span>" +
+        '<a href="producto.html?id=' +
+        p.id +
+        '" class="btn btn-luxury w-100 mb-2">Descubrir</a>' +
+        '<button class="btn btn-luxury btn-luxury--primary w-100" onclick="agregarCarrito(\'' +
+        p.id +
+        "')\">Añadir</button></div>" +
+        "</div></article></div>"
+    );
+}
+
+function crearTarjetaDestacado(p) {
+    var alertaStock = p.stock <= p.stockCritico
+        ? '<span class="badge bg-danger mb-2 d-inline-block">¡Últimas unidades!</span>'
+        : "";
+    var moods = (p.humor || []).map(chipHumor).join("");
+    var enWishlist = estaEnWishlist(p.id);
+
+    return (
+        '<div class="col-12 col-md-6 col-lg-3">' +
+        '<article class="card luxury-card h-100 border-0">' +
+        '<span class="card-badge card-badge--left">' +
+        (CONCENTRACION_LABELS[p.concentracion] || "") +
+        "</span>" +
+        '<span class="card-badge card-badge--right">' +
+        (TIPO_LABELS[p.tipo] || "") +
+        "</span>" +
+        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
+        '<div class="card-img-wrapper">' +
+        '<span class="card-badge card-badge--ml"><i class="bi bi-cloud-fill"></i> ' +
+        p.ml +
+        " ML</span>" +
+        '<img src="' +
+        p.imagen +
+        '" class="card-img-top" alt="' +
+        p.nombre +
+        '"></div>' +
+        '<div class="card-body text-center p-4 d-flex flex-column justify-content-between">' +
+        '<div>' +
+        alertaStock +
+        '<span class="fs-7 text-uppercase text-gold-light tracking-wider d-block">' +
+        p.estacion +
+        " · " +
+        (FAMILIA_LABELS[p.familia] || p.familia) +
+        "</span>" +
+        '<span class="card-brand d-block fs-7 text-uppercase tracking-wider">' +
+        (p.marca || "") +
+        "</span>" +
+        '<h3 class="card-title h5 luxury-title">' +
+        p.nombre +
+        "</h3>" +
+        '<div class="mood-chip-list justify-content-center mb-2">' +
+        moods +
+        "</div>" +
+        "</div>" +
+        '<div><span class="price d-block fs-5 my-3">$' +
+        p.precio.toLocaleString("es-CL") +
+        "</span>" +
+        '<a href="producto.html?id=' +
+        p.id +
+        '" class="btn btn-luxury w-100 mb-2">Descubrir</a>' +
+        '<button class="btn btn-luxury btn-luxury--primary w-100" onclick="agregarCarrito(\'' +
+        p.id +
+        "')\">Añadir</button></div>" +
+        "</div></article></div>"
+    );
+}
+
 function crearSlideLanzamiento(p, activo) {
     var estacionTexto = p.estacion.charAt(0).toUpperCase() + p.estacion.slice(1);
 
@@ -261,7 +489,7 @@ function crearSlideLanzamiento(p, activo) {
         '<span class="d-block fs-7 text-uppercase tracking-wider text-gold-light mt-1">' +
         (p.marca || "") +
         "</span>" +
-        '<h3 class="luxury-title fst-italic display-6 mt-2">' +
+        '<h3 class="luxury-title launch-title fst-italic display-6 mt-2">' +
         p.nombre +
         "</h3>" +
         '<p class="text-gold-light my-3">' +
@@ -271,15 +499,15 @@ function crearSlideLanzamiento(p, activo) {
         '<p class="fs-7 text-uppercase text-gold tracking-wider mb-3 mt-2">Familia: <span class="text-gold-light">' +
         (FAMILIA_LABELS[p.familia] || p.familia) +
         "</span></p>" +
-        '<h4 class="price mb-3">$' +
+        '<h4 class="price launch-price mb-3">$' +
         p.precio.toLocaleString("es-CL") +
         "</h4>" +
         '<a href="producto.html?id=' +
         p.id +
         '" class="btn btn-luxury me-2">Ver producto</a>' +
-        '<button class="btn btn-outline-light" onclick="agregarCarrito(\'' +
+        '<button class="btn btn-luxury btn-luxury--fill" onclick="agregarCarrito(\'' +
         p.id +
-        "')\">Añadir</button>" +
+        "')\">Añadir al carrito <i class=\"bi bi-bag ms-1\"></i></button>" +
         "</div></div></div>"
     );
 }
@@ -307,9 +535,11 @@ function agruparEnBloques(lista, tamano) {
     return bloques;
 }
 
-function renderCarruselGenero(idInner, genero, maxProductos, porSlide) {
+function renderCarruselGenero(idInner, genero, maxProductos, porSlide, tarjetaFn) {
     var contenedor = document.getElementById(idInner);
     if (!contenedor) return;
+
+    var crear = tarjetaFn || crearTarjeta;
 
     var lista = obtenerLista()
         .filter(function (p) {
@@ -328,7 +558,7 @@ function renderCarruselGenero(idInner, genero, maxProductos, porSlide) {
         .map(function (bloque, indice) {
             var tarjetas = bloque
                 .map(function (p) {
-                    return crearTarjeta(p);
+                    return crear(p);
                 })
                 .join("");
             return '<div class="carousel-item' + (indice === 0 ? " active" : "") + '"><div class="row g-4 justify-content-center">' + tarjetas + "</div></div>";
@@ -337,20 +567,20 @@ function renderCarruselGenero(idInner, genero, maxProductos, porSlide) {
 }
 
 function inicializarCarruselesGenero() {
-    renderCarruselGenero("carruselMujerInner", "mujer", 8, 4);
-    renderCarruselGenero("carruselHombreInner", "hombre", 8, 4);
-    renderCarruselGenero("carruselUnisexInner", "unisex", 8, 4);
+    renderCarruselGenero("carruselMujerInner", "mujer", 8, 4, crearTarjetaMujer);
+    renderCarruselGenero("carruselHombreInner", "hombre", 8, 4, crearTarjetaHombre);
+    renderCarruselGenero("carruselUnisexInner", "unisex", 8, 4, crearTarjetaUnisex);
 }
 
 function renderDestacados() {
     var contenedor = document.getElementById("destacadosGrid");
     if (!contenedor) return;
 
-    var lista = obtenerLista().slice(0, 3);
+    var lista = obtenerLista().slice(0, 4);
 
     contenedor.innerHTML = lista
         .map(function (p) {
-            return crearTarjeta(p);
+            return crearTarjetaDestacado(p);
         })
         .join("");
 }

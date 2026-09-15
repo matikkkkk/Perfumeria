@@ -1,9 +1,9 @@
 .navbar-brand {
-    font-family: Georgia, serif;
-    font-size: 30px;
-    font-weight: 500;
-    letter-spacing: 5px;
-    text-transform: uppercase;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
 }
 
 /* ===== Alineación del nav ===== */
@@ -22,32 +22,40 @@
 }
 
 :root {
-    --bg-dark: #0d0f12;
-    --card-bg: #14171d;
-    --gold: #d4af37;
-    --gold-light: #e6ca65;
-    --text-muted: #a0a5b1;
+  --bg-dark: #0d0f12;
+  --card-bg: #14171d;
+  --gold: #d4af37;
+  --gold-light: #e6ca65;
+  --text-muted: #a0a5b1;
+
 }
 
 body.luxury-bg {
-    background-color: var(--bg-dark);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #e0e0e0;
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(rgba(13, 15, 18, 0.88), rgba(13, 15, 18, 0.88)),
+    url("../img/fondo-marmol.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-position: center, center;
+  background-attachment: fixed, fixed;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #e0e0e0;
 }
 
 /* Tipografías */
 .luxury-title {
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 0.5px;
-    color: #f4ecd8;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0.5px;
+  color: #f4ecd8;
 }
 
 .brand-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    letter-spacing: 4px;
-    color: var(--gold) !important;
-    font-weight: 600;
+  font-family: "Playfair Display", serif;
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  color: var(--gold) !important;
+  font-weight: 600;
 }
 
 /* Detalles Dorados */
@@ -59,654 +67,12 @@ body.luxury-bg {
 .card-brand { color: var(--gold); letter-spacing: 0.08em; opacity: 0.85; }
 
 .gold-divider {
-    width: 50px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-
-/* Tarjetas */
-.luxury-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.15) !important;
-    border-radius: 4px;
-    transition: all 0.4s ease;
-    overflow: hidden;
-}
-
-.luxury-card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(212, 175, 55, 0.5) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.1);
-}
-
-.card-img-wrapper {
-    height: 280px;
-    overflow: hidden;
-    position: relative;
-}
-
-.card-badge {
-    position: absolute;
-    top: 12px;
-    z-index: 2;
-    background: rgba(13, 15, 18, 0.85);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    color: var(--gold-light);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 3px 10px;
-    border-radius: 2px;
-}
-
-.card-badge--left { left: 12px; }
-.card-badge--right { right: 12px; }
-
-.card-badge--ml {
-    top: auto;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 20px;
-    background: rgba(212, 175, 55, 0.18);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.toast-luxury {
-    background: rgba(20, 20, 20, 0.95);
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    padding: 12px 20px;
-    border-radius: 8px;
-    margin-top: 10px;
-    font-size: 0.85rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    animation: toastFadeIn 0.3s ease;
-}
-
-.toast-luxury--aviso {
-    border-color: #e07a5f;
-}
-
-@keyframes toastFadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.card-img-top {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.luxury-card:hover .card-img-top {
-    transform: scale(1.05);
-}
-
-.price {
-    font-family: 'Playfair Display', serif;
-    color: var(--gold);
-}
-
-/* Botón de Lujo */
-.btn-luxury {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    border-radius: 0;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
-}
-
-.btn-luxury:hover {
-    background: var(--gold);
-    color: var(--bg-dark);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-}
-
-/* ===== Franja / manifiesto ===== */
-.manifest-section {
-    padding: 36px 20px;
-    background: var(--card-bg);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-}
-
-.manifest-quote {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.2rem;
-    color: #f5f0e6;
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-/* Section label reutilizable */
-.section-label {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-}
-
-/* Footer */
-.site-footer {
-    background: var(--card-bg);
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
-    padding: 48px 0 20px;
-}
-
-.footer-text {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    max-width: 260px;
-    line-height: 1.6;
-}
-
-.footer-heading {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-}
-
-.footer-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.8rem;
-}
-
-.footer-list li { margin-bottom: 8px; }
-.footer-list a { color: var(--text-muted); text-decoration: none; }
-.footer-list a:hover { color: var(--gold); }
-
-.footer-bottom {
-    border-top: 1px solid rgba(212, 175, 55, 0.1);
-    margin-top: 28px;
-    padding-top: 16px;
-}
-
-.footer-bottom span {
-    font-size: 0.65rem;
-    color: #5f5c54;
-    letter-spacing: 0.5px;
-}
-
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 60px 16px 40px;
-    }
-}
-
-
-.form-luxury {
-    background: var(--card-bg);
-    color: #e0e0e0;
-    border: 1px solid rgba(212,175,55,.25);
-    border-radius: 4px;
-    padding: 12px 14px;
-}
-
-.form-luxury::placeholder {
-    color: var(--text-muted);
-    opacity: 1;
-}
-
-.form-luxury:focus {
-    background: var(--card-bg);
-    color: #fff;
-    border-color: var(--gold);
-    box-shadow: 0 0 0 .15rem rgba(212,175,55,.15);
-}
-
-/* Dropdown "Productos" del nav */
-.dropdown-menu-luxury {
-    background: var(--card-bg);
-    border: 1px solid rgba(212,175,55,.2);
-    border-radius: 4px;
-    padding: 10px 0;
-    min-width: 220px;
-}
-
-.dropdown-menu-luxury .dropdown-item {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 10px 20px;
-    color: #d8d8d8;
-}
-
-.dropdown-menu-luxury .dropdown-item:hover,
-.dropdown-menu-luxury .dropdown-item:focus {
-    color: var(--gold);
-}
-
-.dropdown-menu-luxury .dropdown-item-title {
-    color: var(--text-muted);
-    font-size: .8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.dropdown-menu-luxury .dropdown-item-sub {
-    color: rgba(160,165,177,.6);
-    font-size: .72rem;
-}
-
-.dropdown-menu-luxury .dropdown-item:hover .dropdown-item-title,
-.dropdown-menu-luxury .dropdown-item:hover .dropdown-item-sub {
-    color: var(--gold);
-}
-
-.dropdown-menu-luxury .dropdown-item:hover {
-    background: rgba(212,175,55,.06);
-}
-
-/* ===== Carrusel Nuevos Lanzamientos ===== */
-.launch-carousel {
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--card-bg);
-}
-
-.launch-slide { min-height: 420px; }
-.launch-img-wrapper { height: 420px; overflow: hidden; }
-.launch-img { width: 100%; height: 100%; object-fit: cover; }
-
-.carousel-indicators-luxury button {
-    background-color: var(--gold);
-    opacity: 0.35;
-}
-
-.carousel-indicators-luxury button.active { opacity: 1; }
-
-/* ===== Controles de carrusel ===== */
-.carousel-control-luxury {
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    background: rgba(13, 15, 18, 0.7);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    color: var(--gold);
-    opacity: 1;
-    font-size: 1.1rem;
-}
-
-.carousel-control-luxury.carousel-control-prev { left: 16px; }
-.carousel-control-luxury.carousel-control-next { right: 16px; }
-
-.carousel-control-luxury:hover {
-    background: var(--gold);
-    color: var(--bg-dark);
-}
-
-.btn-carousel-nav {
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    color: var(--gold);
-    border-radius: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-carousel-nav:hover {
-    background: var(--gold);
-    color: var(--bg-dark);
-}
-
-/* ===== Preguntas frecuentes ===== */
-.accordion-luxury {
-    --bs-accordion-bg: transparent;
-    --bs-accordion-border-color: rgba(212, 175, 55, 0.15);
-    --bs-accordion-border-radius: 0;
-    --bs-accordion-btn-color: #f5f0e6;
-    --bs-accordion-btn-bg: transparent;
-    --bs-accordion-active-color: var(--gold);
-    --bs-accordion-active-bg: transparent;
-    --bs-accordion-btn-focus-border-color: rgba(212, 175, 55, 0.4);
-    --bs-accordion-btn-focus-box-shadow: none;
-    --bs-accordion-color: var(--text-muted);
-    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23d4af37'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-}
-
-.accordion-luxury .accordion-button {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-}
-
-/* ===== Chips: humor, ocasión, notas olfativas ===== */
-.mood-chip-list, .occasion-chip-list, .nota-chip-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.mood-chip {
-    display: inline-block;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--mood-color, var(--gold));
-    color: var(--mood-color, var(--gold-light));
-    background: var(--mood-bg, rgba(212, 175, 55, 0.12));
-}
-
-.mood-chip--poderoso { --mood-color: #c0392b; --mood-bg: rgba(192, 57, 43, 0.15); }
-.mood-chip--romantico { --mood-color: #ff8fb3; --mood-bg: rgba(255, 143, 179, 0.18); }
-.mood-chip--fresco { --mood-color: #4fb0c6; --mood-bg: rgba(79, 176, 198, 0.15); }
-.mood-chip--misterioso { --mood-color: #8e6fd8; --mood-bg: rgba(142, 111, 216, 0.15); }
-.mood-chip--relajado { --mood-color: #6fb56f; --mood-bg: rgba(111, 181, 111, 0.15); }
-.mood-chip--elegante { --mood-color: var(--gold); --mood-bg: rgba(212, 175, 55, 0.12); }
-
-.inspirado-mini {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    font-size: 0.72rem;
-    border-top: 1px dashed rgba(212, 175, 55, 0.3);
-    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
-    padding: 6px 4px;
-    margin: 8px 0;
-}
-
-.inspirado-mini-label { color: var(--gold); text-transform: uppercase; letter-spacing: 0.03em; }
-.inspirado-mini-label em { font-style: italic; color: #f5f0e6; }
-.inspirado-mini-precios s { color: var(--text-muted); margin-right: 6px; }
-.inspirado-mini-precios { color: var(--gold-light); font-weight: 600; }
-
-/* ===== Botón Diccionario en la navegación ===== */
-.btn-diccionario-nav {
-    border: 1px solid var(--gold);
-    border-radius: 3px;
-    padding: 4px 14px !important;
-    color: var(--gold) !important;
-    transition: all 0.25s ease;
-}
-
-.btn-diccionario-nav:hover {
-    background: var(--gold);
-    color: #14171d !important;
-}
-
-/* ===== Marca "ML" (nav + hero) ===== */
-.brand-mark-mini {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.75rem;
-    letter-spacing: 0;
-    color: var(--gold);
-}
-
-.brand-mark {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.brand-mark-letters {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.2rem;
-    line-height: 1;
-    color: var(--gold);
-    display: flex;
-}
-
-.brand-mark-letters .brand-mark-l {
-    margin-left: -0.15em;
-    margin-top: 0.5em;
-}
-
-.brand-mark-caption {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    margin-top: -14px;
-    font-size: 0.62rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-align: center;
-    line-height: 1.4;
-}
-
-/* ===== Fondo con patrón (Hero Home) ===== */
-.hero-section {
-    position: relative;
-    background-color: var(--bg-dark);
-    background-image:
-        repeating-linear-gradient(45deg, rgba(212,175,55,0.09) 0px, rgba(212,175,55,0.09) 2px, transparent 2px, transparent 44px),
-        repeating-linear-gradient(-45deg, rgba(212,175,55,0.09) 0px, rgba(212,175,55,0.09) 2px, transparent 2px, transparent 44px),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ctext x='6' y='34' font-family='Georgia,serif' font-size='36' fill='rgba(212,175,55,0.08)'%3EM%3C/text%3E%3Ctext x='96' y='26' font-size='15' fill='rgba(212,175,55,0.18)'%3E%2B%3C/text%3E%3Ctext x='52' y='78' font-size='13' fill='rgba(212,175,55,0.18)'%3E%E2%9C%A6%3C/text%3E%3Ctext x='122' y='98' font-size='15' fill='rgba(212,175,55,0.16)'%3E%E2%97%86%3C/text%3E%3Ctext x='14' y='140' font-size='13' fill='rgba(212,175,55,0.16)'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E");
-    background-repeat: repeat, repeat, repeat;
-    background-size: 62px 62px, 62px 62px, 160px 160px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-    padding: 90px 20px 70px;
-}
-
-/* ===== Wishlist ===== */
-.wishlist-heart {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    z-index: 2;
-    width: 34px;
-    height: 34px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(13, 15, 18, 0.85);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    border-radius: 50%;
-    color: var(--gold-light);
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-}
-
-.wishlist-heart:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.wishlist-heart.activo {
-    color: #e0567c;
-    border-color: #e0567c;
-}
-
-/* ===== Diccionario Olfativo (modal) ===== */
-.diccionario-modal-content {
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    border-radius: 4px;
-    color: #e0e0e0;
-}
-
-.diccionario-modal-content .modal-header { padding: 24px 28px 0; }
-.diccionario-modal-content .modal-body {
-    padding: 20px 28px 28px;
-    max-height: 70vh;
-    overflow-y: auto;
-}
-
-.diccionario-item {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 4px;
-    padding: 16px 20px;
-    margin-bottom: 14px;
-}
-
-.diccionario-termino {
-    font-family: 'Playfair Display', serif;
-    color: var(--gold);
-    font-size: 1rem;
-    margin-bottom: 6px;
-}
-
-.diccionario-definicion {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    margin: 0;
-}
-
-/* ===== La Maison Monthly (suscripción) ===== */
-.monthly-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 4px;
-    padding: 36px 28px;
-    height: 100%;
-    text-align: center;
-    position: relative;
-}
-
-.monthly-card--recomendado {
-    border-color: var(--gold);
-    transform: scale(1.03);
-}
-
-.monthly-badge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--gold);
-    color: var(--bg-dark);
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 2px;
-    font-weight: 600;
-}
-
-.monthly-plan-label {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-}
-
-.monthly-plan-name {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    color: #fff;
-    font-size: 1.4rem;
-    margin: 4px 0 14px;
-}
-
-.monthly-price {
-    font-family: 'Playfair Display', serif;
-    color: var(--gold);
-    font-size: 2.1rem;
-}
-
-.monthly-price small {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.monthly-includes {
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    margin: 14px 0 22px;
-}
-
-@media (max-width: 991px) {
-    .monthly-card--recomendado { transform: none; }
-}
-
-@media (max-width: 991px) {
-    .navbar-collapse {
-        margin-top: 16px;
-        border-top: 1px solid rgba(212, 175, 55, 0.15);
-        padding-top: 16px;
-    }
-    .navbar-nav {
-        align-items: flex-start;
-        gap: 4px !important;
-    }
-    .navbar-nav .nav-link {
-        width: 100%;
-        padding: 10px 4px !important;
-    }
-    .launch-slide { min-height: auto; }
-    .launch-img-wrapper { height: 260px; }
-    .launch-img { height: 100%; width: 100%; object-fit: cover; }
-}
-
-.navbar-brand {
-  font-family: Georgia, serif;
-  font-size: 30px;
-  font-weight: 500;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-}
-:root {
-  --bg-dark: #0d0f12;
-  --card-bg: #14171d;
-  --gold: #d4af37;
-  --gold-light: #e6ca65;
-  --text-muted: #a0a5b1;
-
-}
-body.luxury-bg {
-  background-color: var(--bg-dark);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  color: #e0e0e0;
-}
-.luxury-title {
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 0.5px;
-  color: #f4ecd8;
-}
-.brand-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  letter-spacing: 4px;
-  color: var(--gold) !important;
-  font-weight: 600;
-}
-.text-gold { color: var(--gold); }
-.text-gold-light { color: var(--text-muted); }
-.tracking-wider { letter-spacing: 2px; }
-.tracking-widest { letter-spacing: 4px; }
-.fs-7 { font-size: 0.8rem; }
-.card-brand { color: var(--gold); letter-spacing: 0.08em; opacity: 0.85; }
-.gold-divider {
   width: 50px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
+/* Tarjetas */
 .luxury-card {
   background: var(--card-bg);
   border: 1px solid rgba(212, 175, 55, 0.15) !important;
@@ -715,6 +81,7 @@ body.luxury-bg {
   overflow: hidden;
 
 }
+
 .luxury-card:hover {
   transform: translateY(-7px);
   border-color: rgba(212, 175, 55, 0.5) !important;
@@ -744,7 +111,6 @@ body.luxury-bg {
 .card-badge--left {
   left: 12px;
 }
-
 .card-badge--right {
   right: 12px;
 }
@@ -801,10 +167,11 @@ body.luxury-bg {
 }
 
 .price {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   color: var(--gold);
 }
 
+/* Botón de Lujo */
 .btn-luxury {
   background: transparent;
   color: var(--gold);
@@ -823,25 +190,177 @@ body.luxury-bg {
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
+/* Variante sólida: misma fuente/tamaño que .btn-luxury pero siempre rellena */
+.btn-luxury--fill {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-color: var(--gold);
+}
+
+.btn-luxury--fill:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  color: var(--bg-dark);
+}
+
+/* Nuevos Lanzamientos: título y precio con el mismo dorado */
+.launch-title {
+  color: var(--gold) !important;
+}
+
+.launch-price {
+  color: var(--gold);
+}
+
+/* ===== Secciones a pantalla completa (100vh) ===== */
+.vh-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Preguntas frecuentes + footer: 50vh cada una para sumar 100vh */
+.vh-half {
+  min-height: 50vh;
+  min-height: 50dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .vh-section,
+  .vh-half {
+    min-height: auto;
+  }
+}
+
+/* ===== Fondo especial: Colección Mujer (full-bleed, de lado a lado) ===== */
+.coleccion-mujer-section {
+  position: relative;
+  background-image: url('../img/fondo-coleccion-mujer.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.coleccion-mujer-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 12, 0.35);
+  z-index: 0;
+}
+
+.coleccion-mujer-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Fondo especial: Colección Hombre (full-bleed, de lado a lado) ===== */
+.coleccion-hombre-section {
+  position: relative;
+  background-image: url('../img/fondo-coleccion-hombre.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.coleccion-hombre-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 12, 0.45);
+  z-index: 0;
+}
+
+.coleccion-hombre-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Fondo especial: Colección Unisex (full-bleed, de lado a lado) ===== */
+.coleccion-unisex-section {
+  position: relative;
+  background-image: url('../img/fondo-coleccion-unisex.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.coleccion-unisex-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 6, 8, 0.4);
+  z-index: 0;
+}
+
+.coleccion-unisex-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Franja / manifiesto ===== */
+.manifest-section {
+    padding: 36px 20px;
+    background: var(--card-bg);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.manifest-quote {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #f5f0e6;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Section label reutilizable */
+.section-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* Footer */
 .site-footer {
-  background: var(--card-bg);
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  position: relative;
+  background: var(--card-bg) url("../img/textura-footer.jpg") center/cover no-repeat;
+  border-top: 3px solid var(--gold);
   padding: 48px 0 20px;
+}
+
+.site-footer .brand-logo {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .footer-text {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #c7cad2;
   max-width: 260px;
   line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .footer-heading {
   font-size: 0.7rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-light);
   margin-bottom: 12px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .footer-list {
@@ -854,26 +373,97 @@ body.luxury-bg {
 .footer-list li {
   margin-bottom: 8px;
 }
-
 .footer-list a {
-  color: var(--text-muted);
+  color: #c7cad2;
   text-decoration: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
-
 .footer-list a:hover {
-  color: var(--gold);
+  color: var(--gold-light);
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
   margin-top: 28px;
   padding-top: 16px;
 }
 
 .footer-bottom span {
   font-size: 0.65rem;
-  color: #5f5c54;
+  color: #9a9793;
   letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 16px 40px;
+    }
+
+  .navbar-brand.brand-logo {
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+  }
+
+  .brand-mark-mini {
+    width: 26px;
+    height: 26px;
+  }
+
+  h1.display-4.luxury-title,
+  .hero-header h1 {
+    font-size: 2rem;
+  }
+
+  .gold-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card-img-wrapper {
+    height: 210px;
+  }
+
+  .card-badge {
+    font-size: 0.62rem;
+    padding: 2px 8px;
+  }
+
+  .card-title.luxury-title {
+    font-size: 1.05rem;
+  }
+
+  .price {
+    font-size: 1.15rem !important;
+  }
+
+  .btn-luxury {
+    font-size: 0.7rem;
+    padding: 9px 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .filtros-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .filtros-sidebar {
+    padding: 18px;
+  }
+
+  .diccionario-modal-content {
+    margin: 0 8px;
+  }
+
+  .site-footer {
+    text-align: center;
+  }
+
+  .footer-heading {
+    margin-top: 12px;
+  }
 }
 
 .form-luxury {
@@ -884,6 +474,11 @@ body.luxury-bg {
   padding: 12px 14px;
 }
 
+.form-luxury::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
 .form-luxury:focus {
   background: var(--card-bg);
   color: #fff;
@@ -891,12 +486,7 @@ body.luxury-bg {
   box-shadow: 0 0 0 0.15rem rgba(212, 175, 55, 0.15);
 }
 
-.alert-luxury {
-  background: rgba(212, 175, 55, 0.08);
-  color: var(--gold-light);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
+/* Dropdown "Productos" del nav */
 .dropdown-menu-luxury {
   background: var(--card-bg);
   border: 1px solid rgba(212, 175, 55, 0.2);
@@ -940,6 +530,655 @@ body.luxury-bg {
   background: rgba(212, 175, 55, 0.06);
 }
 
+/* ===== Carrusel Nuevos Lanzamientos ===== */
+.launch-carousel {
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    background: linear-gradient(160deg, #181b22 0%, #0d0f12 100%);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(212, 175, 55, 0.05) inset;
+}
+
+/* Recorta imagen/contenido con las mismas esquinas, sin limitar las flechas de afuera */
+.launch-carousel .carousel-inner {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.launch-slide { min-height: 420px; padding-bottom: 34px; }
+.launch-img-wrapper { height: 420px; overflow: hidden; }
+.launch-img { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel-indicators-luxury {
+    bottom: 16px;
+}
+
+.carousel-indicators-luxury button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--gold);
+    opacity: 0.35;
+}
+
+.carousel-indicators-luxury button.active {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+
+/* ===== Controles de carrusel ===== */
+.carousel-control-luxury {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(13, 15, 18, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    color: var(--gold);
+    opacity: 1;
+    font-size: 1.15rem;
+    z-index: 5;
+}
+
+.carousel-control-luxury.carousel-control-prev { left: -22px; }
+.carousel-control-luxury.carousel-control-next { right: -22px; }
+
+.carousel-control-luxury:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
+}
+
+/* Botones dentro de la tarjeta de lanzamiento: dorado sólido en vez de solo contorno */
+.launch-slide .btn-luxury,
+.launch-slide .btn-outline-light {
+    background: linear-gradient(135deg, #f4d570, #d4af37 55%, #b6862a);
+    color: #14171d;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.launch-slide .btn-luxury:hover,
+.launch-slide .btn-outline-light:hover {
+    color: #14171d;
+    filter: brightness(1.08);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+@media (max-width: 767px) {
+    .carousel-control-luxury.carousel-control-prev { left: 10px; }
+    .carousel-control-luxury.carousel-control-next { right: 10px; }
+}
+
+.btn-carousel-nav {
+    width: 42px;
+    height: 42px;
+    background: rgba(20, 16, 14, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    color: var(--gold);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-carousel-nav:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+    border-color: var(--gold);
+    transform: scale(1.08);
+}
+/* ===== Preguntas frecuentes: fondo de sección en mármol oscuro ===== */
+.faq-section {
+    position: relative;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background: var(--card-bg) url("../img/fondo-faq.jpg") center/cover no-repeat;
+}
+
+.faq-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: rgba(8, 8, 6, 0.5);
+}
+
+.faq-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.faq-section .luxury-title {
+    color: var(--gold-light);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.accordion-luxury {
+    --bs-accordion-bg: transparent;
+    --bs-accordion-border-color: rgba(212, 175, 55, 0.7);
+    --bs-accordion-border-radius: 12px;
+    --bs-accordion-inner-border-radius: 12px;
+    --bs-accordion-btn-color: #f4e2c8;
+    --bs-accordion-btn-bg: transparent;
+    --bs-accordion-active-color: var(--gold-light);
+    --bs-accordion-active-bg: transparent;
+    --bs-accordion-btn-focus-border-color: var(--gold);
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-color: #d8c9a8;
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f4e2c8'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e6ca65'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.accordion-luxury .accordion-item {
+    background: var(--card-bg) url("../img/textura-marmol-preguntas.jpg") center/cover no-repeat;
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    margin-bottom: 14px;
+}
+
+.accordion-luxury .accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-luxury .accordion-item:hover {
+    border-color: var(--gold-light);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 14px rgba(212, 175, 55, 0.35);
+}
+
+.accordion-luxury .accordion-button {
+    font-family: "Playfair Display", serif;
+    font-size: 1rem;
+    padding: 18px 20px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.accordion-luxury .accordion-body {
+    padding: 4px 20px 20px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== Chips: humor, ocasión, notas olfativas ===== */
+.mood-chip-list, .occasion-chip-list, .nota-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mood-chip {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--mood-color, var(--gold));
+  color: var(--mood-color, var(--gold-light));
+  background: var(--mood-bg, rgba(212, 175, 55, 0.12));
+}
+
+.mood-chip--poderoso {
+  --mood-color: #c0392b;
+  --mood-bg: rgba(192, 57, 43, 0.15);
+}
+.mood-chip--romantico {
+  --mood-color: #e6779a;
+  --mood-bg: rgba(230, 119, 154, 0.15);
+}
+.mood-chip--fresco {
+  --mood-color: #4fb0c6;
+  --mood-bg: rgba(79, 176, 198, 0.15);
+}
+.mood-chip--misterioso {
+  --mood-color: #8e6fd8;
+  --mood-bg: rgba(142, 111, 216, 0.15);
+}
+.mood-chip--relajado {
+  --mood-color: #6fb56f;
+  --mood-bg: rgba(111, 181, 111, 0.15);
+}
+.mood-chip--elegante {
+  --mood-color: var(--gold);
+  --mood-bg: rgba(212, 175, 55, 0.12);
+}
+
+.inspirado-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.72rem;
+    border-top: 1px dashed rgba(212, 175, 55, 0.3);
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+    padding: 6px 4px;
+    margin: 8px 0;
+}
+
+.inspirado-mini-label { color: var(--gold); text-transform: uppercase; letter-spacing: 0.03em; }
+.inspirado-mini-label em { font-style: italic; color: #f5f0e6; }
+.inspirado-mini-precios s { color: var(--text-muted); margin-right: 6px; }
+.inspirado-mini-precios { color: var(--gold-light); font-weight: 600; }
+
+/* ===== Botón Diccionario en la navegación ===== */
+.btn-diccionario-nav {
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  padding: 4px 14px !important;
+  color: var(--gold) !important;
+  transition: all 0.25s ease;
+}
+
+.btn-diccionario-nav:hover {
+  background: var(--gold);
+  color: #14171d !important;
+}
+
+/* ===== Marca "ML" (nav) ===== */
+.brand-mark-mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-family: "Playfair Display", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  color: var(--gold);
+}
+
+/* ===== Fondo con patrón (Hero Home) ===== */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Imagen banner del Hero (ahora es el fondo de toda la sección) ===== */
+.hero-banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 0;
+}
+
+/* ===== Texto superpuesto sobre la imagen ===== */
+.hero-overlay-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    margin-top: 240px;
+}
+
+.hero-overlay-content .luxury-title,
+.hero-overlay-content p {
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+/* ===== Wishlist ===== */
+.wishlist-heart {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 15, 18, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 50%;
+  color: var(--gold-light);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.wishlist-heart:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.wishlist-heart.activo {
+  color: #e0567c;
+  border-color: #e0567c;
+}
+
+/* ===== Diccionario Olfativo (modal) ===== */
+.diccionario-modal-content {
+  background: var(--card-bg);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 4px;
+  color: #e0e0e0;
+}
+
+.diccionario-modal-content .modal-header {
+  padding: 24px 28px 0;
+}
+.diccionario-modal-content .modal-body {
+  padding: 20px 28px 28px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.diccionario-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+
+.diccionario-termino {
+  font-family: "Playfair Display", serif;
+  color: var(--gold);
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.diccionario-definicion {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ===== La Maison Monthly (suscripción) ===== */
+.monthly-section {
+    position: relative;
+    border-radius: 4px;
+}
+
+.monthly-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(180deg, rgba(13, 15, 18, 0.92), rgba(13, 15, 18, 0.96)),
+        url("../img/textura-marmol-dorado.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+}
+
+.monthly-card {
+    background:
+        linear-gradient(180deg, rgba(13, 15, 18, 0.88), rgba(13, 15, 18, 0.94)),
+        url("../img/textura-marmol-dorado.jpg");
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 4px;
+    padding: 40px 28px;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.monthly-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+}
+
+.monthly-card--recomendado {
+    background:
+        linear-gradient(180deg, rgba(13, 15, 18, 0.35), rgba(13, 15, 18, 0.55)),
+        url("../img/textura-marmol-dorado.jpg");
+    background-size: cover;
+    background-position: center;
+    border: 1.5px solid var(--gold);
+    transform: scale(1.03);
+    box-shadow: 0 16px 40px rgba(212, 175, 55, 0.12);
+}
+
+.monthly-card--recomendado:hover {
+    transform: scale(1.03) translateY(-4px);
+}
+
+.monthly-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--gold-light), var(--gold));
+    color: var(--bg-dark);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 2px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.monthly-plan-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.monthly-plan-name {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1.6rem;
+    margin: 6px 0 16px;
+}
+
+.monthly-price {
+    font-family: "Playfair Display", serif;
+    color: #fff;
+    font-size: 2.1rem;
+}
+
+.monthly-price small {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.monthly-includes {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 14px 0 22px;
+}
+
+@media (max-width: 991px) {
+    .monthly-card--recomendado { transform: none; }
+    .monthly-card--recomendado:hover { transform: translateY(-4px); }
+
+    .navbar-collapse {
+    margin-top: 16px;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    padding-top: 16px;
+  }
+    .navbar-nav {
+    align-items: flex-start;
+    gap: 4px !important;
+  }
+    .navbar-nav .nav-link {
+    width: 100%;
+    padding: 10px 4px !important;
+  }
+    .launch-slide { min-height: auto; }
+    .launch-img-wrapper { height: 260px; }
+    .launch-img { height: 100%; width: 100%; object-fit: cover; }
+
+  .filtros-sidebar {
+    margin-bottom: 24px;
+  }
+
+  .inspirado-banner-body {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+}
+
+/* ===== Los más buscados: fondo de sección + cards con textura de mármol ===== */
+.destacados-section {
+    position: relative;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-image: url("../img/fondo-destacados.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.destacados-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: rgba(13, 15, 18, 0.15);
+}
+
+.destacados-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Los más buscados: mismas tarjetas circulares, fondo floral dorado sobre negro ===== */
+#destacadosGrid {
+    --destacados-gold: var(--gold);
+    --destacados-gold-dark: #a9852b;
+    --destacados-text: #f2e6cc;
+}
+
+#destacadosGrid .luxury-card {
+    position: relative;
+    padding-top: 46px;
+    background:
+        linear-gradient(rgba(8, 8, 6, 0.35), rgba(8, 8, 6, 0.35)),
+        var(--card-bg) url("../img/textura-floral-destacados.jpg") center/cover no-repeat;
+    border: 1px solid rgba(212, 175, 55, 0.5) !important;
+    border-radius: 20px;
+}
+
+#destacadosGrid .luxury-card:hover {
+    border-color: var(--destacados-gold) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(212, 175, 55, 0.35);
+}
+
+#destacadosGrid .card-img-wrapper {
+    position: relative;
+    height: 210px;
+    width: 210px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle at 40% 35%, #2a2a2a 0%, #1a1a1a 55%, #0d0d0d 100%);
+    box-shadow: 0 0 0 6px rgba(20, 20, 20, 0.55), 0 0 0 8px var(--destacados-gold), 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+#destacadosGrid .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* EDP / Tipo: hijos directos de .luxury-card, en las puntas de la tarjeta */
+#destacadosGrid .card-badge--left,
+#destacadosGrid .card-badge--right {
+    top: 14px;
+    z-index: 3;
+}
+
+#destacadosGrid .card-badge {
+    background: rgba(20, 16, 10, 0.92);
+    border: 1px solid var(--destacados-gold);
+    color: #f2e6cc;
+}
+
+/* El chip de ML se queda pegado al círculo de la foto */
+#destacadosGrid .card-img-wrapper .card-badge--ml {
+    background: rgba(20, 16, 10, 0.85);
+    color: #f2e6cc;
+    border-color: var(--destacados-gold);
+}
+
+/* Corazón de wishlist: hijo directo de la tarjeta, esquina superior derecha */
+#destacadosGrid .wishlist-heart {
+    top: 52px;
+    bottom: auto;
+    right: 14px;
+    z-index: 3;
+    background: rgba(20, 16, 10, 0.85);
+    border-color: var(--destacados-gold);
+    color: #f2e6cc;
+}
+
+#destacadosGrid .card-brand,
+#destacadosGrid .text-gold-light,
+#destacadosGrid .price {
+    color: var(--destacados-text) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#destacadosGrid .card-title.luxury-title {
+    color: #f8efd8;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#destacadosGrid .btn-luxury {
+    color: var(--destacados-text);
+    border-color: var(--destacados-gold);
+    background: rgba(8, 8, 6, 0.35);
+}
+
+#destacadosGrid .btn-luxury:hover {
+    background: var(--destacados-gold);
+    color: #241a0d;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+#destacadosGrid .btn-luxury.btn-luxury--primary {
+    background: var(--destacados-gold);
+    border-color: var(--destacados-gold);
+    color: #241a0d;
+}
+
+#destacadosGrid .btn-luxury.btn-luxury--primary:hover {
+    background: var(--destacados-gold-dark);
+    border-color: var(--destacados-gold-dark);
+    color: #fff;
+}
+
+/* Chips de humor: fondo sólido en vez del tono pastel transparente */
+#destacadosGrid .mood-chip {
+    background: var(--mood-color, var(--destacados-gold-dark)) !important;
+    border-color: var(--mood-color, var(--destacados-gold-dark)) !important;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+.alert-luxury {
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--gold-light);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
 .filtros-sidebar {
   background: var(--card-bg);
   border: 1px solid rgba(212, 175, 55, 0.15);
@@ -948,7 +1187,7 @@ body.luxury-bg {
 }
 
 .filtros-titulo {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   color: var(--gold);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -1063,62 +1302,6 @@ body.luxury-bg {
   width: auto;
   min-width: 220px;
   display: inline-block;
-}
-
-@media (max-width: 991px) {
-  .filtros-sidebar {
-    margin-bottom: 24px;
-  }
-}
-
-.mood-chip-list,
-.occasion-chip-list,
-.nota-chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.mood-chip {
-  display: inline-block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid var(--mood-color, var(--gold));
-  color: var(--mood-color, var(--gold-light));
-  background: var(--mood-bg, rgba(212, 175, 55, 0.12));
-}
-
-.mood-chip--poderoso {
-  --mood-color: #c0392b;
-  --mood-bg: rgba(192, 57, 43, 0.15);
-}
-
-.mood-chip--romantico {
-  --mood-color: #e6779a;
-  --mood-bg: rgba(230, 119, 154, 0.15);
-}
-
-.mood-chip--fresco {
-  --mood-color: #4fb0c6;
-  --mood-bg: rgba(79, 176, 198, 0.15);
-}
-
-.mood-chip--misterioso {
-  --mood-color: #8e6fd8;
-  --mood-bg: rgba(142, 111, 216, 0.15);
-}
-
-.mood-chip--relajado {
-  --mood-color: #6fb56f;
-  --mood-bg: rgba(111, 181, 111, 0.15);
-}
-
-.mood-chip--elegante {
-  --mood-color: var(--gold);
-  --mood-bg: rgba(212, 175, 55, 0.12);
 }
 
 .occasion-chip {
@@ -1249,191 +1432,6 @@ body.luxury-bg {
   border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.btn-diccionario-nav {
-  border: 1px solid var(--gold);
-  border-radius: 3px;
-  padding: 4px 14px !important;
-  color: var(--gold) !important;
-  transition: all 0.25s ease;
-}
-
-.btn-diccionario-nav:hover {
-  background: var(--gold);
-  color: #14171d !important;
-}
-
-.brand-mark-mini {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  font-family: 'Playfair Display', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0;
-  color: var(--gold);
-}
-
-.wishlist-heart {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  z-index: 2;
-  width: 34px;
-  height: 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(13, 15, 18, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  border-radius: 50%;
-  color: var(--gold-light);
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.wishlist-heart:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-.wishlist-heart.activo {
-  color: #e0567c;
-  border-color: #e0567c;
-}
-
-.diccionario-modal-content {
-  background: var(--card-bg);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 4px;
-  color: #e0e0e0;
-}
-
-.diccionario-modal-content .modal-header {
-  padding: 24px 28px 0;
-}
-
-.diccionario-modal-content .modal-body {
-  padding: 20px 28px 28px;
-  max-height: 70vh;
-  overflow-y: auto;
-}
-
-.diccionario-item {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(212, 175, 55, 0.15);
-  border-radius: 4px;
-  padding: 16px 20px;
-  margin-bottom: 14px;
-}
-
-.diccionario-termino {
-  font-family: 'Playfair Display', serif;
-  color: var(--gold);
-  font-size: 1rem;
-  margin-bottom: 6px;
-}
-
-.diccionario-definicion {
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  margin: 0;
-}
-
-@media (max-width: 991px) {
-  .navbar-collapse {
-    margin-top: 16px;
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
-    padding-top: 16px;
-  }
-
-  .navbar-nav {
-    align-items: flex-start;
-    gap: 4px !important;
-  }
-
-  .navbar-nav .nav-link {
-    width: 100%;
-    padding: 10px 4px !important;
-  }
-
-  .inspirado-banner-body {
-    flex-direction: column;
-    align-items: flex-start !important;
-    gap: 12px;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar-brand.brand-logo {
-    font-size: 1.15rem;
-    letter-spacing: 2px;
-  }
-
-  .brand-mark-mini {
-    width: 26px;
-    height: 26px;
-  }
-
-  h1.display-4.luxury-title,
-  .hero-header h1 {
-    font-size: 2rem;
-  }
-
-  .gold-divider {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .card-img-wrapper {
-    height: 210px;
-  }
-
-  .card-badge {
-    font-size: 0.62rem;
-    padding: 2px 8px;
-  }
-
-  .card-title.luxury-title {
-    font-size: 1.05rem;
-  }
-
-  .price {
-    font-size: 1.15rem !important;
-  }
-
-  .btn-luxury {
-    font-size: 0.7rem;
-    padding: 9px 14px;
-    letter-spacing: 1.5px;
-  }
-
-  .filtros-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .filtros-sidebar {
-    padding: 18px;
-  }
-
-  .diccionario-modal-content {
-    margin: 0 8px;
-  }
-
-  .site-footer {
-    text-align: center;
-  }
-
-  .footer-heading {
-    margin-top: 12px;
-  }
-}
-
 @media (max-width: 575px) {
   h1.display-4.luxury-title,
   .hero-header h1 {
@@ -1458,7 +1456,7 @@ body.luxury-bg {
     height: 100%;
 }
 .about-value-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-style: italic;
     color: var(--gold);
     font-size: 1.15rem;
@@ -1524,7 +1522,7 @@ body.luxury-bg {
     text-align: center;
 }
 .stat-number {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     color: var(--gold);
     font-size: 2rem;
 }
@@ -1575,7 +1573,7 @@ body.luxury-bg {
 }
 
 .cart-item-name {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     color: #f5f2ea;
     font-size: 1.05rem;
     margin-bottom: 4px;
@@ -1631,7 +1629,7 @@ body.luxury-bg {
     text-align: right;
     color: var(--gold-light);
     font-weight: 600;
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-size: 1.1rem;
     flex-shrink: 0;
 }
@@ -1737,7 +1735,7 @@ body.luxury-bg {
 }
 
 .blog-lead {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     font-style: italic;
     font-size: 1.2rem;
     line-height: 1.6;
@@ -1748,7 +1746,7 @@ body.luxury-bg {
 }
 
 .blog-subhead {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     color: var(--gold-light);
     font-size: 1.3rem;
     margin: 2.25rem 0 1rem;
@@ -1812,12 +1810,11 @@ body.luxury-bg {
     color: var(--gold);
 }
 .blog-cta-text h5 {
-    font-family: 'Playfair Display', serif;
+    font-family: "Playfair Display", serif;
     color: #f4ecd8;
     margin: 0.2rem 0 0.3rem;
 }
 .blog-cta-text p { margin: 0; color: var(--text-muted); font-size: 0.88rem; }
-
 
 /* ===== Íconos del nav (buscador, wishlist, carrito, cuenta) ===== */
 .nav-icon-btn {
@@ -1892,4 +1889,368 @@ body.luxury-bg {
     justify-content: center;
     font-size: 2.4rem;
     margin: 0 auto 1.5rem;
+}
+
+/* ===== Colección Mujer: tarjetas en mármol rosado (imitando referencia) ===== */
+#carruselMujerInner {
+  --rose-gold: #c69a94;
+  --rose-gold-dark: #a97b73;
+  --rose-text: #6e3f3a;
+}
+
+#carruselMujerInner .luxury-card {
+  position: relative;
+  padding-top: 46px;
+  background: var(--card-bg) url("../img/fondo-marmol-rosado.jpg") center/cover no-repeat;
+  border: 1px solid rgba(198, 154, 148, 0.5) !important;
+  border-radius: 20px;
+}
+
+#carruselMujerInner .luxury-card:hover {
+  border-color: var(--rose-gold) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(198, 154, 148, 0.35);
+}
+
+#carruselMujerInner .card-img-wrapper {
+  position: relative;
+  height: 210px;
+  width: 210px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 35%, #ffffff 0%, #f5e4e0 55%, #e6c7c0 100%);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.55), 0 0 0 8px var(--rose-gold), 0 12px 25px rgba(0, 0, 0, 0.35);
+}
+
+#carruselMujerInner .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* EDP / Diseñador: ahora hijos directos de .luxury-card, van en las puntas de la tarjeta */
+#carruselMujerInner .card-badge--left,
+#carruselMujerInner .card-badge--right {
+  top: 14px;
+  z-index: 3;
+}
+
+#carruselMujerInner .card-badge {
+  background: rgba(74, 44, 42, 0.92);
+  border: 1px solid var(--rose-gold);
+  color: #fdf3f1;
+}
+
+/* El chip de ML se queda pegado al círculo de la foto */
+#carruselMujerInner .card-img-wrapper .card-badge--ml {
+  background: rgba(74, 44, 42, 0.85);
+  color: #fdf3f1;
+  border-color: var(--rose-gold);
+}
+
+/* Corazón de wishlist: también hijo directo de la tarjeta, esquina superior derecha */
+#carruselMujerInner .wishlist-heart {
+  top: 52px;
+  bottom: auto;
+  right: 14px;
+  z-index: 3;
+  background: rgba(74, 44, 42, 0.85);
+  border-color: var(--rose-gold);
+  color: #fdf3f1;
+}
+
+/* Flechas del carrusel de mujer: rosado en vez del dorado global */
+.btn-carousel-nav[data-bs-target="#carruselMujer"] {
+  border-color: #c69a94;
+  color: #c69a94;
+}
+
+.btn-carousel-nav[data-bs-target="#carruselMujer"]:hover {
+  background: #c69a94;
+  border-color: #c69a94;
+  color: #fff;
+}
+
+#carruselMujerInner .card-brand,
+#carruselMujerInner .text-gold-light,
+#carruselMujerInner .price {
+  color: var(--rose-text) !important;
+}
+
+#carruselMujerInner .card-title.luxury-title {
+  color: #4a2c2a;
+}
+
+#carruselMujerInner .btn-luxury {
+  color: var(--rose-text);
+  border-color: var(--rose-gold);
+}
+
+#carruselMujerInner .btn-luxury:hover {
+  background: var(--rose-gold);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(198, 154, 148, 0.5);
+}
+
+#carruselMujerInner .btn-luxury.btn-luxury--primary {
+  background: var(--rose-gold);
+  border-color: var(--rose-gold);
+  color: #fff;
+}
+
+#carruselMujerInner .btn-luxury.btn-luxury--primary:hover {
+  background: var(--rose-gold-dark);
+  border-color: var(--rose-gold-dark);
+}
+
+/* Chips de humor (romántico, elegante, etc.): fondo sólido en vez del tono pastel transparente */
+#carruselMujerInner .mood-chip {
+  background: var(--mood-color, var(--rose-gold-dark)) !important;
+  border-color: var(--mood-color, var(--rose-gold-dark)) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* ===== Colección Hombre: tarjetas en mármol negro y dorado (imitando referencia) ===== */
+#carruselHombreInner {
+  --bronze-gold: #c99a4d;
+  --bronze-gold-dark: #8c6529;
+  --bronze-text: #f4e2b8;
+}
+
+#carruselHombreInner .luxury-card {
+  position: relative;
+  padding-top: 46px;
+  background: linear-gradient(rgba(8, 8, 6, 0.55), rgba(8, 8, 6, 0.55)), var(--card-bg) url("../img/fondo-marmol-hombre.jpg") center/cover no-repeat;
+  border: 1px solid rgba(184, 134, 63, 0.5) !important;
+  border-radius: 20px;
+}
+
+#carruselHombreInner .luxury-card:hover {
+  border-color: var(--bronze-gold) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(184, 134, 63, 0.35);
+}
+
+#carruselHombreInner .card-img-wrapper {
+  position: relative;
+  height: 210px;
+  width: 210px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 35%, #2a2a2a 0%, #1a1a1a 55%, #0d0d0d 100%);
+  box-shadow: 0 0 0 6px rgba(20, 20, 20, 0.55), 0 0 0 8px var(--bronze-gold), 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+#carruselHombreInner .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* EDP / Tipo: hijos directos de .luxury-card, en las puntas de la tarjeta */
+#carruselHombreInner .card-badge--left,
+#carruselHombreInner .card-badge--right {
+  top: 14px;
+  z-index: 3;
+}
+
+#carruselHombreInner .card-badge {
+  background: rgba(20, 16, 10, 0.92);
+  border: 1px solid var(--bronze-gold);
+  color: #f2e6cc;
+}
+
+/* El chip de ML se queda pegado al círculo de la foto */
+#carruselHombreInner .card-img-wrapper .card-badge--ml {
+  background: rgba(20, 16, 10, 0.85);
+  color: #f2e6cc;
+  border-color: var(--bronze-gold);
+}
+
+/* Corazón de wishlist: también hijo directo de la tarjeta, esquina superior derecha */
+#carruselHombreInner .wishlist-heart {
+  top: 52px;
+  bottom: auto;
+  right: 14px;
+  z-index: 3;
+  background: rgba(20, 16, 10, 0.85);
+  border-color: var(--bronze-gold);
+  color: #f2e6cc;
+}
+
+/* Flechas del carrusel de hombre: bronce en vez del dorado global */
+.btn-carousel-nav[data-bs-target="#carruselHombre"] {
+  border-color: var(--bronze-gold);
+  color: var(--bronze-gold);
+}
+
+.btn-carousel-nav[data-bs-target="#carruselHombre"]:hover {
+  background: var(--bronze-gold);
+  border-color: var(--bronze-gold);
+  color: #fff;
+}
+
+#carruselHombreInner .card-brand,
+#carruselHombreInner .text-gold-light,
+#carruselHombreInner .price {
+  color: var(--bronze-text) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#carruselHombreInner .card-title.luxury-title {
+  color: #f2e6cc;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#carruselHombreInner .btn-luxury {
+  color: var(--bronze-text);
+  border-color: var(--bronze-gold);
+  background: rgba(8, 8, 6, 0.35);
+}
+
+#carruselHombreInner .btn-luxury:hover {
+  background: var(--bronze-gold);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(184, 134, 63, 0.5);
+}
+
+#carruselHombreInner .btn-luxury.btn-luxury--primary {
+  background: var(--bronze-gold);
+  border-color: var(--bronze-gold);
+  color: #fff;
+}
+
+#carruselHombreInner .btn-luxury.btn-luxury--primary:hover {
+  background: var(--bronze-gold-dark);
+  border-color: var(--bronze-gold-dark);
+}
+
+/* Chips de humor: fondo sólido en vez del tono pastel transparente */
+#carruselHombreInner .mood-chip {
+  background: var(--mood-color, var(--bronze-gold-dark)) !important;
+  border-color: var(--mood-color, var(--bronze-gold-dark)) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* ===== Colección Unisex: tarjetas en mármol claro con vetas doradas ===== */
+#carruselUnisexInner {
+  --plum-gold: #a8763f;
+  --plum-gold-dark: #8a5f30;
+  --plum-text: #5a3324;
+  --plum-dark: #3a1f17;
+}
+
+#carruselUnisexInner .luxury-card {
+  position: relative;
+  padding-top: 46px;
+  background: linear-gradient(rgba(255, 250, 244, 0.55), rgba(255, 250, 244, 0.55)), var(--card-bg) url("../img/fondo-marmol-unisex.jpg") center/cover no-repeat;
+  border: 1px solid rgba(168, 118, 63, 0.6) !important;
+  border-radius: 20px;
+}
+
+#carruselUnisexInner .luxury-card:hover {
+  border-color: var(--plum-gold) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(201, 151, 90, 0.35);
+}
+
+#carruselUnisexInner .card-img-wrapper {
+  position: relative;
+  height: 210px;
+  width: 210px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 35%, #3a2226 0%, #241417 55%, #140b0d 100%);
+  box-shadow: 0 0 0 6px rgba(30, 16, 18, 0.55), 0 0 0 8px var(--plum-gold), 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+#carruselUnisexInner .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* EDP / Tipo: hijos directos de .luxury-card, en las puntas de la tarjeta */
+#carruselUnisexInner .card-badge--left,
+#carruselUnisexInner .card-badge--right {
+  top: 14px;
+  z-index: 3;
+}
+
+#carruselUnisexInner .card-badge {
+  background: rgba(26, 14, 17, 0.92);
+  border: 1px solid var(--plum-gold);
+  color: #f5e3cf;
+}
+
+/* El chip de ML se queda pegado al círculo de la foto */
+#carruselUnisexInner .card-img-wrapper .card-badge--ml {
+  background: rgba(26, 14, 17, 0.85);
+  color: #f5e3cf;
+  border-color: var(--plum-gold);
+}
+
+/* Corazón de wishlist: también hijo directo de la tarjeta, esquina superior derecha */
+#carruselUnisexInner .wishlist-heart {
+  top: 52px;
+  bottom: auto;
+  right: 14px;
+  z-index: 3;
+  background: rgba(26, 14, 17, 0.85);
+  border-color: var(--plum-gold);
+  color: #f5e3cf;
+}
+
+/* Flechas del carrusel unisex */
+.btn-carousel-nav[data-bs-target="#carruselUnisex"] {
+  border-color: var(--plum-gold);
+  color: var(--plum-gold);
+}
+
+.btn-carousel-nav[data-bs-target="#carruselUnisex"]:hover {
+  background: var(--plum-gold);
+  border-color: var(--plum-gold);
+  color: #fff;
+}
+
+#carruselUnisexInner .card-brand,
+#carruselUnisexInner .text-gold-light,
+#carruselUnisexInner .price {
+  color: var(--plum-text) !important;
+}
+
+#carruselUnisexInner .card-title.luxury-title {
+  color: var(--plum-dark);
+}
+
+#carruselUnisexInner .btn-luxury {
+  color: var(--plum-text);
+  border-color: var(--plum-gold);
+}
+
+#carruselUnisexInner .btn-luxury:hover {
+  background: var(--plum-gold);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(201, 151, 90, 0.5);
+}
+
+#carruselUnisexInner .btn-luxury.btn-luxury--primary {
+  background: var(--plum-gold);
+  border-color: var(--plum-gold);
+  color: #fff;
+}
+
+#carruselUnisexInner .btn-luxury.btn-luxury--primary:hover {
+  background: var(--plum-gold-dark);
+  border-color: var(--plum-gold-dark);
+}
+
+/* Chips de humor: fondo sólido en vez del tono pastel transparente */
+#carruselUnisexInner .mood-chip {
+  background: var(--mood-color, var(--plum-gold-dark)) !important;
+  border-color: var(--mood-color, var(--plum-gold-dark)) !important;
+  color: #fff !important;
+  font-weight: 600;
 }

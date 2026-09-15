@@ -71,22 +71,20 @@
 </header>
 
 <main>
-    <section class="hero-section text-center">
-        <div class="brand-mark mx-auto">
-            <span class="brand-mark-letters">M<span class="brand-mark-l">L</span></span>
-            <span class="brand-mark-caption">Maison<br>Luxury</span>
-        </div>
-        <span class="text-gold text-uppercase tracking-widest fs-7">Maison Luxury</span>
-        <h1 class="display-4 luxury-title fst-italic mt-2">Descubre tu fragancia</h1>
-        <div class="gold-divider mx-auto my-3"></div>
-        <p class="text-gold-light fw-light">Curaduría de fragancias para cada estación del año</p>
-        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-            <a href="#colecciones" class="btn btn-luxury">Explorar</a>
-            <a href="#" class="btn btn-luxury" data-bs-toggle="modal" data-bs-target="#diccionarioModal"><i class="bi bi-stars"></i> Diccionario Olfativo</a>
+    <section class="hero-section">
+        <img src="img/hero-banner.jpg" alt="Maison Luxury" class="hero-banner-img">
+        <div class="hero-overlay-content text-center">
+            <h1 class="display-4 luxury-title fst-italic mt-4">Descubre tu fragancia</h1>
+            <div class="gold-divider mx-auto my-3"></div>
+            <p class="text-gold-light fw-light">Curaduría de fragancias para cada estación del año</p>
+            <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                <a href="#colecciones" class="btn btn-luxury">Explorar</a>
+                <a href="#" class="btn btn-luxury" data-bs-toggle="modal" data-bs-target="#diccionarioModal"><i class="bi bi-stars"></i> Diccionario Olfativo</a>
+            </div>
         </div>
     </section>
 
-    <section class="container py-5">
+    <section class="container py-5 vh-section">
         <div class="text-center mb-4">
             <span class="section-label d-block">Recién llegados</span>
             <h2 class="luxury-title mt-2 fst-italic">Nuevos Lanzamientos</h2>
@@ -113,58 +111,64 @@
         <blockquote class="manifest-quote">"Cada fragancia cuenta una historia. ¿Cuál será la tuya?"</blockquote>
     </section>
 
-    <section class="container py-5" id="colecciones">
-        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
-            <div>
-                <span class="section-label d-block">Colección Mujer</span>
-                <h2 class="luxury-title mt-2 fst-italic">Ideal para Ellas</h2>
+    <section class="py-5 vh-section coleccion-mujer-section" id="colecciones">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+                <div>
+                    <span class="section-label d-block">Colección Mujer</span>
+                    <h2 class="luxury-title mt-2 fst-italic">Ideal para Ellas</h2>
+                </div>
+                <a href="productos.html?genero=mujer" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
             </div>
-            <a href="productos.html?genero=mujer" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
-        </div>
-        <div id="carruselMujer" class="carousel slide" data-bs-ride="false">
-            <div class="carousel-inner" id="carruselMujerInner"></div>
-        </div>
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselMujer" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
-            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselMujer" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+            <div id="carruselMujer" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner" id="carruselMujerInner"></div>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button class="btn-carousel-nav" type="button" data-bs-target="#carruselMujer" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
+                <button class="btn-carousel-nav" type="button" data-bs-target="#carruselMujer" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+            </div>
         </div>
     </section>
 
-    <section class="container py-5">
-        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
-            <div>
-                <span class="section-label d-block">Colección Hombre</span>
-                <h2 class="luxury-title mt-2 fst-italic">Ideal para Ellos</h2>
+    <section class="py-5 vh-section coleccion-hombre-section" id="coleccion-hombre">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+                <div>
+                    <span class="section-label d-block">Colección Hombre</span>
+                    <h2 class="luxury-title mt-2 fst-italic">Ideal para Ellos</h2>
+                </div>
+                <a href="productos.html?genero=hombre" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
             </div>
-            <a href="productos.html?genero=hombre" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
-        </div>
-        <div id="carruselHombre" class="carousel slide" data-bs-ride="false">
-            <div class="carousel-inner" id="carruselHombreInner"></div>
-        </div>
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselHombre" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
-            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselHombre" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+            <div id="carruselHombre" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner" id="carruselHombreInner"></div>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button class="btn-carousel-nav" type="button" data-bs-target="#carruselHombre" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
+                <button class="btn-carousel-nav" type="button" data-bs-target="#carruselHombre" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+            </div>
         </div>
     </section>
 
-    <section class="container py-5">
-        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
-            <div>
-                <span class="section-label d-block">Colección Unisex</span>
-                <h2 class="luxury-title mt-2 fst-italic">Ideal para Todos</h2>
+    <section class="py-5 vh-section coleccion-unisex-section" id="coleccion-unisex">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+                <div>
+                    <span class="section-label d-block">Colección Unisex</span>
+                    <h2 class="luxury-title mt-2 fst-italic">Ideal para Todos</h2>
+                </div>
+                <a href="productos.html?genero=unisex" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
             </div>
-            <a href="productos.html?genero=unisex" class="text-gold text-uppercase fs-7 tracking-wider text-decoration-none">Ver todos →</a>
-        </div>
-        <div id="carruselUnisex" class="carousel slide" data-bs-ride="false">
-            <div class="carousel-inner" id="carruselUnisexInner"></div>
-        </div>
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselUnisex" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
-            <button class="btn-carousel-nav" type="button" data-bs-target="#carruselUnisex" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+            <div id="carruselUnisex" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner" id="carruselUnisexInner"></div>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button class="btn-carousel-nav" type="button" data-bs-target="#carruselUnisex" data-bs-slide="prev"><i class="bi bi-chevron-left"></i></button>
+                <button class="btn-carousel-nav" type="button" data-bs-target="#carruselUnisex" data-bs-slide="next"><i class="bi bi-chevron-right"></i></button>
+            </div>
         </div>
     </section>
 
-    <section class="container py-5">
+    <section class="container py-5 vh-section monthly-section">
         <div class="text-center mb-5">
             <span class="text-gold text-uppercase tracking-widest fs-7">Suscripción mensual</span>
             <h2 class="luxury-title fst-italic mt-2">La Maison Monthly</h2>
@@ -177,7 +181,7 @@
                     <h3 class="monthly-plan-name">Découverte</h3>
                     <div class="monthly-price">$19.990 <small>/ mes</small></div>
                     <p class="monthly-includes">2 muestras de 5ml + tarjeta de notas</p>
-                    <a href="contacto.html" class="btn btn-luxury w-100">Suscribirse</a>
+                    <a href="contacto.html" class="btn btn-luxury btn-luxury--fill w-100">Suscribirse</a>
                 </div>
             </div>
             <div class="col-12 col-md-4">
@@ -187,7 +191,7 @@
                     <h3 class="monthly-plan-name">Maison</h3>
                     <div class="monthly-price">$34.990 <small>/ mes</small></div>
                     <p class="monthly-includes">4 muestras + 1 tamaño viaje 15ml</p>
-                    <a href="contacto.html" class="btn btn-luxury w-100">Suscribirse</a>
+                    <a href="contacto.html" class="btn btn-luxury btn-luxury--fill w-100">Suscribirse</a>
                 </div>
             </div>
             <div class="col-12 col-md-4">
@@ -196,79 +200,83 @@
                     <h3 class="monthly-plan-name">Impérial</h3>
                     <div class="monthly-price">$59.990 <small>/ mes</small></div>
                     <p class="monthly-includes">5ml x 3 + frasco completo a elegir</p>
-                    <a href="contacto.html" class="btn btn-luxury w-100">Suscribirse</a>
+                    <a href="contacto.html" class="btn btn-luxury btn-luxury--fill w-100">Suscribirse</a>
                 </div>
             </div>
         </div>
         <p class="text-center text-gold-light fs-7 mt-4">Cancela cuando quieras · Sin permanencia · Próxima caja el 1 de cada mes</p>
     </section>
 
-    <section class="container py-5">
-        <div class="text-center mb-4">
-            <span class="text-gold text-uppercase tracking-widest fs-7">Nuestra tienda</span>
-            <h2 class="luxury-title mt-2">Los más buscados</h2>
+    <section class="py-5 vh-section destacados-section">
+        <div class="container">
+            <div class="text-center mb-4">
+                <span class="text-gold text-uppercase tracking-widest fs-7">Nuestra tienda</span>
+                <h2 class="luxury-title mt-2">Los más buscados</h2>
+            </div>
+            <div class="row g-4 justify-content-center" id="destacadosGrid"></div>
         </div>
-        <div class="row g-4 justify-content-center" id="destacadosGrid"></div>
     </section>
 
-    <section class="container py-5" id="preguntas-frecuentes">
-        <div class="text-center mb-4">
-            <span class="section-label d-block">Soporte</span>
-            <h2 class="luxury-title mt-2 fst-italic">Preguntas Frecuentes</h2>
-        </div>
-        <div class="accordion accordion-luxury mx-auto" id="faqAccordion" style="max-width: 760px;">
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="faqHeading1">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">¿Qué tipos de perfumes ofrecen en Luxury?</button>
-                </h3>
-                <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">Trabajamos fragancias organizadas por estación del año, familia olfativa y género: opciones ligeras para verano, florales de primavera, amaderadas de otoño e intensas de invierno, tanto para hombre, mujer como unisex.</div>
-                </div>
+    <section class="py-5 vh-half faq-section" id="preguntas-frecuentes">
+        <div class="container">
+            <div class="text-center mb-4">
+                <span class="section-label d-block">Soporte</span>
+                <h2 class="luxury-title mt-2 fst-italic">Preguntas Frecuentes</h2>
             </div>
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="faqHeading2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">¿Los perfumes que venden son originales?</button>
-                </h3>
-                <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">Sí, todos nuestros productos son 100% originales y cuentan con garantía de autenticidad.</div>
+            <div class="accordion accordion-luxury mx-auto" id="faqAccordion" style="max-width: 760px;">
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">¿Qué tipos de perfumes ofrecen en Luxury?</button>
+                    </h3>
+                    <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Trabajamos fragancias organizadas por estación del año, familia olfativa y género: opciones ligeras para verano, florales de primavera, amaderadas de otoño e intensas de invierno, tanto para hombre, mujer como unisex.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="faqHeading3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">¿Cómo puedo realizar un pedido?</button>
-                </h3>
-                <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">Debes registrarte o iniciar sesión, elegir tus productos, añadirlos al carrito y finalizar la compra desde la página del carrito.</div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">¿Los perfumes que venden son originales?</button>
+                    </h3>
+                    <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Sí, todos nuestros productos son 100% originales y cuentan con garantía de autenticidad.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="faqHeading4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">¿Cuáles son los métodos de pago disponibles?</button>
-                </h3>
-                <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">Este es un proyecto académico de demostración, por lo que la compra se registra internamente sin procesar pagos reales.</div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">¿Cómo puedo realizar un pedido?</button>
+                    </h3>
+                    <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Debes registrarte o iniciar sesión, elegir tus productos, añadirlos al carrito y finalizar la compra desde la página del carrito.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="faqHeading5">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">¿Puedo devolver un perfume si no me gusta?</button>
-                </h3>
-                <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">Aceptamos devoluciones dentro de los 30 días siguientes a la compra, siempre que el frasco esté sellado y sin uso.</div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">¿Cuáles son los métodos de pago disponibles?</button>
+                    </h3>
+                    <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Este es un proyecto académico de demostración, por lo que la compra se registra internamente sin procesar pagos reales.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h3 class="accordion-header" id="faqHeading6">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">¿Hacen envíos a regiones?</button>
-                </h3>
-                <div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">Sí, realizamos envíos a todas las regiones del país a través de nuestros couriers asociados.</div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">¿Puedo devolver un perfume si no me gusta?</button>
+                    </h3>
+                    <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Aceptamos devoluciones dentro de los 30 días siguientes a la compra, siempre que el frasco esté sellado y sin uso.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="faqHeading6">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">¿Hacen envíos a regiones?</button>
+                    </h3>
+                    <div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">Sí, realizamos envíos a todas las regiones del país a través de nuestros couriers asociados.</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
-<footer class="site-footer mt-5">
+<footer class="site-footer vh-half">
     <div class="container">
         <div class="row gy-4">
             <div class="col-12 col-md-5">
