@@ -194,19 +194,19 @@ function crearTarjeta(p) {
     var enWishlist = estaEnWishlist(p.id);
 
     return (
-        '<div class="col-12 col-md-6 col-lg-3">' +
+        '<div class="col-12 col-md-6 col-lg-4">' +
         '<article class="card luxury-card h-100 border-0">' +
-        '<div class="card-img-wrapper">' +
         '<span class="card-badge card-badge--left">' +
         (CONCENTRACION_LABELS[p.concentracion] || "") +
         "</span>" +
         '<span class="card-badge card-badge--right">' +
         (TIPO_LABELS[p.tipo] || "") +
         "</span>" +
+        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
+        '<div class="card-img-wrapper">' +
         '<span class="card-badge card-badge--ml"><i class="bi bi-cloud-fill"></i> ' +
         p.ml +
         " ML</span>" +
-        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
         '<img src="' +
         p.imagen +
         '" class="card-img-top" alt="' +

@@ -43,6 +43,17 @@ body.luxury-bg {
   color: #e0e0e0;
 }
 
+/* Página de Productos: contenedor más ancho para que las cards respiren igual que en los carruseles */
+.productos-page main.container {
+  max-width: 1500px;
+}
+
+body.productos-page.luxury-bg {
+  background-image:
+    linear-gradient(rgba(10, 8, 7, 0.82), rgba(10, 8, 7, 0.82)),
+    url("../img/fondo-productos.jpg");
+}
+
 /* Tipografías */
 .luxury-title {
   font-family: "Playfair Display", serif;
@@ -74,6 +85,7 @@ body.luxury-bg {
 
 /* Tarjetas */
 .luxury-card {
+  position: relative;
   background: var(--card-bg);
   border: 1px solid rgba(212, 175, 55, 0.15) !important;
   border-radius: 4px;
@@ -300,7 +312,7 @@ body.luxury-bg {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(12, 6, 8, 0.4);
+  background: rgba(10, 7, 6, 0.3);
   z-index: 0;
 }
 
@@ -654,30 +666,63 @@ body.luxury-bg {
 }
 
 .faq-section .luxury-title {
-    color: var(--gold-light);
+    color: #cda86a;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .accordion-luxury {
+    position: relative;
+    --faq-gold: #cda86a;
+    --faq-gold-light: #e3c793;
+    --faq-border: #b9895073;
     --bs-accordion-bg: transparent;
-    --bs-accordion-border-color: rgba(212, 175, 55, 0.7);
-    --bs-accordion-border-radius: 12px;
-    --bs-accordion-inner-border-radius: 12px;
-    --bs-accordion-btn-color: #f4e2c8;
+    --bs-accordion-border-color: #b98a52;
+    --bs-accordion-border-radius: 44px;
+    --bs-accordion-inner-border-radius: 44px;
+    --bs-accordion-btn-color: var(--faq-gold);
     --bs-accordion-btn-bg: transparent;
-    --bs-accordion-active-color: var(--gold-light);
+    --bs-accordion-active-color: var(--faq-gold-light);
     --bs-accordion-active-bg: transparent;
-    --bs-accordion-btn-focus-border-color: var(--gold);
+    --bs-accordion-btn-focus-border-color: var(--faq-gold-light);
     --bs-accordion-btn-focus-box-shadow: none;
-    --bs-accordion-color: #d8c9a8;
-    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f4e2c8'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e6ca65'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-color: #e6d4b4;
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23cda86a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e3c793'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
+/* Gemas decorativas en las cuatro esquinas del bloque, como en la referencia */
+.faq-gem {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.faq-gem--tl,
+.faq-gem--bl {
+    background: radial-gradient(circle at 35% 30%, #e3ebff 0%, #4a63c9 55%, #1c2b6b 100%);
+    box-shadow: 0 0 8px rgba(80, 110, 255, 0.55);
+}
+
+.faq-gem--tr,
+.faq-gem--br {
+    background: radial-gradient(circle at 35% 30%, #ffffff 0%, #d8dee8 55%, #98a4ba 100%);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+}
+
+.faq-gem--tl { top: -7px; left: 10px; }
+.faq-gem--tr { top: -7px; right: 10px; }
+.faq-gem--bl { bottom: -7px; left: 10px; }
+.faq-gem--br { bottom: -7px; right: 10px; }
+
 .accordion-luxury .accordion-item {
-    background: var(--card-bg) url("../img/textura-marmol-preguntas.jpg") center/cover no-repeat;
-    border: 2px solid var(--gold);
-    border-radius: 12px;
+    position: relative;
+    background:
+        linear-gradient(to right, rgba(8, 6, 5, 0.92) 0%, rgba(8, 6, 5, 0.78) 38%, rgba(8, 6, 5, 0.4) 65%, rgba(8, 6, 5, 0.22) 100%),
+        var(--card-bg) url("../img/textura-marmol-preguntas.jpg") right center/cover no-repeat;
+    border: 1.5px solid var(--faq-border);
+    border-radius: 44px;
     overflow: hidden;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
     margin-bottom: 14px;
@@ -688,19 +733,25 @@ body.luxury-bg {
 }
 
 .accordion-luxury .accordion-item:hover {
-    border-color: var(--gold-light);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 14px rgba(212, 175, 55, 0.35);
+    border-color: var(--faq-gold-light);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 14px rgba(205, 168, 106, 0.35);
 }
 
 .accordion-luxury .accordion-button {
     font-family: "Playfair Display", serif;
-    font-size: 1rem;
-    padding: 18px 20px;
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.2px;
+    padding: 20px 32px;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
+.accordion-luxury .accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
+
 .accordion-luxury .accordion-body {
-    padding: 4px 20px 20px;
+    padding: 4px 32px 24px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
@@ -1180,11 +1231,64 @@ body.luxury-bg {
 }
 
 .filtros-sidebar {
+  position: relative;
   background: var(--card-bg);
   border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 4px;
   padding: 24px;
+  overflow: hidden;
 }
+
+.filtros-sidebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+.productos-page .filtros-sidebar {
+  border: 1px solid rgba(184, 128, 74, 0.5);
+}
+
+/* La foto original es muy oscura: se aclara solo visualmente con filter,
+   sin alterar el archivo de imagen. */
+.productos-page .filtros-sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../img/fondo-filtros.jpg") center/cover no-repeat;
+  filter: brightness(2.8) contrast(1.1);
+  opacity: 0.65;
+}
+
+.productos-page .filtros-sidebar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(20, 12, 8, 0.3);
+}
+
+/* Dorado más cálido/lujoso (menos amarillo) para los títulos de filtros */
+.productos-page .filtros-titulo,
+.productos-page .filtro-seccion-titulo {
+  color: #cda86a;
+}
+
+.productos-page .filtro-seccion-titulo {
+  border-bottom-color: rgba(184, 128, 74, 0.35);
+}
+
+.productos-page .btn-outline-luxury {
+  border-color: rgba(184, 128, 74, 0.6);
+  color: #cda86a;
+}
+
+.productos-page .btn-outline-luxury:hover {
+  background: #cda86a;
+  border-color: #cda86a;
+  color: #1a1210;
+}
+
 
 .filtros-titulo {
   font-family: "Playfair Display", serif;
@@ -2134,25 +2238,25 @@ body.luxury-bg {
   font-weight: 600;
 }
 
-/* ===== Colección Unisex: tarjetas en mármol claro con vetas doradas ===== */
+/* ===== Colección Unisex: tarjetas en mármol negro con vetas cobrizas (referencia perlas/cadenas) ===== */
 #carruselUnisexInner {
-  --plum-gold: #a8763f;
-  --plum-gold-dark: #8a5f30;
-  --plum-text: #5a3324;
-  --plum-dark: #3a1f17;
+  --plum-gold: #b8804a;
+  --plum-gold-dark: #8f5f34;
+  --plum-text: #f0dcb8;
+  --plum-dark: #f5e6c8;
 }
 
 #carruselUnisexInner .luxury-card {
   position: relative;
   padding-top: 46px;
-  background: linear-gradient(rgba(255, 250, 244, 0.55), rgba(255, 250, 244, 0.55)), var(--card-bg) url("../img/fondo-marmol-unisex.jpg") center/cover no-repeat;
-  border: 1px solid rgba(168, 118, 63, 0.6) !important;
+  background: linear-gradient(rgba(10, 7, 6, 0.45), rgba(10, 7, 6, 0.55)), var(--card-bg) url("../img/fondo-marmol-unisex.jpg") center/cover no-repeat;
+  border: 1px solid rgba(184, 128, 74, 0.6) !important;
   border-radius: 20px;
 }
 
 #carruselUnisexInner .luxury-card:hover {
   border-color: var(--plum-gold) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(201, 151, 90, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(184, 128, 74, 0.4);
 }
 
 #carruselUnisexInner .card-img-wrapper {
@@ -2219,10 +2323,12 @@ body.luxury-bg {
 #carruselUnisexInner .text-gold-light,
 #carruselUnisexInner .price {
   color: var(--plum-text) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 #carruselUnisexInner .card-title.luxury-title {
   color: var(--plum-dark);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 #carruselUnisexInner .btn-luxury {
@@ -2251,6 +2357,117 @@ body.luxury-bg {
 #carruselUnisexInner .mood-chip {
   background: var(--mood-color, var(--plum-gold-dark)) !important;
   border-color: var(--mood-color, var(--plum-gold-dark)) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* ===== Página de Productos: cards en mármol negro con vetas cobrizas (misma paleta que Colección Unisex) ===== */
+#productosGrid {
+  --prod-gold: #b8804a;
+  --prod-gold-dark: #8f5f34;
+  --prod-text: #f0dcb8;
+  --prod-title: #f5e6c8;
+}
+
+#productosGrid .luxury-card {
+  position: relative;
+  padding-top: 46px;
+  background: linear-gradient(rgba(10, 7, 6, 0.45), rgba(10, 7, 6, 0.55)), var(--card-bg) url("../img/fondo-marmol-unisex.jpg") center/cover no-repeat;
+  border: 1px solid rgba(184, 128, 74, 0.6) !important;
+  border-radius: 20px;
+}
+
+#productosGrid .luxury-card:hover {
+  border-color: var(--prod-gold) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(184, 128, 74, 0.4);
+}
+
+#productosGrid .card-img-wrapper {
+  position: relative;
+  height: 210px;
+  width: 210px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 35%, #3a2226 0%, #241417 55%, #140b0d 100%);
+  box-shadow: 0 0 0 6px rgba(30, 16, 18, 0.55), 0 0 0 8px var(--prod-gold), 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+#productosGrid .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* EDP / Tipo: hijos directos de .luxury-card, en las puntas de la tarjeta */
+#productosGrid .card-badge--left,
+#productosGrid .card-badge--right {
+  top: 14px;
+  z-index: 3;
+}
+
+#productosGrid .card-badge {
+  background: rgba(26, 14, 17, 0.92);
+  border: 1px solid var(--prod-gold);
+  color: #f5e3cf;
+}
+
+/* El chip de ML se queda pegado al círculo de la foto */
+#productosGrid .card-img-wrapper .card-badge--ml {
+  background: rgba(26, 14, 17, 0.85);
+  color: #f5e3cf;
+  border-color: var(--prod-gold);
+}
+
+/* Corazón de wishlist: hijo directo de la tarjeta, esquina superior derecha */
+#productosGrid .wishlist-heart {
+  top: 52px;
+  bottom: auto;
+  right: 14px;
+  z-index: 3;
+  background: rgba(26, 14, 17, 0.85);
+  border-color: var(--prod-gold);
+  color: #f5e3cf;
+}
+
+#productosGrid .card-brand,
+#productosGrid .text-gold-light,
+#productosGrid .price {
+  color: var(--prod-text) !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#productosGrid .card-title.luxury-title {
+  color: var(--prod-title);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#productosGrid .btn-luxury {
+  color: var(--prod-text);
+  border-color: var(--prod-gold);
+}
+
+#productosGrid .btn-luxury:hover {
+  background: var(--prod-gold);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(184, 128, 74, 0.5);
+}
+
+#productosGrid .btn-luxury.btn-luxury--primary {
+  background: var(--prod-gold);
+  border-color: var(--prod-gold);
+  color: #fff;
+}
+
+#productosGrid .btn-luxury.btn-luxury--primary:hover {
+  background: var(--prod-gold-dark);
+  border-color: var(--prod-gold-dark);
+}
+
+/* Chips de humor: fondo sólido en vez del tono pastel transparente */
+#productosGrid .mood-chip {
+  background: var(--mood-color, var(--prod-gold-dark)) !important;
+  border-color: var(--mood-color, var(--prod-gold-dark)) !important;
   color: #fff !important;
   font-weight: 600;
 }
