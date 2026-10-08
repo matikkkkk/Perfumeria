@@ -19,11 +19,13 @@ export async function peticion(ruta, opciones = {}) {
 // Crea el CRUD completo para un recurso REST (ej: "/productos").
 export function crearRecurso(ruta) {
   return {
-    listar: () => peticion(ruta),
+    listar: (consulta = "") => peticion(`${ruta}${consulta}`), // ej: listar("?categoria=intensos")
     obtener: (id) => peticion(`${ruta}/${id}`),
     crear: (datos) => peticion(ruta, { method: "POST", body: JSON.stringify(datos) }),
     actualizar: (id, datos) =>
-      peticion(`${ruta}/${id}`, { method: "PUT", body: JSON.stringify(datos) }),
+      peticion(`${ruta}/${id}`, { method: "PUT", body: JSON.stringify(datos) }), // reemplaza el objeto completo
+    modificar: (id, cambios) =>
+      peticion(`${ruta}/${id}`, { method: "PATCH", body: JSON.stringify(cambios) }), // solo los campos enviados
     eliminar: (id) => peticion(`${ruta}/${id}`, { method: "DELETE" }),
   };
 }

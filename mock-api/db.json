@@ -44,16 +44,16 @@
         "nombre": "Tygar",
         "precioOriginal": 476490
       },
-      "heroFondo": "img/turathiblue/hero-turathi.jpg",
+      "heroFondo": "/img/turathiblue/hero-turathi.jpg",
       "historiaTitulo": "LA ESENCIA DEL HORIZONTE",
       "historia": "Turathi Blue nace del deseo de capturar la energía fresca y magnética del océano al atardecer. Creada para el hombre que abraza su elegancia natural con total confianza: una fragancia que fluye como una marea inagotable y se despliega en cada brisa marina, cada vibrante nota cítrica y cada instante de libertad frente al mar. Una firma olfativa pensada para quienes no solo navegan su propio camino, sino que dejan una huella imborrable a su paso.",
-      "historiaImagen": "img/turathiblue/fondo-notas.jpg",
+      "historiaImagen": "/img/turathiblue/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/turathiblue/notas-salida.jpg",
-        "corazon": "img/turathiblue/notas-corazon.jpg",
-        "fondo": "img/turathiblue/notas-fondo.jpg"
+        "salida": "/img/turathiblue/notas-salida.jpg",
+        "corazon": "/img/turathiblue/notas-corazon.jpg",
+        "fondo": "/img/turathiblue/notas-fondo.jpg"
       },
-      "ctaFondo": "img/turathiblue/fondo-cta.jpg",
+      "ctaFondo": "/img/turathiblue/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#e4edf6",
         "tema-card": "#c7c3bc",
@@ -62,7 +62,7 @@
         "tema-card-corazon": "#e6e3de",
         "tema-card-fondo": "#e6e3de"
       },
-      "fondoPagina": "img/turathiblue/fondo-seccion.jpg",
+      "fondoPagina": "/img/turathiblue/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Turathi Blue",
       "ctaTexto": "Eleva tu presencia con una fragancia fresca y magnética, hecha para deslumbrar bajo el atardecer y despertar tus sentidos.",
       "navClaro": true
@@ -110,16 +110,16 @@
       },
       "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN1Yjy3dn9sLbw0SRYQokbFynHewjNF4R9Ex-GGHBwkVHUZXXsCM28v27m&s=10",
       "descripcion": "Una fragancia dulce y seductora, dominada por una salida de manzana crujiente que evoluciona hacia una base densa de vainilla y canela. Es un aroma potente y magnético, ideal para fiestas y citas, que destaca por su proyección enorme y duración extrema en la noche.",
-      "heroFondo": "img/9pm/hero-9pm.jpg",
+      "heroFondo": "/img/9pm/hero-9pm.jpg",
       "historiaTitulo": "EL DOMINIO DE LA NOCHE",
       "historia": "Afnan 9PM nace del deseo de capturar el magnetismo vibrante y seductor de las noches de invierno. Creada para el hombre que abraza su instinto y carisma con total confianza: una fragancia que resplandece como un fuego cálido en el frío y se despliega en cada rastro especiado, cada nota cremosa de vainilla y cada instante vibrante bajo la luz de la luna. Una firma olfativa pensada para quienes no solo viven la noche, sino que se convierten en los dueños absolutos de ella.",
-      "historiaImagen": "img/9pm/fondo-notas.jpg",
+      "historiaImagen": "/img/9pm/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/9pm/notas-salida.jpg",
-        "corazon": "img/9pm/notas-corazon.jpg",
-        "fondo": "img/9pm/notas-fondo.jpg"
+        "salida": "/img/9pm/notas-salida.jpg",
+        "corazon": "/img/9pm/notas-corazon.jpg",
+        "fondo": "/img/9pm/notas-fondo.jpg"
       },
-      "ctaFondo": "img/9pm/fondo-cta.jpg",
+      "ctaFondo": "/img/9pm/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#000000",
         "tema-card": "#95551f",
@@ -129,7 +129,7 @@
         "tema-card-fondo": "#401c0400"
       },
       "heroAjuste": "contain",
-      "fondoPagina": "img/9pm/fondo-seccion.jpg",
+      "fondoPagina": "/img/9pm/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia 9PM",
       "ctaTexto": "Eleva tu presencia con una fragancia cálida y seductora, hecha para deslumbrar en las noches de invierno y cautivar todos los sentidos."
     },
@@ -177,23 +177,23 @@
       },
       "imagen": "https://media.falabella.com/falabellaCL/15535785_3/w=1200,h=1200,fit=pad",
       "descripcion": "Una fragancia floral, elegante y romántica, con un carácter femenino y sofisticado.",
-      "heroFondo": "img/missdior/hero-miss.jpg",
+      "heroFondo": "/img/missdior/hero-miss.jpg",
       "historiaTitulo": "EL ESPÍRITU DE LA PRIMAVERA",
       "historia": "Miss Dior nace del deseo de capturar el encanto vibrante y luminoso de un jardín en flor. Creada para la mujer que abraza su romanticismo y alegría con total confianza: una fragancia que resplandece como un amanecer radiante y se despliega en cada estela floral, cada nota fresca de rosa y peonía, y cada instante rebosante de vida bajo la luz del sol. Una firma olfativa pensada para quienes no solo celebran el amor, sino que se convierten en la encarnación absoluta de él.",
-      "historiaImagen": "img/missdior/fondo-notas.jpg",
+      "historiaImagen": "/img/missdior/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/missdior/notas-salida.jpg",
-        "corazon": "img/missdior/notas-corazon.jpg",
-        "fondo": "img/missdior/notas-fondo.jpg"
+        "salida": "/img/missdior/notas-salida.jpg",
+        "corazon": "/img/missdior/notas-corazon.jpg",
+        "fondo": "/img/missdior/notas-fondo.jpg"
       },
-      "ctaFondo": "img/missdior/fondo-cta.jpg",
+      "ctaFondo": "/img/missdior/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fcd0d0",
         "tema-card": "#e5a5a4",
         "tema-dorado": "#221919"
       },
       "heroAjuste": "contain",
-      "fondoPagina": "img/missdior/fondo-seccion.jpg",
+      "fondoPagina": "/img/missdior/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Miss Dior",
       "ctaTexto": "Eleva tu presencia con una fragancia floral y luminosa, hecha para deslumbrar como un jardín de primavera y cautivar todos los sentidos.",
       "navClaro": true
@@ -241,23 +241,23 @@
       },
       "imagen": "https://dbs.cl/media/catalog/product/v/a/valentino-vno-76144-4.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
       "descripcion": "Una fragancia de alta costura, cálida y floral con una vibrante mezcla de jazmín y vainilla Bourbon.",
-      "heroFondo": "img/valen-donna/hero-donna.jpg",
+      "heroFondo": "/img/valen-donna/hero-donna.jpg",
       "historiaTitulo": "UNA CELEBRACIÓN DE LA FEMINIDAD MODERNA",
       "historia": "Valentino Donna Born in Roma nace del deseo de capturar la energía vibrante y la dualidad de la cultura romana. Creada para la mujer que abraza su herencia con orgullo pero dicta sus propias reglas: una fragancia que fusiona la elegancia clásica de la alta costura con un espíritu vanguardista. Se despliega en un radiante corazón compuesto por un trío de jazmines, entrelazado con la envolvente calidez de la vainilla Bourbon y despertado por el toque atrevido de la grosella negra y la pimienta rosa. Una firma olfativa pensada para quienes no solo viven su individualidad, sino que la transforman en una declaración de estilo inconfundible.",
-      "historiaImagen": "img/valen-donna/fondo-notas.jpg",
+      "historiaImagen": "/img/valen-donna/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/valen-donna/notas-salida.jpg",
-        "corazon": "img/valen-donna/notas-corazon.jpg",
-        "fondo": "img/valen-donna/notas-fondo.jpg"
+        "salida": "/img/valen-donna/notas-salida.jpg",
+        "corazon": "/img/valen-donna/notas-corazon.jpg",
+        "fondo": "/img/valen-donna/notas-fondo.jpg"
       },
-      "ctaFondo": "img/valen-donna/fondo-cta.jpg",
+      "ctaFondo": "/img/valen-donna/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fcd0d0",
         "tema-card": "#e5a5a4",
         "tema-dorado": "#b7975c"
       },
       "heroAjuste": "contain",
-      "fondoPagina": "img/valen-donna/fondo-seccion.jpg",
+      "fondoPagina": "/img/valen-donna/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Donna Born in Roma",
       "ctaTexto": "Eleva tu presencia con una fragancia vibrante y audaz, hecha para celebrar la feminidad moderna y cautivar todos los sentidos con un inconfundible toque de alta costura.",
       "navClaro": true
@@ -305,22 +305,22 @@
       },
       "imagen": "https://fimgs.net/photogram/p1200/xu/dd/sjhF2oPsrTWGj1R7.jpg",
       "descripcion": "Es una fragancia vibrante, seductora y con mucha presencia. Destaca por un contraste entre una salida fresca de menta, manzana verde y limón, que rápidamente da paso a un fondo cálido, dulce y envolvente dominado por la vainilla, el haba tonka y maderas de cedro. Es ideal para destacar en la noche, salidas informales o citas donde busques dejar huella.",
-      "heroFondo": "img/eros/hero-eros.jpg",
+      "heroFondo": "/img/eros/hero-eros.jpg",
       "historiaTitulo": "EL ALMA DE EROS",
       "historia": "Eros nace del deseo de capturar la esencia fresca y floreciente de un jardín en plena floración. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Menta, se despliega en un corazón de Haba tonka y se asienta en una base de Vainilla de Madagascar, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/eros/fondo-notas.jpg",
+      "historiaImagen": "/img/eros/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/eros/notas-salida.jpg",
-        "corazon": "img/eros/notas-corazon.jpg",
-        "fondo": "img/eros/notas-fondo.jpg"
+        "salida": "/img/eros/notas-salida.jpg",
+        "corazon": "/img/eros/notas-corazon.jpg",
+        "fondo": "/img/eros/notas-fondo.jpg"
       },
-      "ctaFondo": "img/eros/fondo-cta.jpg",
+      "ctaFondo": "/img/eros/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#00232c",
         "tema-card": "#306f79",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/eros/fondo-seccion.jpg",
+      "fondoPagina": "/img/eros/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Eros",
       "ctaTexto": "Descubre Eros de Versace, una fragancia fresca y floreciente hecha para dejar huella.",
       "navClaro": false
@@ -369,22 +369,22 @@
       },
       "imagen": "https://fimgs.net/photogram/p1200/ue/l8/0IZYXSzIvUm7OkMc.jpg",
       "descripcion": "Es una fragancia exótica, ultra atractiva y densa que combina la frescura tropical con una base profundamente dulce y cálida. Su acorde estrella mezcla un coco cremoso y ahumado con madera de sándalo, tonka y un toque de piña jugosa. Es un aroma adictivo y de gran proyección, perfecto para noches de verano, salidas de fiesta o citas románticas donde busques destacar.",
-      "heroFondo": "img/le-beau-le-parfum/hero-le-beau-le-parfum.jpg",
+      "heroFondo": "/img/le-beau-le-parfum/hero-le-beau-le-parfum.jpg",
       "historiaTitulo": "EL ALMA DE LE BEAU LE PARFUM",
       "historia": "Le Beau Le Parfum nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su lado más sensible con total confianza: una fragancia que se abre con Piña, se despliega en un corazón de Coco y se asienta en una base de Haba tonka, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/le-beau-le-parfum/fondo-notas.jpg",
+      "historiaImagen": "/img/le-beau-le-parfum/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/le-beau-le-parfum/notas-salida.jpg",
-        "corazon": "img/le-beau-le-parfum/notas-corazon.jpg",
-        "fondo": "img/le-beau-le-parfum/notas-fondo.jpg"
+        "salida": "/img/le-beau-le-parfum/notas-salida.jpg",
+        "corazon": "/img/le-beau-le-parfum/notas-corazon.jpg",
+        "fondo": "/img/le-beau-le-parfum/notas-fondo.jpg"
       },
-      "ctaFondo": "img/le-beau-le-parfum/fondo-cta.jpg",
+      "ctaFondo": "/img/le-beau-le-parfum/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/le-beau-le-parfum/fondo-seccion.jpg",
+      "fondoPagina": "/img/le-beau-le-parfum/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Le Beau Le Parfum",
       "ctaTexto": "Descubre Le Beau Le Parfum de Jean Paul Gaultier, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -439,22 +439,22 @@
       },
       "imagen": "https://fimgs.net/photogram/p1200/qq/ho/b5y2gJ4LoiKF58Qd.jpg",
       "descripcion": "Delina Exclusif es una fragancia opulenta, sensual y extremadamente sofisticada. Toma el ADN de rosa y lichi del Delina original y lo lleva a un terreno más denso, cremoso y nocturno, incorporando notas sensuales de incienso, ámbar y una vainilla sumamente suave y abizcochada. Es un aroma elegante y envolvente con una fijación extraordinaria, concebido para ocasiones especiales donde quieras proyectar distinción y glamour absoluto..",
-      "heroFondo": "img/delina-exclusif/hero-delina-exclusif.jpg",
+      "heroFondo": "/img/delina-exclusif/hero-delina-exclusif.jpg",
       "historiaTitulo": "EL ALMA DE DELINA EXCLUSIF",
       "historia": "Delina Exclusif nace del deseo de capturar la esencia fresca y floreciente de un jardín en plena floración. Creada para quien abraza su sofisticación natural con total confianza: una fragancia que se abre con Lichi, se despliega en un corazón de Rosa Turca y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/delina-exclusif/fondo-notas.jpg",
+      "historiaImagen": "/img/delina-exclusif/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/delina-exclusif/notas-salida.jpg",
-        "corazon": "img/delina-exclusif/notas-corazon.jpg",
-        "fondo": "img/delina-exclusif/notas-fondo.jpg"
+        "salida": "/img/delina-exclusif/notas-salida.jpg",
+        "corazon": "/img/delina-exclusif/notas-corazon.jpg",
+        "fondo": "/img/delina-exclusif/notas-fondo.jpg"
       },
-      "ctaFondo": "img/delina-exclusif/fondo-cta.jpg",
+      "ctaFondo": "/img/delina-exclusif/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fdf1f5",
         "tema-card": "#f3d9e3",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/delina-exclusif/fondo-seccion.jpg",
+      "fondoPagina": "/img/delina-exclusif/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Delina Exclusif",
       "ctaTexto": "Descubre Delina Exclusif de Parfums de Marly, una fragancia fresca y floreciente hecha para dejar huella.",
       "navClaro": true
@@ -506,22 +506,22 @@
       },
       "imagen": "https://fimgs.net/photogram/p1200/ks/63/viIeYrLTzoakkieZ.jpg",
       "descripcion": "XJ 1861 Naxos de Xerjoff es un tributo a la riqueza y tradición de Sicilia, ofreciendo un aroma suntuoso, cálido y sumamente sofisticado. Destaca por una combinación magistral de miel dorada y tabaco dulce, equilibrada en su apertura por un toque brillante de lavanda y cítricos, para luego asentarse en una base cremosa de vainilla, haba tonka y canela. Es una fragancia versátil dentro de la alta perfumería, con presencia imponente pero extremadamente refinada, ideal para climas templados o fríos y eventos donde la elegancia sea protagonista.",
-      "heroFondo": "img/xj-1861-naxos/hero-xj-1861-naxos.jpg",
+      "heroFondo": "/img/xj-1861-naxos/hero-xj-1861-naxos.jpg",
       "historiaTitulo": "EL ALMA DE XJ 1861 NAXOS",
       "historia": "XJ 1861 Naxos nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su sofisticación natural con total confianza: una fragancia que se abre con Lavanda, se despliega en un corazón de Miel y se asienta en una base de Hojas de tabaco, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/xj-1861-naxos/fondo-notas.jpg",
+      "historiaImagen": "/img/xj-1861-naxos/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/xj-1861-naxos/notas-salida.jpg",
-        "corazon": "img/xj-1861-naxos/notas-corazon.jpg",
-        "fondo": "img/xj-1861-naxos/notas-fondo.jpg"
+        "salida": "/img/xj-1861-naxos/notas-salida.jpg",
+        "corazon": "/img/xj-1861-naxos/notas-corazon.jpg",
+        "fondo": "/img/xj-1861-naxos/notas-fondo.jpg"
       },
-      "ctaFondo": "img/xj-1861-naxos/fondo-cta.jpg",
+      "ctaFondo": "/img/xj-1861-naxos/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/xj-1861-naxos/fondo-seccion.jpg",
+      "fondoPagina": "/img/xj-1861-naxos/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia XJ 1861 Naxos",
       "ctaTexto": "Descubre XJ 1861 Naxos de Xerjoff, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -573,22 +573,22 @@
         "nombre": "Invictus",
         "precioOriginal": 109990
       },
-      "heroFondo": "img/nitro-red/hero-nitro-red.jpg",
+      "heroFondo": "/img/nitro-red/hero-nitro-red.jpg",
       "historiaTitulo": "EL ALMA DE NITRO RED",
       "historia": "Nitro Red nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Manzana, se despliega en un corazón de Sandía y se asienta en una base de Ámbar, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/nitro-red/fondo-notas.jpg",
+      "historiaImagen": "/img/nitro-red/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/nitro-red/notas-salida.jpg",
-        "corazon": "img/nitro-red/notas-corazon.jpg",
-        "fondo": "img/nitro-red/notas-fondo.jpg"
+        "salida": "/img/nitro-red/notas-salida.jpg",
+        "corazon": "/img/nitro-red/notas-corazon.jpg",
+        "fondo": "/img/nitro-red/notas-fondo.jpg"
       },
-      "ctaFondo": "img/nitro-red/fondo-cta.jpg",
+      "ctaFondo": "/img/nitro-red/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/nitro-red/fondo-seccion.jpg",
+      "fondoPagina": "/img/nitro-red/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Nitro Red",
       "ctaTexto": "Descubre Nitro Red de Dumont, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -643,22 +643,22 @@
         "nombre": "MYSLF L'Absolu",
         "precioOriginal": 149990
       },
-      "heroFondo": "img/nitro-elixir/hero-nitro-elixir.jpg",
+      "heroFondo": "/img/nitro-elixir/hero-nitro-elixir.jpg",
       "historiaTitulo": "EL ALMA DE NITRO ELIXIR",
       "historia": "Nitro Elixir nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su sofisticación natural con total confianza: una fragancia que se abre con Bergamota, se despliega en un corazón de Flor de azahar del naranjo y se asienta en una base de Ámbar gris, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/nitro-elixir/fondo-notas.jpg",
+      "historiaImagen": "/img/nitro-elixir/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/nitro-elixir/notas-salida.jpg",
-        "corazon": "img/nitro-elixir/notas-corazon.jpg",
-        "fondo": "img/nitro-elixir/notas-fondo.jpg"
+        "salida": "/img/nitro-elixir/notas-salida.jpg",
+        "corazon": "/img/nitro-elixir/notas-corazon.jpg",
+        "fondo": "/img/nitro-elixir/notas-fondo.jpg"
       },
-      "ctaFondo": "img/nitro-elixir/fondo-cta.jpg",
+      "ctaFondo": "/img/nitro-elixir/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/nitro-elixir/fondo-seccion.jpg",
+      "fondoPagina": "/img/nitro-elixir/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Nitro Elixir",
       "ctaTexto": "Descubre Nitro Elixir de Dumont, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -716,22 +716,22 @@
         "nombre": "Valentino Uomo Born in Roma",
         "precioOriginal": 129990
       },
-      "heroFondo": "img/nitro-gold/hero-nitro-gold.jpg",
+      "heroFondo": "/img/nitro-gold/hero-nitro-gold.jpg",
       "historiaTitulo": "EL ALMA DE NITRO GOLD",
       "historia": "Nitro Gold nace del deseo de capturar la esencia fresca y floreciente de un jardín en plena floración. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Manzana, se despliega en un corazón de Sal y se asienta en una base de Amberwood, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/nitro-gold/fondo-notas.jpg",
+      "historiaImagen": "/img/nitro-gold/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/nitro-gold/notas-salida.jpg",
-        "corazon": "img/nitro-gold/notas-corazon.jpg",
-        "fondo": "img/nitro-gold/notas-fondo.jpg"
+        "salida": "/img/nitro-gold/notas-salida.jpg",
+        "corazon": "/img/nitro-gold/notas-corazon.jpg",
+        "fondo": "/img/nitro-gold/notas-fondo.jpg"
       },
-      "ctaFondo": "img/nitro-gold/fondo-cta.jpg",
+      "ctaFondo": "/img/nitro-gold/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fdf1f5",
         "tema-card": "#f3d9e3",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/nitro-gold/fondo-seccion.jpg",
+      "fondoPagina": "/img/nitro-gold/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Nitro Gold",
       "ctaTexto": "Descubre Nitro Gold de Dumont, una fragancia fresca y floreciente hecha para dejar huella.",
       "navClaro": true
@@ -789,23 +789,23 @@
         "nombre": "Forever Wanted Elixir",
         "precioOriginal": 75000
       },
-      "heroFondo": "img/9pm-night-out/9pm-hero.jpg",
+      "heroFondo": "/img/9pm-night-out/9pm-hero.jpg",
       "heroAjuste": "contain",
       "historiaTitulo": "El Llamado de la Medianoche",
       "historia": "AFNAN nace de la pasión por capturar los momentos más intensos de la noche. 9 PM Night Out fue creado para el hombre que domina la oscuridad con confianza: una fragancia que se enciende como la ciudad al caer el sol y se despliega en cada encuentro, cada mirada, cada instante robado a la noche. Una firma olfativa pensada para quienes no solo salen de noche, sino que la hacen suya.",
-      "historiaImagen": "img/9pm-night-out/Fondonotas.jpg",
+      "historiaImagen": "/img/9pm-night-out/Fondonotas.jpg",
       "notasImagenes": {
-        "salida": "img/9pm-night-out/notas_salida.jpg",
-        "corazon": "img/9pm-night-out/notas_corazon.jpg",
-        "fondo": "img/9pm-night-out/notas_fondo.jpg"
+        "salida": "/img/9pm-night-out/notas_salida.jpg",
+        "corazon": "/img/9pm-night-out/notas_corazon.jpg",
+        "fondo": "/img/9pm-night-out/notas_fondo.jpg"
       },
-      "ctaFondo": "img/9pm-night-out/cta-fondo.jpg",
+      "ctaFondo": "/img/9pm-night-out/cta-fondo.jpg",
       "colores": {
         "tema-bg": "#000000",
         "tema-card": "#111111",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/9pm-night-out/fondo_seccion.jpg",
+      "fondoPagina": "/img/9pm-night-out/fondo_seccion.jpg",
       "ctaTitulo": "Vive la Experiencia 9 PM Night Out",
       "ctaTexto": "Eleva tu presencia con una fragancia que habla por ti, hecha para dominar la noche."
     },
@@ -845,22 +845,22 @@
       },
       "imagen": "https://i5.walmartimages.cl/asr/155346b3-27a0-4a88-83cb-fa37ab28fb5f.40bf4d6021871127eceef8b1a1e73c42.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
       "descripcion": "Un elixir ardiente y altamente concentrado. Su apertura impacta con el calor vibrante del chile rojo, que se equilibra a la perfección con un corazón aromático de lavanda. Finalmente, descansa sobre una base rica y cremosa de sándalo, creando una estela seductora, cálida y profundamente masculina.",
-      "heroFondo": "img/boss-the-scent-elixir-for-him/hero-boss-the-scent-elixir-for-him.jpg",
+      "heroFondo": "/img/boss-the-scent-elixir-for-him/hero-boss-the-scent-elixir-for-him.jpg",
       "historiaTitulo": "EL ALMA DE BOSS THE SCENT ELIXIR FOR HIM",
       "historia": "Boss The Scent Elixir For Him nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Chile rojo (ají rojo), se despliega en un corazón de Lavanda y se asienta en una base de Sándalo, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/boss-the-scent-elixir-for-him/fondo-notas.jpg",
+      "historiaImagen": "/img/boss-the-scent-elixir-for-him/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/boss-the-scent-elixir-for-him/notas-salida.jpg",
-        "corazon": "img/boss-the-scent-elixir-for-him/notas-corazon.jpg",
-        "fondo": "img/boss-the-scent-elixir-for-him/notas-fondo.jpg"
+        "salida": "/img/boss-the-scent-elixir-for-him/notas-salida.jpg",
+        "corazon": "/img/boss-the-scent-elixir-for-him/notas-corazon.jpg",
+        "fondo": "/img/boss-the-scent-elixir-for-him/notas-fondo.jpg"
       },
-      "ctaFondo": "img/boss-the-scent-elixir-for-him/fondo-cta.jpg",
+      "ctaFondo": "/img/boss-the-scent-elixir-for-him/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/boss-the-scent-elixir-for-him/fondo-seccion.jpg",
+      "fondoPagina": "/img/boss-the-scent-elixir-for-him/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Boss The Scent Elixir For Him",
       "ctaTexto": "Descubre Boss The Scent Elixir For Him de Hugo Boss, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -906,16 +906,16 @@
       },
       "imagen": "https://media.falabella.com/falabellaCL/50369047_6/w=1500,h=1500,fit=cover",
       "descripcion": "Una escapada a un jardín tropical. Abre con un frescor vibrante de notas verdes, menta y acordes acuosos. En su corazón, la mezcla exótica de coco e higo se realza con un toque de sal, aportando una cremosidad adictiva. Su fondo de haba tonka y sándalo lo envuelve en una estela seductora, ideal para días de verano y ocasiones relajadas.",
-      "heroFondo": "img/jpgparadise/hero-paradise.jpg",
+      "heroFondo": "/img/jpgparadise/hero-paradise.jpg",
       "historiaTitulo": "EL DESPERTAR DEL PARAÍSO",
       "historia": "Le Beau Paradise Garden nace del deseo de capturar la energía vibrante y exuberante de la primavera. Creada para el hombre que abraza su naturaleza más instintiva con total confianza: una fragancia que florece como un edén exótico bajo el sol de la mañana y se despliega en cada brisa acuática, cada nota de coco y cada instante robado en el jardín prohibido. Una firma olfativa pensada para quienes no solo exploran el paraíso, sino que se convierten en la tentación misma.",
-      "historiaImagen": "img/jpgparadise/fondo-notas.jpg",
+      "historiaImagen": "/img/jpgparadise/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/jpgparadise/notas-salida.jpg",
-        "corazon": "img/jpgparadise/notas-corazon.jpg",
-        "fondo": "img/jpgparadise/notas-fondo.jpg"
+        "salida": "/img/jpgparadise/notas-salida.jpg",
+        "corazon": "/img/jpgparadise/notas-corazon.jpg",
+        "fondo": "/img/jpgparadise/notas-fondo.jpg"
       },
-      "ctaFondo": "img/jpgparadise/fondo-cta.jpg",
+      "ctaFondo": "/img/jpgparadise/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fdefe0",
         "tema-card": "#eadfc8",
@@ -924,7 +924,7 @@
         "tema-card-corazon": "#f5f0eb",
         "tema-card-fondo": "#f5f0eb"
       },
-      "fondoPagina": "img/jpgparadise/fondo-seccion.jpg",
+      "fondoPagina": "/img/jpgparadise/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Paradise Garden",
       "ctaTexto": "Eleva tu presencia con una fragancia vibrante y seductora, hecha para deslumbrar bajo el sol primaveral y despertar tus sentidos."
     },
@@ -972,22 +972,22 @@
       },
       "imagen": "https://cl-dam-resizer.ecomm.cencosud.com/unsafe/adaptive-fit-in/3840x0/filters:quality(75)/cl/paris/206934999/variant/685ac78315a03c31025e0564/images/baaecf13-ece0-4982-a957-76541918144d/206934999-0000-003.jpg",
       "descripcion": "Una fragancia cálida, dulce y profundamente adictiva. Inicia con un toque especiado de pimienta rosa y enebro, envuelto en hojas de violeta. Su corazón irresistible combina la dulzura del tófe y la canela con destellos aromáticos, para finalmente fundirse en un fondo intenso de vainilla, ámbar y gamuza. Es el aroma perfecto para destacar en las noches frías y en citas románticas.",
-      "heroFondo": "img/emporio-armani-stronger-with-you-intensely/hero-emporio-armani-stronger-with-you-intensely.jpg",
+      "heroFondo": "/img/emporio-armani-stronger-with-you-intensely/hero-emporio-armani-stronger-with-you-intensely.jpg",
       "historiaTitulo": "EL ALMA DE EMPORIO ARMANI STRONGER WITH YOU INTENSELY",
       "historia": "Emporio Armani Stronger With You Intensely nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su lado más sensible con total confianza: una fragancia que se abre con Pimienta rosa, se despliega en un corazón de Tófe y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/emporio-armani-stronger-with-you-intensely/fondo-notas.jpg",
+      "historiaImagen": "/img/emporio-armani-stronger-with-you-intensely/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/emporio-armani-stronger-with-you-intensely/notas-salida.jpg",
-        "corazon": "img/emporio-armani-stronger-with-you-intensely/notas-corazon.jpg",
-        "fondo": "img/emporio-armani-stronger-with-you-intensely/notas-fondo.jpg"
+        "salida": "/img/emporio-armani-stronger-with-you-intensely/notas-salida.jpg",
+        "corazon": "/img/emporio-armani-stronger-with-you-intensely/notas-corazon.jpg",
+        "fondo": "/img/emporio-armani-stronger-with-you-intensely/notas-fondo.jpg"
       },
-      "ctaFondo": "img/emporio-armani-stronger-with-you-intensely/fondo-cta.jpg",
+      "ctaFondo": "/img/emporio-armani-stronger-with-you-intensely/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/emporio-armani-stronger-with-you-intensely/fondo-seccion.jpg",
+      "fondoPagina": "/img/emporio-armani-stronger-with-you-intensely/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Emporio Armani Stronger With You Intensely",
       "ctaTexto": "Descubre Emporio Armani Stronger With You Intensely de Giorgio Armani, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1032,22 +1032,22 @@
       },
       "imagen": "https://media.falabella.com/falabellaCL/80711328_3/w=1500,h=1500,fit=cover",
       "descripcion": "Una fragancia luminosa y tropical. Abre con la jugosidad exótica del maracuyá y vibrantes toques cítricos, dando paso a un corazón radiante de frangipani y notas solares. Su base cálida de vainilla de Madagascar y benjuí envuelve la piel con un toque dulce y elegante, perfecta para destacar en días soleados.",
-      "heroFondo": "img/power-of-you/hero-power-of-you.jpg",
+      "heroFondo": "/img/power-of-you/hero-power-of-you.jpg",
       "historiaTitulo": "EL ALMA DE POWER OF YOU",
       "historia": "Power Of You nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Maracuyá (fruta de la pasión), se despliega en un corazón de Frangipani (plumeria, plumaria, atapaima) y se asienta en una base de Vainilla de Madagascar, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/power-of-you/fondo-notas.jpg",
+      "historiaImagen": "/img/power-of-you/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/power-of-you/notas-salida.jpg",
-        "corazon": "img/power-of-you/notas-corazon.jpg",
-        "fondo": "img/power-of-you/notas-fondo.jpg"
+        "salida": "/img/power-of-you/notas-salida.jpg",
+        "corazon": "/img/power-of-you/notas-corazon.jpg",
+        "fondo": "/img/power-of-you/notas-fondo.jpg"
       },
-      "ctaFondo": "img/power-of-you/fondo-cta.jpg",
+      "ctaFondo": "/img/power-of-you/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/power-of-you/fondo-seccion.jpg",
+      "fondoPagina": "/img/power-of-you/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Power Of You",
       "ctaTexto": "Descubre Power Of You de Giorgio Armani, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -1093,22 +1093,22 @@
       },
       "imagen": "https://static.sweetcare.com/img/prd/488/v-638485379091938175/jean-paul-gaultier-011307jg-3.webp",
       "descripcion": "Una fragancia irresistiblemente dulce y seductora. Abre con una nota jugosa y luminosa de pera entrelazada con bergamota, que se funde en un corazón cautivador de notas florales y un toque audaz de cuero. Su base es un adictivo abrazo de vainilla, ámbar, vetiver y almizcle, creando una estela femenina, sensual y perfecta para deslumbrar en ocasiones especiales.",
-      "heroFondo": "img/la-belle/hero-la-belle.jpg",
+      "heroFondo": "/img/la-belle/hero-la-belle.jpg",
       "historiaTitulo": "EL ALMA DE LA BELLE",
       "historia": "La Belle nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su lado más sensible con total confianza: una fragancia que se abre con Pera, se despliega en un corazón de Notas florales y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/la-belle/fondo-notas.jpg",
+      "historiaImagen": "/img/la-belle/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/la-belle/notas-salida.jpg",
-        "corazon": "img/la-belle/notas-corazon.jpg",
-        "fondo": "img/la-belle/notas-fondo.jpg"
+        "salida": "/img/la-belle/notas-salida.jpg",
+        "corazon": "/img/la-belle/notas-corazon.jpg",
+        "fondo": "/img/la-belle/notas-fondo.jpg"
       },
-      "ctaFondo": "img/la-belle/fondo-cta.jpg",
+      "ctaFondo": "/img/la-belle/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/la-belle/fondo-seccion.jpg",
+      "fondoPagina": "/img/la-belle/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia La Belle",
       "ctaTexto": "Descubre La Belle de Jean Paul Gaultier, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -1166,22 +1166,22 @@
       },
       "imagen": "https://productosdelujo.cl/cdn/shop/products/3CC24099563.jpg?v=1623701251&width=1214",
       "descripcion": "Una fragancia audaz y sofisticada, símbolo de la dualidad femenina. Abre con notas luminosas de almendra y un toque energizante de café. El corazón es un bouquet floral de nardos y jazmín sambac que irradia feminidad, mientras que su fondo profundo y seductor revela notas sumamente adictivas de haba tonka, cacao y vainilla. Perfecta para empoderar tus noches y eventos exclusivos.",
-      "heroFondo": "img/good-girl/hero-good-girl.jpg",
+      "heroFondo": "/img/good-girl/hero-good-girl.jpg",
       "historiaTitulo": "EL ALMA DE GOOD GIRL",
       "historia": "Good Girl nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Almendra, se despliega en un corazón de Nardos y se asienta en una base de Haba tonka, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/good-girl/fondo-notas.jpg",
+      "historiaImagen": "/img/good-girl/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/good-girl/notas-salida.jpg",
-        "corazon": "img/good-girl/notas-corazon.jpg",
-        "fondo": "img/good-girl/notas-fondo.jpg"
+        "salida": "/img/good-girl/notas-salida.jpg",
+        "corazon": "/img/good-girl/notas-corazon.jpg",
+        "fondo": "/img/good-girl/notas-fondo.jpg"
       },
-      "ctaFondo": "img/good-girl/fondo-cta.jpg",
+      "ctaFondo": "/img/good-girl/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/good-girl/fondo-seccion.jpg",
+      "fondoPagina": "/img/good-girl/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Good Girl",
       "ctaTexto": "Descubre Good Girl de Carolina Herrera, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1229,22 +1229,22 @@
       },
       "imagen": "https://la.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-perfume-l-immensite--LP0052_PM1_Interior%20view.jpg",
       "descripcion": "Una fragancia refrescante y sofisticada de alta gama. Su apertura vibrante de toronja y jengibre da paso a un corazón aromático y acuático. El fondo de ambroxan y ámbar asegura una estela elegante y persistente, ideal para proyectar exclusividad y frescura en el día a día.",
-      "heroFondo": "img/limmensite/hero-limmensite.jpg",
+      "heroFondo": "/img/limmensite/hero-limmensite.jpg",
       "historiaTitulo": "EL ALMA DE L'IMMENSITÉ",
       "historia": "L'Immensité nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Toronja (pomelo), se despliega en un corazón de Romero y se asienta en una base de Ambroxan, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/limmensite/fondo-notas.jpg",
+      "historiaImagen": "/img/limmensite/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/limmensite/notas-salida.jpg",
-        "corazon": "img/limmensite/notas-corazon.jpg",
-        "fondo": "img/limmensite/notas-fondo.jpg"
+        "salida": "/img/limmensite/notas-salida.jpg",
+        "corazon": "/img/limmensite/notas-corazon.jpg",
+        "fondo": "/img/limmensite/notas-fondo.jpg"
       },
-      "ctaFondo": "img/limmensite/fondo-cta.jpg",
+      "ctaFondo": "/img/limmensite/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/limmensite/fondo-seccion.jpg",
+      "fondoPagina": "/img/limmensite/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia L'Immensité",
       "ctaTexto": "Descubre L'Immensité de Louis Vuitton, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -1294,22 +1294,22 @@
       },
       "imagen": "https://la.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-perfume-imagination--LP0219_PM1_Interior%20view.jpg",
       "descripcion": "Una obra maestra cítrica y estimulante. Abre con un estallido luminoso de cítricos italianos, evolucionando hacia un corazón especiado de neroli y jengibre. La magia ocurre en su fondo, donde el té negro de China y el ambroxan crean un aura limpia, lujosa y sumamente adictiva.",
-      "heroFondo": "img/imagination/hero-imagination.jpg",
+      "heroFondo": "/img/imagination/hero-imagination.jpg",
       "historiaTitulo": "EL ALMA DE IMAGINATION",
       "historia": "Imagination nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Cidra, se despliega en un corazón de Neroli de Túnez y se asienta en una base de Té negro de China, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/imagination/fondo-notas.jpg",
+      "historiaImagen": "/img/imagination/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/imagination/notas-salida.jpg",
-        "corazon": "img/imagination/notas-corazon.jpg",
-        "fondo": "img/imagination/notas-fondo.jpg"
+        "salida": "/img/imagination/notas-salida.jpg",
+        "corazon": "/img/imagination/notas-corazon.jpg",
+        "fondo": "/img/imagination/notas-fondo.jpg"
       },
-      "ctaFondo": "img/imagination/fondo-cta.jpg",
+      "ctaFondo": "/img/imagination/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/imagination/fondo-seccion.jpg",
+      "fondoPagina": "/img/imagination/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Imagination",
       "ctaTexto": "Descubre Imagination de Louis Vuitton, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -1362,22 +1362,22 @@
         "nombre": "Imagination",
         "precioOriginal": 420000
       },
-      "heroFondo": "img/marwa/hero-marwa.jpg",
+      "heroFondo": "/img/marwa/hero-marwa.jpg",
       "historiaTitulo": "EL ALMA DE MARWA",
       "historia": "Marwa nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Bergamota de Calabria, se despliega en un corazón de Jengibre nigeriano y se asienta en una base de Ambroxan, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/marwa/fondo-notas.jpg",
+      "historiaImagen": "/img/marwa/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/marwa/notas-salida.jpg",
-        "corazon": "img/marwa/notas-corazon.jpg",
-        "fondo": "img/marwa/notas-fondo.jpg"
+        "salida": "/img/marwa/notas-salida.jpg",
+        "corazon": "/img/marwa/notas-corazon.jpg",
+        "fondo": "/img/marwa/notas-fondo.jpg"
       },
-      "ctaFondo": "img/marwa/fondo-cta.jpg",
+      "ctaFondo": "/img/marwa/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/marwa/fondo-seccion.jpg",
+      "fondoPagina": "/img/marwa/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Marwa",
       "ctaTexto": "Descubre Marwa de Arabiyat Prestige, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -1433,22 +1433,22 @@
       },
       "imagen": "https://hypefragrances.cl/wp-content/uploads/2021/11/LOST-CHERRY-2.jpg",
       "descripcion": "Un viaje olfativo exótico, cálido y profundamente dulce. Abre con una explosión intensa de cereza negra, licor y almendra amarga, que se funde en un corazón de ciruela y notas florales. Su fondo es una mezcla opulenta de vainilla, haba tonka y maderas preciosas que crean una estela embriagadora e irresistible.",
-      "heroFondo": "img/lost-cherry/hero-lost-cherry.jpg",
+      "heroFondo": "/img/lost-cherry/hero-lost-cherry.jpg",
       "historiaTitulo": "EL ALMA DE LOST CHERRY",
       "historia": "Lost Cherry nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su aura enigmática con total confianza: una fragancia que se abre con Almendra amarga, se despliega en un corazón de Cereza ácida (guinda) y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/lost-cherry/fondo-notas.jpg",
+      "historiaImagen": "/img/lost-cherry/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/lost-cherry/notas-salida.jpg",
-        "corazon": "img/lost-cherry/notas-corazon.jpg",
-        "fondo": "img/lost-cherry/notas-fondo.jpg"
+        "salida": "/img/lost-cherry/notas-salida.jpg",
+        "corazon": "/img/lost-cherry/notas-corazon.jpg",
+        "fondo": "/img/lost-cherry/notas-fondo.jpg"
       },
-      "ctaFondo": "img/lost-cherry/fondo-cta.jpg",
+      "ctaFondo": "/img/lost-cherry/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/lost-cherry/fondo-seccion.jpg",
+      "fondoPagina": "/img/lost-cherry/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Lost Cherry",
       "ctaTexto": "Descubre Lost Cherry de Tom Ford, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -1499,22 +1499,22 @@
       },
       "imagen": "https://aliss.do/media/catalog/product/4/9/498e733a0af2fe685b95f8fbd46c0c9477d15eda_file.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700",
       "descripcion": "Una fragancia apasionada, cálida y de contrastes. Abre con un golpe cítrico y especiado vibrante gracias a la mandarina y la pimienta negra, para luego revelar un corazón floral intenso. Su base cálida de vainilla, haba tonka y maderas nobles deja una estela poderosa y seductora, perfecta para climas fríos y ocasiones especiales.",
-      "heroFondo": "img/eros-flame/hero-eros-flame.jpg",
+      "heroFondo": "/img/eros-flame/hero-eros-flame.jpg",
       "historiaTitulo": "EL ALMA DE EROS FLAME",
       "historia": "Eros Flame nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Mandarina, se despliega en un corazón de Geranio y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/eros-flame/fondo-notas.jpg",
+      "historiaImagen": "/img/eros-flame/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/eros-flame/notas-salida.jpg",
-        "corazon": "img/eros-flame/notas-corazon.jpg",
-        "fondo": "img/eros-flame/notas-fondo.jpg"
+        "salida": "/img/eros-flame/notas-salida.jpg",
+        "corazon": "/img/eros-flame/notas-corazon.jpg",
+        "fondo": "/img/eros-flame/notas-fondo.jpg"
       },
-      "ctaFondo": "img/eros-flame/fondo-cta.jpg",
+      "ctaFondo": "/img/eros-flame/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/eros-flame/fondo-seccion.jpg",
+      "fondoPagina": "/img/eros-flame/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Eros Flame",
       "ctaTexto": "Descubre Eros Flame de Versace, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1566,22 +1566,22 @@
         "nombre": "Scandal Pour Homme",
         "precioOriginal": 110000
       },
-      "heroFondo": "img/odyssey-mandarin-sky/hero-odyssey-mandarin-sky.jpg",
+      "heroFondo": "/img/odyssey-mandarin-sky/hero-odyssey-mandarin-sky.jpg",
       "historiaTitulo": "EL ALMA DE ODYSSEY MANDARIN SKY",
       "historia": "Odyssey Mandarin Sky nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Mandarina, se despliega en un corazón de Caramelo y se asienta en una base de Ambroxan, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/odyssey-mandarin-sky/fondo-notas.jpg",
+      "historiaImagen": "/img/odyssey-mandarin-sky/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/odyssey-mandarin-sky/notas-salida.jpg",
-        "corazon": "img/odyssey-mandarin-sky/notas-corazon.jpg",
-        "fondo": "img/odyssey-mandarin-sky/notas-fondo.jpg"
+        "salida": "/img/odyssey-mandarin-sky/notas-salida.jpg",
+        "corazon": "/img/odyssey-mandarin-sky/notas-corazon.jpg",
+        "fondo": "/img/odyssey-mandarin-sky/notas-fondo.jpg"
       },
-      "ctaFondo": "img/odyssey-mandarin-sky/fondo-cta.jpg",
+      "ctaFondo": "/img/odyssey-mandarin-sky/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/odyssey-mandarin-sky/fondo-seccion.jpg",
+      "fondoPagina": "/img/odyssey-mandarin-sky/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Odyssey Mandarin Sky",
       "ctaTexto": "Descubre Odyssey Mandarin Sky de Armaf, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -1623,22 +1623,22 @@
       },
       "imagen": "https://cl-dam-resizer.ecomm.cencosud.com/unsafe/adaptive-fit-in/3840x0/filters:quality(75)/paris/517296999/variant/images/00056e7c-4391-4c76-bdfe-4b5f642cddd7/517296999-0000-003.jpg",
       "descripcion": "Una fragancia magnética, dulce y audaz. Abre con un toque fresco y aromático de mandarina y esclarea, que rápidamente cede el paso a un corazón adictivo y goloso de caramelo y haba tonka. Su base de vetiver le otorga un anclaje terroso y masculino, creando una estela irresistible perfecta para la noche, fiestas y citas románticas.",
-      "heroFondo": "img/scandal-pour-homme/hero-scandal-pour-homme.jpg",
+      "heroFondo": "/img/scandal-pour-homme/hero-scandal-pour-homme.jpg",
       "historiaTitulo": "EL ALMA DE SCANDAL POUR HOMME",
       "historia": "Scandal Pour Homme nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Mandarina, se despliega en un corazón de Caramelo y se asienta en una base de Vetiver, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/scandal-pour-homme/fondo-notas.jpg",
+      "historiaImagen": "/img/scandal-pour-homme/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/scandal-pour-homme/notas-salida.jpg",
-        "corazon": "img/scandal-pour-homme/notas-corazon.jpg",
-        "fondo": "img/scandal-pour-homme/notas-fondo.jpg"
+        "salida": "/img/scandal-pour-homme/notas-salida.jpg",
+        "corazon": "/img/scandal-pour-homme/notas-corazon.jpg",
+        "fondo": "/img/scandal-pour-homme/notas-fondo.jpg"
       },
-      "ctaFondo": "img/scandal-pour-homme/fondo-cta.jpg",
+      "ctaFondo": "/img/scandal-pour-homme/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/scandal-pour-homme/fondo-seccion.jpg",
+      "fondoPagina": "/img/scandal-pour-homme/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Scandal Pour Homme",
       "ctaTexto": "Descubre Scandal Pour Homme de Jean Paul Gaultier, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1682,22 +1682,22 @@
       },
       "imagen": "https://cl-dam-resizer.ecomm.cencosud.com/unsafe/adaptive-fit-in/3840x0/filters:quality(75)/cl/paris/724216999/variant/69c528b46a2ef0119c97fc2d/images/e2f18eb2-70ad-40cb-bcb1-4ee8c375cd44/724216999-0000-004.jpg",
       "descripcion": "Una fragancia intensa, dulce y sumamente cautivadora. Abre con un contraste vibrante de limón y pimienta rosa, que da paso a un corazón misterioso de incienso y lavanda. Su fondo revela una calidez magnética con vainilla, haba tonka y ámbar, creando una estela poderosa y seductora, perfecta para la noche y climas fríos.",
-      "heroFondo": "img/invictus-victory/hero-invictus-victory.jpg",
+      "heroFondo": "/img/invictus-victory/hero-invictus-victory.jpg",
       "historiaTitulo": "EL ALMA DE INVICTUS VICTORY",
       "historia": "Invictus Victory nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Pimienta rosa, se despliega en un corazón de Incienso de olíbano (franquincienso) y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/invictus-victory/fondo-notas.jpg",
+      "historiaImagen": "/img/invictus-victory/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/invictus-victory/notas-salida.jpg",
-        "corazon": "img/invictus-victory/notas-corazon.jpg",
-        "fondo": "img/invictus-victory/notas-fondo.jpg"
+        "salida": "/img/invictus-victory/notas-salida.jpg",
+        "corazon": "/img/invictus-victory/notas-corazon.jpg",
+        "fondo": "/img/invictus-victory/notas-fondo.jpg"
       },
-      "ctaFondo": "img/invictus-victory/fondo-cta.jpg",
+      "ctaFondo": "/img/invictus-victory/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/invictus-victory/fondo-seccion.jpg",
+      "fondoPagina": "/img/invictus-victory/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Invictus Victory",
       "ctaTexto": "Descubre Invictus Victory de Paco Rabanne, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1742,22 +1742,22 @@
         "nombre": "The Most Wanted",
         "precioOriginal": 89990
       },
-      "heroFondo": "img/wolf/hero-wolf.jpg",
+      "heroFondo": "/img/wolf/hero-wolf.jpg",
       "historiaTitulo": "EL ALMA DE WOLF",
       "historia": "Wolf nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Cardamomo, se despliega en un corazón de Tófe y se asienta en una base de Amberwood, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/wolf/fondo-notas.jpg",
+      "historiaImagen": "/img/wolf/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/wolf/notas-salida.jpg",
-        "corazon": "img/wolf/notas-corazon.jpg",
-        "fondo": "img/wolf/notas-fondo.jpg"
+        "salida": "/img/wolf/notas-salida.jpg",
+        "corazon": "/img/wolf/notas-corazon.jpg",
+        "fondo": "/img/wolf/notas-fondo.jpg"
       },
-      "ctaFondo": "img/wolf/fondo-cta.jpg",
+      "ctaFondo": "/img/wolf/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/wolf/fondo-seccion.jpg",
+      "fondoPagina": "/img/wolf/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Wolf",
       "ctaTexto": "Descubre Wolf de Rayhaan, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1810,22 +1810,22 @@
         "nombre": "Summer Hammer",
         "precioOriginal": 158000
       },
-      "heroFondo": "img/tropical-vibe/hero-tropical-vibe.jpg",
+      "heroFondo": "/img/tropical-vibe/hero-tropical-vibe.jpg",
       "historiaTitulo": "EL ALMA DE TROPICAL VIBE",
       "historia": "Tropical Vibe nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Mango, se despliega en un corazón de Coco y se asienta en una base de Almizcle, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/tropical-vibe/fondo-notas.jpg",
+      "historiaImagen": "/img/tropical-vibe/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/tropical-vibe/notas-salida.jpg",
-        "corazon": "img/tropical-vibe/notas-corazon.jpg",
-        "fondo": "img/tropical-vibe/notas-fondo.jpg"
+        "salida": "/img/tropical-vibe/notas-salida.jpg",
+        "corazon": "/img/tropical-vibe/notas-corazon.jpg",
+        "fondo": "/img/tropical-vibe/notas-fondo.jpg"
       },
-      "ctaFondo": "img/tropical-vibe/fondo-cta.jpg",
+      "ctaFondo": "/img/tropical-vibe/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/tropical-vibe/fondo-seccion.jpg",
+      "fondoPagina": "/img/tropical-vibe/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Tropical Vibe",
       "ctaTexto": "Descubre Tropical Vibe de Rayhaan, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -1876,22 +1876,22 @@
       },
       "imagen": "https://odorare.fr/cdn/shop/files/summer-hammer-lorenzo-pazzaglia-extrait-de-parfum-50ml-ambiance-tropicale_4b09825c-f5a2-4569-86d2-cddb4a6f989c.png?v=1784465904&width=1254",
       "descripcion": "Una experiencia olfativa de lujo absoluta que captura la esencia del verano eterno. Este extracto de perfume abre con una opulenta y densa mezcla de frutas exóticas bañadas en ron blanco. Su corazón revela una textura cremosa de leche de coco entrelazada con acordes salados, descansando sobre una base rica en ámbar y sándalo. Su rendimiento es extraordinario, proyectando una vibra tropical sofisticada y persistente.",
-      "heroFondo": "img/summer-hammer/hero-summer-hammer.jpg",
+      "heroFondo": "/img/summer-hammer/hero-summer-hammer.jpg",
       "historiaTitulo": "EL ALMA DE SUMMER HAMMER",
       "historia": "Summer Hammer nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Mango, se despliega en un corazón de Leche de coco y se asienta en una base de Almizcle, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/summer-hammer/fondo-notas.jpg",
+      "historiaImagen": "/img/summer-hammer/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/summer-hammer/notas-salida.jpg",
-        "corazon": "img/summer-hammer/notas-corazon.jpg",
-        "fondo": "img/summer-hammer/notas-fondo.jpg"
+        "salida": "/img/summer-hammer/notas-salida.jpg",
+        "corazon": "/img/summer-hammer/notas-corazon.jpg",
+        "fondo": "/img/summer-hammer/notas-fondo.jpg"
       },
-      "ctaFondo": "img/summer-hammer/fondo-cta.jpg",
+      "ctaFondo": "/img/summer-hammer/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/summer-hammer/fondo-seccion.jpg",
+      "fondoPagina": "/img/summer-hammer/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Summer Hammer",
       "ctaTexto": "Descubre Summer Hammer de Lorenzo Pazzaglia, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -1940,22 +1940,22 @@
       },
       "imagen": "https://media.falabella.com/falabellaCL/50190731_7/w=1500,h=1500,fit=cover",
       "descripcion": "Una reinterpretación audaz y sumamente concentrada. Abre con un golpe cálido y especiado de nuez moscada, canela y cardamomo, contrastado con la frescura de la toronja. Su corazón puro de lavanda descansa sobre un fondo oscuro y opulento de regaliz, sándalo y ámbar. Es una fragancia imponente, de duración extrema, diseñada para dejar huella en la noche.",
-      "heroFondo": "img/sauvage-elixir/hero-sauvage-elixir.jpg",
+      "heroFondo": "/img/sauvage-elixir/hero-sauvage-elixir.jpg",
       "historiaTitulo": "EL ALMA DE SAUVAGE ELIXIR",
       "historia": "Sauvage Elixir nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Nuez moscada, se despliega en un corazón de Lavanda y se asienta en una base de Regaliz, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/sauvage-elixir/fondo-notas.jpg",
+      "historiaImagen": "/img/sauvage-elixir/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/sauvage-elixir/notas-salida.jpg",
-        "corazon": "img/sauvage-elixir/notas-corazon.jpg",
-        "fondo": "img/sauvage-elixir/notas-fondo.jpg"
+        "salida": "/img/sauvage-elixir/notas-salida.jpg",
+        "corazon": "/img/sauvage-elixir/notas-corazon.jpg",
+        "fondo": "/img/sauvage-elixir/notas-fondo.jpg"
       },
-      "ctaFondo": "img/sauvage-elixir/fondo-cta.jpg",
+      "ctaFondo": "/img/sauvage-elixir/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/sauvage-elixir/fondo-seccion.jpg",
+      "fondoPagina": "/img/sauvage-elixir/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Sauvage Elixir",
       "ctaTexto": "Descubre Sauvage Elixir de Dior, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -1999,22 +1999,22 @@
       },
       "imagen": "https://fenixperfumes.cl/cdn/shop/files/xerjoff-erba-pura-ultra-lujoso.png?v=1769030518",
       "descripcion": "Una exquisita y moderna mezcla de cítricos mediterráneos dulces envueltos en un aura de lujo. Su salida vibrante de naranja y bergamota da paso a un corazón sumamente jugoso y frutal. El secreto de su estela inmensa radica en su fondo de almizcle blanco, ámbar y vainilla, creando una fragancia aterciopelada, brillante y adictiva.",
-      "heroFondo": "img/erba-pura/hero-erba-pura.jpg",
+      "heroFondo": "/img/erba-pura/hero-erba-pura.jpg",
       "historiaTitulo": "EL ALMA DE ERBA PURA",
       "historia": "Erba Pura nace del deseo de capturar la esencia fresca y floreciente de un jardín en plena floración. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Naranja siciliana, se despliega en un corazón de Frutas y se asienta en una base de Almizcle blanco, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/erba-pura/fondo-notas.jpg",
+      "historiaImagen": "/img/erba-pura/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/erba-pura/notas-salida.jpg",
-        "corazon": "img/erba-pura/notas-corazon.jpg",
-        "fondo": "img/erba-pura/notas-fondo.jpg"
+        "salida": "/img/erba-pura/notas-salida.jpg",
+        "corazon": "/img/erba-pura/notas-corazon.jpg",
+        "fondo": "/img/erba-pura/notas-fondo.jpg"
       },
-      "ctaFondo": "img/erba-pura/fondo-cta.jpg",
+      "ctaFondo": "/img/erba-pura/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fdf1f5",
         "tema-card": "#f3d9e3",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/erba-pura/fondo-seccion.jpg",
+      "fondoPagina": "/img/erba-pura/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Erba Pura",
       "ctaTexto": "Descubre Erba Pura de Xerjoff, una fragancia fresca y floreciente hecha para dejar huella.",
       "navClaro": true
@@ -2061,22 +2061,22 @@
       },
       "imagen": "https://i0.wp.com/dperfumes.cl/wp-content/uploads/2024/04/Valentino-Uomo-Born-In-Roma-Coral-Fantasy-Eau-de-Toilette-01.webp?fit=1200%2C1200&ssl=1",
       "descripcion": "Una fragancia vibrante y de grandes contrastes. Abre con un acorde jugoso y llamativo de manzana roja entrelazado con cardamomo y bergamota. Su corazón aromático de lavanda y geranio descansa sobre una base profunda y sumamente masculina de hojas de tabaco y vetiver. Un aroma ideal para destacar con un toque moderno, seductor y atrevido.",
-      "heroFondo": "img/valentino-uomo-born-in-roma-coral-fantasy/hero-valentino-uomo-born-in-roma-coral-fantasy.jpg",
+      "heroFondo": "/img/valentino-uomo-born-in-roma-coral-fantasy/hero-valentino-uomo-born-in-roma-coral-fantasy.jpg",
       "historiaTitulo": "EL ALMA DE VALENTINO UOMO BORN IN ROMA CORAL FANTASY",
       "historia": "Valentino Uomo Born In Roma Coral Fantasy nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Manzana roja, se despliega en un corazón de Lavanda y se asienta en una base de Hojas de tabaco, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/valentino-uomo-born-in-roma-coral-fantasy/fondo-notas.jpg",
+      "historiaImagen": "/img/valentino-uomo-born-in-roma-coral-fantasy/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/valentino-uomo-born-in-roma-coral-fantasy/notas-salida.jpg",
-        "corazon": "img/valentino-uomo-born-in-roma-coral-fantasy/notas-corazon.jpg",
-        "fondo": "img/valentino-uomo-born-in-roma-coral-fantasy/notas-fondo.jpg"
+        "salida": "/img/valentino-uomo-born-in-roma-coral-fantasy/notas-salida.jpg",
+        "corazon": "/img/valentino-uomo-born-in-roma-coral-fantasy/notas-corazon.jpg",
+        "fondo": "/img/valentino-uomo-born-in-roma-coral-fantasy/notas-fondo.jpg"
       },
-      "ctaFondo": "img/valentino-uomo-born-in-roma-coral-fantasy/fondo-cta.jpg",
+      "ctaFondo": "/img/valentino-uomo-born-in-roma-coral-fantasy/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/valentino-uomo-born-in-roma-coral-fantasy/fondo-seccion.jpg",
+      "fondoPagina": "/img/valentino-uomo-born-in-roma-coral-fantasy/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Valentino Uomo Born In Roma Coral Fantasy",
       "ctaTexto": "Descubre Valentino Uomo Born In Roma Coral Fantasy de Valentino, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -2122,22 +2122,22 @@
       },
       "imagen": "https://laconicum.com/cdn/shop/files/by-the-fireplace-9845085.png?v=1755162591&width=1080",
       "descripcion": "Un aroma acogedor y nostálgico que evoca el calor de una chimenea en pleno invierno. Combina el toque ahumado de la madera de gaiac y las castañas asadas con la dulzura reconfortante de la vainilla y el bálsamo del Perú. Ideal para climas fríos, creando un aura cálida y sumamente íntima.",
-      "heroFondo": "img/by-the-fireplace/hero-by-the-fireplace.jpg",
+      "heroFondo": "/img/by-the-fireplace/hero-by-the-fireplace.jpg",
       "historiaTitulo": "EL ALMA DE BY THE FIREPLACE",
       "historia": "By the Fireplace nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su aura enigmática con total confianza: una fragancia que se abre con Clavos de olor, se despliega en un corazón de Castaña y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/by-the-fireplace/fondo-notas.jpg",
+      "historiaImagen": "/img/by-the-fireplace/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/by-the-fireplace/notas-salida.jpg",
-        "corazon": "img/by-the-fireplace/notas-corazon.jpg",
-        "fondo": "img/by-the-fireplace/notas-fondo.jpg"
+        "salida": "/img/by-the-fireplace/notas-salida.jpg",
+        "corazon": "/img/by-the-fireplace/notas-corazon.jpg",
+        "fondo": "/img/by-the-fireplace/notas-fondo.jpg"
       },
-      "ctaFondo": "img/by-the-fireplace/fondo-cta.jpg",
+      "ctaFondo": "/img/by-the-fireplace/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/by-the-fireplace/fondo-seccion.jpg",
+      "fondoPagina": "/img/by-the-fireplace/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia By the Fireplace",
       "ctaTexto": "Descubre By the Fireplace de Maison Martin Margiela, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -2185,22 +2185,22 @@
       },
       "imagen": "https://fimgs.net/photogram/p1200/ti/km/3rZsvmRo0o1hweST.jpg",
       "descripcion": "Una obra maestra de la perfumería nicho, luminosa y sofisticada. Su firma olfativa es inconfundible, mezclando la brisa floral del jazmín y el azafrán con las facetas minerales del ámbar gris y los tonos amaderados del cedro. Una fragancia lujosa, magnética y de estela inolvidable que denota pura exclusividad.",
-      "heroFondo": "img/baccarat-rouge-540/hero-baccarat-rouge-540.jpg",
+      "heroFondo": "/img/baccarat-rouge-540/hero-baccarat-rouge-540.jpg",
       "historiaTitulo": "EL ALMA DE BACCARAT ROUGE 540",
       "historia": "Baccarat Rouge 540 nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su sofisticación natural con total confianza: una fragancia que se abre con Azafrán, se despliega en un corazón de Amberwood y se asienta en una base de Resina de abeto, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/baccarat-rouge-540/fondo-notas.jpg",
+      "historiaImagen": "/img/baccarat-rouge-540/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/baccarat-rouge-540/notas-salida.jpg",
-        "corazon": "img/baccarat-rouge-540/notas-corazon.jpg",
-        "fondo": "img/baccarat-rouge-540/notas-fondo.jpg"
+        "salida": "/img/baccarat-rouge-540/notas-salida.jpg",
+        "corazon": "/img/baccarat-rouge-540/notas-corazon.jpg",
+        "fondo": "/img/baccarat-rouge-540/notas-fondo.jpg"
       },
-      "ctaFondo": "img/baccarat-rouge-540/fondo-cta.jpg",
+      "ctaFondo": "/img/baccarat-rouge-540/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/baccarat-rouge-540/fondo-seccion.jpg",
+      "fondoPagina": "/img/baccarat-rouge-540/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Baccarat Rouge 540",
       "ctaTexto": "Descubre Baccarat Rouge 540 de Maison Francis Kurkdjian, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -2247,22 +2247,22 @@
       },
       "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMelhbQ4Glmp3CyDg-x6v2Vua99iK0vAMtj3677uQ4hze6hQqe4jk5I-1&s=10",
       "descripcion": "Una fragancia embriagadora y opulenta que rinde homenaje al coñac más fino. Su apertura licorosa se sumerge rápidamente en un corazón cálido de canela y roble, para terminar en un fondo absolutamente delicioso de praliné, vainilla y almendras acarameladas. Perfecta para quienes buscan un aroma exclusivo, dulce y muy nocturno.",
-      "heroFondo": "img/angels-share/hero-angels-share.jpg",
+      "heroFondo": "/img/angels-share/hero-angels-share.jpg",
       "historiaTitulo": "EL ALMA DE ANGELS' SHARE",
       "historia": "Angels' Share nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su sofisticación natural con total confianza: una fragancia que se abre con Coñac, se despliega en un corazón de Canela y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/angels-share/fondo-notas.jpg",
+      "historiaImagen": "/img/angels-share/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/angels-share/notas-salida.jpg",
-        "corazon": "img/angels-share/notas-corazon.jpg",
-        "fondo": "img/angels-share/notas-fondo.jpg"
+        "salida": "/img/angels-share/notas-salida.jpg",
+        "corazon": "/img/angels-share/notas-corazon.jpg",
+        "fondo": "/img/angels-share/notas-fondo.jpg"
       },
-      "ctaFondo": "img/angels-share/fondo-cta.jpg",
+      "ctaFondo": "/img/angels-share/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/angels-share/fondo-seccion.jpg",
+      "fondoPagina": "/img/angels-share/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Angels' Share",
       "ctaTexto": "Descubre Angels' Share de By Kilian, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -2315,22 +2315,22 @@
       },
       "imagen": "https://cdn4.beautinow.com/wp-content/uploads/2023/12/Xerjoff_Erba-Gold_-2.webp",
       "descripcion": "Una fragancia unisex lujosa y vibrante que combina una salida cítrica y fresca de naranja, bergamota y limón con un corazón frutal de melón, pera y manzana verde, acompañado de especias cálidas. Su fondo de vainilla, almizcle blanco, ámbar y maderas aporta profundidad, elegancia y una estela sofisticada.",
-      "heroFondo": "img/erba-gold/hero-erba-gold.jpg",
+      "heroFondo": "/img/erba-gold/hero-erba-gold.jpg",
       "historiaTitulo": "EL ALMA DE ERBA GOLD",
       "historia": "Erba Gold nace del deseo de capturar la esencia luminosa y vibrante de un día de verano bajo el sol. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Naranja brasileña, se despliega en un corazón de Melón y se asienta en una base de Almizcle blanco, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/erba-gold/fondo-notas.jpg",
+      "historiaImagen": "/img/erba-gold/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/erba-gold/notas-salida.jpg",
-        "corazon": "img/erba-gold/notas-corazon.jpg",
-        "fondo": "img/erba-gold/notas-fondo.jpg"
+        "salida": "/img/erba-gold/notas-salida.jpg",
+        "corazon": "/img/erba-gold/notas-corazon.jpg",
+        "fondo": "/img/erba-gold/notas-fondo.jpg"
       },
-      "ctaFondo": "img/erba-gold/fondo-cta.jpg",
+      "ctaFondo": "/img/erba-gold/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#eaf6fb",
         "tema-card": "#cfe9f0",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/erba-gold/fondo-seccion.jpg",
+      "fondoPagina": "/img/erba-gold/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Erba Gold",
       "ctaTexto": "Descubre Erba Gold de Xerjoff, una fragancia luminosa y vibrante hecha para dejar huella.",
       "navClaro": true
@@ -2376,22 +2376,22 @@
       },
       "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp-VVV0vkzHzmLLcz_aJRBx7NhB7e9TKLPlkf7zx-c79rcuYYpBSejP5k&s=10",
       "descripcion": "Una fragancia masculina intensa y sofisticada que combina una salida fresca y especiada de jengibre, bergamota y cardamomo con un corazón floral dominado por la flor de azahar. Su fondo de pachulí aporta profundidad, carácter y una estela elegante, ideal para ocasiones nocturnas y especiales.",
-      "heroFondo": "img/myslf-l-absolu/hero-myslf-l-absolu.jpg",
+      "heroFondo": "/img/myslf-l-absolu/hero-myslf-l-absolu.jpg",
       "historiaTitulo": "EL ALMA DE MYSLF L’ABSOLU",
       "historia": "MYSLF L’Absolu nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Jengibre, se despliega en un corazón de Flor de azahar del naranjo y se asienta en una base de Pachulí, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/myslf-l-absolu/fondo-notas.jpg",
+      "historiaImagen": "/img/myslf-l-absolu/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/myslf-l-absolu/notas-salida.jpg",
-        "corazon": "img/myslf-l-absolu/notas-corazon.jpg",
-        "fondo": "img/myslf-l-absolu/notas-fondo.jpg"
+        "salida": "/img/myslf-l-absolu/notas-salida.jpg",
+        "corazon": "/img/myslf-l-absolu/notas-corazon.jpg",
+        "fondo": "/img/myslf-l-absolu/notas-fondo.jpg"
       },
-      "ctaFondo": "img/myslf-l-absolu/fondo-cta.jpg",
+      "ctaFondo": "/img/myslf-l-absolu/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/myslf-l-absolu/fondo-seccion.jpg",
+      "fondoPagina": "/img/myslf-l-absolu/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia MYSLF L’Absolu",
       "ctaTexto": "Descubre MYSLF L’Absolu de Yves Saint Laurent, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -2436,22 +2436,22 @@
       },
       "imagen": "https://static.sweetcare.com/img/prd/488/v-638703336022797059/ralph-lauren-005986rl-2.webp",
       "descripcion": "Una fragancia energizante y audaz. Abre con la frescura vibrante del arándano y los cítricos, dando paso a un corazón especiado de azafrán y salvia. Su fondo cálido de café, ámbar y maderas le aporta un carácter masculino, seductor y lleno de adrenalina.",
-      "heroFondo": "img/polo-red/hero-polo-red.jpg",
+      "heroFondo": "/img/polo-red/hero-polo-red.jpg",
       "historiaTitulo": "EL ALMA DE POLO RED",
       "historia": "Polo Red nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Arándano, se despliega en un corazón de Azafrán y se asienta en una base de Ámbar, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/polo-red/fondo-notas.jpg",
+      "historiaImagen": "/img/polo-red/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/polo-red/notas-salida.jpg",
-        "corazon": "img/polo-red/notas-corazon.jpg",
-        "fondo": "img/polo-red/notas-fondo.jpg"
+        "salida": "/img/polo-red/notas-salida.jpg",
+        "corazon": "/img/polo-red/notas-corazon.jpg",
+        "fondo": "/img/polo-red/notas-fondo.jpg"
       },
-      "ctaFondo": "img/polo-red/fondo-cta.jpg",
+      "ctaFondo": "/img/polo-red/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/polo-red/fondo-seccion.jpg",
+      "fondoPagina": "/img/polo-red/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Polo Red",
       "ctaTexto": "Descubre Polo Red de Ralph Lauren, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -2498,22 +2498,22 @@
       },
       "imagen": "https://yauras.cl/cdn/shop/files/Disenosintitulo_14_2eea6fad-add5-4d35-85e0-672b418bfb3a_700x700.jpg?v=1777050635",
       "descripcion": "Una fragancia luminosa y moderna. Destaca por una salida chispeante de mandarina verde y bergamota, contrastada con un exótico corazón de piña, lavanda y un toque único de sésamo. Su base amaderada de cedro y vetiver envuelta en benjuí crea una estela elegante y versátil, perfecta para el uso diario.",
-      "heroFondo": "img/polo-67/hero-polo-67.jpg",
+      "heroFondo": "/img/polo-67/hero-polo-67.jpg",
       "historiaTitulo": "EL ALMA DE POLO 67",
       "historia": "Polo 67 nace del deseo de capturar la esencia fresca y floreciente de un jardín en plena floración. Creada para quien abraza su energía renovada con total confianza: una fragancia que se abre con Mandarina verde, se despliega en un corazón de Piña y se asienta en una base de Benjuí, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/polo-67/fondo-notas.jpg",
+      "historiaImagen": "/img/polo-67/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/polo-67/notas-salida.jpg",
-        "corazon": "img/polo-67/notas-corazon.jpg",
-        "fondo": "img/polo-67/notas-fondo.jpg"
+        "salida": "/img/polo-67/notas-salida.jpg",
+        "corazon": "/img/polo-67/notas-corazon.jpg",
+        "fondo": "/img/polo-67/notas-fondo.jpg"
       },
-      "ctaFondo": "img/polo-67/fondo-cta.jpg",
+      "ctaFondo": "/img/polo-67/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#fdf1f5",
         "tema-card": "#f3d9e3",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/polo-67/fondo-seccion.jpg",
+      "fondoPagina": "/img/polo-67/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Polo 67",
       "ctaTexto": "Descubre Polo 67 de Ralph Lauren, una fragancia fresca y floreciente hecha para dejar huella.",
       "navClaro": true
@@ -2555,22 +2555,22 @@
       },
       "imagen": "https://cl-dam-resizer.ecomm.cencosud.com/unsafe/adaptive-fit-in/3840x0/filters:quality(75)/cl/paris/420778999/variant/69f8dec770ba745e138fe887/images/91da93e0-71ff-4170-b5be-d607f2743e5a/420778999-0000-003.jpg",
       "descripcion": "Una fragancia intrigante y moderna. Su apertura especiada de cardamomo capta la atención rápidamente, fusionándose con un corazón inesperado que mezcla la frescura clásica de la lavanda con un toque cremoso de coco. El fondo de amberwood le otorga una calidez envolvente y una estela sumamente magnética.",
-      "heroFondo": "img/valentino-uomo-born-in-roma-purple-melancholia/hero-valentino-uomo-born-in-roma-purple-melancholia.jpg",
+      "heroFondo": "/img/valentino-uomo-born-in-roma-purple-melancholia/hero-valentino-uomo-born-in-roma-purple-melancholia.jpg",
       "historiaTitulo": "EL ALMA DE VALENTINO UOMO BORN IN ROMA PURPLE MELANCHOLIA",
       "historia": "Valentino Uomo Born in Roma Purple Melancholia nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su aura enigmática con total confianza: una fragancia que se abre con Cardamomo, se despliega en un corazón de Coco y se asienta en una base de Amberwood, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/valentino-uomo-born-in-roma-purple-melancholia/fondo-notas.jpg",
+      "historiaImagen": "/img/valentino-uomo-born-in-roma-purple-melancholia/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/valentino-uomo-born-in-roma-purple-melancholia/notas-salida.jpg",
-        "corazon": "img/valentino-uomo-born-in-roma-purple-melancholia/notas-corazon.jpg",
-        "fondo": "img/valentino-uomo-born-in-roma-purple-melancholia/notas-fondo.jpg"
+        "salida": "/img/valentino-uomo-born-in-roma-purple-melancholia/notas-salida.jpg",
+        "corazon": "/img/valentino-uomo-born-in-roma-purple-melancholia/notas-corazon.jpg",
+        "fondo": "/img/valentino-uomo-born-in-roma-purple-melancholia/notas-fondo.jpg"
       },
-      "ctaFondo": "img/valentino-uomo-born-in-roma-purple-melancholia/fondo-cta.jpg",
+      "ctaFondo": "/img/valentino-uomo-born-in-roma-purple-melancholia/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/valentino-uomo-born-in-roma-purple-melancholia/fondo-seccion.jpg",
+      "fondoPagina": "/img/valentino-uomo-born-in-roma-purple-melancholia/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Valentino Uomo Born in Roma Purple Melancholia",
       "ctaTexto": "Descubre Valentino Uomo Born in Roma Purple Melancholia de Valentino, una fragancia profunda y envolvente hecha para dejar huella."
     },
@@ -2614,22 +2614,22 @@
       },
       "imagen": "https://cdnx.jumpseller.com/aromachil/image/65519005/resize/591/591?1753045519",
       "descripcion": "Una poción dorada, intensa y ardiente. Mantiene el ADN clásico con lavanda y menta en su salida, pero rápidamente se vuelve un fuego dulce y adictivo gracias a la vainilla y el benjuí. Su fondo oscuro de miel, haba tonka y tabaco lo hace extremadamente sensual y poderoso, ideal para destacar en la noche fría.",
-      "heroFondo": "img/le-male-elixir/hero-le-male-elixir.jpg",
+      "heroFondo": "/img/le-male-elixir/hero-le-male-elixir.jpg",
       "historiaTitulo": "EL ALMA DE LE MALE ELIXIR",
       "historia": "Le Male Elixir nace del deseo de capturar la esencia cálida y envolvente de una noche fría e íntima. Creada para quien abraza su instinto y carácter con total confianza: una fragancia que se abre con Lavanda, se despliega en un corazón de Vainilla y se asienta en una base de Miel, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/le-male-elixir/fondo-notas.jpg",
+      "historiaImagen": "/img/le-male-elixir/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/le-male-elixir/notas-salida.jpg",
-        "corazon": "img/le-male-elixir/notas-corazon.jpg",
-        "fondo": "img/le-male-elixir/notas-fondo.jpg"
+        "salida": "/img/le-male-elixir/notas-salida.jpg",
+        "corazon": "/img/le-male-elixir/notas-corazon.jpg",
+        "fondo": "/img/le-male-elixir/notas-fondo.jpg"
       },
-      "ctaFondo": "img/le-male-elixir/fondo-cta.jpg",
+      "ctaFondo": "/img/le-male-elixir/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#0d1420",
         "tema-card": "#1a2230",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/le-male-elixir/fondo-seccion.jpg",
+      "fondoPagina": "/img/le-male-elixir/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Le Male Elixir",
       "ctaTexto": "Descubre Le Male Elixir de Jean Paul Gaultier, una fragancia cálida y envolvente hecha para dejar huella."
     },
@@ -2682,28 +2682,94 @@
       },
       "imagen": "https://static.sweetcare.com/img/prd/488/v-638803095831766190/parfums-de-marly-023722pg-2.webp",
       "descripcion": "Una composición nicho magistral que destila nobleza y distinción. Su frescura inicial de manzana y lavanda evoluciona suavemente hacia un corazón floral refinado. La verdadera magia radica en su fondo cálido, dulce y especiado de vainilla, cardamomo y maderas preciosas, creando una estela seductora, elegante y sumamente elogiada en todo momento.",
-      "heroFondo": "img/layton/hero-layton.jpg",
+      "heroFondo": "/img/layton/hero-layton.jpg",
       "historiaTitulo": "EL ALMA DE LAYTON",
       "historia": "Layton nace del deseo de capturar la esencia profunda y envolvente de un atardecer de otoño. Creada para quien abraza su sofisticación natural con total confianza: una fragancia que se abre con Manzana, se despliega en un corazón de Geranio y se asienta en una base de Vainilla, dejando una estela inolvidable. Una firma olfativa pensada para quienes no solo la usan, sino que la convierten en su sello personal.",
-      "historiaImagen": "img/layton/fondo-notas.jpg",
+      "historiaImagen": "/img/layton/fondo-notas.jpg",
       "notasImagenes": {
-        "salida": "img/layton/notas-salida.jpg",
-        "corazon": "img/layton/notas-corazon.jpg",
-        "fondo": "img/layton/notas-fondo.jpg"
+        "salida": "/img/layton/notas-salida.jpg",
+        "corazon": "/img/layton/notas-corazon.jpg",
+        "fondo": "/img/layton/notas-fondo.jpg"
       },
-      "ctaFondo": "img/layton/fondo-cta.jpg",
+      "ctaFondo": "/img/layton/fondo-cta.jpg",
       "colores": {
         "tema-bg": "#2a1810",
         "tema-card": "#4a2c1a",
         "tema-dorado": "#c2a06a"
       },
-      "fondoPagina": "img/layton/fondo-seccion.jpg",
+      "fondoPagina": "/img/layton/fondo-seccion.jpg",
       "ctaTitulo": "Vive la Experiencia Layton",
       "ctaTexto": "Descubre Layton de Parfums de Marly, una fragancia profunda y envolvente hecha para dejar huella."
+    }
+  ],
+  "categorias": [
+    {
+      "id": "ligeros",
+      "nombre": "Ligeros",
+      "descripcion": "Frescos y sutiles, ideales para el día a día y climas cálidos.",
+      "imagen": "/img/fondo-coleccion-unisex.jpg"
     },
     {
-      "nombre": "T",
-      "id": "UKKZjoq"
+      "id": "moderados",
+      "nombre": "Moderados",
+      "descripcion": "Equilibrados: presencia elegante sin llegar a ser invasivos.",
+      "imagen": "/img/fondo-coleccion-mujer.jpg"
+    },
+    {
+      "id": "intensos",
+      "nombre": "Intensos",
+      "descripcion": "Estela larga y carácter marcado, pensados para la noche y los eventos.",
+      "imagen": "/img/fondo-coleccion-hombre.jpg"
+    }
+  ],
+  "ofertas": [
+    {
+      "id": "1",
+      "productoId": "1",
+      "descuento": 15,
+      "etiqueta": "Verano",
+      "vigenteHasta": "2026-12-31",
+      "activa": true
+    },
+    {
+      "id": "2",
+      "productoId": "5",
+      "descuento": 20,
+      "etiqueta": "Liquidación",
+      "vigenteHasta": "2026-12-31",
+      "activa": true
+    },
+    {
+      "id": "3",
+      "productoId": "9",
+      "descuento": 10,
+      "etiqueta": "Semana Luxury",
+      "vigenteHasta": "2026-12-31",
+      "activa": true
+    },
+    {
+      "id": "4",
+      "productoId": "14",
+      "descuento": 25,
+      "etiqueta": "Últimas unidades",
+      "vigenteHasta": "2026-12-31",
+      "activa": true
+    },
+    {
+      "id": "5",
+      "productoId": "20",
+      "descuento": 12,
+      "etiqueta": "Semana Luxury",
+      "vigenteHasta": "2026-12-31",
+      "activa": true
+    },
+    {
+      "id": "6",
+      "productoId": "30",
+      "descuento": 30,
+      "etiqueta": "Liquidación",
+      "vigenteHasta": "2026-06-30",
+      "activa": false
     }
   ],
   "usuarios": [
@@ -2747,6 +2813,130 @@
       "direccion": "Av. Perú 456"
     }
   ],
-  "ordenes": [],
+  "ordenes": [
+    {
+      "id": 1,
+      "fecha": "2026-09-12T15:30:00.000Z",
+      "estado": "Pagado",
+      "cliente": {
+        "nombre": "Camila",
+        "apellidos": "Soto",
+        "correo": "cliente@gmail.com"
+      },
+      "envio": {
+        "calle": "Av. Perú 456",
+        "departamento": "",
+        "region": "Valparaíso",
+        "comuna": "Viña del Mar",
+        "indicaciones": ""
+      },
+      "items": [
+        {
+          "productoId": "1",
+          "codigo": "LUX001",
+          "nombre": "Turathi Blue for Men",
+          "marca": "Afnan",
+          "imagen": "https://wonder.com.bo/wp-content/uploads/2025/05/turathi-afnan-notas.jpg",
+          "precio": 28000,
+          "cantidad": 1,
+          "subtotal": 28000
+        },
+        {
+          "productoId": "5",
+          "codigo": "LUX005",
+          "nombre": "Eros",
+          "marca": "Versace",
+          "imagen": "https://fimgs.net/photogram/p1200/xu/dd/sjhF2oPsrTWGj1R7.jpg",
+          "precio": 69990,
+          "cantidad": 2,
+          "subtotal": 139980
+        }
+      ],
+      "subtotal": 167980,
+      "cupon": null,
+      "descuento": 0,
+      "total": 167980,
+      "pago": {
+        "metodo": "Tarjeta",
+        "tarjetaFinal": "4242"
+      },
+      "usuarioId": "20987654K"
+    },
+    {
+      "id": 2,
+      "fecha": "2026-09-28T19:05:00.000Z",
+      "estado": "Pagado",
+      "cliente": {
+        "nombre": "Camila",
+        "apellidos": "Soto",
+        "correo": "cliente@gmail.com"
+      },
+      "envio": {
+        "calle": "Av. Perú 456",
+        "departamento": "",
+        "region": "Valparaíso",
+        "comuna": "Viña del Mar",
+        "indicaciones": ""
+      },
+      "items": [
+        {
+          "productoId": "9",
+          "codigo": "LUX009",
+          "nombre": "Nitro Red",
+          "marca": "Dumont",
+          "imagen": "https://fimgs.net/photogram/p1200/6g/8s/bZuLdAW7wKZY7PaH.jpg",
+          "precio": 27990,
+          "cantidad": 1,
+          "subtotal": 27990
+        }
+      ],
+      "subtotal": 27990,
+      "cupon": "LUXURY10",
+      "descuento": 2799,
+      "total": 25191,
+      "pago": {
+        "metodo": "Tarjeta",
+        "tarjetaFinal": "4242"
+      },
+      "usuarioId": "20987654K"
+    },
+    {
+      "id": 3,
+      "fecha": "2026-10-05T22:40:00.000Z",
+      "estado": "Pago fallido",
+      "cliente": {
+        "nombre": "Pedro",
+        "apellidos": "Hacker",
+        "correo": "pedro.hacker20@example.com"
+      },
+      "envio": {
+        "calle": "Los Crisantemos, Edificio Norte",
+        "departamento": "603",
+        "region": "Región Metropolitana",
+        "comuna": "Santiago",
+        "indicaciones": "El martes no estaremos, dejarlo con el conserje."
+      },
+      "items": [
+        {
+          "productoId": "14",
+          "codigo": "LUX014",
+          "nombre": "Le Beau Paradise Garden",
+          "marca": "Jean Paul Gaultier",
+          "imagen": "https://media.falabella.com/falabellaCL/50369047_6/w=1500,h=1500,fit=cover",
+          "precio": 153990,
+          "cantidad": 1,
+          "subtotal": 153990
+        }
+      ],
+      "subtotal": 153990,
+      "cupon": null,
+      "descuento": 0,
+      "total": 153990,
+      "pago": {
+        "metodo": "Tarjeta",
+        "tarjetaFinal": "0001"
+      }
+    }
+  ],
   "mensajes": []
 }
