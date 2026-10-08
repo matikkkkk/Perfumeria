@@ -5,32 +5,31 @@ import { renderConApp } from "./utils";
 import { useAuth } from "../context/AuthContext";
 
 // Prueba de humo: comprueba que TODA la cadena de pruebas funciona
-// (Karma -> webpack -> Babel -> Jasmine -> React en el DOM del navegador).
+// (Vitest -> Vite -> JSX -> Testing Library -> React en jsdom).
 // Si esta falla, el problema es de configuracion, no de la app.
 describe("prueba de humo del entorno de pruebas", () => {
-  it("Jasmine ejecuta pruebas", () => {
+  it("Vitest ejecuta pruebas", () => {
     expect(1 + 1).toBe(2);
-    expect(jasmine).toBeDefined();
+    expect(vi).toBeDefined();
   });
 
-  it("Babel transforma JSX y React pinta en el DOM", () => {
+  it("Vite transforma JSX y React pinta en el DOM", () => {
     render(<h1>Luxury</h1>);
-    expect(screen.getByRole("heading", { name: "Luxury" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Luxury" })).toBeInTheDocument();
   });
 
-  it("webpack resuelve imports del proyecto sin extension", () => {
+  it("los imports del proyecto se resuelven sin extension", () => {
     expect(formatearPrecio(28000)).toBe("$28.000");
   });
 
   it("import.meta.env está definido: services/api.js arma la URL con VITE_API_URL", async () => {
-    const original = window.fetch;
-    const falsoFetch = jasmine.createSpy("fetch").and.resolveTo({ ok: true, status: 200, json: async () => [] });
-    window.fetch = falsoFetch;
+    const falsoFetch = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => [] });
+    vi.stubGlobal("fetch", falsoFetch);
     try {
       await peticion("/productos");
-      expect(falsoFetch).toHaveBeenCalledWith("http://localhost:8080/api/productos", jasmine.any(Object));
+      expect(falsoFetch).toHaveBeenCalledWith("http://localhost:8080/api/productos", expect.any(Object));
     } finally {
-      window.fetch = original;
+      vi.unstubAllGlobals();
     }
   });
 
@@ -41,10 +40,10 @@ describe("prueba de humo del entorno de pruebas", () => {
     }
 
     renderConApp(<MuestraRol />);
-    expect(screen.getByText("sin sesión")).toBeTruthy();
+    expect(screen.getByText("sin sesión")).toBeInTheDocument();
   });
 
-  it("localStorage se limpia entre pruebas (setup.js)", () => {
+  it("localStorage se limpia entre pruebas (setupTests.js)", () => {
     expect(localStorage.length).toBe(0);
   });
 });

@@ -9,10 +9,9 @@
     "preview": "vite preview",
     "api:seed": "node mock-api/generar-db.mjs",
     "api": "json-server mock-api/db.json --routes mock-api/routes.json --port 8080",
-    "test": "karma start karma.conf.cjs --single-run",
-    "test:watch": "karma start karma.conf.cjs --browsers Chrome",
-    "test:cov": "cross-env COVERAGE=1 karma start karma.conf.cjs --single-run",
-    "test:jsdom": "karma start karma.conf.cjs --single-run --browsers jsdom"
+    "test": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
@@ -22,28 +21,15 @@
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.7",
-    "@babel/preset-env": "^8.0.7",
-    "@babel/preset-react": "^8.0.1",
     "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@vitejs/plugin-react": "^6.1.2",
-    "babel-loader": "^10.1.1",
-    "babel-plugin-istanbul": "^8.0.0",
-    "cross-env": "^10.1.0",
-    "jasmine-core": "^7.0.2",
+    "@vitest/coverage-v8": "^5.0.3",
     "jsdom": "^30.1.2",
     "json-server": "^0.17.4",
-    "karma": "^6.4.4",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-coverage": "^2.2.1",
-    "karma-jasmine": "^5.1.0",
-    "karma-jsdom-launcher": "^22.0.0",
-    "karma-sourcemap-loader": "^0.4.0",
-    "karma-spec-reporter": "^0.0.37",
-    "karma-webpack": "^5.0.1",
-    "null-loader": "^4.0.1",
     "vite": "^8.3.4",
-    "webpack": "^5.111.1"
+    "vitest": "^5.0.3"
   }
 }

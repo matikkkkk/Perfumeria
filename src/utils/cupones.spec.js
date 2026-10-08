@@ -2,14 +2,14 @@ import { CUPONES, cuponValido, porcentajeCupon, calcularDescuento, calcularTotal
 
 describe("cupones", () => {
   it("reconoce los cupones sin importar mayúsculas ni espacios", () => {
-    expect(cuponValido("luxury10")).toBeTrue();
-    expect(cuponValido("  BIENVENIDO15 ")).toBeTrue();
+    expect(cuponValido("luxury10")).toBe(true);
+    expect(cuponValido("  BIENVENIDO15 ")).toBe(true);
   });
 
   it("rechaza códigos inexistentes, vacíos y propiedades heredadas de Object", () => {
-    expect(cuponValido("NOEXISTE")).toBeFalse();
-    expect(cuponValido("")).toBeFalse();
-    expect(cuponValido("constructor")).toBeFalse();
+    expect(cuponValido("NOEXISTE")).toBe(false);
+    expect(cuponValido("")).toBe(false);
+    expect(cuponValido("constructor")).toBe(false);
   });
 
   it("entrega el porcentaje, o 0 si no existe", () => {

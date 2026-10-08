@@ -1,15 +1,16 @@
-# Etapa 4 — Jasmine y Karma (hecha)
+# Etapa 4 - Vitest (hecha)
 
 **Hecho**
-- Karma + Jasmine con webpack y Babel. Archivos nuevos: `karma.conf.cjs`, `babel.config.cjs`, `src/test/` (`index.js`, `setup.js`, `utils.jsx`, `humo.spec.jsx`).
-- Scripts: `npm test` (Chrome sin ventana, una pasada), `npm run test:watch`, `npm run test:cov` (reporte en `coverage/`), `npm run test:jsdom` (sin Chrome instalado).
-- Cualquier archivo `*.spec.js` o `*.spec.jsx` dentro de `src/` se ejecuta solo. No hay que registrarlo.
-- Prueba de humo (6 casos): Jasmine, JSX con Babel, imports sin extensión, `import.meta.env` (definido con `DefinePlugin`) y contextos + router montando.
-- Specs con DOM que quedaron pendientes de la etapa 3: `RutaProtegida` (5), `Navbar` (7) y `NewsletterForm` (4). Las 24 specs de las etapas 2 y 3 ahora corren en Karma. Total: 54.
-- `src/test/utils.jsx`: `renderConApp(ui, { ruta, usuario })` monta el componente con router y los tres contextos; `USUARIOS_PRUEBA` trae un admin, un vendedor y un cliente.
-- Con `test:cov` el % cuenta todo `src/` (no solo lo que ya tiene prueba): hoy ~55 % de líneas.
+- Pruebas con Vitest + Testing Library + jsdom. Reemplaza a Karma + Jasmine + webpack + Babel (Karma esta deprecado y Vitest comparte la sintaxis de Jasmine y se integra con Vite).
+- Config en `vite.config.js` (bloque `test`: jsdom, globals, setupFiles, cobertura v8) y `src/setupTests.js` (jest-dom y limpieza de localStorage antes de cada prueba).
+- Scripts: `npm test` (modo observador), `npm run test:run` (una pasada), `npm run coverage` (reporte en `coverage/`).
+- Cualquier archivo `*.spec.js(x)` o `*.test.js(x)` dentro de `src/` se ejecuta solo.
+- Migracion de sintaxis: `toBeTrue()`/`toBeFalse()` a `toBe(true)`/`toBe(false)`, `jasmine.createSpy` a `vi.fn()`, `jasmine.any` a `expect.any`.
+- Se eliminaron `karma.conf.cjs`, `babel.config.cjs`, `src/test/index.js` y `src/test/setup.js`.
+- `src/test/utils.jsx`: `renderConApp(ui, { ruta, usuario })` sigue igual (router + los tres contextos).
+- 9 archivos, 54 pruebas pasando.
 
 **Pendiente / a decidir**
-- `npm test` y `test:watch` necesitan Chrome. Si solo tienes Edge, define `CHROME_BIN` o usa `npm run test:jsdom`.
-- Las specs son aleatorias (`random: true`): si una falla solo a veces, depende del orden.
-- Desde la etapa 5: cada pantalla termina con 1–2 specs usando `renderConApp`.
+- Confirmar con el docente que se puede entregar con Vitest (la pauta menciona Jasmine/Karma) y guardar la respuesta.
+- Documentar la "Decision de herramienta" en el documento de cobertura (etapa 18).
+- Desde la etapa 5: cada pantalla termina con 1 spec usando `renderConApp`.

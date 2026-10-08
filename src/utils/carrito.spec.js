@@ -9,8 +9,8 @@ describe("carrito (lógica pura)", () => {
     const { items, resultado } = agregarItem([], perfume);
     expect(items.length).toBe(1);
     expect(items[0].cantidad).toBe(1);
-    expect(resultado.ok).toBeTrue();
-    expect(resultado.critico).toBeFalse(); // quedan 2, crítico es 1
+    expect(resultado.ok).toBe(true);
+    expect(resultado.critico).toBe(false); // quedan 2, crítico es 1
   });
 
   it("suma cantidad si el producto ya estaba y no repite la fila", () => {
@@ -22,18 +22,18 @@ describe("carrito (lógica pura)", () => {
   it("no deja superar el stock y no modifica el carrito", () => {
     const base = agregarItem([], perfume, 3).items;
     const { items, resultado } = agregarItem(base, perfume);
-    expect(resultado.ok).toBeFalse();
+    expect(resultado.ok).toBe(false);
     expect(resultado.motivo).toBe("sin_stock");
     expect(items).toBe(base);
   });
 
   it("avisa stock crítico cuando quedan pocas unidades", () => {
-    expect(agregarItem([], perfume, 2).resultado.critico).toBeTrue(); // queda 1 <= stockCritico
+    expect(agregarItem([], perfume, 2).resultado.critico).toBe(true); // queda 1 <= stockCritico
   });
 
   it("cambiarCantidad respeta el stock y elimina al llegar a 0", () => {
     const base = agregarItem([], perfume, 3).items;
-    expect(cambiarCantidadItem(base, "1", 1).ok).toBeFalse();
+    expect(cambiarCantidadItem(base, "1", 1).ok).toBe(false);
     const bajo = cambiarCantidadItem(base, "1", -1);
     expect(bajo.items[0].cantidad).toBe(2);
     const vacio = cambiarCantidadItem(agregarItem([], perfume).items, "1", -1);

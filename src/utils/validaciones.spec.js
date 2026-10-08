@@ -9,34 +9,34 @@ describe("validaciones", () => {
 
   describe("validarRun", () => {
     it("acepta RUN con dígito verificador correcto, con o sin formato", () => {
-      expect(validarRun("20987654K")).toBeTrue();
-      expect(validarRun("12.345.678-5")).toBeTrue();
-      expect(validarRun("111111111")).toBeTrue();
+      expect(validarRun("20987654K")).toBe(true);
+      expect(validarRun("12.345.678-5")).toBe(true);
+      expect(validarRun("111111111")).toBe(true);
     });
 
     it("rechaza dígito verificador incorrecto", () => {
-      expect(validarRun("123456780")).toBeFalse();
+      expect(validarRun("123456780")).toBe(false);
     });
 
     it("rechaza largo o caracteres inválidos", () => {
-      expect(validarRun("123")).toBeFalse();
-      expect(validarRun("ABCDEFGH1")).toBeFalse();
-      expect(validarRun("")).toBeFalse();
+      expect(validarRun("123")).toBe(false);
+      expect(validarRun("ABCDEFGH1")).toBe(false);
+      expect(validarRun("")).toBe(false);
     });
   });
 
   describe("validarCorreo", () => {
     it("acepta solo los dominios permitidos", () => {
-      expect(validarCorreo("ana@duoc.cl")).toBeTrue();
-      expect(validarCorreo("ana@profesor.duoc.cl")).toBeTrue();
-      expect(validarCorreo("Ana@GMAIL.com")).toBeTrue();
+      expect(validarCorreo("ana@duoc.cl")).toBe(true);
+      expect(validarCorreo("ana@profesor.duoc.cl")).toBe(true);
+      expect(validarCorreo("Ana@GMAIL.com")).toBe(true);
     });
 
     it("rechaza otros dominios y formatos rotos", () => {
-      expect(validarCorreo("ana@hotmail.com")).toBeFalse();
-      expect(validarCorreo("ana@duoc.cl.evil.com")).toBeFalse();
-      expect(validarCorreo("ana duoc.cl")).toBeFalse();
-      expect(validarCorreo("")).toBeFalse();
+      expect(validarCorreo("ana@hotmail.com")).toBe(false);
+      expect(validarCorreo("ana@duoc.cl.evil.com")).toBe(false);
+      expect(validarCorreo("ana duoc.cl")).toBe(false);
+      expect(validarCorreo("")).toBe(false);
     });
   });
 
