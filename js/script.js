@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         inicializarFiltrosProductos();
     }
 
-    if (document.getElementById("detalleProducto")) {
+    if (document.getElementById("heroProducto")) {
         mostrarDetalle();
     }
 
@@ -114,6 +114,59 @@ var FAMILIA_LABELS = {
     atalcados: "Atalcado"
 };
 
+/* Temas visuales de producto.html según estación. Si el producto trae un
+   estacion no reconocido, se usa "invierno" como respaldo neutro. */
+var TEMAS_VALIDOS = ["verano", "primavera", "invierno", "otono"];
+
+function temaDeProducto(producto) {
+    var key = (producto.estacion || "").toString().trim().toLowerCase();
+    return TEMAS_VALIDOS.indexOf(key) !== -1 ? key : "invierno";
+}
+
+/* Banco fijo de reseñas "fake" para no tener que redactar una por producto.
+   Se eligen siempre las mismas 3 para un mismo id (determinístico), no
+   cambian entre recargas. */
+var RESENAS_BANCO = [
+    { nombre: "Camila R.", texto: "Duración increíble, todavía lo siento en la piel horas después.", estrellas: 5 },
+    { nombre: "Matías G.", texto: "El aroma es tal cual se describe, quedé encantado desde la primera vez.", estrellas: 5 },
+    { nombre: "Valentina S.", texto: "Se lo regalé a mi pareja y le fascinó, no se lo esperaba.", estrellas: 5 },
+    { nombre: "Tomás P.", texto: "Buena relación calidad-precio, sin duda volvería a comprar.", estrellas: 4 },
+    { nombre: "Javiera M.", texto: "El empaque llegó impecable y el perfume es precioso en persona.", estrellas: 5 },
+    { nombre: "Nicolás F.", texto: "Justo lo que buscaba para el día a día, ni muy fuerte ni muy suave.", estrellas: 4 },
+    { nombre: "Antonia V.", texto: "Huele increíble, he recibido muchos cumplidos usándolo.", estrellas: 5 },
+    { nombre: "Diego H.", texto: "Se siente como un perfume de nicho, muy elegante para el precio.", estrellas: 5 },
+    { nombre: "Fernanda L.", texto: "Llegó rápido y es tal cual la foto, muy conforme.", estrellas: 4 },
+    { nombre: "Sebastián O.", texto: "Se convirtió en mi favorito, no me lo esperaba la verdad.", estrellas: 5 },
+    { nombre: "Isidora T.", texto: "La fijación es excelente, me dura prácticamente todo el día.", estrellas: 5 },
+    { nombre: "Cristóbal A.", texto: "Muy buen aroma para la ocasión que estaba buscando.", estrellas: 4 }
+];
+
+function resenasDeProducto(id) {
+    var suma = 0;
+    for (var i = 0; i < id.length; i++) suma += id.charCodeAt(i);
+    var inicio = suma % RESENAS_BANCO.length;
+    var elegidas = [];
+    for (var j = 0; j < 3; j++) {
+        elegidas.push(RESENAS_BANCO[(inicio + j) % RESENAS_BANCO.length]);
+    }
+    return elegidas;
+}
+
+function iniciales(nombre) {
+    return nombre
+        .split(" ")
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(function (parte) { return parte.charAt(0).toUpperCase(); })
+        .join("");
+}
+
+function estrellasHtml(n) {
+    var llenas = "★".repeat(n);
+    var vacias = "☆".repeat(5 - n);
+    return llenas + vacias;
+}
+
 function chipHumor(tag) {
     return '<span class="mood-chip mood-chip--' + tag + '">' + (HUMOR_LABELS[tag] || tag) + "</span>";
 }
@@ -174,7 +227,7 @@ function renderInspiradoEn(producto, compacto) {
         "</s>" +
         "</div>" +
         '<div class="text-md-end">' +
-        '<span class="fs-7 text-gold text-uppercase tracking-wider d-block">Nuestra versión</span>' +
+        '<span class="fs-7 text-tema-dorado text-uppercase tracking-wider d-block">Nuestra versión</span>' +
         '<span class="price">$' +
         producto.precio.toLocaleString("es-CL") +
         "</span>" +
@@ -194,19 +247,19 @@ function crearTarjeta(p) {
     var enWishlist = estaEnWishlist(p.id);
 
     return (
-        '<div class="col-12 col-md-6 col-lg-3">' +
+        '<div class="col-12 col-md-6 col-lg-4">' +
         '<article class="card luxury-card h-100 border-0">' +
-        '<div class="card-img-wrapper">' +
         '<span class="card-badge card-badge--left">' +
         (CONCENTRACION_LABELS[p.concentracion] || "") +
         "</span>" +
         '<span class="card-badge card-badge--right">' +
         (TIPO_LABELS[p.tipo] || "") +
         "</span>" +
+        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
+        '<div class="card-img-wrapper">' +
         '<span class="card-badge card-badge--ml"><i class="bi bi-cloud-fill"></i> ' +
         p.ml +
         " ML</span>" +
-        '<button type="button" class="wishlist-heart' + (enWishlist ? " activo" : "") + '" data-id="' + p.id + '" onclick="event.stopPropagation(); toggleWishlist(\'' + p.id + '\');" aria-label="Guardar en wishlist"><i class="bi ' + (enWishlist ? "bi-heart-fill" : "bi-heart") + '"></i></button>' +
         '<img src="' +
         p.imagen +
         '" class="card-img-top" alt="' +
@@ -719,124 +772,161 @@ function mostrarDetalle() {
     var producto = obtenerLista().find(function (p) {
         return p.id === id;
     });
-    var contenedor = document.getElementById("detalleProducto");
 
     if (!producto) {
-        contenedor.innerHTML = '<div class="alert alert-luxury">Producto no encontrado.</div>';
+        var maridajeElVacio = document.getElementById("maridajeProducto");
+        if (maridajeElVacio) maridajeElVacio.innerHTML = '<div class="container"><div class="alert alert-luxury">Producto no encontrado.</div></div>';
         return;
+    }
+
+    var tema = temaDeProducto(producto);
+    document.body.classList.add("tema-" + tema);
+
+    var navClaro = (typeof producto.navClaro === "boolean")
+        ? producto.navClaro
+        : (tema === "verano" || tema === "primavera");
+
+    if (navClaro) {
+        document.body.classList.add("nav-claro");
+    }
+
+    if (producto.colores) {
+        Object.keys(producto.colores).forEach(function (key) {
+            document.body.style.setProperty("--" + key, producto.colores[key]);
+        });
     }
 
     var breadcrumbNombre = document.getElementById("breadcrumbActual");
     if (breadcrumbNombre) breadcrumbNombre.textContent = producto.nombre;
 
-    var agotado = producto.stock <= 0;
-    var alertaStock = agotado
-        ? '<div class="alert alert-luxury py-2 px-3 mb-3 d-inline-block">Producto agotado por el momento.</div>'
-        : producto.stock <= producto.stockCritico
-        ? '<div class="alert alert-luxury py-2 px-3 mb-3 d-inline-block">Quedan pocas unidades disponibles.</div>'
-        : "";
+    var heroEl = document.getElementById("heroProducto");
+    if (heroEl) heroEl.innerHTML = renderHero(producto);
 
-    var opcionesCantidad = "";
-    for (var i = 1; i <= Math.min(producto.stock, 10); i++) {
-        opcionesCantidad += '<option value="' + i + '">' + i + "</option>";
+    var piramideEl = document.getElementById("piramideProducto");
+    if (piramideEl) piramideEl.innerHTML = renderPiramideOlfativa(producto);
+
+    var maridajeEl = document.getElementById("maridajeProducto");
+    if (maridajeEl) maridajeEl.innerHTML = renderMaridaje(producto);
+
+    var historiaEl = document.getElementById("historiaProducto");
+    if (historiaEl) historiaEl.innerHTML = renderHistoria(producto);
+
+    var reviewsEl = document.getElementById("reviewsProducto");
+    if (reviewsEl) reviewsEl.innerHTML = renderReviews(producto);
+
+    var ctaEl = document.getElementById("ctaProducto");
+    if (ctaEl) ctaEl.innerHTML = renderCTA(producto);
+
+    if (producto.fondoPagina) {
+        ["piramideProducto", "maridajeProducto", "reviewsProducto"].forEach(function (idSeccion) {
+            var el = document.getElementById(idSeccion);
+            if (!el) return;
+            el.style.backgroundImage = "url('" + producto.fondoPagina + "')";
+            el.style.backgroundSize = "cover";
+            el.style.backgroundPosition = "center";
+            el.style.backgroundRepeat = "no-repeat";
+        });
+
+        // La historia solo recibe el fondo general si el producto no trae su propia imagen de historia
+        if (historiaEl && !producto.historiaImagen) {
+            historiaEl.style.backgroundImage = "url('" + producto.fondoPagina + "')";
+            historiaEl.style.backgroundSize = "cover";
+            historiaEl.style.backgroundPosition = "center";
+            historiaEl.style.backgroundRepeat = "no-repeat";
+        }
     }
 
-    var moods = (producto.humor || []).map(chipHumor).join("");
-    var notas = notasPlanas(producto).map(chipNota).join("");
-
-    contenedor.innerHTML =
-        '<div class="row g-5">' +
-        '<div class="col-md-6">' +
-        '<div class="product-gallery-main"><img src="' +
-        producto.imagen +
-        '" class="img-fluid rounded" alt="' +
-        producto.nombre +
-        '"></div>' +
-        "</div>" +
-        '<div class="col-md-6">' +
-        '<div class="mb-2">' +
-        '<span class="text-gold text-uppercase tracking-wider fs-7">' +
-        producto.estacion.toUpperCase() +
-        "</span> " +
-        '<span class="badge-pill-luxury">' +
-        (CONCENTRACION_LABELS[producto.concentracion] || "") +
-        "</span> " +
-        '<span class="badge-pill-luxury badge-pill-luxury--muted">' +
-        (TIPO_LABELS[producto.tipo] || "") +
-        "</span> " +
-        '<span class="badge-pill-luxury"><i class="bi bi-cloud-fill"></i> ' +
-        producto.ml +
-        " ML</span>" +
-        "</div>" +
-        '<span class="d-block fs-7 text-uppercase tracking-wider text-gold-light">' +
-        (producto.marca || "") +
-        "</span>" +
-        '<h1 class="display-5 luxury-title mt-1">' +
-        producto.nombre +
-        "</h1>" +
-        '<h2 class="price">$' +
-        producto.precio.toLocaleString("es-CL") +
-        "</h2>" +
-        '<div class="mood-chip-list mb-3">' +
-        moods +
-        "</div>" +
-        alertaStock +
-        '<p class="text-gold-light">' +
-        producto.descripcion +
-        "</p>" +
-        (notas
-            ? '<h6 class="fs-7 text-uppercase text-gold tracking-wider mt-4 mb-2">Notas olfativas</h6><div class="nota-chip-list mb-4">' +
-              notas +
-              "</div>"
-            : "") +
-        (agotado
-            ? '<button class="btn btn-luxury w-100" disabled>Sin stock</button>'
-            : '<div class="d-flex align-items-center gap-3 mb-3 flex-wrap">' +
-              '<label class="fs-7 text-uppercase text-gold-light mb-0">Cantidad</label>' +
-              '<select id="cantidadProducto" class="form-select form-luxury w-auto">' +
-              opcionesCantidad +
-              "</select>" +
-              '<span class="fs-7 text-gold-light">Stock: ' +
-              producto.stock +
-              " uds.</span>" +
-              "</div>" +
-              '<button class="btn btn-luxury w-100" onclick="agregarCarritoConCantidad(\'' +
-              producto.id +
-              "')\">Añadir al carrito</button>") +
-        "</div>" +
-        "</div>" +
-        renderInspiradoEn(producto, false) +
-        renderPiramideOlfativa(producto) +
-        renderMaridaje(producto);
+    llenarModalCompra(producto);
 }
 
-function renderPiramideOlfativa(producto) {
-    if (!producto.notas) return "";
-
-    var etapas = [
-        { key: "salida", label: "Salida", tiempo: "Primeras 15 min", ancho: 55 },
-        { key: "corazon", label: "Corazón", tiempo: "15 min – 4 horas", ancho: 78 },
-        { key: "fondo", label: "Fondo", tiempo: "4+ horas", ancho: 100 },
-    ];
-
-    var visual = etapas
-        .map(function (e) {
-            return '<div class="piramide-nivel" style="width:' + e.ancho + '%">' + e.label.toUpperCase() + "</div>";
-        })
-        .join("");
-
-    var info = etapas
-        .map(function (e) {
-            var chips = (producto.notas[e.key] || []).map(chipNota).join("");
+function renderHero(producto) {
+    if (producto.heroFondo) {
+        if (producto.heroAjuste === "contain") {
             return (
-                '<div class="piramide-etapa-card">' +
-                '<span class="fs-7 text-uppercase text-gold tracking-wider">' +
-                e.label.toUpperCase() +
-                '<span class="text-gold-light text-lowercase ms-2">' +
-                e.tiempo +
-                "</span></span>" +
-                '<div class="nota-chip-list mt-2">' +
-                chips +
+                '<div class="hero-producto hero-producto--contain">' +
+                '<img src="' + producto.heroFondo + '" alt="' + producto.nombre + '" class="hero-producto--contain-img">' +
+                '<a href="#piramideProducto" class="hero-scroll-btn">Descubrir el aroma ↓</a>' +
+                "</div>"
+            );
+        }
+        return (
+            '<div class="hero-producto hero-producto--imagen" style="background-image:url(\'' +
+            producto.heroFondo +
+            '\')">' +
+            '<a href="#piramideProducto" class="hero-scroll-btn">Descubrir el aroma ↓</a>' +
+            "</div>"
+        );
+    }
+
+    return (
+        '<div class="hero-producto hero-producto--fallback">' +
+        '<img src="' +
+        producto.imagen +
+        '" alt="' +
+        producto.nombre +
+        '">' +
+        '<h1 class="hero-nombre">' +
+        producto.nombre +
+        "</h1>" +
+        '<p class="hero-tagline">' +
+        (producto.descripcion || "") +
+        "</p>" +
+        '<a href="#piramideProducto" class="hero-scroll-btn">Descubrir el aroma ↓</a>' +
+        "</div>"
+    );
+}
+
+function renderHistoria(producto) {
+    var titulo = producto.historiaTitulo || "Nuestra Historia";
+    var texto =
+        producto.historia ||
+        producto.descripcion ||
+        "Una fragancia pensada para acompañar cada momento, elaborada con ingredientes cuidadosamente seleccionados para dejar una impresión inolvidable.";
+
+    var conImagen = !!producto.historiaImagen;
+
+    return (
+        '<div class="historia-producto' +
+        (conImagen ? "" : " historia-producto--fallback") +
+        '"' +
+        (conImagen ? ' style="background-image:url(\'' + producto.historiaImagen + '\')"' : "") +
+        ">" +
+        '<div class="historia-contenido">' +
+        '<span class="text-tema-dorado text-uppercase tracking-wider fs-7">Nuestra Historia</span>' +
+        '<h3 class="titulo mt-2">' +
+        titulo +
+        "</h3>" +
+        "<p>" +
+        texto +
+        "</p>" +
+        "</div>" +
+        "</div>"
+    );
+}
+
+function renderReviews(producto) {
+    var elegidas = resenasDeProducto(producto.id);
+    var promedio = (elegidas.reduce(function (acc, r) { return acc + r.estrellas; }, 0) / elegidas.length).toFixed(1);
+
+    var cards = elegidas
+        .map(function (r) {
+            return (
+                '<div class="col-md-4">' +
+                '<div class="review-card">' +
+                '<span class="estrellas">' +
+                estrellasHtml(r.estrellas) +
+                "</span>" +
+                "<p>“" +
+                r.texto +
+                "”</p>" +
+                '<div class="d-flex align-items-center gap-2 mt-3">' +
+                '<span class="review-avatar">' +
+                iniciales(r.nombre) +
+                "</span>" +
+                '<span class="review-nombre">' +
+                r.nombre +
+                "</span>" +
+                "</div>" +
                 "</div>" +
                 "</div>"
             );
@@ -844,19 +934,125 @@ function renderPiramideOlfativa(producto) {
         .join("");
 
     return (
-        '<section class="piramide-section mt-5 pt-5 border-top border-secondary border-opacity-25">' +
-        '<div class="row g-5">' +
-        '<div class="col-md-5">' +
-        '<span class="text-gold text-uppercase tracking-wider fs-7">Pirámide olfativa</span>' +
-        '<h3 class="luxury-title fst-italic mb-4">Arquitectura del Aroma</h3>' +
-        '<div class="piramide-visual">' +
-        visual +
+        '<section class="reviews-section">' +
+        '<div class="container">' +
+        '<div class="text-center mb-4">' +
+        '<span class="text-tema-dorado text-uppercase tracking-wider fs-7">Reseñas</span>' +
+        '<h3 class="luxury-title fst-italic mb-1">' +
+        promedio +
+        ' <span class="estrellas">★</span></h3>' +
+        "</div>" +
+        '<div class="row g-4">' +
+        cards +
         "</div>" +
         "</div>" +
-        '<div class="col-md-7 d-flex flex-column gap-3 justify-content-center">' +
-        info +
+        "</section>"
+    );
+}
+
+function renderCTA(producto) {
+    var titulo = producto.ctaTitulo || "Vive la experiencia " + producto.nombre;
+    var texto = producto.ctaTexto || "Eleva tu presencia con una fragancia que habla por ti.";
+    var conImagen = !!producto.ctaFondo;
+
+    return (
+        '<div class="cta-producto' +
+        (conImagen ? "" : " cta-producto--fallback") +
+        '"' +
+        (conImagen ? ' style="background-image:url(\'' + producto.ctaFondo + '\')"' : "") +
+        ">" +
+        '<div class="cta-contenido">' +
+        "<h3>" +
+        titulo +
+        "</h3>" +
+        "<p>" +
+        texto +
+        "</p>" +
+        '<button class="btn btn-outline-luxury" data-bs-toggle="modal" data-bs-target="#modalCompra">Comprar Ahora</button>' +
         "</div>" +
-        "</div></section>"
+        "</div>"
+    );
+}
+
+function llenarModalCompra(producto) {
+    var modal = document.getElementById("modalCompra");
+    if (!modal) return;
+
+    var agotado = producto.stock <= 0;
+    var opcionesCantidad = "";
+    for (var i = 1; i <= Math.min(producto.stock, 10); i++) {
+        opcionesCantidad += '<option value="' + i + '">' + i + "</option>";
+    }
+
+    modal.querySelector(".modal-compra-nombre").textContent = producto.nombre;
+    modal.querySelector(".modal-compra-marca").textContent = producto.marca || "";
+    modal.querySelector(".modal-compra-precio").textContent = "$" + producto.precio.toLocaleString("es-CL");
+    modal.querySelector(".modal-compra-imagen").src = producto.imagen;
+    modal.querySelector(".modal-compra-imagen").alt = producto.nombre;
+
+    var cuerpo = modal.querySelector(".modal-compra-cuerpo");
+    cuerpo.innerHTML = agotado
+        ? '<button class="btn btn-luxury w-100" disabled>Sin stock</button>'
+        : '<div class="d-flex align-items-center gap-3 mb-3 flex-wrap">' +
+          '<label class="fs-7 text-uppercase text-gold-light mb-0">Cantidad</label>' +
+          '<select id="cantidadProducto" class="form-select form-luxury w-auto">' +
+          opcionesCantidad +
+          "</select>" +
+          '<span class="fs-7 text-gold-light">Stock: ' +
+          producto.stock +
+          " uds.</span>" +
+          "</div>" +
+          '<button class="btn btn-luxury w-100" data-bs-dismiss="modal" onclick="agregarCarritoConCantidad(\'' +
+          producto.id +
+          "')\">Añadir al carrito</button>";
+}
+
+function renderPiramideOlfativa(producto) {
+    if (!producto.notas) return "";
+
+    var etapas = [
+        { key: "salida", label: "Notas de Salida", texto: "Una apertura vibrante que despierta los sentidos." },
+        { key: "corazon", label: "Notas de Corazón", texto: "Un corazón cálido que revela su verdadero carácter." },
+        { key: "fondo", label: "Notas de Fondo", texto: "Una base envolvente que deja huella duradera." },
+    ];
+
+    var imagenes = producto.notasImagenes || {};
+
+    var cards = etapas
+        .map(function (e) {
+            var img = imagenes[e.key]
+                ? '<img src="' + imagenes[e.key] + '" alt="' + e.label + '" class="piramide-etapa-img">'
+                : "";
+            return (
+                '<div class="col-md-4">' +
+                '<div class="piramide-etapa-card piramide-etapa-card--' +
+                e.key +
+                '">' +
+                img +
+                "</div>" +
+                "</div>"
+            );
+        })
+        .join("");
+
+    var fondoAttr = producto.piramideFondo
+        ? ' style="background-image:url(\'' + producto.piramideFondo + '\')"'
+        : "";
+
+    return (
+        '<div class="piramide-section"' +
+        fondoAttr +
+        ">" +
+        '<div class="container">' +
+        '<div class="text-center mb-5">' +
+        '<span class="text-tema-dorado text-uppercase tracking-wider fs-7">La Fragancia</span>' +
+        '<h3 class="luxury-title fst-italic mb-0">Un viaje sensorial a través de la noche</h3>' +
+        "</div>" +
+        '<div class="row g-4">' +
+        cards +
+        "</div>" +
+        "</div>" +
+        "</div>"
     );
 }
 
@@ -866,16 +1062,14 @@ function renderMaridaje(producto) {
     if (!ocasiones && !moods) return "";
 
     return (
-        '<section class="maridaje-section mt-5 pt-5 border-top border-secondary border-opacity-25">' +
-        '<span class="text-gold text-uppercase tracking-wider fs-7">Maridaje</span>' +
+        '<div class="maridaje-section">' +
+        '<div class="maridaje-contenido">' +
+        '<span class="text-tema-dorado text-uppercase tracking-wider fs-7">Maridaje</span>' +
         '<h3 class="luxury-title fst-italic mb-4">Ideal Para</h3>' +
-        '<div class="occasion-chip-list mb-3">' +
-        ocasiones +
+        (ocasiones ? '<div class="occasion-chip-list mb-3 justify-content-center">' + ocasiones + "</div>" : "") +
+        (moods ? '<div class="mood-chip-list justify-content-center">' + moods + "</div>" : "") +
         "</div>" +
-        '<div class="mood-chip-list">' +
-        moods +
-        "</div>" +
-        "</section>"
+        "</div>"
     );
 }
 

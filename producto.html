@@ -70,17 +70,24 @@
     </nav>
 </header>
 
-<main class="container py-5 my-4">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb-luxury">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="productos.html">Productos</a></li>
-            <li class="active" id="breadcrumbActual">Producto</li>
-        </ol>
-    </nav>
-    <section id="detalleProducto"></section>
+<main>
+    <div class="container pt-4 pb-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb-luxury">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li class="active" id="breadcrumbActual">Producto</li>
+            </ol>
+        </nav>
+    </div>
+    <section id="heroProducto"></section>
+    <section id="piramideProducto"></section>
+    <section id="historiaProducto"></section>
+    <section id="reviewsProducto"></section>
+    <section id="ctaProducto"></section>
+    <section id="maridajeProducto"></section>
 </main>
-<footer class="site-footer mt-5">
+<footer class="site-footer">
     <div class="container">
         <div class="row gy-4">
             <div class="col-12 col-md-5">
@@ -110,6 +117,24 @@
         </div>
     </div>
 </footer>
+
+<div class="modal fade modal-compra" id="modalCompra" tabindex="-1" aria-labelledby="modalCompraLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h2 class="visually-hidden" id="modalCompraLabel">Comprar producto</h2>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" alt="" class="modal-compra-imagen mb-3">
+                <span class="d-block fs-7 text-uppercase tracking-wider text-gold-light modal-compra-marca"></span>
+                <h3 class="luxury-title h4 mt-1 modal-compra-nombre"></h3>
+                <p class="precio-modal modal-compra-precio mb-4"></p>
+                <div class="modal-compra-cuerpo text-start"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="diccionarioModal" tabindex="-1" aria-labelledby="diccionarioModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
