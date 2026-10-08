@@ -1,0 +1,24 @@
+{
+  "name": "perfumeria-react",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "api:seed": "node mock-api/generar-db.mjs",
+    "api": "json-server mock-api/db.json --routes mock-api/routes.json --port 8080"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "json-server": "^0.17.4",
+    "vite": "^8.3.4"
+  }
+}
