@@ -1,9 +1,10 @@
 import { createContext, useCallback, useContext, useMemo } from "react";
 import { useStorage } from "../hooks/useStorage";
 import { usuariosService } from "../services/usuariosService";
+import { ROLES_STAFF } from "../utils/acceso";
 
 // Roles de la BD (usuarios.tipo). El panel admin lo pueden ver Administrador y Vendedor.
-export const ROLES_ADMIN = ["Administrador", "Vendedor"];
+export const ROLES_ADMIN = ROLES_STAFF;
 
 const AuthContext = createContext(null);
 
