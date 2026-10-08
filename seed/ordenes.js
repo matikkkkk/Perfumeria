@@ -1,8 +1,9 @@
 // Ordenes de ejemplo para que Admin (ordenes, boletas, reportes) y el historial de compras
 // tengan datos desde el inicio. Los items guardan una "foto" del producto al momento de la compra.
 import { productos } from "./productos.js";
+import { CUPONES } from "../src/utils/cupones.js";
 
-const CUPONES = { LUXURY10: 10, BIENVENIDO15: 15 }; // porcentaje; la fuente real queda en utils/ (etapa 2)
+// Fuente única de cupones (porcentajes). Mismo archivo que usa el carrito en el front.
 
 function item(productoId, cantidad) {
   const p = productos.find((x) => x.id === productoId);
