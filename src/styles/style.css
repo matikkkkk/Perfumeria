@@ -2905,3 +2905,9 @@ body.tema-otono.luxury-bg {
 .diccionario-lista .diccionario-item:last-child {
   margin-bottom: 0;
 }
+
+/* Productos (5B): contenedor ancho para la grilla con filtros. En HTML era `.productos-page main.container`;
+   en React el <main> lo pone LayoutTienda, así que la página usa esta clase. */
+.productos-page .productos-contenedor {
+  max-width: 1500px;
+}

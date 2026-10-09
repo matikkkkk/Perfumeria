@@ -38,6 +38,8 @@ export const TIPO = { disenador: "Diseñador", nicho: "Nicho", arabe: "Árabe" }
 
 export const CONCENTRACION = { edt: "EDT", edp: "EDP", parfum: "Parfum", edc: "EDC", eau_cologne: "Eau de Cologne" };
 
+export const ESTACION = { primavera: "Primavera", verano: "Verano", otono: "Otoño", invierno: "Invierno" };
+
 // Si la clave no existe en el diccionario se devuelve tal cual (igual que `HUMOR_LABELS[tag] || tag` del HTML).
 const textoDe = (diccionario) => (clave) => diccionario[clave] || clave;
 
@@ -45,6 +47,7 @@ export const etiquetaHumor = textoDe(HUMOR);
 export const etiquetaFamilia = textoDe(FAMILIA);
 export const etiquetaTipo = textoDe(TIPO);
 export const etiquetaConcentracion = textoDe(CONCENTRACION);
+export const etiquetaEstacion = textoDe(ESTACION);
 
 // Ocasión completa { label, icon }; las claves desconocidas devuelven null para poder omitirlas.
 export function ocasionDe(codigo) {
