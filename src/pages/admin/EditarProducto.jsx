@@ -1,5 +1,2 @@
-import PaginaPendiente from "../../components/PaginaPendiente";
-
-export default function EditarProducto() {
-  return <PaginaPendiente titulo="Editar producto" etapa={12} />;
-}
+import ProductoForm from "./ProductoForm";
+export default function EditarProducto() { return <ProductoForm modo="editar" />; }

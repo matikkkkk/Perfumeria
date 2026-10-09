@@ -1,5 +1,2 @@
-import PaginaPendiente from "../../components/PaginaPendiente";
-
-export default function NuevoProducto() {
-  return <PaginaPendiente titulo="Nuevo producto" etapa={12} />;
-}
+import ProductoForm from "./ProductoForm";
+export default function NuevoProducto() { return <ProductoForm modo="nuevo" />; }
