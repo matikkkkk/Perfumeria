@@ -1,5 +1,7 @@
-import PaginaPendiente from "../../components/PaginaPendiente";
-
-export default function Blogs() {
-  return <PaginaPendiente titulo="Blogs" etapa={10} />;
-}
+import { Link } from "react-router-dom";
+export const ARTICULOS = [
+ {id:"1",categoria:"Guía olfativa",titulo:"Cómo elegir un perfume para cada ocasión",resumen:"Descubre cómo el contexto, la estación y la intensidad ayudan a elegir tu próxima fragancia.",tiempo:"5 min de lectura",imagen:"/img/blog1.jpg",fecha:"Guía de estilo"},
+ {id:"2",categoria:"Notas y acordes",titulo:"Notas de salida, corazón y fondo: la pirámide olfativa",resumen:"Aprende cómo evoluciona un perfume sobre la piel y por qué su aroma cambia con el tiempo.",tiempo:"4 min de lectura",imagen:"/img/blog2.jpg",fecha:"Universo del perfume"},
+ {id:"3",categoria:"Cuidado de fragancias",titulo:"Cómo conservar tus perfumes por más tiempo",resumen:"Pequeños hábitos para proteger tus fragancias de la luz, el calor y la humedad.",tiempo:"3 min de lectura",imagen:"/img/blog3.jpg",fecha:"Consejos Luxury"}
+];
+export default function Blogs(){return <section className="container py-5"><div className="text-center mb-5"><span className="text-uppercase tracking-wider text-gold-light small">Journal Luxury</span><h1 className="display-4 mt-2">Historias y cultura olfativa</h1><p className="text-secondary">Consejos, inspiración y secretos para descubrir el mundo de las fragancias.</p></div><div className="row g-4">{ARTICULOS.map((art,i)=><div className="col-md-6 col-lg-4" key={art.id}><article className="card luxury-card h-100 overflow-hidden"><div className="blog-cover d-flex align-items-center justify-content-center" style={{minHeight:190,background:`linear-gradient(135deg, rgba(20,17,15,.4), rgba(145,111,57,.35)), var(--bs-secondary-bg)`}}><span className="display-2 text-gold-light">0{i+1}</span></div><div className="card-body p-4 d-flex flex-column"><span className="text-uppercase small text-gold-light">{art.categoria}</span><h2 className="h4 mt-2">{art.titulo}</h2><p className="text-secondary">{art.resumen}</p><div className="mt-auto d-flex justify-content-between align-items-center"><small className="text-secondary">{art.tiempo}</small><Link className="text-gold-light" to={`/blogs/${art.id}`}>Leer artículo <i className="bi bi-arrow-right"/></Link></div></div></article></div>)}</div></section>}
