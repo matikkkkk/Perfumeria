@@ -2918,3 +2918,30 @@ body.tema-otono.luxury-bg {
   color: var(--gold);
   opacity: 0.6;
 }
+
+/* Categorías (8a): imagen de la tarjeta de categoría. Se oscurece un poco y se aviva al pasar el mouse, como las tarjetas de producto. */
+.categoria-card__img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  filter: brightness(0.75);
+  transition: filter 0.4s ease;
+}
+
+.categoria-card:hover .categoria-card__img {
+  filter: brightness(1);
+}
+
+/* Ofertas (8b): insignia de descuento y precio original tachado en la tarjeta de producto. */
+.badge-oferta {
+  background: var(--gold);
+  color: #0d0f12;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.price-original {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
