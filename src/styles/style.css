@@ -2911,3 +2911,10 @@ body.tema-otono.luxury-bg {
 .productos-page .productos-contenedor {
   max-width: 1500px;
 }
+
+/* Wishlist vacía (7): el HTML usaba la clase pero no tenía estilo; se le da el dorado de la marca. */
+.wishlist-empty-icon {
+  font-size: 3.5rem;
+  color: var(--gold);
+  opacity: 0.6;
+}
