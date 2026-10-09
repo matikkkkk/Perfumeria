@@ -2887,3 +2887,21 @@ body.tema-otono.luxury-bg {
   color: inherit;
   background: rgba(0, 0, 0, 0.08);
 }
+/* ===== Diccionario Olfativo (sección del home) ===== */
+.diccionario-panel {
+  max-width: 760px;
+  background: var(--card-bg);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 4px;
+  padding: 24px 28px;
+}
+
+.diccionario-lista {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.diccionario-lista .diccionario-item:last-child {
+  margin-bottom: 0;
+}

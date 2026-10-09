@@ -1,14 +1,17 @@
 import { AuthProvider } from "./AuthContext";
 import { CarritoProvider } from "./CarritoContext";
+import { ToastProvider } from "./ToastContext";
 import { WishlistProvider } from "./WishlistContext";
 
-// Agrupa los tres contextos para no anidarlos a mano en main.jsx.
-// Los tres son independientes entre sí, el orden no importa.
+// Agrupa los contextos para no anidarlos a mano en main.jsx.
+// Son independientes entre sí, el orden no importa.
 export default function AppProviders({ children }) {
   return (
     <AuthProvider>
       <CarritoProvider>
-        <WishlistProvider>{children}</WishlistProvider>
+        <WishlistProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </WishlistProvider>
       </CarritoProvider>
     </AuthProvider>
   );
