@@ -10,7 +10,10 @@ export async function peticion(ruta, opciones = {}) {
   });
 
   if (!respuesta.ok) {
-    throw new Error(`Error ${respuesta.status} en ${opciones.method || "GET"} ${ruta}`);
+    // `status` permite distinguir un 404 (no existe) de una API caída sin leer el texto del mensaje.
+    const error = new Error(`Error ${respuesta.status} en ${opciones.method || "GET"} ${ruta}`);
+    error.status = respuesta.status;
+    throw error;
   }
   // DELETE normalmente no devuelve cuerpo
   return respuesta.status === 204 ? null : respuesta.json();
