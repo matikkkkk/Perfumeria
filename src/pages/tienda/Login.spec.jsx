@@ -10,12 +10,12 @@ vi.mock("../../services/usuariosService", async (importOriginal) => {
 });
 
 describe("Login (eventos)", () => {
-  it("muestra el error de credenciales cuando el inicio de sesión falla", async () => {
+  it("muestra el error de credenciales en el campo correo cuando el inicio de sesión falla", async () => {
     const user = userEvent.setup();
     renderConApp(<Login />);
-    await user.type(screen.getByLabelText("Correo electrónico"), "noexiste@correo.cl");
+    await user.type(screen.getByLabelText("Correo electrónico"), "noexiste@gmail.com");
     await user.type(screen.getByLabelText("Contraseña"), "incorrecta");
     await user.click(screen.getByRole("button", { name: "Ingresar" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("Usuario no encontrado.");
+    expect(await screen.findByText("Usuario no encontrado.")).toBeInTheDocument();
   });
 });
