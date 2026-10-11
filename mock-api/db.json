@@ -2704,12 +2704,6 @@
   ],
   "categorias": [
     {
-      "id": "ligeros",
-      "nombre": "Ligeros",
-      "descripcion": "Frescos y sutiles, ideales para el día a día y climas cálidos.",
-      "imagen": "/img/fondo-coleccion-unisex.jpg"
-    },
-    {
       "id": "moderados",
       "nombre": "Moderados",
       "descripcion": "Equilibrados: presencia elegante sin llegar a ser invasivos.",
@@ -2936,6 +2930,53 @@
         "metodo": "Tarjeta",
         "tarjetaFinal": "0001"
       }
+    },
+    {
+      "fecha": "2026-10-11T20:08:17.582Z",
+      "estado": "Pagado",
+      "cliente": {
+        "nombre": "dsadad",
+        "apellidos": "adadsad",
+        "correo": "adasdada@duoc.cl"
+      },
+      "envio": {
+        "calle": "dsadad",
+        "departamento": "dasd2",
+        "region": "Región Metropolitana",
+        "comuna": "dawda",
+        "indicaciones": "dawdwa"
+      },
+      "items": [
+        {
+          "productoId": "4",
+          "codigo": "LUX004",
+          "nombre": "Donna Born In Roma",
+          "marca": "Valentino",
+          "imagen": "https://dbs.cl/media/catalog/product/v/a/valentino-vno-76144-4.jpg?optimize=low&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:",
+          "precio": 159990,
+          "cantidad": 1,
+          "subtotal": 159990
+        },
+        {
+          "productoId": "7",
+          "codigo": "LUX007",
+          "nombre": "Delina Exclusif",
+          "marca": "Parfums de Marly",
+          "imagen": "https://fimgs.net/photogram/p1200/qq/ho/b5y2gJ4LoiKF58Qd.jpg",
+          "precio": 364990,
+          "cantidad": 1,
+          "subtotal": 364990
+        }
+      ],
+      "subtotal": 524980,
+      "cupon": null,
+      "descuento": 0,
+      "total": 524980,
+      "pago": {
+        "metodo": "Tarjeta",
+        "tarjetaFinal": "3232"
+      },
+      "id": 4
     }
   ],
   "mensajes": []

@@ -1,5 +1,9 @@
-import PaginaPendiente from "../../components/PaginaPendiente";
-
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { categoriasService } from "../../services/categoriasService";
 export default function EditarCategoria() {
-  return <PaginaPendiente titulo="Editar categoría" etapa={13} />;
+  const { id } = useParams(); const navegar = useNavigate(); const [nombre,setNombre]=useState(""); const [descripcion,setDescripcion]=useState(""); const [cargando,setCargando]=useState(true); const [error,setError]=useState(""); const [guardando,setGuardando]=useState(false);
+  useEffect(()=>{categoriasService.obtener(id).then(c=>{setNombre(c.nombre||"");setDescripcion(c.descripcion||"")}).catch(()=>setError("No se encontró la categoría.")).finally(()=>setCargando(false))},[id]);
+  async function guardar(e){e.preventDefault();setError("");if(!nombre.trim()){setError("Ingresa el nombre de la categoría.");return}setGuardando(true);try{const actual=await categoriasService.obtener(id);await categoriasService.actualizar(id,{...actual,nombre:nombre.trim(),descripcion:descripcion.trim()});navegar("/admin/categorias")}catch{setError("No se pudieron guardar los cambios.")}finally{setGuardando(false)}}
+  return <section className="admin-page container-fluid py-2"><Link to="/admin/categorias" className="btn btn-sm btn-outline-light mb-3"><i className="bi bi-arrow-left me-2"/>Volver a categorías</Link><span className="admin-eyebrow d-block">CATÁLOGO</span><h1 className="luxury-title display-5 mb-4">Editar categoría</h1>{cargando?<p role="status">Cargando categoría…</p>:<form className="admin-panel" onSubmit={guardar}><div className="mb-3"><label className="form-label" htmlFor="nombreCategoria">Nombre *</label><input id="nombreCategoria" className="form-control" value={nombre} onChange={e=>setNombre(e.target.value)} required maxLength={60}/></div><div className="mb-4"><label className="form-label" htmlFor="descripcionCategoria">Descripción</label><textarea id="descripcionCategoria" className="form-control" rows="3" value={descripcion} onChange={e=>setDescripcion(e.target.value)} maxLength={250}/></div>{error&&<div className="alert alert-danger" role="alert">{error}</div>}<button className="btn btn-luxury" disabled={guardando}>{guardando?"Guardando…":"Guardar cambios"}</button></form>}</section>;
 }
