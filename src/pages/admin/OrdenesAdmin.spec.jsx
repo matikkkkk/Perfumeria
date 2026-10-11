@@ -15,7 +15,7 @@ describe("OrdenesAdmin", () => {
     render(<MemoryRouter><OrdenesAdmin /></MemoryRouter>);
     expect(await screen.findByText(/Camila Soto/)).toBeInTheDocument();
     fireEvent.change(screen.getByLabelText("Buscar orden o cliente"), { target: { value: "Pedro" } });
-    await waitFor(() => expect(screen.getByText("Pedro")).toBeInTheDocument());
+    expect(await screen.findByText(/Pedro\s+Rojas/)).toBeInTheDocument();
     expect(screen.queryByText(/Camila Soto/)).not.toBeInTheDocument();
     expect(screen.getByText("1 de 2 órdenes")).toBeInTheDocument();
   });
