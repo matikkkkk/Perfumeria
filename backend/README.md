@@ -13,74 +13,10 @@ Arquitectura: **React → gateway :8080 → 3 microservicios Spring Boot → MyS
 - JDK 21, Maven 3.9+ (o IntelliJ / VS Code con Extension Pack for Java)
 - MySQL 8 (XAMPP, MySQL Workbench o Docker)
 
-## Puesta en marcha de ms-catalogo
-```bash
-# 1) Base de datos (desde la raíz del proyecto)
-mysql -u root -p < backend/database/01-schema-catalogo.sql
-mysql -u root -p < backend/database/02-seed-catalogo.sql
+## Ejecución recomendada
 
-# 2) Servicio
-cd backend/ms-catalogo
-mvn spring-boot:run          # DB_USER / DB_PASS / DB_URL por variable de entorno si no es root sin clave
-
-# 3) Comprobar
-curl http://localhost:8081/api/catalogo/salud
-curl http://localhost:8081/api/productos?categoria=intensos
-curl "http://localhost:8081/api/ofertas?activa=true&_expand=producto"
-```
-Ejemplo con clave: `DB_PASS=miClave mvn spring-boot:run` (Windows PowerShell: `$env:DB_PASS="miClave"; mvn spring-boot:run`).
-
-## Puesta en marcha de ms-usuarios
-```powershell
-# 1) Base de datos (solo la estructura; los 3 usuarios demo los crea el servicio con BCrypt)
-mysql -u root -p < backend/database/03-schema-usuarios.sql   # o ejecutar el archivo en MySQL Workbench
-
-# 2) Servicio
-cd backend/ms-usuarios
-$env:DB_PASS="tu_clave"      # si tu MySQL tiene clave
-mvn spring-boot:run
-
-# 3) Comprobar
-curl http://localhost:8082/api/auth/salud
-curl http://localhost:8082/api/usuarios
-curl -X POST http://localhost:8082/api/auth/login -H "Content-Type: application/json" -d '{"correo":"admin@duoc.cl","password":"admin123"}'
-```
-(En PowerShell, si `curl` da problemas, usar `curl.exe` o probar el login desde el front en la etapa 17.)
-
-## Puesta en marcha de ms-ordenes
-```powershell
-# 1) Base de datos (estructura + 3 órdenes demo, opcional)
-mysql -u root -p < backend/database/04-schema-ordenes.sql
-mysql -u root -p < backend/database/05-seed-ordenes.sql     # se regenera con: npm run db:seed-ordenes
-
-# 2) Servicio
-cd backend/ms-ordenes
-$env:DB_PASS="tu_clave"      # si tu MySQL tiene clave
-mvn spring-boot:run
-
-# 3) Comprobar
-curl http://localhost:8083/api/ordenes/salud
-curl "http://localhost:8083/api/ordenes?_sort=fecha&_order=desc"
-```
-
-## Puesta en marcha del gateway (y de todo el sistema)
-Orden recomendado: MySQL → ms-catalogo → ms-usuarios → ms-ordenes → gateway → front. Cada servicio en su propia terminal.
-```powershell
-cd backend/gateway
-mvn spring-boot:run          # puerto 8080
-
-# Comprobar que el gateway reenvía a los tres servicios
-curl http://localhost:8080/api/catalogo/salud
-curl http://localhost:8080/api/auth/salud
-curl http://localhost:8080/api/ordenes/salud
-
-# Front (en la raíz del proyecto; .env con VITE_API_URL=http://localhost:8080/api)
-npm run dev                  # http://localhost:5173
-```
-Variables del gateway: `CORS_ORIGINS` (orígenes permitidos, separados por coma), `MS_CATALOGO_URL`, `MS_USUARIOS_URL`, `MS_ORDENES_URL`, `PORT`.
-No ejecutar `npm run api` (json-server) a la vez: también usa el puerto 8080.
-
-**Si el navegador muestra un error de CORS:** (1) ¿el front corre en uno de los orígenes de `CORS_ORIGINS`? (por defecto `localhost:5173`); (2) ¿el gateway está encendido? Un gateway apagado también aparece como "CORS error" en la consola; (3) ¿`VITE_API_URL` apunta al gateway (8080) y no a un microservicio?
+Usa el lanzador `iniciar-perfumeria.ps1` y las instrucciones del [README principal](../README.md).
+Las migraciones Flyway se ejecutan automáticamente con bases MySQL previamente creadas; no ejecutes los scripts antiguos con DROP/DELETE sobre datos reales.
 
 ## Pruebas
 ```bash

@@ -1,14 +1,10 @@
-import { describe, expect, it } from "vitest";
-import { act } from "@testing-library/react";
-import { renderVista } from "../../renderVista";
-import Home from "../../../pages/tienda/Home";
+import { screen } from '@testing-library/react';
+import { renderConApp } from '../../utils';
+import Destacados from '../../../components/home/Destacados';
 
-describe("Vista Home", () => {
-  it("se renderiza sin errores", async () => {
-    let container;
-    await act(async () => {
-      ({ container } = renderVista(<Home />, "/", "*"));
-    });
-    expect(container.firstChild).not.toBeNull();
+describe('Vista Home: componente Destacados (renderizado)', () => {
+  it('muestra el título de la sección', () => {
+    renderConApp(<Destacados productos={[]} />);
+    expect(screen.getByRole('heading', { level: 2, name: 'Los más buscados' })).toBeInTheDocument();
   });
 });

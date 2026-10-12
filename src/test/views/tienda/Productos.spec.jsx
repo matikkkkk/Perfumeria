@@ -1,14 +1,18 @@
-import { describe, expect, it } from "vitest";
-import { act } from "@testing-library/react";
-import { renderVista } from "../../renderVista";
-import Productos from "../../../pages/tienda/Productos";
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { crearFiltrosVacios } from '../../../utils/filtrosProductos';
+import PanelFiltros from '../../../components/productos/PanelFiltros';
 
-describe("Vista Productos", () => {
-  it("se renderiza sin errores", async () => {
-    let container;
-    await act(async () => {
-      ({ container } = renderVista(<Productos />, "/", "*"));
-    });
-    expect(container.firstChild).not.toBeNull();
+describe('Vista Productos: PanelFiltros (eventos)', () => {
+  it('notifica la opción elegida', async () => {
+    const onAlternar = vi.fn();
+    render(<PanelFiltros
+      opciones={{ categoria: ['intensos'], ocasion: [], humor: ['poderoso'], familia: [], estacion: [], tipo: [], concentracion: [], ml: [] }}
+      seleccion={crearFiltrosVacios()}
+      categorias={[{ id: 'intensos', nombre: 'Intensos' }]}
+      onAlternar={onAlternar} onLimpiar={vi.fn()}
+    />);
+    await userEvent.setup().click(screen.getByRole('checkbox', { name: 'Poderoso' }));
+    expect(onAlternar).toHaveBeenCalledWith('humor', 'poderoso');
   });
 });

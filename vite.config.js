@@ -11,7 +11,6 @@ test: {
   env: { VITE_API_URL: "http://localhost:8080/api" },
   include: ["src/**/*.{spec,test}.{js,jsx}"],
   exclude: [
-    "src/test/specs/**",
     "node_modules/**",
     "dist/**",
   ],

@@ -1,8 +1,9 @@
-node_modules
-dist
-.env
-_legacy-html/
+node_modules/
+dist/
 coverage/
+.env
+.env.local
 backend/**/target/
 *.iml
 .idea/
+.vscode/
