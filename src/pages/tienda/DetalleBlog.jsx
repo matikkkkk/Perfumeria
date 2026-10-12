@@ -1,8 +1,31 @@
 import { Link, useParams } from "react-router-dom";
 import { ARTICULOS } from "./Blogs";
-const CONTENIDO = {
- "1": ["Piensa primero en el momento. Para el día a día suelen funcionar bien las composiciones frescas, cítricas o aromáticas; para la noche puedes explorar acordes amaderados, especiados o más intensos.","Considera también la estación y el entorno. El calor puede hacer que una fragancia se perciba con mayor intensidad, mientras que en climas fríos las notas cálidas y envolventes pueden resultar especialmente agradables.","Prueba el perfume sobre la piel y dale tiempo. Las notas de salida son solo el comienzo: espera a que aparezca el corazón y descubre cómo evoluciona el fondo antes de decidir."],
- "2": ["La pirámide olfativa es una manera de explicar cómo se desarrolla una fragancia a lo largo del tiempo. No todos los perfumes siguen exactamente el mismo patrón, pero el modelo ayuda a comprender su evolución.","Las notas de salida son las primeras que percibimos: suelen aportar frescura y volatilidad. Después aparecen las notas de corazón, que dan identidad y carácter a la composición.","Las notas de fondo permanecen durante más tiempo y aportan profundidad. Maderas, resinas, almizcles y vainillas son algunos de los acordes que pueden formar parte de esta etapa."],
- "3": ["Guarda tus perfumes en un lugar fresco y seco, lejos de la luz solar directa. La exposición prolongada a la luz y las variaciones de temperatura pueden afectar la composición.","Evita dejarlos en el baño si hay vapor y cambios constantes de humedad. Un armario o cajón, lejos de fuentes de calor, suele ser una mejor opción.","Mantén el frasco bien cerrado después de cada uso. Así reduces el contacto innecesario con el aire y ayudas a conservar mejor sus características." ]
-};
-export default function DetalleBlog(){const {id}=useParams();const articulo=ARTICULOS.find(a=>a.id===id);if(!articulo)return <section className="container py-5 text-center"><h1>Artículo no encontrado</h1><Link to="/blogs" className="btn btn-luxury mt-3">Volver al blog</Link></section>;return <article className="container py-5" style={{maxWidth:850}}><Link to="/blogs" className="text-gold-light"><i className="bi bi-arrow-left me-2"/>Volver al blog</Link><header className="text-center py-5"><span className="text-uppercase small text-gold-light">{articulo.categoria}</span><h1 className="display-4 mt-3">{articulo.titulo}</h1><p className="text-secondary">{articulo.tiempo} · {articulo.fecha}</p><div className="my-4 p-5 rounded-3 border border-secondary border-opacity-25"><span className="display-1 text-gold-light">{`0${id}`}</span><p className="text-secondary mb-0">El universo de las fragancias, por Luxury</p></div><p className="lead text-secondary">{articulo.resumen}</p></header><div className="blog-article-content">{CONTENIDO[id].map((parrafo,i)=><p className="fs-5 lh-lg mb-4" key={i}>{parrafo}</p>)}</div><div className="border-top border-secondary border-opacity-25 pt-4 mt-5 d-flex justify-content-between flex-wrap gap-3"><span className="text-secondary">Sigue explorando el universo olfativo.</span><Link to="/blogs" className="btn btn-luxury">Más artículos</Link></div></article>}
+
+export default function DetalleBlog() {
+  const { id } = useParams();
+  const articulo = ARTICULOS.find((item) => item.id === id);
+  if (!articulo) return <main className="container py-5 text-center"><h1>Artículo no encontrado</h1><Link to="/blogs" className="btn btn-luxury">Volver a Blogs</Link></main>;
+
+  return (
+    <main className="container py-5 my-4">
+      <article className="luxury-card p-4 p-md-5 luxury-blog-detail">
+        <Link to="/blogs" className="text-gold-light d-inline-block mb-3"><i className="bi bi-arrow-left me-2" />Volver a Blogs</Link>
+        <h1 className="luxury-title fst-italic blog-title">{articulo.titulo}</h1>
+        <div className="blog-meta">
+          {articulo.meta.map((dato, i) => <span key={dato}><i className={`bi bi-${i === 0 ? "clock" : i === 1 ? "droplet" : "person"}`} />{dato}</span>)}
+        </div>
+        <div className="blog-hero-frame"><img src={articulo.imagen} alt={articulo.titulo} /><span className="blog-hero-badge">{articulo.badge}</span></div>
+        {articulo.blocks.map((bloque, i) => {
+          if (bloque.type === "heading") return <h2 className="blog-subhead" key={i}>{bloque.text}</h2>;
+          if (bloque.type === "notes") return <div className="notes-block" key={i}>{bloque.groups.map((grupo) => <div className="notes-row" key={grupo.label}><span className="note-pill-label w-100">{grupo.label}</span>{grupo.notes.map((nota) => <span className="note-pill" key={nota}>{nota}</span>)}</div>)}</div>;
+          return <p key={i} className={bloque.type === "lead" ? "blog-lead" : "luxury-blog-paragraph"}>{bloque.text}</p>;
+        })}
+        <div className="blog-cta-card">
+          <img src={articulo.producto.imagen} alt={articulo.producto.titulo} className="blog-cta-img" />
+          <div className="blog-cta-text"><span className="cta-eyebrow">Disponible en LUXURY</span><h5>{articulo.producto.titulo}</h5><p>{articulo.producto.subtitulo}</p></div>
+          <Link className="btn btn-luxury" to={`/productos/${articulo.producto.id}`}>Ver en la tienda</Link>
+        </div>
+      </article>
+    </main>
+  );
+}

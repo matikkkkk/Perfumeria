@@ -3098,3 +3098,12 @@ body.tema-otono.luxury-bg {
 .admin-menu-links > a:hover, .admin-menu-links > a.active { color: var(--gold-light); background: rgba(212,175,55,.08); border-left-color: var(--gold); }
 .admin-menu-links > a i { width: 1.2rem; text-align: center; }
 @media (max-width: 767.98px) { .admin-menu-links { display: flex; flex-wrap: wrap; gap: .25rem; } .admin-menu-links > a { display: inline-flex; padding: .55rem .75rem; font-size: .85rem; } }
+
+/* Restauración del blog original y contraste del formulario Contacto */
+.luxury-blog-cover { height: 260px; width: 100%; object-fit: cover; }
+.luxury-blog-detail { max-width: 960px; margin: 0 auto; }
+.luxury-blog-detail .blog-meta { justify-content: flex-start; margin-top: 1rem; }
+.luxury-blog-paragraph { color: #e5dfd6; line-height: 1.85; font-size: 1.04rem; margin-bottom: 1.1rem; }
+.contacto-formulario .form-label { color: #f4ecd8 !important; opacity: 1; font-weight: 600; }
+.contacto-formulario .form-control { color: #f4ecd8; }
+@media (max-width: 575px) { .luxury-blog-cover { height: 210px; } }
