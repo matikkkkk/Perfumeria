@@ -12,18 +12,21 @@ export class ErrorAuth extends Error {
 export const usuariosService = {
   ...crearRecurso("/usuarios"),
 
-  // MOCK: consulta /usuarios y compara la contrasena aqui mismo (json-server no tiene /auth/login).
-  // Con Spring Boot (etapa 15-17) solo cambia el cuerpo: POST /auth/login con BCrypt en el servidor.
-  // La firma login(correo, password) -> usuario SIN password se mantiene, el resto del front no se entera.
+  // POST /auth/login (ms-usuarios): la contrasena se compara en el servidor con BCrypt y nunca vuelve en la respuesta.
+  // 200 -> usuario sin password. 401 -> { campo: "correo" | "password" }, que se traduce a ErrorAuth para mostrar
+  // el mensaje bajo el campo correcto (igual que mostrarError() del HTML original).
   async login(correo, password) {
-    const correoNormalizado = correo.trim().toLowerCase();
-    const encontrados = await peticion(`/usuarios?correo=${encodeURIComponent(correoNormalizado)}`);
-    const usuario = encontrados[0];
-
-    if (!usuario) throw new ErrorAuth("correo", "Usuario no encontrado.");
-    if (usuario.password !== password) throw new ErrorAuth("password", "Contraseña incorrecta.");
-
-    const { password: _descartada, ...usuarioSeguro } = usuario;
-    return usuarioSeguro;
+    try {
+      return await peticion("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ correo: correo.trim().toLowerCase(), password }),
+      });
+    } catch (err) {
+      if (err.status === 401) {
+        const campo = err.cuerpo?.campo === "correo" ? "correo" : "password";
+        throw new ErrorAuth(campo, campo === "correo" ? "Usuario no encontrado." : "Contraseña incorrecta.");
+      }
+      throw err; // API caida (status 0), 400, 500...: la pantalla muestra el mensaje generico
+    }
   },
 };

@@ -1,7 +1,7 @@
 // Usuarios iniciales (semilla). Se cargan solo si localStorage esta vacio.
 export const usuarios = [
   {
-    run: "19011022K",
+    run: "190110222",
     nombre: "Administrador",
     apellidos: "Luxury",
     correo: "admin@duoc.cl",
@@ -13,7 +13,7 @@ export const usuarios = [
     direccion: "Casa matriz Luxury",
   },
   {
-    run: "15234567K",
+    run: "152345674",
     nombre: "Valentina",
     apellidos: "Rojas",
     correo: "vendedor@duoc.cl",

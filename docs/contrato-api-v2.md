@@ -45,13 +45,70 @@ El precio final **no** se guarda: `Math.round(precio * (1 - descuento / 100))` e
 ### Salud
 `GET /api/catalogo/salud` → `{ "servicio": "ms-catalogo", "estado": "OK" }`
 
-## ms-usuarios (etapa 16) · puerto 8082 — plan
-`/api/usuarios` (CRUD; `id` = RUN normalizado; filtros `?correo=` y `?run=` que usa Registro) y `POST /api/auth/login` → usuario **sin** password (BCrypt). 401 con `{campo: "correo"|"password"}` para mantener `ErrorAuth`.
+## ms-usuarios (implementado, etapa 16) · puerto 8082
 
-## ms-ordenes (etapa 17) · puerto 8083 — plan
-`/api/ordenes` (CRUD, `?usuarioId=`, `?_sort=fecha&_order=desc`; `id` numérico correlativo) y `/api/mensajes` (contacto). Estructura de la orden: ver `esquema-datos.md`.
+Base `luxury_usuarios`. **La contraseña nunca sale en ninguna respuesta** y se guarda con BCrypt (`password_hash`).
+El RUN (sin puntos ni guion, ej. `20987654K`) es la clave primaria y se envía también como `id`.
 
-## Cambios que requerirá el front (etapa 17)
-1. `VITE_API_URL` → URL del gateway.
-2. `usuariosService.login` → `POST /auth/login` (misma firma).
-3. Verificar que `_sort/_order` y `_expand` se mantienen (ya soportados o planificados).
+| Método | Ruta | Detalle |
+|---|---|---|
+| GET | `/api/usuarios` | Filtros opcionales `?correo=` (minúsculas), `?run=` (acepta puntos/guion), `?tipo=`. Orden por nombre. |
+| GET | `/api/usuarios/{id}` | `id` = RUN. 404 si no existe |
+| POST | `/api/usuarios` | Obligatorios: `run` (módulo 11), `nombre` (≤50), `apellidos` (≤100), `correo` (@duoc.cl, @profesor.duoc.cl o @gmail.com), `password` (4-10). `tipo` por defecto `Cliente`. 409 si el RUN o el correo ya existen. |
+| PUT | `/api/usuarios/{id}` | Reemplaza los datos. **Sin `password` se conserva la actual** (así `EditarUsuario` funciona aunque nunca reciba la clave). El `run` del cuerpo no puede ser distinto del de la ruta (400). |
+| PATCH | `/api/usuarios/{id}` | Solo los campos enviados (perfil). Acepta `password` para cambiarla. Ignora cualquier intento de cambiar el `run`. |
+| DELETE | `/api/usuarios/{id}` | 204. **409 si es el único administrador.** |
+| POST | `/api/auth/login` | Cuerpo `{correo, password}` → 200 con el usuario **sin** contraseña. 401 con `{status, error, mensaje, campo}` donde `campo` es `"correo"` (no existe) o `"password"` (incorrecta). |
+| GET | `/api/auth/salud` | `{ "servicio": "ms-usuarios", "estado": "OK" }` |
+
+Campos: `id, run, nombre, apellidos, correo, fechaNacimiento (yyyy-MM-dd), tipo (Administrador|Vendedor|Cliente), region, comuna, direccion`.
+
+Usuarios demo (se crean en el primer arranque si la tabla está vacía): `admin@duoc.cl / admin123`, `vendedor@duoc.cl / vende123`, `cliente@gmail.com / cliente123`.
+
+Alcance de seguridad (limitación consciente): el login valida credenciales y devuelve el usuario, pero **la API no emite tokens (JWT)**. La protección de rutas (`RutaProtegida`) sigue siendo del front. Es suficiente para la pauta, pero un sistema real exigiría JWT en el gateway.
+
+## ms-ordenes (implementado, etapa 17) · puerto 8083
+
+Base `luxury_ordenes` (tablas `ordenes`, `orden_items`, `mensajes`). El `id` es numérico correlativo (autoincrement); el nº de boleta es `String(id).padStart(6, "0")` y lo arma el front. Las fechas se guardan en UTC y salen en ISO-8601 (`2026-10-05T22:40:00Z`).
+
+### Órdenes `/api/ordenes`
+| Método | Ruta | Detalle |
+|---|---|---|
+| GET | `/api/ordenes` | Filtros opcionales `?usuarioId=<run>` (historial, acepta puntos/guion) y `?estado=`. Orden `?_sort=fecha&_order=desc` (campos: `id, fecha, estado, subtotal, descuento, total`; otro campo → 400). Por defecto id ascendente. |
+| GET | `/api/ordenes/{id}` | 404 si no existe |
+| POST | `/api/ordenes` | 201 + `Location`. Mismo cuerpo que arma `Checkout.jsx` (ver `esquema-datos.md`). Compra como invitado = **sin** `usuarioId`. |
+| PUT | `/api/ordenes/{id}` | Reemplaza la orden completa (conserva el id) |
+| PATCH | `/api/ordenes/{id}` | **Solo `estado`** (`Pendiente`, `Pagado`, `Pago fallido`). Al pasar a `Pagado` el total se recalcula como `subtotal - descuento`. |
+| DELETE | `/api/ordenes/{id}` | 204 |
+| GET | `/api/ordenes/salud` | `{ "servicio": "ms-ordenes", "estado": "OK" }` |
+
+Reglas de negocio del POST/PUT (400 si no se cumplen): al menos 1 producto (máx. 30); `cantidad` 1-99; `precio` 0-1.000.000; cada `items[].subtotal` = precio × cantidad y `subtotal` = suma de las líneas (el servidor las recalcula y rechaza si el cliente mandó otro valor); `descuento` ≤ subtotal; en una orden **no** fallida `total` = subtotal − descuento (un `Pago fallido` puede quedar con total 0, como lo envía el checkout); `pago.tarjetaFinal` = exactamente 4 dígitos (nunca el número completo); correo con formato válido (se guarda en minúsculas); `usuarioId` normalizado (sin puntos ni guion, K mayúscula).
+`usuarioId` e `items[].productoId` son referencias lógicas: **no** se valida que existan en ms-usuarios / ms-catalogo (no hay llamadas entre servicios; la orden guarda una copia de los datos del producto).
+
+### Mensajes de contacto `/api/mensajes`
+`GET` (más recientes primero; `?_order=asc` invierte) · `GET /{id}` · `POST` (`nombre, correo, asunto, mensaje` de 10-2000 caracteres; `fecha` y `estado` son opcionales: por defecto ahora y `Nuevo`) · `PATCH /{id}` solo `{"estado": "Leído"}` (máx. 20 caracteres) · `DELETE /{id}`.
+
+## Gateway (implementado, etapa 17) · puerto 8080
+Spring Cloud Gateway (Boot 3.3.5 + Spring Cloud 2023.0.3). **Es la única URL que conoce el front**: `VITE_API_URL=http://localhost:8080/api`.
+
+| Rutas | Se reenvían a |
+|---|---|
+| `/api/productos/**`, `/api/categorias/**`, `/api/ofertas/**`, `/api/catalogo/**` | ms-catalogo `:8081` |
+| `/api/usuarios/**`, `/api/auth/**` | ms-usuarios `:8082` |
+| `/api/ordenes/**`, `/api/mensajes/**` | ms-ordenes `:8083` |
+
+Las rutas no se reescriben (cada microservicio ya usa `/api/...`). Las URLs destino se pueden cambiar con `MS_CATALOGO_URL`, `MS_USUARIOS_URL` y `MS_ORDENES_URL`.
+
+### CORS
+React (Vite, `http://localhost:5173`) y el gateway (`http://localhost:8080`) son orígenes distintos, así que el navegador exige CORS. Se configura **solo en el gateway** (`spring.cloud.gateway.globalcors` en `application.yml`); los microservicios no envían cabeceras CORS para que no lleguen duplicadas.
+- Orígenes permitidos (lista blanca): `http://localhost:5173`, `http://127.0.0.1:5173` y `http://localhost:4173` (`vite preview`). Para otro origen: variable `CORS_ORIGINS` (separados por coma).
+- Métodos: `GET, POST, PUT, PATCH, DELETE, OPTIONS`. Cabeceras: todas. `maxAge` 3600 s (el navegador reutiliza la pre-solicitud 1 hora).
+- Sin cookies/credenciales (no hay sesión en el servidor, ver nota de seguridad).
+- Un origen que no está en la lista recibe **403** en la pre-solicitud.
+
+## Cambios hechos en el front (etapa 17)
+1. `VITE_API_URL` apunta al gateway (`.env.example`; el valor por defecto de `api.js` ya era `:8080/api`).
+2. `peticion()` (`api.js`) guarda en el error `status`, el cuerpo JSON del backend (`error.cuerpo`) y marca `status = 0` cuando no hay conexión (gateway apagado o CORS mal configurado).
+3. `usuariosService.login` usa `POST /auth/login` y convierte el 401 (`campo` = `correo` | `password`) en el mismo `ErrorAuth` de antes: **`Login.jsx` no cambió**.
+4. `_sort/_order` están soportados en ms-ordenes; `_expand=producto` en ms-catalogo (etapa 15).
+5. json-server (`npm run api`, `mock-api/`) queda como respaldo histórico: usa el mismo puerto 8080 que el gateway (no ejecutar los dos a la vez) y ya no sirve para el login.

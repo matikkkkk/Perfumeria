@@ -4,19 +4,39 @@
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 export async function peticion(ruta, opciones = {}) {
-  const respuesta = await fetch(`${BASE_URL}${ruta}`, {
-    headers: { "Content-Type": "application/json" },
-    ...opciones,
-  });
+  const metodo = opciones.method || "GET";
+  let respuesta;
+  try {
+    respuesta = await fetch(`${BASE_URL}${ruta}`, {
+      headers: { "Content-Type": "application/json" },
+      ...opciones,
+    });
+  } catch (causa) {
+    // Sin respuesta HTTP: gateway apagado, microservicio caido o CORS mal configurado (el navegador lo reporta igual).
+    const error = new Error(`No se pudo conectar con la API (${metodo} ${ruta}). Verifica que el gateway este iniciado.`);
+    error.status = 0;
+    error.causa = causa;
+    throw error;
+  }
 
   if (!respuesta.ok) {
     // `status` permite distinguir un 404 (no existe) de una API caída sin leer el texto del mensaje.
-    const error = new Error(`Error ${respuesta.status} en ${opciones.method || "GET"} ${ruta}`);
+    const error = new Error(`Error ${respuesta.status} en ${metodo} ${ruta}`);
     error.status = respuesta.status;
+    // El backend responde { status, error, mensaje, campo? }. `campo` lo usa el login (401).
+    error.cuerpo = await leerCuerpoDeError(respuesta);
     throw error;
   }
   // DELETE normalmente no devuelve cuerpo
   return respuesta.status === 204 ? null : respuesta.json();
+}
+
+async function leerCuerpoDeError(respuesta) {
+  try {
+    return await respuesta.json();
+  } catch {
+    return null; // cuerpo vacio o no es JSON (ej. 502 del gateway)
+  }
 }
 
 // Crea el CRUD completo para un recurso REST (ej: "/productos").

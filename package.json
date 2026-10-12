@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "api:seed": "node mock-api/generar-db.mjs",
     "db:seed-sql": "node backend/database/generar-seed-catalogo.mjs",
+    "db:seed-ordenes": "node backend/database/generar-seed-ordenes.mjs",
     "api": "json-server mock-api/db.json --routes mock-api/routes.json --port 8080",
     "test": "vitest",
     "test:run": "vitest run",
