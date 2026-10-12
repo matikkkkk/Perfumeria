@@ -3,3 +3,6 @@ dist
 .env
 _legacy-html/
 coverage/
+backend/**/target/
+*.iml
+.idea/
