@@ -5,6 +5,7 @@ import { CONCENTRACION, TIPO, etiquetaFamilia } from "../../utils/etiquetas";
 import { formatearPrecio } from "../../utils/formato";
 import { formatearFechaCorta } from "../../utils/ofertas";
 import ChipHumor from "./ChipHumor";
+import ImagenProducto from "./ImagenProducto";
 
 // Tarjeta del catálogo (crearTarjeta* de script.js). La usan el home, productos, categorías y ofertas.
 // `columna` es la clase de grilla de Bootstrap: 4 por fila en el home, 3 por fila en productos.
@@ -36,7 +37,7 @@ export default function TarjetaProducto({ producto: p, columna = "col-12 col-md-
           <span className="card-badge card-badge--ml">
             <i className="bi bi-cloud-fill"></i> {p.ml} ML
           </span>
-          <img src={p.imagen} className="card-img-top" alt={p.nombre} />
+          <ImagenProducto key={p.imagen || p.id} src={p.imagen} className="card-img-top" alt={p.nombre} />
         </div>
         <div className="card-body text-center p-4 d-flex flex-column justify-content-between">
           <div>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import InspiradoEn from "../producto/InspiradoEn";
+import ImagenProducto from "../producto/ImagenProducto";
 import { useAgregarAlCarrito } from "../../hooks/useAgregarAlCarrito";
 import { useCarrusel } from "../../hooks/useCarrusel";
 import { etiquetaFamilia } from "../../utils/etiquetas";
@@ -29,7 +30,7 @@ export default function NuevosLanzamientos({ productos }) {
             <div key={p.id} className={`carousel-item${i === indice ? " active" : ""}`}>
               <div className="row g-0 align-items-center launch-slide">
                 <div className="col-md-6 launch-img-wrapper">
-                  <img src={p.imagen} alt={p.nombre} className="launch-img" />
+                  <ImagenProducto key={p.imagen || p.id} src={p.imagen} alt={p.nombre} className="launch-img" />
                 </div>
                 <div className="col-md-6 p-4 p-lg-5">
                   <span className="text-gold text-uppercase fs-7 tracking-wider">Nuevo · {mayuscula(p.estacion)}</span>

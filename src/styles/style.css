@@ -3107,3 +3107,47 @@ body.tema-otono.luxury-bg {
 .contacto-formulario .form-label { color: #f4ecd8 !important; opacity: 1; font-weight: 600; }
 .contacto-formulario .form-control { color: #f4ecd8; }
 @media (max-width: 575px) { .luxury-blog-cover { height: 210px; } }
+
+/* Respaldo visual para perfumes sin foto o con URL externa rota. */
+.imagen-producto-pendiente {
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  text-align: center;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, #111319, #29251b) !important;
+  color: #eadfca !important;
+  border: 1px solid rgba(199,161,76,.45);
+  min-height: 180px;
+  width: 100%;
+}
+.imagen-producto-pendiente > .bi { font-size: 2rem; color: #cda953; }
+.imagen-producto-pendiente__marca { font-size: .65rem; letter-spacing: .16em; color: #cda953; }
+.imagen-producto-pendiente > strong { font-size: 1rem; color: #f1e4ca; }
+.imagen-producto-pendiente > small { font-size: .75rem; max-width: 22rem; color: #c8c0b0; }
+.cart-item-img .imagen-producto-pendiente { min-height: 75px; padding: .3rem; gap: .1rem; }
+.cart-item-img .imagen-producto-pendiente > .bi { font-size: 1rem; }
+.cart-item-img .imagen-producto-pendiente > strong { font-size: .6rem; }
+.cart-item-img .imagen-producto-pendiente > small,
+.cart-item-img .imagen-producto-pendiente__marca { display: none; }
+.modal-compra-imagen.imagen-producto-pendiente { margin-inline: auto; max-width: 360px; }
+
+/* Hero del detalle: las rutas de fondo inexistentes también muestran el placeholder.
+   background-image de CSS no tiene evento onError; por eso ahora se usa <img>. */
+.hero-producto--imagen > .hero-producto--fondo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-producto--imagen > .hero-producto--fondo-img.imagen-producto-pendiente {
+  min-height: 100%;
+  padding: 2rem;
+}
+.hero-producto--contain > .hero-producto--contain-img.imagen-producto-pendiente {
+  min-height: 65vh;
+}

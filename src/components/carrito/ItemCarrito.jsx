@@ -1,4 +1,5 @@
 import { formatearPrecio } from "../../utils/formato";
+import ImagenProducto from "../producto/ImagenProducto";
 
 // Una fila del carrito (cart-item de mostrarCarrito). No guarda estado: avisa con onCambiarCantidad(id, ±1) y onQuitar(id).
 export default function ItemCarrito({ item, onCambiarCantidad, onQuitar }) {
@@ -7,7 +8,7 @@ export default function ItemCarrito({ item, onCambiarCantidad, onQuitar }) {
   return (
     <div className="cart-item">
       <div className="cart-item-img">
-        <img src={imagen} alt={nombre} />
+        <ImagenProducto key={imagen || productoId} src={imagen} alt={nombre} />
       </div>
       <div className="cart-item-info">
         <h3 className="cart-item-name">{nombre}</h3>

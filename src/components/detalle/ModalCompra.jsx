@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAgregarAlCarrito } from "../../hooks/useAgregarAlCarrito";
 import { formatearPrecio } from "../../utils/formato";
+import ImagenProducto from "../producto/ImagenProducto";
 
 const MAXIMO_POR_COMPRA = 10;
 
@@ -57,7 +58,7 @@ export default function ModalCompra({ producto, abierto, onCerrar }) {
               <button type="button" className="btn-close btn-close-white" aria-label="Cerrar" onClick={onCerrar}></button>
             </div>
             <div className="modal-body text-center">
-              <img src={producto.imagen} alt={producto.nombre} className="modal-compra-imagen mb-3" />
+              <ImagenProducto key={producto.imagen || producto.id} src={producto.imagen} alt={producto.nombre} className="modal-compra-imagen mb-3" />
               <span className="d-block fs-7 text-uppercase tracking-wider text-gold-light">{producto.marca || ""}</span>
               <h3 className="luxury-title h4 mt-1">{producto.nombre}</h3>
               <p className="precio-modal mb-4">{formatearPrecio(producto.precio)}</p>
