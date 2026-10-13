@@ -3151,3 +3151,29 @@ body.tema-otono.luxury-bg {
 .hero-producto--contain > .hero-producto--contain-img.imagen-producto-pendiente {
   min-height: 65vh;
 }
+
+/* Ajustes globales de selects: una única flecha, sin mosaicos repetidos. */
+select.form-select, .form-select.form-luxury, .sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #17191f !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-position: right 0.85rem center !important;
+  background-size: 16px 16px !important;
+  background-repeat: no-repeat !important;
+  color: #f3ede2 !important;
+  border: 1px solid rgba(212,175,55,.35);
+  padding-right: 2.6rem;
+}
+select.form-select option { background: #17191f; color: #f3ede2; }
+select.form-select:disabled { background-color: #20232a !important; color: #a4a8b2 !important; opacity: 1; }
+select.form-select:focus { border-color: #d4af37; box-shadow: 0 0 0 .16rem rgba(212,175,55,.16); }
+/* Campos del checkout legibles sobre fondo oscuro. */
+.luxury-card .form-label { color: #efe9db; opacity: 1; }
+.luxury-card .form-control { background: #17191f; border: 1px solid rgba(212,175,55,.35); color: #f5f0e6; }
+.luxury-card .form-control:focus { background: #17191f; border-color: #d4af37; color: #fff; box-shadow: 0 0 0 .16rem rgba(212,175,55,.14); }
+.luxury-card .form-control::placeholder { color: #aeb3bd; opacity: 1; }
+/* Menú de cuenta: nombre y acciones contrastados. */
+.dropdown-menu-luxury .dropdown-item-text { color: #e7d3a0 !important; opacity: 1; overflow-wrap: anywhere; }
+.dropdown-menu-luxury .dropdown-item { color: #f3ede2; }
+.dropdown-menu-luxury .dropdown-item:hover, .dropdown-menu-luxury .dropdown-item:focus { color: #f8d976; }
