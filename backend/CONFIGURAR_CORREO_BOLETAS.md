@@ -44,3 +44,11 @@ A continuación inicia el backend de la forma habitual. En Gmail, si tienes acti
 - Solo se notifica al guardar una orden pagada o cuando cambia a `Pagado`; volver a aplicar el mismo estado no reenvía el correo.
 - No se valida una transacción bancaria real: el checkout de demostración marca pagos según la lógica existente. En producción la confirmación de pago debe validarse en el servidor con una pasarela de pagos.
 - La seguridad de los endpoints de órdenes debe endurecerse antes de un despliegue público.
+
+## Configuracion integrada en el lanzador (Windows)
+
+Ejecuta `\.\iniciar-perfumeria.ps1` desde PowerShell, en la raiz del proyecto. Despues de configurar MySQL el lanzador preguntara **Enviar boletas por Gmail? (S/N)**. Si respondes `S`, solicita el correo Gmail remitente y la **contrasena de aplicacion**. Esta clave se conserva unicamente como variable de entorno durante el arranque de los procesos y no se escribe en `.env` ni en el ZIP. Se necesita tener habilitada la verificacion en dos pasos en la cuenta Google y disponibilidad de contrasenas de aplicacion.
+
+Gmail queda preconfigurado en `ms-ordenes`: `smtp.gmail.com`, puerto `587`, autenticacion y STARTTLS. Sin credenciales el envio permanece deshabilitado. Para ejecutar el microservicio manualmente sin el lanzador, usa las variables de entorno descritas arriba.
+
+**Seguridad:** evita utilizar una cuenta personal principal para pruebas; usa una cuenta dedicada. El lanzador pone las credenciales en el entorno de los procesos hijos para que Spring Boot las lea; no las subas a repositorios.
