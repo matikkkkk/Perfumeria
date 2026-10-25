@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import BoletaOrden from "./BoletaOrden";
-import { ordenesService } from "../../services/ordenesService";
+import BoletaOrden from "../../../pages/admin/BoletaOrden";
+import { ordenesService } from "../../../services/ordenesService";
 
-vi.mock("../../services/ordenesService", () => ({ ordenesService: { obtener: vi.fn() } }));
+vi.mock("../../../services/ordenesService", () => ({ ordenesService: { obtener: vi.fn() } }));
 
 describe("BoletaOrden", () => {
   it("renderiza los datos del pedido y el total", async () => {

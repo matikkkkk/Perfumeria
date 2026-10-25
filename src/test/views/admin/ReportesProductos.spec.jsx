@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import ReportesProductos from "./ReportesProductos";
-import { productosService } from "../../services/productosService";
+import ReportesProductos from "../../../pages/admin/ReportesProductos";
+import { productosService } from "../../../services/productosService";
 
-vi.mock("../../services/productosService", () => ({
+vi.mock("../../../services/productosService", () => ({
   productosService: {
     listar: vi.fn(),
   },

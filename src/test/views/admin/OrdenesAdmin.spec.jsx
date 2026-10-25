@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import OrdenesAdmin from "./OrdenesAdmin";
-import { ordenesService } from "../../services/ordenesService";
+import OrdenesAdmin from "../../../pages/admin/OrdenesAdmin";
+import { ordenesService } from "../../../services/ordenesService";
 
-vi.mock("../../services/ordenesService", () => ({ ordenesService: { listar: vi.fn() } }));
+vi.mock("../../../services/ordenesService", () => ({ ordenesService: { listar: vi.fn() } }));
 
 describe("OrdenesAdmin", () => {
   it("filtra las órdenes al escribir el nombre del cliente", async () => {

@@ -1,14 +1,14 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import DashboardAdmin from "./DashboardAdmin";
-import { ordenesService } from "../../services/ordenesService";
-import { productosService } from "../../services/productosService";
-import { usuariosService } from "../../services/usuariosService";
+import DashboardAdmin from "../../../pages/admin/DashboardAdmin";
+import { ordenesService } from "../../../services/ordenesService";
+import { productosService } from "../../../services/productosService";
+import { usuariosService } from "../../../services/usuariosService";
 
-vi.mock("../../services/ordenesService", () => ({ ordenesService: { listar: vi.fn() } }));
-vi.mock("../../services/productosService", () => ({ productosService: { listar: vi.fn() } }));
-vi.mock("../../services/usuariosService", () => ({ usuariosService: { listar: vi.fn() } }));
+vi.mock("../../../services/ordenesService", () => ({ ordenesService: { listar: vi.fn() } }));
+vi.mock("../../../services/productosService", () => ({ productosService: { listar: vi.fn() } }));
+vi.mock("../../../services/usuariosService", () => ({ usuariosService: { listar: vi.fn() } }));
 
 describe("DashboardAdmin", () => {
   beforeEach(() => {

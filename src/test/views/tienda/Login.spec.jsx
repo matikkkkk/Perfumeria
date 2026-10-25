@@ -1,10 +1,10 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { renderConApp } from "../../test/utils";
-import Login from "./Login";
+import { renderConApp } from "../../utils";
+import Login from "../../../pages/tienda/Login";
 
-vi.mock("../../services/usuariosService", async (importOriginal) => {
+vi.mock("../../../services/usuariosService", async (importOriginal) => {
   const actual = await importOriginal();
   return { ...actual, usuariosService: { ...actual.usuariosService, login: vi.fn().mockRejectedValue(new actual.ErrorAuth("correo", "Usuario no encontrado.")) } };
 });
