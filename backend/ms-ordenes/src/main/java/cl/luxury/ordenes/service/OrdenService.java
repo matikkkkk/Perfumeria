@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
@@ -31,9 +32,11 @@ public class OrdenService {
     private static final long MAXIMO_IMPORTE = Integer.MAX_VALUE;
 
     private final OrdenRepository ordenes;
+    private final ApplicationEventPublisher eventos;
 
-    public OrdenService(OrdenRepository ordenes) {
+    public OrdenService(OrdenRepository ordenes, ApplicationEventPublisher eventos) {
         this.ordenes = ordenes;
+        this.eventos = eventos;
     }
 
     /**
@@ -78,15 +81,24 @@ public class OrdenService {
     public Orden crear(OrdenRequest solicitud) {
         Orden orden = new Orden();
         aplicar(orden, solicitud);
-        return ordenes.save(orden);
+        Orden guardada = ordenes.save(orden);
+        if (PAGADO.equals(guardada.getEstado())) {
+            eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
+        }
+        return guardada;
     }
 
     /** Reemplaza la orden completa (conserva el id). */
     @Transactional
     public Orden actualizar(Long id, OrdenRequest solicitud) {
         Orden orden = obtener(id);
+        boolean pagadaAntes = PAGADO.equals(orden.getEstado());
         aplicar(orden, solicitud);
-        return ordenes.save(orden);
+        Orden guardada = ordenes.save(orden);
+        if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
+            eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
+        }
+        return guardada;
     }
 
     /**
@@ -103,11 +115,16 @@ public class OrdenService {
         if (!ESTADOS.contains(estado)) {
             throw new SolicitudInvalidaException("Estado inválido. Valores: " + ESTADOS);
         }
+        boolean pagadaAntes = PAGADO.equals(orden.getEstado());
         orden.setEstado(estado);
         if (PAGADO.equals(estado)) {
             orden.setTotal(orden.getSubtotal() - orden.getDescuento());
         }
-        return ordenes.save(orden);
+        Orden guardada = ordenes.save(orden);
+        if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
+            eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
+        }
+        return guardada;
     }
 
     @Transactional
