@@ -23,6 +23,7 @@ export default function PanelCliente() {
   const [perfil, setPerfil] = useState(() => ({ nombre: usuario.nombre || "", apellidos: usuario.apellidos || "", correo: usuario.correo || "", region: usuario.region || "", comuna: usuario.comuna || "", direccion: usuario.direccion || "" }));
   const [password, setPassword] = useState({ actual: "", nueva: "", confirmar: "" });
   const [guardando, setGuardando] = useState(false);
+  const [descargando, setDescargando] = useState(null);
   const [aviso, setAviso] = useState("");
 
   useEffect(() => {
@@ -56,6 +57,17 @@ export default function PanelCliente() {
     } catch(e) { setAviso(e.status === 401 ? "La contraseña actual es incorrecta." : mensajeError(e)); }
     finally { setGuardando(false); }
   }
+  async function descargarBoleta(id) {
+    setDescargando(id);
+    setAviso("");
+    try {
+      await ordenesService.descargarBoleta(id);
+    } catch (e) {
+      setAviso(e.message || "No se pudo descargar la boleta.");
+    } finally {
+      setDescargando(null);
+    }
+  }
   const pagadas = ordenes.filter(o => o.estado === "Pagado");
   const pedidos = seccion === "boletas" ? pagadas : ordenes;
   return <main className="container py-5">
@@ -84,8 +96,8 @@ export default function PanelCliente() {
           {(seccion === "pedidos" || seccion === "boletas") && <>
             <h2 className="h4 luxury-title">{seccion === "boletas" ? "Mis boletas" : "Mis pedidos"}</h2>
             {cargando ? <p>Cargando pedidos…</p> : error ? <p role="alert">{error}</p> : pedidos.length === 0 ? <p>No tienes {seccion === "boletas" ? "boletas disponibles" : "pedidos registrados"}.</p> :
-            <div className="table-responsive"><table className="table table-dark table-hover align-middle"><thead><tr><th>Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Detalle</th></tr></thead><tbody>{pedidos.map(o => <tr key={o.id}><td>#{o.id}</td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td>{o.estado}</td><td>{formatearPrecio(o.total)}</td><td><details><summary>Ver productos</summary><ul>{o.items?.map((item,i) => <li key={i}>{item.cantidad} × {item.nombre}</li>)}</ul>{o.estado === "Pagado" && <p>El comprobante PDF fue enviado al correo indicado al comprar: {o.cliente?.correo}.</p>}</details></td></tr>)}</tbody></table></div>}
-            {seccion === "boletas" && <p className="small text-gold-light">La descarga directa del PDF desde la cuenta requiere autenticar la API de órdenes. Por ahora puedes recuperarlo desde el correo de confirmación.</p>}
+            <div className="table-responsive"><table className="table table-dark table-hover align-middle"><thead><tr><th>Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Detalle</th><th>Boleta PDF</th></tr></thead><tbody>{pedidos.map(o => <tr key={o.id}><td>#{o.id}</td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td>{o.estado}</td><td>{formatearPrecio(o.total)}</td><td><details><summary>Ver productos</summary><ul>{o.items?.map((item,i) => <li key={i}>{item.cantidad} × {item.nombre}</li>)}</ul>{o.estado === "Pagado" && <p>El comprobante PDF fue enviado al correo indicado al comprar: {o.cliente?.correo}.</p>}</details></td><td>{o.estado === "Pagado" ? <button type="button" className="btn btn-luxury btn-sm" disabled={descargando === o.id} onClick={() => descargarBoleta(o.id)}>{descargando === o.id ? "Descargando…" : "Descargar PDF"}</button> : <span className="text-muted">No disponible</span>}</td></tr>)}</tbody></table></div>}
+            {seccion === "boletas" && <p className="small text-gold-light">Puedes descargar aquí el mismo comprobante PDF que recibiste por correo.</p>}
           </>}
           {seccion === "perfil" && <><h2 className="h4 luxury-title">Actualizar mis datos</h2><form onSubmit={guardarPerfil} className="row g-3">{[["nombre","Nombre"],["apellidos","Apellidos"],["correo","Correo electrónico"],["region","Región"],["comuna","Comuna"],["direccion","Dirección"]].map(([clave,etiqueta])=><div key={clave} className="col-md-6"><label className="form-label" htmlFor={`cuenta-${clave}`}>{etiqueta}</label><input required={["nombre","apellidos","correo"].includes(clave)} type={clave === "correo" ? "email" : "text"} className="form-control" id={`cuenta-${clave}`} value={perfil[clave]} onChange={e=>setPerfil(v=>({...v,[clave]:e.target.value}))}/></div>)}<div className="col-12"><button className="btn btn-luxury" disabled={guardando}>Guardar cambios</button></div></form></>}
           {seccion === "seguridad" && <><h2 className="h4 luxury-title">Cambiar contraseña</h2><p className="small text-gold-light">Escribe tu contraseña actual. La nueva debe tener entre 4 y 10 caracteres, según las reglas vigentes de registro.</p><form onSubmit={cambiarPassword} className="row g-3">{[["actual","Contraseña actual"],["nueva","Nueva contraseña"],["confirmar","Confirmar nueva contraseña"]].map(([clave,nombre])=><div className="col-12" key={clave}><label htmlFor={`password-${clave}`} className="form-label">{nombre}</label><input className="form-control" id={`password-${clave}`} type="password" required autoComplete={clave === "actual" ? "current-password" : "new-password"} value={password[clave]} onChange={e=>setPassword(v=>({...v,[clave]:e.target.value}))}/></div>)}<div><button className="btn btn-luxury" disabled={guardando}>Actualizar contraseña</button></div></form></>}

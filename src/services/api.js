@@ -52,3 +52,23 @@ export function crearRecurso(ruta) {
     eliminar: (id) => peticion(`${ruta}/${id}`, { method: "DELETE" }),
   };
 }
+
+// Respuestas binarias: las boletas PDF no se pueden leer con respuesta.json().
+export async function descargarPdf(ruta, nombreArchivo) {
+  const respuesta = await fetch(`${BASE_URL}${ruta}`);
+  if (!respuesta.ok) {
+    throw new Error(`No se pudo descargar la boleta (HTTP ${respuesta.status}).`);
+  }
+  const blob = await respuesta.blob();
+  const url = URL.createObjectURL(blob);
+  try {
+    const enlace = document.createElement("a");
+    enlace.href = url;
+    enlace.download = nombreArchivo;
+    document.body.appendChild(enlace);
+    enlace.click();
+    enlace.remove();
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
