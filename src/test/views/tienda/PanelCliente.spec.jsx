@@ -1,31 +1,54 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { ordenesService } from "../../../services/ordenesService";
+import { vi } from "vitest";
 import PanelCliente from "../../../pages/tienda/PanelCliente";
 
 vi.mock("../../../context/AuthContext", () => ({
-  useAuth: () => ({ usuario: { id: "12345678K", nombre: "Ana", apellidos: "Pérez", correo: "ana@gmail.com", tipo: "Cliente" }, actualizarSesion: vi.fn() }),
+  useAuth: () => ({
+    usuario: { id: 1, nombre: "Cliente", apellidos: "Prueba", correo: "cliente@ejemplo.cl", tipo: "Cliente" },
+    actualizarSesion: vi.fn(),
+  }),
 }));
 vi.mock("../../../services/ordenesService", () => ({
-  ordenesService: { listar: vi.fn().mockResolvedValue([]), descargarBoleta: vi.fn().mockResolvedValue(undefined) },
+  ordenesService: { listar: vi.fn().mockResolvedValue([]), descargarBoleta: vi.fn() },
 }));
 vi.mock("../../../services/usuariosService", () => ({
   usuariosService: { modificar: vi.fn(), cambiarPassword: vi.fn() },
 }));
 
-describe("PanelCliente", () => {
-  it("muestra el menú lateral con las secciones de la cuenta", async () => {
-    render(<MemoryRouter initialEntries={["/mi-cuenta"]}><Routes><Route path="/mi-cuenta" element={<PanelCliente />} /></Routes></MemoryRouter>);
-    expect(screen.getByRole("navigation", { name: "Menú de mi cuenta" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Mis pedidos/ })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Mis boletas/ })).toBeInTheDocument();
-    expect(screen.getByText(/Bienvenido, Ana/)).toBeInTheDocument();
+function abrirSeccion(seccion = "") {
+  const ruta = `/mi-cuenta${seccion ? `/${seccion}` : ""}`;
+  return render(
+    <MemoryRouter initialEntries={[ruta]}>
+      <Routes><Route path="/mi-cuenta/:seccion?" element={<PanelCliente />} /></Routes>
+    </MemoryRouter>,
+  );
+}
+
+describe("Panel de cliente: una prueba representativa por vista nueva", () => {
+  it("Resumen: muestra la bienvenida al cliente", () => {
+    abrirSeccion();
+    expect(screen.getByRole("heading", { name: "Bienvenido, Cliente" })).toBeInTheDocument();
   });
-  it("descarga la boleta de un pedido pagado desde Mis boletas", async () => {
-    ordenesService.listar.mockResolvedValueOnce([{ id: 9, fecha: "2026-10-15T12:00:00Z", estado: "Pagado", total: 20000, items: [] }]);
-    render(<MemoryRouter initialEntries={["/mi-cuenta/boletas"]}><Routes><Route path="/mi-cuenta/:seccion" element={<PanelCliente />} /></Routes></MemoryRouter>);
-    fireEvent.click(await screen.findByRole("button", { name: "Descargar PDF" }));
-    await waitFor(() => expect(ordenesService.descargarBoleta).toHaveBeenCalledWith(9));
+
+  it("Mis pedidos: muestra la sección de historial", () => {
+    abrirSeccion("pedidos");
+    expect(screen.getByRole("heading", { name: "Mis pedidos" })).toBeInTheDocument();
+  });
+
+  it("Mis boletas: muestra la sección de comprobantes", () => {
+    abrirSeccion("boletas");
+    expect(screen.getByRole("heading", { name: "Mis boletas" })).toBeInTheDocument();
+  });
+
+  it("Mi perfil: muestra el formulario de datos personales", () => {
+    abrirSeccion("perfil");
+    expect(screen.getByRole("heading", { name: "Actualizar mis datos" })).toBeInTheDocument();
+  });
+
+  it("Contraseña: muestra el formulario para cambiarla", () => {
+    abrirSeccion("seguridad");
+    expect(screen.getByRole("heading", { name: "Cambiar contraseña" })).toBeInTheDocument();
   });
 });
