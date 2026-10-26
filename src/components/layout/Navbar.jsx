@@ -98,6 +98,9 @@ export default function Navbar() {
                 data-bs-popper="static"
               >
                 <li><span className="dropdown-item-text fs-7 text-gold-light">{nombre}</span></li>
+                {!esStaff && (
+                  <li><Link className="dropdown-item" to="/mi-cuenta">Mi cuenta y pedidos</Link></li>
+                )}
                 {esStaff && (
                   <li><Link className="dropdown-item" to="/admin">Panel Admin</Link></li>
                 )}

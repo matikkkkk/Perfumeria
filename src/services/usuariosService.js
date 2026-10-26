@@ -11,6 +11,11 @@ export class ErrorAuth extends Error {
 
 export const usuariosService = {
   ...crearRecurso("/usuarios"),
+  cambiarPassword(id, datos) {
+    return peticion(`/usuarios/${encodeURIComponent(id)}/cambiar-password`, {
+      method: "POST", body: JSON.stringify(datos),
+    });
+  },
 
   // POST /auth/login (ms-usuarios): la contrasena se compara en el servidor con BCrypt y nunca vuelve en la respuesta.
   // 200 -> usuario sin password. 401 -> { campo: "correo" | "password" }, que se traduce a ErrorAuth para mostrar

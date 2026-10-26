@@ -1,6 +1,7 @@
 package cl.luxury.usuarios.service;
 
 import cl.luxury.usuarios.dto.UsuarioRequest;
+import cl.luxury.usuarios.dto.CambioPasswordRequest;
 import cl.luxury.usuarios.exception.ConflictoException;
 import cl.luxury.usuarios.exception.CredencialesInvalidasException;
 import cl.luxury.usuarios.exception.NoEncontradoException;
@@ -135,6 +136,21 @@ public class UsuarioService {
             throw new CredencialesInvalidasException("password", "Contraseña incorrecta.");
         }
         return usuario;
+    }
+
+    /** Revalida la contraseña anterior antes de sustituir el hash BCrypt. */
+    @Transactional
+    public void cambiarPassword(String id, CambioPasswordRequest r) {
+        Usuario usuario = obtener(id);
+        if (!usuario.getCorreo().equalsIgnoreCase(r.correo().trim())
+                || !encoder.matches(r.passwordActual(), usuario.getPasswordHash())) {
+            throw new CredencialesInvalidasException("password", "Contraseña actual incorrecta.");
+        }
+        if (encoder.matches(r.passwordNueva(), usuario.getPasswordHash())) {
+            throw new SolicitudInvalidaException("La nueva contraseña debe ser diferente de la actual.");
+        }
+        usuario.setPasswordHash(encoder.encode(r.passwordNueva()));
+        usuarios.save(usuario);
     }
 
     // ---------------------------------------------------------------- helpers

@@ -1,6 +1,7 @@
 package cl.luxury.usuarios.controller;
 
 import cl.luxury.usuarios.dto.UsuarioRequest;
+import cl.luxury.usuarios.dto.CambioPasswordRequest;
 import cl.luxury.usuarios.model.Usuario;
 import cl.luxury.usuarios.service.UsuarioService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -56,6 +57,13 @@ public class UsuarioController {
     @PatchMapping("/{id}")
     public Usuario modificar(@PathVariable String id, @RequestBody JsonNode cambios) {
         return servicio.modificar(id, cambios);
+    }
+
+    @PostMapping("/{id}/cambiar-password")
+    public ResponseEntity<Void> cambiarPassword(@PathVariable String id,
+            @Valid @RequestBody CambioPasswordRequest solicitud) {
+        servicio.cambiarPassword(id, solicitud);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")

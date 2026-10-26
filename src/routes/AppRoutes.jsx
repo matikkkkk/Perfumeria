@@ -42,6 +42,7 @@ import DetalleUsuario from "../pages/admin/DetalleUsuario";
 import EditarUsuario from "../pages/admin/EditarUsuario";
 import HistorialCompras from "../pages/admin/HistorialCompras";
 import ReportesAdmin from "../pages/admin/ReportesAdmin";
+import PanelCliente from "../pages/tienda/PanelCliente";
 
 // Mapa de rutas del proyecto (Figura 2 de las instrucciones: tienda + administrador).
 // Reglas de acceso:
@@ -72,6 +73,10 @@ export default function AppRoutes() {
         <Route path="blogs/:id" element={<DetalleBlog />} />
         <Route path="contacto" element={<Contacto />} />
         <Route path="logout" element={<CerrarSesion />} />
+        <Route element={<RutaProtegida roles={["Cliente"]} />}>
+          <Route path="mi-cuenta" element={<PanelCliente />} />
+          <Route path="mi-cuenta/:seccion" element={<PanelCliente />} />
+        </Route>
         <Route path="acceso-denegado" element={<AccesoDenegado />} />
         <Route path="*" element={<NoEncontrada />} />
       </Route>
