@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { ordenesService } from "../../services/ordenesService";
 import { usuariosService } from "../../services/usuariosService";
 import { formatearPrecio } from "../../utils/formato";
+import { regiones } from "../../data/regiones";
 
 const enlaces = [
   ["", "bi-grid", "Resumen"],
@@ -68,6 +69,7 @@ export default function PanelCliente() {
       setDescargando(null);
     }
   }
+  const comunasDisponibles = regiones.find(r => r.nombre === perfil.region)?.comunas ?? [];
   const pagadas = ordenes.filter(o => o.estado === "Pagado");
   const pedidos = seccion === "boletas" ? pagadas : ordenes;
   return <main className="container py-5">
@@ -99,7 +101,38 @@ export default function PanelCliente() {
             <div className="table-responsive"><table className="table table-dark table-hover align-middle"><thead><tr><th>Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Detalle</th><th>Boleta PDF</th></tr></thead><tbody>{pedidos.map(o => <tr key={o.id}><td>#{o.id}</td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td>{o.estado}</td><td>{formatearPrecio(o.total)}</td><td><details><summary>Ver productos</summary><ul>{o.items?.map((item,i) => <li key={i}>{item.cantidad} × {item.nombre}</li>)}</ul>{o.estado === "Pagado" && <p>El comprobante PDF fue enviado al correo indicado al comprar: {o.cliente?.correo}.</p>}</details></td><td>{o.estado === "Pagado" ? <button type="button" className="btn btn-luxury btn-sm" disabled={descargando === o.id} onClick={() => descargarBoleta(o.id)}>{descargando === o.id ? "Descargando…" : "Descargar PDF"}</button> : <span className="text-muted">No disponible</span>}</td></tr>)}</tbody></table></div>}
             {seccion === "boletas" && <p className="small text-gold-light">Puedes descargar aquí el mismo comprobante PDF que recibiste por correo.</p>}
           </>}
-          {seccion === "perfil" && <><h2 className="h4 luxury-title">Actualizar mis datos</h2><form onSubmit={guardarPerfil} className="row g-3">{[["nombre","Nombre"],["apellidos","Apellidos"],["correo","Correo electrónico"],["region","Región"],["comuna","Comuna"],["direccion","Dirección"]].map(([clave,etiqueta])=><div key={clave} className="col-md-6"><label className="form-label" htmlFor={`cuenta-${clave}`}>{etiqueta}</label><input required={["nombre","apellidos","correo"].includes(clave)} type={clave === "correo" ? "email" : "text"} className="form-control" id={`cuenta-${clave}`} value={perfil[clave]} onChange={e=>setPerfil(v=>({...v,[clave]:e.target.value}))}/></div>)}<div className="col-12"><button className="btn btn-luxury" disabled={guardando}>Guardar cambios</button></div></form></>}
+          {seccion === "perfil" && <>
+            <h2 className="h4 luxury-title">Actualizar mis datos</h2>
+            <form onSubmit={guardarPerfil} className="row g-3">
+              {[["nombre", "Nombre"], ["apellidos", "Apellidos"], ["correo", "Correo electrónico"]].map(([clave, etiqueta]) =>
+                <div key={clave} className="col-md-6">
+                  <label className="form-label" htmlFor={`cuenta-${clave}`}>{etiqueta}</label>
+                  <input required type={clave === "correo" ? "email" : "text"} className="form-control" id={`cuenta-${clave}`} value={perfil[clave]} onChange={e => setPerfil(v => ({ ...v, [clave]: e.target.value }))} />
+                </div>
+              )}
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="cuenta-region">Región</label>
+                <select className="form-select" id="cuenta-region" value={perfil.region} onChange={e => setPerfil(v => ({ ...v, region: e.target.value, comuna: "" }))} required>
+                  <option value="">Selecciona región</option>
+                  {perfil.region && !regiones.some(r => r.nombre === perfil.region) && <option value={perfil.region}>{perfil.region}</option>}
+                  {regiones.map(r => <option key={r.nombre} value={r.nombre}>{r.nombre}</option>)}
+                </select>
+              </div>
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="cuenta-comuna">Comuna</label>
+                <select className="form-select" id="cuenta-comuna" value={perfil.comuna} onChange={e => setPerfil(v => ({ ...v, comuna: e.target.value }))} disabled={!perfil.region} required>
+                  <option value="">{perfil.region ? "Selecciona comuna" : "Primero selecciona región"}</option>
+                  {perfil.comuna && !comunasDisponibles.includes(perfil.comuna) && <option value={perfil.comuna}>{perfil.comuna}</option>}
+                  {comunasDisponibles.map(c => <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="cuenta-direccion">Dirección</label>
+                <input className="form-control" id="cuenta-direccion" value={perfil.direccion} onChange={e => setPerfil(v => ({ ...v, direccion: e.target.value }))} />
+              </div>
+              <div className="col-12"><button className="btn btn-luxury" disabled={guardando}>Guardar cambios</button></div>
+            </form>
+          </>}
           {seccion === "seguridad" && <><h2 className="h4 luxury-title">Cambiar contraseña</h2><p className="small text-gold-light">Escribe tu contraseña actual. La nueva debe tener entre 4 y 10 caracteres, según las reglas vigentes de registro.</p><form onSubmit={cambiarPassword} className="row g-3">{[["actual","Contraseña actual"],["nueva","Nueva contraseña"],["confirmar","Confirmar nueva contraseña"]].map(([clave,nombre])=><div className="col-12" key={clave}><label htmlFor={`password-${clave}`} className="form-label">{nombre}</label><input className="form-control" id={`password-${clave}`} type="password" required autoComplete={clave === "actual" ? "current-password" : "new-password"} value={password[clave]} onChange={e=>setPassword(v=>({...v,[clave]:e.target.value}))}/></div>)}<div><button className="btn btn-luxury" disabled={guardando}>Actualizar contraseña</button></div></form></>}
           {!enlaces.some(([ruta]) => ruta === seccion) && <p>Sección no encontrada. <Link to="/mi-cuenta">Volver a mi cuenta</Link>.</p>}
         </div>
