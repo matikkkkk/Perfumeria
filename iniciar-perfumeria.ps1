@@ -35,13 +35,13 @@ foreach ($puerto in 8080,8081,8082,8083,5173) {
 }
 # Configuracion opcional de Gmail para enviar comprobantes PDF.
 # Las credenciales se introducen en cada ejecucion y no se escriben en archivos.
-$respuestaCorreo = Read-Host 'Enviar boletas por Gmail? (S/N, por defecto N)'
+$respuestaCorreo = Read-Host 'Activar correos Gmail (boletas, seguimiento, stock y bienvenida)? (S/N, por defecto N)'
 if ($respuestaCorreo -match '^[sS]$') {
   $env:SMTP_HOST = 'smtp.gmail.com'
   $env:SMTP_PORT = '587'
   $env:SMTP_AUTH = 'true'
   $env:SMTP_STARTTLS = 'true'
-  $correoRemitente = (Read-Host 'Direccion Gmail desde donde se enviaran las boletas').Trim()
+  $correoRemitente = (Read-Host 'Direccion Gmail remitente').Trim()
   if ($correoRemitente -notmatch '^[^@\s]+@(?:gmail\.com|googlemail\.com)$') {
     throw 'Indica una direccion Gmail valida. Para otros proveedores usa variables SMTP externas.'
   }
@@ -56,7 +56,7 @@ if ($respuestaCorreo -match '^[sS]$') {
   $env:MAIL_FROM = $correoRemitente
   $env:MAIL_ENABLED = 'true'
   $claveCorreo = $null
-  Write-Host 'Gmail SMTP habilitado para ms-ordenes (smtp.gmail.com:587 / STARTTLS).'
+  Write-Host 'Gmail SMTP habilitado para los microservicios (incluye ms-usuarios) (smtp.gmail.com:587 / STARTTLS).'
 } else {
   $env:MAIL_ENABLED = 'false'
   Write-Host 'Envio por correo desactivado para esta ejecucion.'

@@ -45,10 +45,12 @@ function valoresDe(producto, grupo) {
 // Genero y búsqueda vienen de la URL; los grupos son la selección de la página.
 // Dentro de un grupo basta con coincidir con una opción (O); entre grupos deben cumplirse todos (Y).
 // La búsqueda ignora mayúsculas y tildes y mira nombre + marca.
-export function filtrarProductos(productos, { genero = "", buscar = "", grupos = {} } = {}) {
+export function filtrarProductos(productos, { genero = "", buscar = "", grupos = {}, precioMin = null, precioMax = null } = {}) {
   const texto = normalizar(buscar);
   return productos.filter((p) => {
     if (genero && p.genero !== genero) return false;
+    if (precioMin !== null && Number(p.precio) < precioMin) return false;
+    if (precioMax !== null && Number(p.precio) > precioMax) return false;
     if (texto && !normalizar(`${p.nombre} ${p.marca ?? ""}`).includes(texto)) return false;
     return GRUPOS.every((grupo) => {
       const elegidas = grupos[grupo] ?? [];

@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./styles/style.css";
+import "./styles/responsive-polish.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import AppProviders from "./context/AppProviders.jsx";

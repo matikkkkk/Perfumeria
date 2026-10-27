@@ -1,3 +1,5 @@
+import RangoFechas from "../../components/admin/RangoFechas";
+import { filtrarPorFechas } from "../../utils/rangoFechas";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ordenesService } from "../../services/ordenesService";
@@ -9,6 +11,8 @@ export default function OrdenesAdmin() {
   const [error, setError] = useState("");
   const [busqueda, setBusqueda] = useState("");
   const [estado, setEstado] = useState("Todas");
+  const [desde, setDesde] = useState("");
+  const [hasta, setHasta] = useState("");
   const [actualizando, setActualizando] = useState(null);
   const siguiente = { Pagado: "En preparación", "En preparación": "Enviado", Enviado: "Entregado" };
 
@@ -38,14 +42,15 @@ export default function OrdenesAdmin() {
   const estados = useMemo(() => ["Todas", ...new Set(ordenes.map((orden) => orden.estado).filter(Boolean))], [ordenes]);
   const filtradas = useMemo(() => {
     const texto = busqueda.trim().toLowerCase();
-    return ordenes.filter((orden) => {
+    return filtrarPorFechas(ordenes, desde, hasta).filter((orden) => {
       const cliente = `${orden.cliente?.nombre || ""} ${orden.cliente?.apellidos || ""} ${orden.cliente?.correo || ""}`.toLowerCase();
       return (estado === "Todas" || orden.estado === estado) && (!texto || String(orden.id).toLowerCase().includes(texto) || cliente.includes(texto));
     });
-  }, [ordenes, busqueda, estado]);
+  }, [ordenes, busqueda, estado, desde, hasta]);
 
   return <section className="admin-page container-fluid py-2">
     <div className="mb-4"><span className="admin-eyebrow">VENTAS Y DESPACHOS</span><h1 className="luxury-title display-5 mb-1">Órdenes</h1><p className="text-gold-light mb-0">Consulta las compras y accede a la boleta de cada pedido.</p></div>
+    <RangoFechas desde={desde} hasta={hasta} onDesde={setDesde} onHasta={setHasta} />
     <section className="admin-panel">
       <div className="row g-3 mb-4"><div className="col-12 col-lg-7"><label htmlFor="buscar-orden" className="form-label">Buscar orden o cliente</label><div className="input-group"><span className="input-group-text admin-input-addon"><i className="bi bi-search"/></span><input id="buscar-orden" className="form-control admin-input" placeholder="Número, nombre o correo" value={busqueda} onChange={(event) => setBusqueda(event.target.value)}/></div></div><div className="col-12 col-lg-5"><label htmlFor="filtrar-estado" className="form-label">Filtrar por estado</label><select id="filtrar-estado" className="form-select admin-input" value={estado} onChange={(event) => setEstado(event.target.value)}>{estados.map((opcion) => <option key={opcion}>{opcion}</option>)}</select></div></div>
       {error && <div className="alert alert-warning" role="alert">{error}</div>}

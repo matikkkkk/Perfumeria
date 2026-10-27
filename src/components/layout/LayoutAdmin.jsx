@@ -9,6 +9,7 @@ const iconosMenu = {
   Productos: "bi-droplet",
   Categorías: "bi-tags",
   Usuarios: "bi-people",
+  Cupones: "bi-ticket-perforated",
   Reportes: "bi-bar-chart-line",
   Perfil: "bi-person-circle",
 };

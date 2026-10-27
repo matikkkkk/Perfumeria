@@ -7,6 +7,7 @@ export const MENU_ADMIN = [
   { to: "/admin/ordenes", etiqueta: "Órdenes", roles: ROLES_STAFF },
   { to: "/admin/productos", etiqueta: "Productos", roles: ROLES_STAFF },
   { to: "/admin/categorias", etiqueta: "Categorías", roles: ROLES_SOLO_ADMIN },
+  { to: "/admin/cupones", etiqueta: "Cupones", roles: ROLES_SOLO_ADMIN },
   { to: "/admin/usuarios", etiqueta: "Usuarios", roles: ROLES_SOLO_ADMIN },
   { to: "/admin/reportes", etiqueta: "Reportes", roles: ROLES_STAFF },
   { to: "/admin/perfil", etiqueta: "Perfil", roles: ROLES_STAFF },

@@ -34,14 +34,16 @@ public class ProductoService {
     private final OfertaRepository ofertas;
     private final ObjectMapper mapper;
     private final Validator validador;
+    private final AlertaStockService alertas;
 
     public ProductoService(ProductoRepository productos, CategoriaRepository categorias,
-                           OfertaRepository ofertas, ObjectMapper mapper, Validator validador) {
+                           OfertaRepository ofertas, ObjectMapper mapper, Validator validador, AlertaStockService alertas) {
         this.productos = productos;
         this.categorias = categorias;
         this.ofertas = ofertas;
         this.mapper = mapper;
         this.validador = validador;
+        this.alertas = alertas;
     }
 
     @Transactional(readOnly = true)
@@ -79,16 +81,20 @@ public class ProductoService {
     /** PUT: reemplaza el producto completo. */
     @Transactional
     public Producto actualizar(Long id, Producto producto) {
-        obtener(id);
+        Producto anterior = obtener(id);
+        boolean agotado = anterior.getStock() == null || anterior.getStock() <= 0;
         producto.setId(id);
         validarReglas(producto);
-        return productos.save(producto);
+        Producto guardado = productos.save(producto);
+        if (agotado && guardado.getStock() != null && guardado.getStock() > 0) alertas.avisarReposicion(id);
+        return guardado;
     }
 
     /** PATCH: cambia solo los campos enviados (ej. { "stock": 5 }). */
     @Transactional
     public Producto modificar(Long id, JsonNode cambios) {
         Producto actual = obtener(id);
+        boolean agotado = actual.getStock() == null || actual.getStock() <= 0;
         try {
             mapper.readerForUpdating(actual).readValue(cambios);
         } catch (IOException e) {
@@ -101,7 +107,9 @@ public class ProductoService {
             throw new ConstraintViolationException(errores);
         }
         validarReglas(actual);
-        return productos.save(actual);
+        Producto guardado = productos.save(actual);
+        if (agotado && guardado.getStock() != null && guardado.getStock() > 0) alertas.avisarReposicion(id);
+        return guardado;
     }
 
     /** Borra el producto y sus ofertas. Las órdenes ya emitidas conservan su copia en items[]. */

@@ -10,8 +10,8 @@ export default function ResumenCarrito({ onFinalizar }) {
   const [codigo, setCodigo] = useState(cupon ?? "");
   const [mensaje, setMensaje] = useState(null); // { ok, texto }
 
-  function aplicar() {
-    const resultado = aplicarCupon(codigo);
+  async function aplicar() {
+    const resultado = await aplicarCupon(codigo);
     setMensaje({ ok: resultado.ok, texto: resultado.mensaje });
   }
 
@@ -67,7 +67,7 @@ export default function ResumenCarrito({ onFinalizar }) {
       <h2 className="price my-3">{formatearPrecio(total)}</h2>
 
       <button type="button" className="btn btn-luxury w-100" onClick={onFinalizar}>
-        Finalizar compra
+        Continuar al pago
       </button>
     </div>
   );

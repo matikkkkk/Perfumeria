@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import BreadcrumbProducto from "../../components/detalle/BreadcrumbProducto";
 import CtaProducto from "../../components/detalle/CtaProducto";
@@ -7,10 +7,13 @@ import HistoriaProducto from "../../components/detalle/HistoriaProducto";
 import MaridajeProducto from "../../components/detalle/MaridajeProducto";
 import ModalCompra from "../../components/detalle/ModalCompra";
 import PiramideOlfativa from "../../components/detalle/PiramideOlfativa";
+import AlertaReposicion from "../../components/detalle/AlertaReposicion";
 import ResenasProducto from "../../components/detalle/ResenasProducto";
 import { useProducto } from "../../hooks/useProducto";
 import { useTemaProducto } from "../../hooks/useTemaProducto";
-import { estiloFondo, resenasDeProducto } from "../../utils/productoDetalle";
+import { estiloFondo } from "../../utils/productoDetalle";
+import { resenasService } from "../../services/resenasService";
+import { useAuth } from "../../context/AuthContext";
 
 // Detalle (producto.html). La página carga el producto, aplica su tema al <body> y reparte los datos a una sección por
 // componente, en el orden del HTML: hero, pirámide, historia, reseñas, llamado a comprar y maridaje.
@@ -22,7 +25,20 @@ export default function DetalleProducto() {
   const cerrarModal = useCallback(() => setModalAbierto(false), []);
 
   useTemaProducto(producto);
-  const resenas = useMemo(() => (producto ? resenasDeProducto(producto.id) : []), [producto]);
+  const { usuario } = useAuth();
+  const [resenas, setResenas] = useState([]);
+  const [errorResenas, setErrorResenas] = useState("");
+  const recargarResenas = useCallback(async () => {
+    if (!producto?.id) return;
+    try {
+      const datos = await resenasService.listar(`?productoId=${encodeURIComponent(producto.id)}`);
+      setResenas(datos);
+      setErrorResenas("");
+    } catch {
+      setErrorResenas("No se pudieron cargar las reseñas.");
+    }
+  }, [producto?.id]);
+  useEffect(() => { recargarResenas(); }, [recargarResenas]);
 
   if (cargando) {
     return (
@@ -61,7 +77,8 @@ export default function DetalleProducto() {
       <section id="historiaProducto" style={producto.historiaImagen ? undefined : fondo}>
         <HistoriaProducto producto={producto} />
       </section>
-      <section id="reviewsProducto" style={fondo}><ResenasProducto resenas={resenas} /></section>
+      <section id="reviewsProducto" style={fondo}><ResenasProducto productoId={producto.id} usuario={usuario} resenas={resenas} error={errorResenas} onNuevaResena={recargarResenas} /></section>
+      <AlertaReposicion key={producto.id} producto={producto} usuario={usuario} />
       <section id="ctaProducto"><CtaProducto producto={producto} onComprar={() => setModalAbierto(true)} /></section>
       <section id="maridajeProducto" style={fondo}><MaridajeProducto producto={producto} /></section>
 

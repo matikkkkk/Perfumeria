@@ -1,4 +1,3 @@
-import { RESENAS_BANCO } from "../data/resenas";
 
 // Lógica pura de la pantalla de detalle (temaDeProducto, resenasDeProducto, iniciales, estrellasHtml de script.js).
 
@@ -13,13 +12,6 @@ export function temaDeProducto(producto) {
 // El navbar se pinta oscuro sobre temas claros. El producto puede forzarlo con `navClaro`; si no, depende del tema.
 export function navClaroDe(producto, tema = temaDeProducto(producto)) {
   return typeof producto.navClaro === "boolean" ? producto.navClaro : tema === "verano" || tema === "primavera";
-}
-
-// 3 reseñas, siempre las mismas para un mismo id (suma de los códigos de sus letras como punto de partida).
-export function resenasDeProducto(id) {
-  const suma = [...String(id)].reduce((acc, letra) => acc + letra.charCodeAt(0), 0);
-  const inicio = suma % RESENAS_BANCO.length;
-  return [0, 1, 2].map((paso) => RESENAS_BANCO[(inicio + paso) % RESENAS_BANCO.length]);
 }
 
 // Promedio con un decimal, como texto ("4.7"). Sin reseñas devuelve "0.0".

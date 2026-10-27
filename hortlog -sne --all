@@ -1,0 +1,76 @@
+06048c3 | keizer17fts | gahafelipe@gmail.com | fix: corregir formularios, desplegables y validaciones de checkout
+9b96f8a | keizer17fts | gahafelipe@gmail.com | implementacion imagen proximamente
+7df94b1 | keizer17fts | gahafelipe@gmail.com | Correccion blogs y contacto
+85c7044 | keizer17fts | gahafelipe@gmail.com | Integracion MySQL Flyway, inicio automatico y optimizacion de tests
+eae24ed | matikkkkk | matydiscord2@gmail.com | Microservicio 2 usuarios  y Microservicio 3, gateway con CORS y conexión del front a la API
+739301a | matikkkkk | matydiscord2@gmail.com |  Backend, microservicio 1 y contrato de la API.
+2e9286e | keizer17fts | gahafelipe@gmail.com | Correccion testing y mejoras visuales
+fbae18e | matikkkkk | matydiscord2@gmail.com |  Pruebas que faltaron y reporte de cobertura (npm run coverage). Verificar que entre todas las views queden cubiertos los cuatro tipos que pide la pauta: renderizado, props, estado y eventos.
+51e5b62 | matikkkkk | matydiscord2@gmail.com | Categorías, Usuarios con historial de compras y Reportes.
+6e29bac | Emilio555 | emil.valenzuela@duocuc.cl | paso 14 productos: listar, nuevo, editar, criticos y reportes listos
+cb1cd52 | Emilio555 | emil.valenzuela@duocuc.cl | paso 13 layout admin, dashboard, ordenes con boleta y perfil listos
+3c807cf | Emilio555 | emil.valenzuela@duocuc.cl | paso 12 login, registro, contacto, nosotroy blogs listos
+3692a25 | Emilio555 | emil.valenzuela@duocuc.cl | paso 11 checkout, pagos y boletas listas
+0ab3c28 | Emilio555 | emil.valenzuela@duocuc.cl | paso 10 categorias, ofertas listos
+2f1b437 | Emilio555 | emil.valenzuela@duocuc.cl | paso 9 carrito wishlist y cupones listos
+5a3186a | keizer17fts | gahafelipe@gmail.com | paso 8: (Detalle de producto) hero, piramide, historia, resenas, maridaje y modal de compra
+425b3ce | keizer17fts | gahafelipe@gmail.com | paso 7: (Productos) filtros, orden y busqueda
+9f9f1d4 | keizer17fts | gahafelipe@gmail.com | paso 6: (Home) hecha
+c30a845 | keizer17fts | gahafelipe@gmail.com | paso 5.5: migrar pruebas de Karma/Jasmine a Vitest
+7f3d6ec | keizer17fts | gahafelipe@gmail.com | paso 5: jasmine y karma con webpack y babel, 54 specs
+f2a0f94 | keizer17fts | gahafelipe@gmail.com | paso 4: router, layouts, navbar, footer y RutaProtegida
+fef0d84 | keizer17fts | gahafelipe@gmail.com | paso3: utils, contextos de Auth, Carrito y Wishlist
+63eb3c0 | keizer17fts | gahafelipe@gmail.com | paso 2: cimientos de datos (categorias, ofertas, ordenes, login via /usuarios)
+86a523e | keizer17fts | gahafelipe@gmail.com | migracion a react paso 1: proyecto vite con bootstrap, capa de servicios y conexion a la api
+6a5224a | keizer17fts | gahafelipe@gmail.com | se retira el proyecto html para iniciar la migracion a react
+43fedce | keizer17fts | gahafelipe@gmail.com | index completodo y producto mejorado al 100
+8601981 | keizer17fts | gahafelipe@gmail.com | Avance mejora index
+61c72db | keizer17fts | gahafelipe@gmail.com | Correccion filtro de busqueda en index
+bd7376c | keizer17fts | gahafelipe@gmail.com | se agrego pasarela de pago y buscador
+87537da | keizer17fts | gahafelipe@gmail.com | Correccion validacion newsletter, ancho de nav y bug de cerrar sesion admin
+f346adb | keizer17fts | gahafelipe@gmail.com | Arreglo usuario validado
+4827b45 | keizer17fts | gahafelipe@gmail.com | correccion despegable index
+be8e2c5 | keizer17fts | gahafelipe@gmail.com | Correccion id de perfumes
+213ca3a | keizer17fts | gahafelipe@gmail.com | Correcion funciones validar
+e2e327a | keizer17fts | gahafelipe@gmail.com | Inclusion etiqueta iframe
+e695007 | keizer17fts | gahafelipe@gmail.com | Mas perfumes agregados
+83ce5ce | keizer17fts | gahafelipe@gmail.com | correccion nombres usuarios
+ced16c3 | keizer17fts | gahafelipe@gmail.com | agregar usuarios de prueba para roles Vendedor y Cliente
+3c6bd17 | keizer17fts | gahafelipe@gmail.com | Arreglo nombre nosotros
+9fb6e2b | keizer17fts | gahafelipe@gmail.com | Arreglo bug de limpiar filtros, ahora nos deja en la misma pagina
+fd98ab2 | keizer17fts | gahafelipe@gmail.com | arreglo funcion filtros marcados
+9f47014 | keizer17fts | gahafelipe@gmail.com | correcion bug de ingresar como admin no lleva a pagina de admin
+3e4bd6f | keizer17fts | gahafelipe@gmail.com | Script.js ordenado por secciones (sin cambios de logica)
+e014edf | keizer17fts | gahafelipe@gmail.com | Correcion nombre script.js
+52ffaf3 | keizer17fts | gahafelipe@gmail.com | Correccion blogs y se agrega blog 3
+bdc0a62 | Emilio555 | emil.valenzuela@duocuc.cl | Arreglo de blog1 y blog2
+0ecdaf3 | keizer17fts | gahafelipe@gmail.com | modifacion visual de carrito
+b280b4f | keizer17fts | gahafelipe@gmail.com | readme creado
+58e80b0 | keizer17fts | gahafelipe@gmail.com | correccion nombre archivo
+af97ec2 | Emilio555 | emil.valenzuela@duocuc.cl | Arreglo bug de limite carrito
+bad8db5 | matikkkkk | matydiscord2@gmail.com | admin ordenes y detalle de usuario admin
+5547394 | Emilio555 | emil.valenzuela@duocuc.cl | Creacion estructura contacto y  funciones.
+9e5d429 | Emilio555 | emil.valenzuela@duocuc.cl | Agregado blog y blogs estructura html
+6c0832e | keizer17fts | gahafelipe@gmail.com | Bug de carrito corregido, producto se ve reflejado en carrito
+96d07a3 | keizer17fts | gahafelipe@gmail.com | admin: crear/editar/eliminar producto
+b57c2ac | keizer17fts | gahafelipe@gmail.com | admin: proteccion de acceso y listado de productos listo
+f6de017 | matikkkkk | matydiscord2@gmail.com | arreglo myself
+3dc8884 | matikkkkk | matydiscord2@gmail.com | mas data de perfume
+56ec2d5 | keizer17fts | gahafelipe@gmail.com | creacion estructura nosotros.html y styles nosotros
+8b38397 | Emilio555 | emil.valenzuela@duocuc.cl | Funciones registrar usuario e iniciar sesion
+b4a9c4c | Emilio555 | emil.valenzuela@duocuc.cl | Carga de regiones y comunas
+4925c75 | matikkkkk | matydiscord2@gmail.com | Cupones agregados js
+6c8a483 | matikkkkk | matydiscord2@gmail.com | funciones js de carrito(agregar y mas cosas)
+ae68c98 | matikkkkk | matydiscord2@gmail.com | creacion estructura carrito
+989520f | Emilio555 | emil.valenzuela@duocuc.cl | Validacion de run y correo
+0781d8a | Emilio555 | emil.valenzuela@duocuc.cl | Creacion estructura de registro y login
+a55d3c1 | keizer17fts | gahafelipe@gmail.com | mas data de perfumes
+c78c1cb | keizer17fts | gahafelipe@gmail.com | termino funciones de producto (detalle, piramide, maridaje) y de index (diccionario, newsletter)
+9df4634 | keizer17fts | gahafelipe@gmail.com | wishlist creado y funciones js creadas de wishlists
+a8104c2 | keizer17fts | gahafelipe@gmail.com | creacion funciones para mostrar productos
+90ca7e2 | matikkkkk | matydiscord2@gmail.com | syles de productos y producto
+1b3bddb | matikkkkk | matydiscord2@gmail.com | funciones js para index (carrusel) y creacion de producto y productos
+fbf21b7 | keizer17fts | gahafelipe@gmail.com | data perfumes, regiones y usuarios creada
+e5e76d7 | keizer17fts | gahafelipe@gmail.com | cambio color acordeon y chip romantico
+9aebc5d | keizer17fts | gahafelipe@gmail.com | Index terminado, con css listo
+55f4410 | matikkkkk | matydiscord2@gmail.com | index  avanzado

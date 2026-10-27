@@ -31,7 +31,7 @@ spring:
         - id: ms-catalogo
           uri: ${MS_CATALOGO_URL:http://localhost:8081}
           predicates:
-            - Path=/api/productos/**,/api/categorias/**,/api/ofertas/**,/api/catalogo/**
+            - Path=/api/productos/**,/api/categorias/**,/api/ofertas/**,/api/cupones/**,/api/resenas/**,/api/alertas-stock/**,/api/catalogo/**
         - id: ms-usuarios
           uri: ${MS_USUARIOS_URL:http://localhost:8082}
           predicates:

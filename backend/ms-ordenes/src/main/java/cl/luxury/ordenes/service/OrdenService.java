@@ -125,7 +125,8 @@ public class OrdenService {
                 throw new SolicitudInvalidaException("Transición no permitida: " + anterior + " → " + estado);
             }
         }
-        if (flujo.contains(anterior) && !flujo.contains(estado)) {
+        if (flujo.contains(anterior) &&
+                (!flujo.contains(estado) || flujo.indexOf(estado) < flujo.indexOf(anterior))) {
             throw new SolicitudInvalidaException("No se puede retroceder un pedido en despacho.");
         }
         orden.setEstado(estado);

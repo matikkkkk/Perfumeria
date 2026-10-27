@@ -11,12 +11,33 @@ const inicial = { nombre: "", apellidos: "", correo: "", calle: "", departamento
 
 
 export default function Checkout() {
-  const { items, subtotal, cupon, descuento, total, vaciar } = useCarrito();
+  const { items, subtotal, cupon, descuento, total, vaciar, aplicarCupon, quitarCupon } = useCarrito();
   const { usuario } = useAuth();
   const navigate = useNavigate();
   const [datos, setDatos] = useState(() => ({ ...inicial, nombre: usuario?.nombre || "", apellidos: usuario?.apellidos || "", correo: usuario?.correo || "" }));
   const [error, setError] = useState("");
   const [procesando, setProcesando] = useState(false);
+  const [codigoCupon, setCodigoCupon] = useState("");
+  const [mensajeCupon, setMensajeCupon] = useState(null);
+  const [validandoCupon, setValidandoCupon] = useState(false);
+
+  async function aplicarCuponPago() {
+    if (cupon || validandoCupon || procesando) return;
+    setValidandoCupon(true);
+    try {
+      const resultado = await aplicarCupon(codigoCupon);
+      setMensajeCupon({ ok: resultado.ok, texto: resultado.mensaje });
+      if (resultado.ok) setCodigoCupon("");
+    } finally {
+      setValidandoCupon(false);
+    }
+  }
+
+  function quitarCuponPago() {
+    quitarCupon();
+    setCodigoCupon("");
+    setMensajeCupon(null);
+  }
   const comunasDisponibles = regiones.find((r) => r.nombre === datos.region)?.comunas ?? [];
   const cambio = (e) => {
     const { name, value } = e.target;
@@ -56,5 +77,16 @@ export default function Checkout() {
     <form onSubmit={pagar} noValidate><div className="row g-4"><div className="col-lg-7"><section className="luxury-card p-4 mb-4"><h2 className="h4 luxury-title mb-4">1. Datos del cliente</h2><div className="row g-3">{[["nombre","Nombre"],["apellidos","Apellidos"],["correo","Correo electrónico"]].map(([name,label])=><div className="col-md-6" key={name}><label className="form-label" htmlFor={name}>{label}</label><input className="form-control" id={name} name={name} value={datos[name]} onChange={cambio} required type={name === "correo" ? "email" : "text"}/></div>)}</div></section>
       <section className="luxury-card p-4 mb-4"><h2 className="h4 luxury-title mb-4">2. Dirección de envío</h2><div className="row g-3"><div className="col-md-8"><label className="form-label" htmlFor="calle">Calle y número</label><input className="form-control" id="calle" name="calle" value={datos.calle} onChange={cambio} required/></div><div className="col-md-4"><label className="form-label" htmlFor="departamento">Depto. (opcional)</label><input className="form-control" id="departamento" name="departamento" value={datos.departamento} onChange={cambio}/></div><div className="col-md-6"><label className="form-label" htmlFor="region">Región</label><select className="form-select" id="region" name="region" value={datos.region} onChange={cambio} required><option value="">Selecciona región</option>{regiones.map(r=><option key={r.nombre} value={r.nombre}>{r.nombre}</option>)}</select></div><div className="col-md-6"><label className="form-label" htmlFor="comuna">Comuna</label><select className="form-select" id="comuna" name="comuna" value={datos.comuna} onChange={cambio} disabled={!datos.region} required><option value="">{datos.region ? "Selecciona comuna" : "Primero selecciona región"}</option>{comunasDisponibles.map(c=><option key={c} value={c}>{c}</option>)}</select></div><div className="col-12"><label className="form-label" htmlFor="indicaciones">Indicaciones (opcional)</label><textarea className="form-control" id="indicaciones" name="indicaciones" rows="2" value={datos.indicaciones} onChange={cambio}/></div></div></section>
       <section className="luxury-card p-4"><h2 className="h4 luxury-title mb-4">3. Pago con tarjeta</h2><div className="row g-3"><div className="col-12"><label className="form-label" htmlFor="titular">Nombre del titular</label><input className="form-control" id="titular" name="titular" value={datos.titular} onChange={cambio} required/></div><div className="col-12"><label className="form-label" htmlFor="tarjeta">Número de tarjeta</label><input className="form-control" id="tarjeta" name="tarjeta" inputMode="numeric" autoComplete="cc-number" maxLength="23" placeholder="1234 5678 9012 3456" value={datos.tarjeta} onChange={cambio} required/><small className="text-gold-light">Demo: usa una tarjeta de prueba; para simular rechazo, termina en 0000.</small></div><div className="col-md-6"><label className="form-label" htmlFor="vencimiento">Vencimiento (MM/AA)</label><input className="form-control" id="vencimiento" name="vencimiento" inputMode="numeric" autoComplete="cc-exp" maxLength="5" placeholder="MM/AA" value={datos.vencimiento} onChange={cambio} required/></div><div className="col-md-6"><label className="form-label" htmlFor="cvv">CVV</label><input className="form-control" id="cvv" name="cvv" type="password" inputMode="numeric" autoComplete="cc-csc" maxLength="4" value={datos.cvv} onChange={cambio} required/></div></div></section></div>
-      <aside className="col-lg-5"><div className="luxury-card p-4 position-sticky" style={{top:"100px"}}><h2 className="h4 luxury-title mb-4">Resumen de la orden</h2>{items.map(i=><div key={i.productoId} className="d-flex justify-content-between gap-3 mb-3"><div><div>{i.nombre}</div><small className="text-gold-light">{i.cantidad} × {formatearPrecio(i.precio)}</small></div><span>{formatearPrecio(i.precio*i.cantidad)}</span></div>)}<hr/><div className="d-flex justify-content-between mb-2"><span>Subtotal</span><span>{formatearPrecio(subtotal)}</span></div>{cupon&&<div className="d-flex justify-content-between mb-2"><span>Descuento ({cupon})</span><span>-{formatearPrecio(descuento)}</span></div>}<div className="d-flex justify-content-between fw-bold fs-5 text-gold mt-3"><span>Total</span><span>{formatearPrecio(total)}</span></div>{error&&<div role="alert" className="alert alert-danger mt-3">{error}</div>}<button className="btn btn-luxury w-100 mt-4" type="submit" disabled={procesando}>{procesando?"Procesando…":"Confirmar y pagar"}</button><Link className="btn btn-outline-secondary w-100 mt-2" to="/carrito">Volver al carrito</Link><small className="d-block text-gold-light mt-3">Esta tienda usa un flujo de pago simulado para fines académicos. No ingreses datos de una tarjeta real.</small></div></aside></div></form></div>;
+      <aside className="col-lg-5"><div className="luxury-card p-4 position-sticky" style={{top:"100px"}}><h2 className="h4 luxury-title mb-4">Resumen de la orden</h2>{items.map(i=><div key={i.productoId} className="d-flex justify-content-between gap-3 mb-3"><div><div>{i.nombre}</div><small className="text-gold-light">{i.cantidad} × {formatearPrecio(i.precio)}</small></div><span>{formatearPrecio(i.precio*i.cantidad)}</span></div>)}<hr/>
+      <div className="mb-3">
+        <label className="form-label text-gold-light" htmlFor="cupon-pago">Cupón de descuento</label>
+        <div className="input-group">
+          <input id="cupon-pago" className="form-control form-luxury" type="text" placeholder="Ej: LUXURY10" value={cupon || codigoCupon} disabled={Boolean(cupon) || procesando || validandoCupon} onChange={(e) => { setCodigoCupon(e.target.value); setMensajeCupon(null); }} />
+          {cupon ? <button type="button" className="btn btn-outline-luxury" onClick={quitarCuponPago} disabled={procesando}>Quitar</button>
+            : <button type="button" className="btn btn-outline-luxury" onClick={aplicarCuponPago} disabled={procesando || validandoCupon}>{validandoCupon ? "Validando…" : "Aplicar"}</button>}
+        </div>
+        {cupon && <small className="d-block mt-1 text-success">Cupón {cupon} aplicado. Ya se incluye en el total.</small>}
+        {mensajeCupon && !cupon && <small role="status" className={`d-block mt-1 ${mensajeCupon.ok ? "text-success" : "text-danger"}`}>{mensajeCupon.texto}</small>}
+      </div>
+      <div className="d-flex justify-content-between mb-2"><span>Subtotal</span><span>{formatearPrecio(subtotal)}</span></div>{cupon&&<div className="d-flex justify-content-between mb-2"><span>Descuento ({cupon})</span><span>-{formatearPrecio(descuento)}</span></div>}<div className="d-flex justify-content-between fw-bold fs-5 text-gold mt-3"><span>Total</span><span>{formatearPrecio(total)}</span></div>{error&&<div role="alert" className="alert alert-danger mt-3">{error}</div>}<button className="btn btn-luxury w-100 mt-4" type="submit" disabled={procesando}>{procesando?"Procesando…":"Confirmar y pagar"}</button><Link className="btn btn-outline-secondary w-100 mt-2" to="/carrito">Volver al carrito</Link><small className="d-block text-gold-light mt-3">Esta tienda usa un flujo de pago simulado para fines académicos. No ingreses datos de una tarjeta real.</small></div></aside></div></form></div>;
 }

@@ -1,3 +1,4 @@
+import { formatearPrecio } from "../../utils/formato";
 import { useState } from "react";
 import { GRUPOS, opcionDeFiltro } from "../../utils/filtrosProductos";
 
@@ -17,7 +18,7 @@ const TITULOS = {
 // (antes lo hacía data-bs-toggle="collapse").
 //   opciones:  { grupo: ["valor", ...] }  lo que existe en el catálogo
 //   seleccion: { grupo: ["valor", ...] }  lo que está marcado
-export default function PanelFiltros({ opciones, seleccion, categorias = [], onAlternar, onLimpiar }) {
+export default function PanelFiltros({ opciones, seleccion, categorias = [], onAlternar, onLimpiar, limitesPrecio = { min: 0, max: 0 }, precioMin = 0, precioMax = 0, onPrecioMin = () => {}, onPrecioMax = () => {} }) {
   const [abierto, setAbierto] = useState(false);
 
   return (
@@ -35,6 +36,15 @@ export default function PanelFiltros({ opciones, seleccion, categorias = [], onA
       <div className={`filtros-sidebar collapse d-lg-block${abierto ? " show" : ""}`} id="filtrosCollapse">
         <h4 className="filtros-titulo">Filtros</h4>
 
+        <div className="filtro-seccion filtro-precio">
+          <h5 className="filtro-seccion-titulo">Rango de precio</h5>
+          <div className="d-flex justify-content-between gap-2 small text-gold-light mb-2"><span>{formatearPrecio(precioMin)}</span><span>{formatearPrecio(precioMax)}</span></div>
+          <div className="rango-precio-doble" style={{ "--inicio": `${limitesPrecio.max === limitesPrecio.min ? 0 : ((precioMin - limitesPrecio.min) / (limitesPrecio.max - limitesPrecio.min)) * 100}%`, "--fin": `${limitesPrecio.max === limitesPrecio.min ? 100 : ((precioMax - limitesPrecio.min) / (limitesPrecio.max - limitesPrecio.min)) * 100}%` }}>
+            <div className="rango-precio-doble__pista" aria-hidden="true"><div className="rango-precio-doble__seleccion" /></div>
+            <input aria-label="Precio mínimo" id="precio-minimo" type="range" min={limitesPrecio.min} max={limitesPrecio.max} step="1000" value={precioMin} disabled={limitesPrecio.min === limitesPrecio.max} onChange={(e) => onPrecioMin(Math.min(Number(e.target.value), precioMax))} />
+            <input aria-label="Precio máximo" id="precio-maximo" type="range" min={limitesPrecio.min} max={limitesPrecio.max} step="1000" value={precioMax} disabled={limitesPrecio.min === limitesPrecio.max} onChange={(e) => onPrecioMax(Math.max(Number(e.target.value), precioMin))} />
+          </div>
+        </div>
         {GRUPOS.filter((grupo) => (opciones[grupo] ?? []).length > 0).map((grupo) => (
           <div className="filtro-seccion" key={grupo}>
             <h5 className="filtro-seccion-titulo">{TITULOS[grupo]}</h5>

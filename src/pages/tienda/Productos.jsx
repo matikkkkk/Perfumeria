@@ -1,3 +1,4 @@
+import "../../styles/rangos-luxury.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import BarraResultados from "../../components/productos/BarraResultados";
@@ -31,6 +32,7 @@ export default function Productos() {
 
   const [seleccion, setSeleccion] = useState(() => filtrosDesdeUrl(params));
   const [orden, setOrden] = useState("destacados");
+  const [rangoPrecio, setRangoPrecio] = useState(null);
 
   // Si llegan nuevos ?categoria=/?humor=... con la página ya abierta, se actualiza la selección.
   const claveFiltrosUrl = GRUPOS.map((g) => params.get(g) ?? "").join("|");
@@ -50,10 +52,16 @@ export default function Productos() {
     return () => document.body.classList.remove("productos-page");
   }, []);
 
+  const limitesPrecio = useMemo(() => {
+    const precios = productos.map(p => Number(p.precio)).filter(Number.isFinite);
+    return precios.length ? { min: Math.floor(Math.min(...precios) / 1000) * 1000, max: Math.ceil(Math.max(...precios) / 1000) * 1000 } : { min: 0, max: 0 };
+  }, [productos]);
+  const precioMin = rangoPrecio ? rangoPrecio.min : limitesPrecio.min;
+  const precioMax = rangoPrecio ? rangoPrecio.max : limitesPrecio.max;
   const opciones = useMemo(() => opcionesDisponibles(productos), [productos]);
   const visibles = useMemo(
-    () => ordenarProductos(filtrarProductos(productos, { genero, buscar, grupos: seleccion }), orden),
-    [productos, genero, buscar, seleccion, orden]
+    () => ordenarProductos(filtrarProductos(productos, { genero, buscar, grupos: seleccion, precioMin, precioMax }), orden),
+    [productos, genero, buscar, seleccion, orden, precioMin, precioMax]
   );
 
   const alternar = (grupo, valor) => setSeleccion((previa) => alternarValor(previa, grupo, valor));
@@ -62,6 +70,7 @@ export default function Productos() {
   function limpiar() {
     setSeleccion(crearFiltrosVacios());
     setOrden("destacados");
+    setRangoPrecio(null);
     setParams(genero ? { genero } : {});
   }
 
@@ -81,6 +90,11 @@ export default function Productos() {
           categorias={categorias}
           onAlternar={alternar}
           onLimpiar={limpiar}
+          limitesPrecio={limitesPrecio}
+          precioMin={precioMin}
+          precioMax={precioMax}
+          onPrecioMin={(min) => setRangoPrecio({ min, max: Math.max(min, precioMax) })}
+          onPrecioMax={(max) => setRangoPrecio({ min: Math.min(precioMin, max), max })}
         />
 
         <div className="col-lg-9">

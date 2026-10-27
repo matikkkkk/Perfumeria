@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
@@ -32,12 +33,13 @@ public class BoletaCorreoService {
     }
 
     // Solo después del COMMIT: un SMTP caído jamás revierte una compra confirmada.
+    @Async("correoExecutor")
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void enviar(OrdenPagadaEvento evento) {
         if (!habilitado) return;
         try {
             Orden orden = ordenes.findById(evento.ordenId()).orElse(null);
-            if (orden == null || !"Pagado".equals(orden.getEstado())) return;
+            if (orden == null || !java.util.Set.of("Pagado", "En preparación", "Enviado", "Entregado").contains(orden.getEstado())) return;
             String destinatario = orden.getCliente() == null ? null : orden.getCliente().getCorreo();
             if (destinatario == null || destinatario.isBlank()) return;
             MimeMessage mensaje = correo.createMimeMessage();

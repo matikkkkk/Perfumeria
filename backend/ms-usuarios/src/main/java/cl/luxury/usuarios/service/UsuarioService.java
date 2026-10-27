@@ -14,6 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import org.springframework.context.ApplicationEventPublisher;
+import cl.luxury.usuarios.correo.RegistroCreadoEvent;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,13 +38,15 @@ public class UsuarioService {
     private final PasswordEncoder encoder;
     private final ObjectMapper mapper;
     private final Validator validador;
+    private final ApplicationEventPublisher eventos;
 
     public UsuarioService(UsuarioRepository usuarios, PasswordEncoder encoder,
-                          ObjectMapper mapper, Validator validador) {
+                          ObjectMapper mapper, Validator validador, ApplicationEventPublisher eventos) {
         this.usuarios = usuarios;
         this.encoder = encoder;
         this.mapper = mapper;
         this.validador = validador;
+        this.eventos = eventos;
     }
 
     /** Filtros opcionales: ?correo=..., ?run=..., ?tipo=... (los que usa el registro y el admin). */
@@ -87,7 +91,9 @@ public class UsuarioService {
         Usuario nuevo = new Usuario();
         nuevo.setRun(run);
         nuevo.setTipo("Cliente");
-        return guardarCambios(nuevo, r);
+        Usuario creado = guardarCambios(nuevo, r);
+        eventos.publishEvent(new RegistroCreadoEvent(creado.getCorreo(), creado.getNombre()));
+        return creado;
     }
 
     /** PUT: reemplaza los datos. Si no viene password se conserva la actual. El RUN no se puede cambiar. */

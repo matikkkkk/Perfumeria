@@ -35,11 +35,21 @@ export default function Navbar() {
   // Al navegar se cierra todo y el buscador refleja el ?buscar= de la URL (igual que el HTML).
   useEffect(() => {
     setMenuAbierto(false);
+    setBuscadorAbierto(false);
     setTexto(new URLSearchParams(location.search).get("buscar") ?? "");
   }, [location.pathname, location.search]);
 
   useEffect(() => {
     if (buscadorAbierto) refInput.current?.focus();
+  }, [buscadorAbierto]);
+
+  useEffect(() => {
+    if (!buscadorAbierto) return;
+    function cerrarConEscape(evento) {
+      if (evento.key === "Escape") setBuscadorAbierto(false);
+    }
+    document.addEventListener("keydown", cerrarConEscape);
+    return () => document.removeEventListener("keydown", cerrarConEscape);
   }, [buscadorAbierto]);
 
   function buscar(evento) {
@@ -53,7 +63,7 @@ export default function Navbar() {
   const enProductos = location.pathname.startsWith("/productos");
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-transparent py-3 border-bottom border-secondary border-opacity-25">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-transparent py-3 border-bottom border-secondary border-opacity-25 luxury-navbar">
       <div className="container">
         <Link className="navbar-brand brand-logo d-flex align-items-center gap-2" to="/" aria-label="Inicio">
           <span className="brand-mark-mini">ML</span>
@@ -63,12 +73,12 @@ export default function Navbar() {
           <button
             type="button"
             className="nav-icon-btn"
-            aria-label="Buscar"
+            aria-label={buscadorAbierto ? "Cerrar buscador" : "Abrir buscador"}
             aria-expanded={buscadorAbierto}
             aria-controls="navSearchBox"
             onClick={() => setBuscadorAbierto((v) => !v)}
           >
-            <i className="bi bi-search"></i>
+            <i className={`bi ${buscadorAbierto ? "bi-x-lg" : "bi-search"}`}></i>
           </button>
 
           <Link className="nav-icon-btn position-relative" to="/wishlist" aria-label={`Wishlist, ${enWishlist} productos`}>
@@ -164,9 +174,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className={`nav-search-box collapse${buscadorAbierto ? " show" : ""}`} id="navSearchBox">
+      <div className={`nav-search-box collapse${buscadorAbierto ? " show" : ""}`} id="navSearchBox" role="region" aria-label="Buscador de perfumes">
         <div className="container py-3">
-          <form className="d-flex gap-2" role="search" onSubmit={buscar}>
+          <form className="nav-search-form d-flex gap-2" role="search" onSubmit={buscar}>
             <input
               ref={refInput}
               type="text"
@@ -177,8 +187,11 @@ export default function Navbar() {
               value={texto}
               onChange={(e) => setTexto(e.target.value)}
             />
-            <button type="submit" className="btn btn-luxury" aria-label="Buscar">
+            <button type="submit" className="btn btn-luxury nav-search-submit" aria-label="Buscar perfumes">
               <i className="bi bi-search"></i>
+            </button>
+            <button type="button" className="nav-search-close" aria-label="Cerrar buscador" title="Cerrar buscador" onClick={() => setBuscadorAbierto(false)}>
+              <i className="bi bi-x-lg" aria-hidden="true"></i>
             </button>
           </form>
         </div>

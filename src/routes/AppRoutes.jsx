@@ -42,6 +42,7 @@ import DetalleUsuario from "../pages/admin/DetalleUsuario";
 import EditarUsuario from "../pages/admin/EditarUsuario";
 import HistorialCompras from "../pages/admin/HistorialCompras";
 import ReportesAdmin from "../pages/admin/ReportesAdmin";
+import CuponesAdmin from "../pages/admin/CuponesAdmin";
 import PanelCliente from "../pages/tienda/PanelCliente";
 
 // Mapa de rutas del proyecto (Figura 2 de las instrucciones: tienda + administrador).
@@ -101,6 +102,7 @@ export default function AppRoutes() {
             <Route path="categorias" element={<CategoriasAdmin />} />
             <Route path="categorias/nueva" element={<NuevaCategoria />} />
             <Route path="categorias/:id/editar" element={<EditarCategoria />} />
+            <Route path="cupones" element={<CuponesAdmin />} />
             <Route path="usuarios" element={<UsuariosAdmin />} />
             <Route path="usuarios/nuevo" element={<NuevoUsuario />} />
             <Route path="usuarios/:id" element={<DetalleUsuario />} />
