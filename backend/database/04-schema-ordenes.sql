@@ -36,7 +36,7 @@ CREATE TABLE ordenes (
   PRIMARY KEY (id),
   KEY ix_ordenes_usuario (usuario_id),
   KEY ix_ordenes_fecha (fecha),
-  CONSTRAINT ck_ordenes_estado CHECK (estado IN ('Pendiente', 'Pagado', 'Pago fallido'))
+  CONSTRAINT ck_ordenes_estado CHECK (estado IN ('Pendiente', 'Pagado', 'Pago fallido', 'En preparación', 'Enviado', 'Entregado'))
 ) ENGINE=InnoDB;
 
 CREATE TABLE orden_items (

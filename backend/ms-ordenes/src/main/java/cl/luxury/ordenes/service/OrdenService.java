@@ -26,7 +26,7 @@ public class OrdenService {
 
     static final String PAGADO = "Pagado";
     static final String PAGO_FALLIDO = "Pago fallido";
-    private static final Set<String> ESTADOS = Set.of("Pendiente", PAGADO, PAGO_FALLIDO);
+    private static final Set<String> ESTADOS = Set.of("Pendiente", PAGADO, PAGO_FALLIDO, "En preparación", "Enviado", "Entregado");
     /** Campos por los que se puede ordenar (?_sort=fecha&_order=desc, como json-server). */
     private static final Set<String> ORDENABLES = Set.of("id", "fecha", "estado", "subtotal", "descuento", "total");
     private static final long MAXIMO_IMPORTE = Integer.MAX_VALUE;
@@ -115,7 +115,19 @@ public class OrdenService {
         if (!ESTADOS.contains(estado)) {
             throw new SolicitudInvalidaException("Estado inválido. Valores: " + ESTADOS);
         }
-        boolean pagadaAntes = PAGADO.equals(orden.getEstado());
+        String anterior = orden.getEstado();
+        if (anterior.equals(estado)) return orden; // evitar notificaciones repetidas
+        boolean pagadaAntes = PAGADO.equals(anterior);
+        // No permitir que las compras fallidas avancen al despacho ni retroceder etapas.
+        List<String> flujo = List.of(PAGADO, "En preparación", "Enviado", "Entregado");
+        if (flujo.contains(estado) && !PAGADO.equals(estado)) {
+            if (!flujo.contains(anterior) || flujo.indexOf(estado) != flujo.indexOf(anterior) + 1) {
+                throw new SolicitudInvalidaException("Transición no permitida: " + anterior + " → " + estado);
+            }
+        }
+        if (flujo.contains(anterior) && !flujo.contains(estado)) {
+            throw new SolicitudInvalidaException("No se puede retroceder un pedido en despacho.");
+        }
         orden.setEstado(estado);
         if (PAGADO.equals(estado)) {
             orden.setTotal(orden.getSubtotal() - orden.getDescuento());
@@ -123,6 +135,8 @@ public class OrdenService {
         Orden guardada = ordenes.save(orden);
         if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
+        } else if (Set.of("En preparación", "Enviado", "Entregado").contains(estado)) {
+            eventos.publishEvent(new OrdenEstadoActualizadoEvento(guardada.getId(), estado));
         }
         return guardada;
     }

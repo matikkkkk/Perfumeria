@@ -43,8 +43,8 @@ public class OrdenController {
     @GetMapping(value = "/{id}/boleta", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> descargarBoleta(@PathVariable Long id) {
         Orden orden = servicio.obtener(id);
-        if (!"Pagado".equalsIgnoreCase(orden.getEstado())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Solo se pueden descargar boletas de pedidos pagados.");
+        if (!java.util.Set.of("Pagado", "En preparación", "Enviado", "Entregado").contains(orden.getEstado())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Solo hay boletas para compras confirmadas.");
         }
         try {
             byte[] pdf = boletaPdfService.generar(orden);

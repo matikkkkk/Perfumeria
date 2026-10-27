@@ -70,7 +70,8 @@ export default function PanelCliente() {
     }
   }
   const comunasDisponibles = regiones.find(r => r.nombre === perfil.region)?.comunas ?? [];
-  const pagadas = ordenes.filter(o => o.estado === "Pagado");
+  const estadosConfirmados = ["Pagado", "En preparación", "Enviado", "Entregado"];
+  const pagadas = ordenes.filter(o => estadosConfirmados.includes(o.estado));
   const pedidos = seccion === "boletas" ? pagadas : ordenes;
   return <main className="container py-5">
     <p className="text-uppercase text-gold tracking-widest mb-2">Luxury Perfumería</p>
@@ -98,7 +99,7 @@ export default function PanelCliente() {
           {(seccion === "pedidos" || seccion === "boletas") && <>
             <h2 className="h4 luxury-title">{seccion === "boletas" ? "Mis boletas" : "Mis pedidos"}</h2>
             {cargando ? <p>Cargando pedidos…</p> : error ? <p role="alert">{error}</p> : pedidos.length === 0 ? <p>No tienes {seccion === "boletas" ? "boletas disponibles" : "pedidos registrados"}.</p> :
-            <div className="table-responsive"><table className="table table-dark table-hover align-middle"><thead><tr><th>Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Detalle</th><th>Boleta PDF</th></tr></thead><tbody>{pedidos.map(o => <tr key={o.id}><td>#{o.id}</td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td>{o.estado}</td><td>{formatearPrecio(o.total)}</td><td><details><summary>Ver productos</summary><ul>{o.items?.map((item,i) => <li key={i}>{item.cantidad} × {item.nombre}</li>)}</ul>{o.estado === "Pagado" && <p>El comprobante PDF fue enviado al correo indicado al comprar: {o.cliente?.correo}.</p>}</details></td><td>{o.estado === "Pagado" ? <button type="button" className="btn btn-luxury btn-sm" disabled={descargando === o.id} onClick={() => descargarBoleta(o.id)}>{descargando === o.id ? "Descargando…" : "Descargar PDF"}</button> : <span className="text-muted">No disponible</span>}</td></tr>)}</tbody></table></div>}
+            <div className="table-responsive"><table className="table table-dark table-hover align-middle"><thead><tr><th>Pedido</th><th>Fecha</th><th>Estado</th><th>Total</th><th>Detalle</th><th>Boleta PDF</th></tr></thead><tbody>{pedidos.map(o => <tr key={o.id}><td>#{o.id}</td><td>{new Date(o.fecha).toLocaleDateString("es-CL")}</td><td><span className="d-block fw-semibold">{o.estado}</span>{estadosConfirmados.includes(o.estado) && <small className="text-gold-light">{["Pagado", "En preparación", "Enviado", "Entregado"].map((etapa, indice) => <span key={etapa} title={etapa} style={{ opacity: indice <= ["Pagado", "En preparación", "Enviado", "Entregado"].indexOf(o.estado) ? 1 : 0.3 }}>● </span>)}</small>}</td><td>{formatearPrecio(o.total)}</td><td><details><summary>Ver productos</summary><ul>{o.items?.map((item,i) => <li key={i}>{item.cantidad} × {item.nombre}</li>)}</ul>{estadosConfirmados.includes(o.estado) && <p>El comprobante PDF fue enviado al correo indicado al comprar: {o.cliente?.correo}.</p>}</details></td><td>{estadosConfirmados.includes(o.estado) ? <button type="button" className="btn btn-luxury btn-sm" disabled={descargando === o.id} onClick={() => descargarBoleta(o.id)}>{descargando === o.id ? "Descargando…" : "Descargar PDF"}</button> : <span className="text-muted">No disponible</span>}</td></tr>)}</tbody></table></div>}
             {seccion === "boletas" && <p className="small text-gold-light">Puedes descargar aquí el mismo comprobante PDF que recibiste por correo.</p>}
           </>}
           {seccion === "perfil" && <>
