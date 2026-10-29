@@ -10,6 +10,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String>, JpaSp
 
     Optional<Usuario> findByCorreo(String correo);
 
+    Optional<Usuario> findByGoogleSub(String googleSub);
+
     boolean existsByCorreo(String correo);
 
     boolean existsByCorreoAndRunNot(String correo, String run);

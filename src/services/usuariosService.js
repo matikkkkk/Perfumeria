@@ -17,6 +17,12 @@ export const usuariosService = {
     });
   },
 
+  loginGoogle(credential) {
+    return peticion("/auth/google", {
+      method: "POST", body: JSON.stringify({ credential }),
+    });
+  },
+
   // POST /auth/login (ms-usuarios): la contrasena se compara en el servidor con BCrypt y nunca vuelve en la respuesta.
   // 200 -> usuario sin password. 401 -> { campo: "correo" | "password" }, que se traduce a ErrorAuth para mostrar
   // el mensaje bajo el campo correcto (igual que mostrarError() del HTML original).

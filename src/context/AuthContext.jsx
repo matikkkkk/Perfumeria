@@ -23,6 +23,12 @@ export function AuthProvider({ children }) {
     [setUsuario]
   );
 
+  const iniciarSesionGoogle = useCallback(async (credential) => {
+    const encontrado = await usuariosService.loginGoogle(credential);
+    setUsuario(encontrado);
+    return encontrado;
+  }, [setUsuario]);
+
   const cerrarSesion = useCallback(() => setUsuario(null), [setUsuario]);
 
   // Para cuando el perfil cambia datos del usuario logueado (etapa 11).
@@ -41,10 +47,11 @@ export function AuthProvider({ children }) {
       // tieneRol("Administrador") o tieneRol("Administrador", "Vendedor"): lo usa RutaProtegida (etapa 3)
       tieneRol: (...roles) => usuario !== null && roles.includes(usuario.tipo),
       iniciarSesion,
+      iniciarSesionGoogle,
       cerrarSesion,
       actualizarSesion,
     }),
-    [usuario, iniciarSesion, cerrarSesion, actualizarSesion]
+    [usuario, iniciarSesion, iniciarSesionGoogle, cerrarSesion, actualizarSesion]
   );
 
   return <AuthContext.Provider value={valor}>{children}</AuthContext.Provider>;

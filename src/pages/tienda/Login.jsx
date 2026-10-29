@@ -1,13 +1,63 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { ErrorAuth } from "../../services/usuariosService";
 import { reglasCampos } from "../../utils/validaciones";
 
 export default function Login() {
-  const { iniciarSesion } = useAuth();
+  const { iniciarSesion, iniciarSesionGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const googleRef = useRef(null);
+  const googleLoginRef = useRef(null);
+  googleLoginRef.current = iniciarSesionGoogle;
+  const navigateRef = useRef(null);
+  navigateRef.current = navigate;
+  const destinoRef = useRef(null);
+  destinoRef.current = location.state?.from?.pathname;
+
+  useEffect(() => {
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    if (!clientId || !googleRef.current) return;
+    let activo = true;
+    const inicializar = () => {
+      if (!activo || !window.google?.accounts?.id || !googleRef.current) return;
+      window.google.accounts.id.initialize({
+        client_id: clientId,
+        callback: async ({ credential }) => {
+          if (!activo) return;
+          setMensajeGeneral("");
+          setCargando(true);
+          try {
+            const usuario = await googleLoginRef.current(credential);
+            const destino = destinoRef.current || (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor" ? "/admin" : "/");
+            navigateRef.current(destino, { replace: true });
+          } catch (error) {
+            setMensajeGeneral(error?.cuerpo?.mensaje || error?.message || "No se pudo iniciar sesión con Google.");
+          } finally {
+            if (activo) setCargando(false);
+          }
+        },
+      });
+      window.google.accounts.id.renderButton(googleRef.current, { theme: "outline", size: "large", text: "continue_with", shape: "rectangular", width: 280 });
+    };
+    if (window.google?.accounts?.id) {
+      inicializar();
+    } else {
+      let script = document.querySelector('script[data-google-identity="true"]');
+      if (!script) {
+        script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        script.dataset.googleIdentity = "true";
+        document.head.appendChild(script);
+      }
+      script.addEventListener("load", inicializar);
+      return () => { activo = false; script.removeEventListener("load", inicializar); };
+    }
+    return () => { activo = false; };
+  }, []);
 
   const [datos, setDatos] = useState({ correo: "", password: "" });
   const [errores, setErrores] = useState({});
@@ -120,6 +170,13 @@ export default function Login() {
             {cargando ? "Ingresando…" : "Ingresar"}
           </button>
         </form>
+
+        {import.meta.env.VITE_GOOGLE_CLIENT_ID && (
+          <div className="mt-4 text-center">
+            <p className="text-gold-light mb-3">O continúa con</p>
+            <div ref={googleRef} className="d-flex justify-content-center" aria-label="Iniciar sesión con Google" />
+          </div>
+        )}
 
         <p className="text-center mt-4 mb-0 auth-helper-text">
           ¿Aún no tienes cuenta? <Link to="/registro" className="text-gold-light">Crear cuenta</Link>

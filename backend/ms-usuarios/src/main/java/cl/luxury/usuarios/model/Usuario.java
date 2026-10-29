@@ -56,6 +56,10 @@ public class Usuario {
     @Column(length = 300)
     private String direccion;
 
+    @JsonIgnore
+    @Column(name = "google_sub", length = 255, unique = true)
+    private String googleSub;
+
     @JsonProperty("id")
     public String getId() {
         return run;
