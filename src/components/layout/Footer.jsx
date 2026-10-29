@@ -6,7 +6,7 @@ export default function Footer() {
   const { estaAutenticado } = useAuth();
 
   return (
-    <footer className="site-footer vh-half">
+    <footer className="site-footer">
       <div className="container">
         <div className="row gy-4">
           <div className="col-12 col-md-5">
@@ -20,6 +20,9 @@ export default function Footer() {
               <li><Link to="/productos?genero=mujer">Perfumes Mujer</Link></li>
               <li><Link to="/productos?genero=unisex">Perfumes Unisex</Link></li>
               <li><Link to="/ofertas">Ofertas</Link></li>
+              <li><Link to="/productos?tipo=arabe">Árabes</Link></li>
+              <li><Link to="/productos?tipo=disenador">Diseñador</Link></li>
+              <li><Link to="/productos?tipo=nicho">Nicho</Link></li>
             </ul>
           </div>
           <div className="col-6 col-md-4">
@@ -28,6 +31,8 @@ export default function Footer() {
               <li><Link to="/nosotros">Nosotros</Link></li>
               <li><Link to="/blogs">Blogs</Link></li>
               <li><Link to="/contacto">Contacto</Link></li>
+              <li><Link to="/guia-olfativa">Guía olfativa</Link></li>
+              <li><Link to="/preguntas-frecuentes">Preguntas frecuentes</Link></li>
               {!estaAutenticado && <li><Link to="/login">Ingresar</Link></li>}
             </ul>
           </div>

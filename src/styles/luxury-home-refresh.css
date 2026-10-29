@@ -1,0 +1,25 @@
+/* Rediseño editorial del inicio; mantiene la identidad de Luxury. */
+.luxury-home-refresh {background-color:#0c0d10;}
+.luxury-home-refresh .container {max-width:1250px;}
+.luxury-curated-section,.luxury-gender-section,.luxury-editorial-section {padding:76px 0;}
+.luxury-editorial-card {position:relative;display:flex;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;border:1px solid rgba(210,165,72,.38);border-radius:5px;background-color:#17151a;background-size:cover;background-position:center;transition:transform .3s ease,border-color .3s ease;}
+.luxury-editorial-card:hover {transform:translateY(-5px);border-color:#dab759;color:#fff;}
+.luxury-editorial-card--arabe {background-image:linear-gradient(90deg,rgba(15,7,3,.67),transparent),url('/img/fondo-coleccion-hombre.jpg');}
+.luxury-editorial-card--disenador {background-image:linear-gradient(90deg,rgba(8,15,23,.78),rgba(9,12,20,.25)),url('/img/fondo-destacados.jpg');}
+.luxury-editorial-card--nicho {background-image:linear-gradient(90deg,rgba(26,16,8,.76),rgba(15,10,8,.25)),url('/img/textura-marmol-dorado.jpg');}
+.luxury-gender-card--mujer {background-image:linear-gradient(90deg,rgba(36,7,20,.72),rgba(35,7,20,.08)),url('/img/fondo-coleccion-mujer.jpg');}
+.luxury-gender-card--hombre {background-image:linear-gradient(90deg,rgba(8,14,23,.78),rgba(8,14,23,.08)),url('/img/fondo-coleccion-hombre.jpg');}
+.luxury-gender-card--unisex {background-image:linear-gradient(90deg,rgba(20,11,26,.76),rgba(20,11,26,.08)),url('/img/fondo-coleccion-unisex.jpg');}
+.luxury-editorial-shade {display:flex;flex-direction:column;align-items:flex-start;justify-content:end;width:100%;padding:28px;background:linear-gradient(0deg,rgba(0,0,0,.78),transparent 70%);}
+.luxury-editorial-shade strong {font-family:Georgia,serif;font-size:2rem;line-height:1.3;font-weight:500;}
+.luxury-editorial-shade small {max-width:240px;font-size:.9rem;color:#e0d6c9;margin:7px 0 20px;}
+.luxury-card-action {display:inline-flex;gap:13px;align-items:center;border:1px solid #c6a04d;color:#e4c16a;padding:9px 17px;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;}
+.luxury-editorial-feature {display:grid;grid-template-columns:1fr 1fr;min-height:345px;border:1px solid rgba(210,165,72,.35);background:#101114;}
+.luxury-editorial-copy {display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px;}
+.luxury-editorial-copy p {color:#bdc0c7;max-width:360px;}
+.luxury-editorial-visual {display:flex;align-items:end;justify-content:center;padding:35px;background:linear-gradient(0deg,rgba(7,6,6,.8),transparent),url('/img/textura-marmol-dorado.jpg') center / cover;}
+.luxury-editorial-visual span {font-family:Georgia,serif;color:#e5c377;font-size:1.25rem;letter-spacing:.12em;text-align:center;}
+.luxury-reference-page {min-height:65vh;background:rgba(8,9,12,.6);}
+.luxury-reference-page .faq-section,.luxury-reference-page .diccionario-section {min-height:auto!important;}
+.luxury-home-refresh .launch-slide p.text-gold-light {display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+@media(max-width:767px){.luxury-curated-section,.luxury-gender-section,.luxury-editorial-section{padding:48px 0;}.luxury-editorial-card{min-height:235px;}.luxury-editorial-feature{grid-template-columns:1fr;}.luxury-editorial-copy{padding:30px;}.luxury-editorial-visual{min-height:190px;}.luxury-editorial-shade strong{font-size:1.7rem;}}

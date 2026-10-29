@@ -30,6 +30,7 @@ export default function Navbar() {
   const refInput = useRef(null);
   const rutaActual = location.pathname + location.search;
   const ddProductos = useDropdown(rutaActual);
+  const ddColecciones = useDropdown(rutaActual);
   const ddUsuario = useDropdown(rutaActual);
 
   // Al navegar se cierra todo y el buscador refleja el ?buscar= de la URL (igual que el HTML).
@@ -137,7 +138,7 @@ export default function Navbar() {
         <div className={`collapse navbar-collapse order-lg-2${menuAbierto ? " show" : ""}`}>
           <ul className="navbar-nav mx-lg-auto mb-2 mb-lg-0 gap-lg-3 text-uppercase fs-7 tracking-wider">
             <li className="nav-item">
-              <NavLink className={claseLink} to="/" end>Home</NavLink>
+              <NavLink className={claseLink} to="/" end>Inicio</NavLink>
             </li>
             <li className="nav-item dropdown" ref={ddProductos.ref}>
               <button
@@ -165,11 +166,20 @@ export default function Navbar() {
                 ))}
               </ul>
             </li>
-            <li className="nav-item"><NavLink className={claseLink} to="/categorias">Categorías</NavLink></li>
-            <li className="nav-item"><NavLink className={claseLink} to="/ofertas">Ofertas</NavLink></li>
+            <li className="nav-item dropdown" ref={ddColecciones.ref}>
+              <button type="button" className={`nav-link dropdown-toggle bg-transparent border-0${location.pathname === "/categorias" ? " active" : ""}`} aria-expanded={ddColecciones.abierto} onClick={ddColecciones.alternar}>Colecciones</button>
+              <ul className={`dropdown-menu dropdown-menu-luxury${ddColecciones.abierto ? " show" : ""}`} data-bs-popper="static">
+                <li><Link className="dropdown-item" to="/productos?tipo=arabe">Árabes</Link></li>
+                <li><Link className="dropdown-item" to="/productos?tipo=disenador">Diseñador</Link></li>
+                <li><Link className="dropdown-item" to="/productos?tipo=nicho">Nicho</Link></li>
+                <li><Link className="dropdown-item" to="/categorias">Todas las categorías</Link></li>
+              </ul>
+            </li>
+            
             <li className="nav-item"><NavLink className={claseLink} to="/nosotros">Nosotros</NavLink></li>
-            <li className="nav-item"><NavLink className={claseLink} to="/blogs">Blogs</NavLink></li>
-            <li className="nav-item"><NavLink className={claseLink} to="/contacto">Contacto</NavLink></li>
+            <li className="nav-item"><NavLink className={claseLink} to="/blogs">Blog</NavLink></li>
+            <li className="nav-item"><NavLink className={claseLink} to="/guia-olfativa">Guía olfativa</NavLink></li>
+            
           </ul>
         </div>
       </div>

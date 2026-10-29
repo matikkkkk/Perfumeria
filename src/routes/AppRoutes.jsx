@@ -1,3 +1,5 @@
+import GuiaOlfativa from "../pages/tienda/GuiaOlfativa";
+import PreguntasFrecuentesPage from "../pages/tienda/PreguntasFrecuentesPage";
 import { Route, Routes } from "react-router-dom";
 import LayoutAdmin from "../components/layout/LayoutAdmin";
 import LayoutTienda from "../components/layout/LayoutTienda";
@@ -71,6 +73,8 @@ export default function AppRoutes() {
         <Route path="registro" element={<Registro />} />
         <Route path="nosotros" element={<Nosotros />} />
         <Route path="blogs" element={<Blogs />} />
+        <Route path="guia-olfativa" element={<GuiaOlfativa />} />
+        <Route path="preguntas-frecuentes" element={<PreguntasFrecuentesPage />} />
         <Route path="blogs/:id" element={<DetalleBlog />} />
         <Route path="contacto" element={<Contacto />} />
         <Route path="logout" element={<CerrarSesion />} />

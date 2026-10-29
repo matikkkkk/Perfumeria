@@ -1,0 +1,4 @@
+import { Link } from "react-router-dom";
+export default function EditorialLuxury() {
+  return <section className="luxury-editorial-section"><div className="container"><div className="luxury-editorial-feature"><div className="luxury-editorial-copy"><span className="section-label">El universo Luxury</span><h2 className="luxury-title fst-italic">Más que perfumes,<br/>una experiencia</h2><p>Descubre historias, recomendaciones y el arte de la perfumería en nuestro blog.</p><div className="d-flex flex-wrap gap-2"><Link className="btn btn-luxury" to="/blogs">Ir al blog <i className="bi bi-arrow-right" /></Link><Link className="btn btn-luxury" to="/guia-olfativa">Guía olfativa</Link></div></div><div className="luxury-editorial-visual" aria-hidden="true"><span>Historias · Notas · Tendencias</span></div></div></div></section>;
+}
