@@ -19,6 +19,6 @@ CREATE TABLE usuarios (
   comuna           VARCHAR(100) NULL,
   direccion        VARCHAR(300) NULL,
   PRIMARY KEY (run),
-  UNIQUE KEY uk_usuarios_correo (correo),
+  CONSTRAINT uk_usuarios_correo UNIQUE (correo),
   CONSTRAINT ck_usuarios_tipo CHECK (tipo IN ('Administrador', 'Vendedor', 'Cliente'))
-) ENGINE=InnoDB;
+);

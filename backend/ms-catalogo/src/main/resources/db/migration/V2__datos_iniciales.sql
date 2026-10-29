@@ -1,8 +1,6 @@
 -- Migración automática Flyway. No contiene DROP/DELETE y se ejecuta una sola vez.
 -- GENERADO por generar-seed-catalogo.mjs (no editar a mano)
 
-SET NAMES utf8mb4;
-
 INSERT INTO categorias (id, nombre, descripcion, imagen) VALUES
   ('ligeros', 'Ligeros', 'Frescos y sutiles, ideales para el día a día y climas cálidos.', '/img/fondo-coleccion-unisex.jpg'),
   ('moderados', 'Moderados', 'Equilibrados: presencia elegante sin llegar a ser invasivos.', '/img/fondo-coleccion-mujer.jpg'),
