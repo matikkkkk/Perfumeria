@@ -1,5 +1,9 @@
 package cl.luxury.catalogo.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import cl.luxury.catalogo.exception.*;
 import cl.luxury.catalogo.model.Resena;
 import cl.luxury.catalogo.repository.ResenaRepository;
@@ -13,6 +17,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.net.URI;
 import java.util.*;
 
+@Tag(name = "Resena", description = "Operaciones del recurso resena en el microservicio catálogo.")
 @RestController @RequestMapping("/api/resenas")
 public class ResenaController {
   private final ResenaRepository resenas;
@@ -26,12 +31,16 @@ public class ResenaController {
   }
   public record NuevaResena(Long productoId, String usuarioId, String nombre, Integer estrellas, String texto) {}
 
-  @GetMapping
+  @Operation(summary = "Listar registros", description = "GET del recurso resena.")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "Lista obtenida (puede estar vacía)")})
+    @GetMapping
   public List<Resena> listar(@RequestParam Long productoId) {
     return resenas.findByProductoIdOrderByFechaDesc(productoId);
   }
 
-  @PostMapping
+  @Operation(summary = "Crear registro", description = "POST del recurso resena.")
+    @ApiResponses({@ApiResponse(responseCode = "201", description = "Recurso creado"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
+    @PostMapping
   public ResponseEntity<Resena> crear(@RequestBody NuevaResena dato) {
     if (dato == null || dato.productoId() == null || dato.usuarioId() == null || dato.usuarioId().isBlank()
         || dato.nombre() == null || dato.nombre().isBlank() || dato.estrellas() == null
@@ -76,7 +85,9 @@ public class ResenaController {
   }
 
   // Demo académica: igual que el CRUD de productos, sin sesión JWT en la API.
-  @DeleteMapping("/{id}")
+  @Operation(summary = "Eliminar registro", description = "DELETE del recurso resena.")
+    @ApiResponses({@ApiResponse(responseCode = "204", description = "Recurso eliminado"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
+    @DeleteMapping("/{id}")
   public ResponseEntity<Void> eliminar(@PathVariable Long id) {
     if (!resenas.existsById(id)) throw new NoEncontradoException("Reseña no encontrada.");
     resenas.deleteById(id);
