@@ -1,15 +1,15 @@
 /* Rediseño editorial del inicio; mantiene la identidad de Luxury. */
-.luxury-home-refresh {background-color:#0c0d10;}
+.luxury-home-refresh {background-color:transparent;}
 .luxury-home-refresh .container {max-width:1250px;}
 .luxury-curated-section,.luxury-gender-section,.luxury-editorial-section {padding:76px 0;}
 .luxury-editorial-card {position:relative;display:flex;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;border:1px solid rgba(210,165,72,.38);border-radius:5px;background-color:#17151a;background-size:cover;background-position:center;transition:transform .3s ease,border-color .3s ease;}
 .luxury-editorial-card:hover {transform:translateY(-5px);border-color:#dab759;color:#fff;}
-.luxury-editorial-card--arabe {background-image:linear-gradient(90deg,rgba(15,7,3,.67),transparent),url('/img/fondo-coleccion-hombre.jpg');}
-.luxury-editorial-card--disenador {background-image:linear-gradient(90deg,rgba(8,15,23,.78),rgba(9,12,20,.25)),url('/img/fondo-destacados.jpg');}
-.luxury-editorial-card--nicho {background-image:linear-gradient(90deg,rgba(26,16,8,.76),rgba(15,10,8,.25)),url('/img/textura-marmol-dorado.jpg');}
-.luxury-gender-card--mujer {background-image:linear-gradient(90deg,rgba(36,7,20,.72),rgba(35,7,20,.08)),url('/img/fondo-coleccion-mujer.jpg');}
-.luxury-gender-card--hombre {background-image:linear-gradient(90deg,rgba(8,14,23,.78),rgba(8,14,23,.08)),url('/img/fondo-coleccion-hombre.jpg');}
-.luxury-gender-card--unisex {background-image:linear-gradient(90deg,rgba(20,11,26,.76),rgba(20,11,26,.08)),url('/img/fondo-coleccion-unisex.jpg');}
+.luxury-editorial-card--arabe {background-image:linear-gradient(90deg,rgba(15,7,3,.67),transparent),url('/img/fondo-arabe.jpg');}
+.luxury-editorial-card--disenador {background-image:linear-gradient(90deg,rgba(8,15,23,.78),rgba(9,12,20,.25)),url('/img/fondo-disenador.jpg');}
+.luxury-editorial-card--nicho {background-image:linear-gradient(90deg,rgba(26,16,8,.76),rgba(15,10,8,.25)),url('/img/fondo-nicho.jpg');}
+.luxury-gender-card--mujer {background-image:linear-gradient(90deg,rgba(36,7,20,.72),rgba(35,7,20,.08)),url('/img/fondo-ellas.jpg');}
+.luxury-gender-card--hombre {background-image:linear-gradient(90deg,rgba(8,14,23,.78),rgba(8,14,23,.08)),url('/img/fondo-ellos.jpg');}
+.luxury-gender-card--unisex {background-image:linear-gradient(90deg,rgba(20,11,26,.76),rgba(20,11,26,.08)),url('/img/fondo-unisex.jpg');}
 .luxury-editorial-shade {display:flex;flex-direction:column;align-items:flex-start;justify-content:end;width:100%;padding:28px;background:linear-gradient(0deg,rgba(0,0,0,.78),transparent 70%);}
 .luxury-editorial-shade strong {font-family:Georgia,serif;font-size:2rem;line-height:1.3;font-weight:500;}
 .luxury-editorial-shade small {max-width:240px;font-size:.9rem;color:#e0d6c9;margin:7px 0 20px;}
@@ -17,9 +17,34 @@
 .luxury-editorial-feature {display:grid;grid-template-columns:1fr 1fr;min-height:345px;border:1px solid rgba(210,165,72,.35);background:#101114;}
 .luxury-editorial-copy {display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px;}
 .luxury-editorial-copy p {color:#bdc0c7;max-width:360px;}
-.luxury-editorial-visual {display:flex;align-items:end;justify-content:center;padding:35px;background:linear-gradient(0deg,rgba(7,6,6,.8),transparent),url('/img/textura-marmol-dorado.jpg') center / cover;}
+.luxury-editorial-visual {display:flex;align-items:end;justify-content:center;padding:35px;background:linear-gradient(0deg,rgba(7,6,6,.8),transparent),url('/img/fondo-nosotros.jpg') center / cover;}
 .luxury-editorial-visual span {font-family:Georgia,serif;color:#e5c377;font-size:1.25rem;letter-spacing:.12em;text-align:center;}
 .luxury-reference-page {min-height:65vh;background:rgba(8,9,12,.6);}
 .luxury-reference-page .faq-section,.luxury-reference-page .diccionario-section {min-height:auto!important;}
 .luxury-home-refresh .launch-slide p.text-gold-light {display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 @media(max-width:767px){.luxury-curated-section,.luxury-gender-section,.luxury-editorial-section{padding:48px 0;}.luxury-editorial-card{min-height:235px;}.luxury-editorial-feature{grid-template-columns:1fr;}.luxury-editorial-copy{padding:30px;}.luxury-editorial-visual{min-height:190px;}.luxury-editorial-shade strong{font-size:1.7rem;}}
+
+/* Home: dejar visible el fondo de mármol del body entre las tarjetas. */
+.luxury-home-refresh { background: transparent; }
+.luxury-home-refresh .luxury-curated-section,
+.luxury-home-refresh .luxury-gender-section,
+.luxury-home-refresh .luxury-editorial-section { background: transparent; }
+.luxury-home-refresh .luxury-editorial-visual { background-position:center; background-size:cover; }
+
+/* Nuevos lanzamientos: dimensiones idénticas para cualquier producto. */
+.luxury-home-refresh .launch-carousel .carousel-item { height: 460px; }
+.luxury-home-refresh .launch-carousel .launch-slide { height: 100%; min-height:0; padding: 14px 14px 38px; }
+.luxury-home-refresh .launch-carousel .launch-img-wrapper { height:100%; min-height:0; border-radius:9px; }
+.luxury-home-refresh .launch-carousel .launch-img { width:100%; height:100%; object-fit:cover; }
+.luxury-home-refresh .launch-carousel .launch-copy { height:100%; min-width:0; padding: 22px 28px 16px 42px !important; display:flex;flex-direction:column;justify-content:center;align-items:flex-start; }
+.luxury-home-refresh .launch-carousel .launch-title { font-size:clamp(1.55rem,2.6vw,2.45rem);line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden; }
+.luxury-home-refresh .launch-carousel .launch-description { display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
+.luxury-home-refresh .launch-carousel .launch-actions { display:flex; flex-wrap:wrap;gap:8px; }
+.luxury-home-refresh .launch-carousel .launch-actions .btn { margin:0 !important; }
+@media(max-width:767px){
+ .luxury-home-refresh .launch-carousel .carousel-item {height:auto;min-height:0;}
+ .luxury-home-refresh .launch-carousel .launch-slide {height:auto;padding:12px 12px 45px;}
+ .luxury-home-refresh .launch-carousel .launch-img-wrapper {height:250px;}
+ .luxury-home-refresh .launch-carousel .launch-copy {height:auto;min-height:325px;padding:22px 20px 18px !important;}
+ .luxury-home-refresh .launch-carousel .launch-title {font-size:1.65rem;}
+}

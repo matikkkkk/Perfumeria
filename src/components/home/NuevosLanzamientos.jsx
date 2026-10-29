@@ -32,22 +32,24 @@ export default function NuevosLanzamientos({ productos }) {
                 <div className="col-md-6 launch-img-wrapper">
                   <ImagenProducto key={p.imagen || p.id} src={p.imagen} alt={p.nombre} className="launch-img" />
                 </div>
-                <div className="col-md-6 p-4 p-lg-5">
+                <div className="col-md-6 launch-copy">
                   <span className="text-gold text-uppercase fs-7 tracking-wider">Nuevo · {mayuscula(p.estacion)}</span>
                   <span className="d-block fs-7 text-uppercase tracking-wider text-gold-light mt-1">{p.marca || ""}</span>
                   <h3 className="luxury-title launch-title fst-italic display-6 mt-2">{p.nombre}</h3>
-                  <p className="text-gold-light my-3">{p.descripcion}</p>
+                  <p className="text-gold-light my-3 launch-description">{p.descripcion}</p>
                   <InspiradoEn producto={p} />
                   <p className="fs-7 text-uppercase text-gold tracking-wider mb-3 mt-2">
                     Familia: <span className="text-gold-light">{etiquetaFamilia(p.familia)}</span>
                   </p>
                   <h4 className="price launch-price mb-3">{formatearPrecio(p.precio)}</h4>
+                  <div className="launch-actions">
                   <Link to={`/productos/${p.id}`} className="btn btn-luxury me-2">
                     Ver producto
                   </Link>
                   <button type="button" className="btn btn-luxury btn-luxury--fill" onClick={() => agregarAlCarrito(p)}>
                     Añadir al carrito <i className="bi bi-bag ms-1"></i>
                   </button>
+                  </div>
                 </div>
               </div>
             </div>

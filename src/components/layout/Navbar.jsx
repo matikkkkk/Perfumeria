@@ -169,10 +169,10 @@ export default function Navbar() {
             <li className="nav-item dropdown" ref={ddColecciones.ref}>
               <button type="button" className={`nav-link dropdown-toggle bg-transparent border-0${location.pathname === "/categorias" ? " active" : ""}`} aria-expanded={ddColecciones.abierto} onClick={ddColecciones.alternar}>Colecciones</button>
               <ul className={`dropdown-menu dropdown-menu-luxury${ddColecciones.abierto ? " show" : ""}`} data-bs-popper="static">
-                <li><Link className="dropdown-item" to="/productos?tipo=arabe">Árabes</Link></li>
-                <li><Link className="dropdown-item" to="/productos?tipo=disenador">Diseñador</Link></li>
-                <li><Link className="dropdown-item" to="/productos?tipo=nicho">Nicho</Link></li>
-                <li><Link className="dropdown-item" to="/categorias">Todas las categorías</Link></li>
+                <li><Link className="dropdown-item" to="/categorias"><span className="dropdown-item-title">Todas</span><span className="dropdown-item-sub">Explorar colecciones</span></Link></li>
+                <li><Link className="dropdown-item" to="/productos?tipo=arabe"><span className="dropdown-item-title">Árabes</span><span className="dropdown-item-sub">Tradición e intensidad</span></Link></li>
+                <li><Link className="dropdown-item" to="/productos?tipo=disenador"><span className="dropdown-item-title">Diseñador</span><span className="dropdown-item-sub">Íconos y tendencias</span></Link></li>
+                <li><Link className="dropdown-item" to="/productos?tipo=nicho"><span className="dropdown-item-title">Nicho</span><span className="dropdown-item-sub">Fragancias exclusivas</span></Link></li>
               </ul>
             </li>
             
