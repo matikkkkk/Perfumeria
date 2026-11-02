@@ -24,6 +24,32 @@ public class DescuentoInventarioService {
         this.descuentos = descuentos;
     }
 
+    /** Reversión idempotente para compensar una orden que no se pudo confirmar. */
+    @Transactional
+    public void revertir(String ordenId) {
+        DescuentoInventario registro = descuentos.findById(ordenId).orElse(null);
+        if (registro == null) return;
+        String detalle = registro.getDetalle();
+        // Se interpreta exactamente el formato canónico escrito por descontar(): {id=cantidad, ...}
+        Map<Long, Integer> cantidades = new TreeMap<>();
+        String interior = detalle.substring(1, detalle.length() - 1).trim();
+        if (!interior.isEmpty()) {
+            for (String par : interior.split(", ")) {
+                String[] partes = par.split("=", 2);
+                if (partes.length != 2) throw new IllegalStateException("Registro de descuento inválido");
+                cantidades.put(Long.parseLong(partes[0]), Integer.parseInt(partes[1]));
+            }
+        }
+        for (var entrada : cantidades.entrySet()) {
+            Producto producto = productos.bloquearPorId(entrada.getKey())
+                    .orElseThrow(() -> new IllegalStateException("Producto de compensación no encontrado: " + entrada.getKey()));
+            producto.setStock(Math.addExact(producto.getStock(), entrada.getValue()));
+        }
+        productos.flush();
+        descuentos.delete(registro);
+        descuentos.flush();
+    }
+
     /** Transacción única: si una línea no tiene stock, no se descuenta ninguna. */
     @Transactional
     public void descontar(Solicitud solicitud) {

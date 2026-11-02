@@ -15,6 +15,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.List;
@@ -24,6 +28,7 @@ import java.util.Set;
 @Service
 public class OrdenService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OrdenService.class);
     static final String PAGADO = "Pagado";
     static final String PAGO_FALLIDO = "Pago fallido";
     private static final String PENDIENTE = "Pendiente";
@@ -97,7 +102,7 @@ public class OrdenService {
         aplicar(orden, solicitud);
         Orden guardada = ordenes.saveAndFlush(orden);
         if (PAGADO.equals(guardada.getEstado())) {
-            inventario.descontar(guardada);
+            descontarYCompensar(guardada);
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
         }
         return guardada;
@@ -116,7 +121,7 @@ public class OrdenService {
         aplicar(orden, solicitud);
         Orden guardada = ordenes.save(orden);
         if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
-            inventario.descontar(guardada);
+            descontarYCompensar(guardada);
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
         }
         return guardada;
@@ -146,7 +151,7 @@ public class OrdenService {
         }
         Orden guardada = ordenes.save(orden);
         if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
-            inventario.descontar(guardada);
+            descontarYCompensar(guardada);
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
         } else if (Set.of("En preparación", "Enviado", "Entregado").contains(estado)) {
             eventos.publishEvent(new OrdenEstadoActualizadoEvento(guardada.getId(), estado));
@@ -171,6 +176,35 @@ public class OrdenService {
         if (!anterior.equals(siguiente) && !TRANSICIONES.getOrDefault(anterior, Set.of()).contains(siguiente)) {
             throw new SolicitudInvalidaException("Transición no permitida: " + anterior + " → " + siguiente);
         }
+    }
+
+    /**
+     * Cada servicio conserva su transacción local. Si la transacción de órdenes falla
+     * después de descontar en catálogo, se intenta compensar la actualización remota.
+     * No sustituye a una cola transaccional: un corte total del proceso requeriría
+     * conciliación manual de las órdenes y de los registros de descuento.
+     */
+    private void descontarYCompensar(Orden orden) {
+        if (!TransactionSynchronizationManager.isSynchronizationActive()) {
+            throw new IllegalStateException("El descuento de inventario requiere una transacción activa.");
+        }
+        final long ordenId = orden.getId();
+        // Se registra primero para cubrir también los errores tras la respuesta HTTP.
+        final boolean[] descontado = {false};
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCompletion(int status) {
+                if (status != STATUS_COMMITTED && descontado[0]) {
+                    try {
+                        inventario.revertirDescuento(ordenId);
+                    } catch (Exception e) {
+                        LOG.error("Revisar manualmente stock de orden {}: falló la compensación", ordenId, e);
+                    }
+                }
+            }
+        });
+        inventario.descontar(orden);
+        descontado[0] = true;
     }
 
     // ------------------------------------------------------------------ reglas de negocio
@@ -214,6 +248,18 @@ public class OrdenService {
         int descuento = r.descuento() == null ? 0 : r.descuento();
         if (descuento > subtotal) {
             throw new SolicitudInvalidaException("El descuento no puede superar el subtotal.");
+        }
+        String codigoCupon = vacioANulo(r.cupon());
+        if (codigoCupon == null) {
+            if (descuento != 0) {
+                throw new SolicitudInvalidaException("No se puede aplicar descuento sin un cupón.");
+            }
+        } else {
+            int porcentaje = inventario.porcentajeCupon(codigoCupon);
+            int calculado = (int) Math.round((double) subtotal * porcentaje / 100);
+            if (descuento != calculado) {
+                throw new SolicitudInvalidaException("El descuento del cupón cambió. Actualiza el carrito antes de comprar.");
+            }
         }
         int esperado = subtotal - descuento;
         int total = r.total() == null ? esperado : r.total();
@@ -263,7 +309,7 @@ public class OrdenService {
         }
 
         destino.setSubtotal(subtotal);
-        destino.setCupon(vacioANulo(r.cupon()));
+        destino.setCupon(codigoCupon == null ? null : codigoCupon.toUpperCase(java.util.Locale.ROOT));
         destino.setDescuento(descuento);
         destino.setTotal(total);
 

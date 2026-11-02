@@ -41,6 +41,35 @@ public class InventarioClient {
         }
     }
 
+    public int porcentajeCupon(String codigo) {
+        try {
+            JsonCupon cupon = cliente.get().uri("/api/cupones/{codigo}/validar", codigo)
+                    .retrieve().body(JsonCupon.class);
+            if (cupon == null || !Boolean.TRUE.equals(cupon.valido()) || cupon.descuento() == null
+                    || cupon.descuento() < 1 || cupon.descuento() > 90) {
+                throw new SolicitudInvalidaException("El cupón no tiene un descuento válido.");
+            }
+            return cupon.descuento();
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode().is4xxClientError())
+                throw new SolicitudInvalidaException("El cupón ya no existe, está inactivo o expiró. Vuelve a aplicarlo.");
+            throw e;
+        } catch (RestClientException e) {
+            throw new IllegalStateException("No se pudo verificar el cupón en catálogo. La compra no se confirmó.", e);
+        }
+    }
+
+    private record JsonCupon(String codigo, Integer descuento, Boolean valido) {}
+
+    public void revertirDescuento(long ordenId) {
+        try {
+            cliente.post().uri("/api/inventario/revertir/{ordenId}", "ordenes:" + ordenId)
+                    .retrieve().toBodilessEntity();
+        } catch (RestClientException e) {
+            throw new IllegalStateException("No se pudo revertir automáticamente el inventario de la orden " + ordenId, e);
+        }
+    }
+
     public void descontar(Orden orden) {
         var lineas = orden.getItems().stream().map(i -> {
             try {
