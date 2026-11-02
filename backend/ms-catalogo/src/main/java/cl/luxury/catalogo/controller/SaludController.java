@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /** Para comprobar rápido que el servicio está arriba: GET http://localhost:8081/api/catalogo/salud */
-@Tag(name = "Salud", description = "Operaciones del recurso salud en el microservicio catálogo.")
+@Tag(name = "Salud", description = "API de salud: estado del microservicio. Consultar cada operación para conocer sus validaciones y respuestas.")
 @RestController
 @RequestMapping("/api/catalogo")
 public class SaludController {
 
-    @Operation(summary = "Comprobar estado del servicio", description = "GET del recurso salud.")
+    @Operation(summary = "Consultar salud del servicio", description = "Devuelve un JSON identificando el microservicio y su estado.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente")})
     @GetMapping("/salud")
     public Map<String, String> salud() {

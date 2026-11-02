@@ -26,6 +26,18 @@ public class OrdenService {
 
     static final String PAGADO = "Pagado";
     static final String PAGO_FALLIDO = "Pago fallido";
+    private static final String PENDIENTE = "Pendiente";
+    private static final String PREPARACION = "En preparación";
+    private static final String ENVIADO = "Enviado";
+    private static final String ENTREGADO = "Entregado";
+    private static final Map<String, Set<String>> TRANSICIONES = Map.of(
+            PENDIENTE, Set.of(PAGADO, PAGO_FALLIDO),
+            PAGO_FALLIDO, Set.of(PENDIENTE, PAGADO),
+            PAGADO, Set.of(PREPARACION),
+            PREPARACION, Set.of(ENVIADO),
+            ENVIADO, Set.of(ENTREGADO),
+            ENTREGADO, Set.of()
+    );
     private static final Set<String> ESTADOS = Set.of("Pendiente", PAGADO, PAGO_FALLIDO, "En preparación", "Enviado", "Entregado");
     /** Campos por los que se puede ordenar (?_sort=fecha&_order=desc, como json-server). */
     private static final Set<String> ORDENABLES = Set.of("id", "fecha", "estado", "subtotal", "descuento", "total");
@@ -95,8 +107,12 @@ public class OrdenService {
     @Transactional
     public Orden actualizar(Long id, OrdenRequest solicitud) {
         Orden orden = obtener(id);
-        boolean pagadaAntes = PAGADO.equals(orden.getEstado());
-        if (pagadaAntes) throw new SolicitudInvalidaException("No se pueden reemplazar los productos de una compra ya pagada.");
+        String anterior = orden.getEstado();
+        if (!Set.of(PENDIENTE, PAGO_FALLIDO).contains(anterior)) {
+            throw new SolicitudInvalidaException("No se pueden reemplazar los datos de una compra pagada o despachada.");
+        }
+        validarTransicion(anterior, solicitud.estado());
+        boolean pagadaAntes = PAGADO.equals(anterior);
         aplicar(orden, solicitud);
         Orden guardada = ordenes.save(orden);
         if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
@@ -122,18 +138,8 @@ public class OrdenService {
         }
         String anterior = orden.getEstado();
         if (anterior.equals(estado)) return orden; // evitar notificaciones repetidas
+        validarTransicion(anterior, estado);
         boolean pagadaAntes = PAGADO.equals(anterior);
-        // No permitir que las compras fallidas avancen al despacho ni retroceder etapas.
-        List<String> flujo = List.of(PAGADO, "En preparación", "Enviado", "Entregado");
-        if (flujo.contains(estado) && !PAGADO.equals(estado)) {
-            if (!flujo.contains(anterior) || flujo.indexOf(estado) != flujo.indexOf(anterior) + 1) {
-                throw new SolicitudInvalidaException("Transición no permitida: " + anterior + " → " + estado);
-            }
-        }
-        if (flujo.contains(anterior) &&
-                (!flujo.contains(estado) || flujo.indexOf(estado) < flujo.indexOf(anterior))) {
-            throw new SolicitudInvalidaException("No se puede retroceder un pedido en despacho.");
-        }
         orden.setEstado(estado);
         if (PAGADO.equals(estado)) {
             orden.setTotal(orden.getSubtotal() - orden.getDescuento());
@@ -155,6 +161,16 @@ public class OrdenService {
             throw new SolicitudInvalidaException("No se puede eliminar una compra pagada o despachada sin gestionar su devolución de stock.");
         }
         ordenes.delete(orden);
+    }
+
+    /** Política única para PUT y PATCH: no permite saltar etapas ni volver a una etapa anterior. */
+    private static void validarTransicion(String anterior, String siguiente) {
+        if (!ESTADOS.contains(siguiente)) {
+            throw new SolicitudInvalidaException("Estado inválido. Valores: " + ESTADOS);
+        }
+        if (!anterior.equals(siguiente) && !TRANSICIONES.getOrDefault(anterior, Set.of()).contains(siguiente)) {
+            throw new SolicitudInvalidaException("Transición no permitida: " + anterior + " → " + siguiente);
+        }
     }
 
     // ------------------------------------------------------------------ reglas de negocio

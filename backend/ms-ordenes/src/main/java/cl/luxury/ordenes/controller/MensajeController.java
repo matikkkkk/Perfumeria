@@ -24,7 +24,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-@Tag(name = "Mensaje", description = "Operaciones del recurso mensaje en el microservicio órdenes.")
+@Tag(name = "Mensaje", description = "API de mensajes: mensajes enviados desde contacto y su estado de lectura. Consultar cada operación para conocer sus validaciones y respuestas.")
 @RestController
 @RequestMapping("/api/mensajes")
 public class MensajeController {
@@ -35,21 +35,21 @@ public class MensajeController {
         this.servicio = servicio;
     }
 
-    @Operation(summary = "Listar registros", description = "GET del recurso mensaje.")
+    @Operation(summary = "Listar mensajes", description = "Devuelve la lista de mensajes enviados desde contacto y su estado de lectura. Para filtros disponibles: según filtros admitidos por el recurso. Si no hay coincidencias devuelve una lista vacía.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Lista obtenida (puede estar vacía)")})
     @GetMapping
     public List<Mensaje> listar(@RequestParam Map<String, String> filtros) {
         return servicio.listar(filtros);
     }
 
-    @Operation(summary = "Consultar registro por identificador", description = "GET del recurso mensaje.")
+    @Operation(summary = "Consultar mensaje por identificador", description = "Obtiene un recurso existente; devuelve 404 cuando no se encuentra.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @GetMapping("/{id}")
     public Mensaje obtener(@PathVariable Long id) {
         return servicio.obtener(id);
     }
 
-    @Operation(summary = "Crear registro", description = "POST del recurso mensaje.")
+    @Operation(summary = "Crear mensaje", description = "Recibe un JSON con los campos del recurso, valida sus datos y devuelve el registro creado junto a su ubicación.")
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Recurso creado"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
     @PostMapping
     public ResponseEntity<Mensaje> crear(@Valid @RequestBody MensajeRequest solicitud) {
@@ -57,14 +57,14 @@ public class MensajeController {
         return ResponseEntity.created(URI.create("/api/mensajes/" + creado.getId())).body(creado);
     }
 
-    @Operation(summary = "Modificar campos del registro", description = "PATCH del recurso mensaje.")
+    @Operation(summary = "Actualizar parcialmente mensaje mediante PATCH", description = "Recibe un objeto JSON con los campos a cambiar. No envíes el recurso completo; campos no enviados se conservan y los no permitidos pueden generar 400.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @PatchMapping("/{id}")
     public Mensaje modificar(@PathVariable Long id, @RequestBody JsonNode cambios) {
         return servicio.modificar(id, cambios);
     }
 
-    @Operation(summary = "Eliminar registro", description = "DELETE del recurso mensaje.")
+    @Operation(summary = "Eliminar mensaje", description = "Elimina el registro si existe y si las reglas de negocio lo permiten. Devuelve 204 sin contenido al eliminar.")
     @ApiResponses({@ApiResponse(responseCode = "204", description = "Recurso eliminado"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {

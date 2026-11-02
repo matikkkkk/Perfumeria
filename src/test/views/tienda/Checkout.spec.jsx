@@ -12,6 +12,21 @@ describe("Checkout (eventos)", () => {
     const user = userEvent.setup();
     renderConApp(<Checkout />);
     await user.click(screen.getByRole("button", { name: "Confirmar y pagar" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("Ingresa un número de tarjeta válido");
+    expect(await screen.findByText("Ingresa un número de tarjeta válido (13 a 19 dígitos).")) .toBeInTheDocument();
+    expect(screen.getByLabelText("Nombre")).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("valida los datos obligatorios y muestra los mensajes bajo cada campo antes de pagar", async () => {
+    const user = userEvent.setup();
+    renderConApp(<Checkout />);
+    await user.click(screen.getByRole("button", { name: "Confirmar y pagar" }));
+    expect(screen.getByText("Ingresa tu nombre.")).toBeInTheDocument();
+    expect(screen.getByText("Ingresa tus apellidos.")).toBeInTheDocument();
+    expect(screen.getByText("Ingresa tu correo electrónico.")).toBeInTheDocument();
+    expect(screen.getByText("Ingresa la calle y el número.")).toBeInTheDocument();
+    expect(screen.getByText("Selecciona una región.")).toBeInTheDocument();
+    expect(screen.getByText("Selecciona una comuna.")).toBeInTheDocument();
+    await user.type(screen.getByLabelText("Nombre"), "Ana");
+    expect(screen.queryByText("Ingresa tu nombre.")).not.toBeInTheDocument();
   });
 });

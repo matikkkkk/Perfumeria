@@ -287,6 +287,43 @@ class OrdenesApiTest {
         assertEquals(1, ordenes.count());
     }
 
+    @Test
+    void soloPermiteTransicionesValidasDesdePendienteYFallido() throws Exception {
+        crear(orden(null, "2026-10-05T22:40:00.000Z", "Pendiente", 20000, 0));
+        Long id = ordenes.findAll().get(0).getId();
+        for (String estado : new String[]{"En preparación", "Enviado", "Entregado"}) {
+            mvc.perform(patch("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                    .content("{\"estado\":\"" + estado + "\"}"))
+                    .andExpect(status().isBadRequest());
+        }
+        mvc.perform(patch("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"estado\":\"Pago fallido\"}"))
+                .andExpect(status().isOk());
+        mvc.perform(patch("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"estado\":\"Enviado\"}"))
+                .andExpect(status().isBadRequest());
+        mvc.perform(patch("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"estado\":\"Pagado\"}"))
+                .andExpect(status().isOk());
+        mvc.perform(patch("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"estado\":\"Enviado\"}"))
+                .andExpect(status().isBadRequest());
+        mvc.perform(patch("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"estado\":\"En preparación\"}"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void putNoPuedeSaltarDesdePendienteDirectamenteAPagadoDespachado() throws Exception {
+        crear(orden(null, "2026-10-05T22:40:00.000Z", "Pendiente", 20000, 0));
+        Long id = ordenes.findAll().get(0).getId();
+        mvc.perform(put("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                .content(orden(null, "2026-10-06T10:00:00.000Z", "Enviado", 20000, 0)))
+                .andExpect(status().isBadRequest());
+        mvc.perform(get("/api/ordenes/" + id))
+                .andExpect(jsonPath("$.estado").value("Pendiente"));
+    }
+
     // ------------------------------------------------------------ eliminar
 
     @Test

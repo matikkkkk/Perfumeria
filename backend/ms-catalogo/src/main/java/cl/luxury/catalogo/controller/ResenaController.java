@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.net.URI;
 import java.util.*;
 
-@Tag(name = "Resena", description = "Operaciones del recurso resena en el microservicio catálogo.")
+@Tag(name = "Resena", description = "API de reseñas: reseñas de clientes por producto. Consultar cada operación para conocer sus validaciones y respuestas.")
 @RestController @RequestMapping("/api/resenas")
 public class ResenaController {
   private final ResenaRepository resenas;
@@ -31,14 +31,14 @@ public class ResenaController {
   }
   public record NuevaResena(Long productoId, String usuarioId, String nombre, Integer estrellas, String texto) {}
 
-  @Operation(summary = "Listar registros", description = "GET del recurso resena.")
+  @Operation(summary = "Listar reseñas", description = "Devuelve la lista de reseñas de clientes por producto. Para filtros disponibles: consultar parámetros del recurso. Si no hay coincidencias devuelve una lista vacía.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Lista obtenida (puede estar vacía)")})
     @GetMapping
   public List<Resena> listar(@RequestParam Long productoId) {
     return resenas.findByProductoIdOrderByFechaDesc(productoId);
   }
 
-  @Operation(summary = "Crear registro", description = "POST del recurso resena.")
+  @Operation(summary = "Crear reseña", description = "Recibe un JSON con los campos del recurso, valida sus datos y devuelve el registro creado junto a su ubicación.")
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Recurso creado"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
     @PostMapping
   public ResponseEntity<Resena> crear(@RequestBody NuevaResena dato) {
@@ -85,7 +85,7 @@ public class ResenaController {
   }
 
   // Demo académica: igual que el CRUD de productos, sin sesión JWT en la API.
-  @Operation(summary = "Eliminar registro", description = "DELETE del recurso resena.")
+  @Operation(summary = "Eliminar reseña", description = "Elimina el registro si existe y si las reglas de negocio lo permiten. Devuelve 204 sin contenido al eliminar.")
     @ApiResponses({@ApiResponse(responseCode = "204", description = "Recurso eliminado"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @DeleteMapping("/{id}")
   public ResponseEntity<Void> eliminar(@PathVariable Long id) {

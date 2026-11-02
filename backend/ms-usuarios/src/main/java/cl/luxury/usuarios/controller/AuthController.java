@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@Tag(name = "Auth", description = "Operaciones del recurso auth en el microservicio usuarios.")
+@Tag(name = "Auth", description = "API de autenticación: inicio de sesión y datos del usuario autenticado. Consultar cada operación para conocer sus validaciones y respuestas.")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -32,14 +32,14 @@ public class AuthController {
     }
 
     /** POST /api/auth/login {correo, password} -> usuario SIN contraseña, o 401 con {campo}. */
-    @Operation(summary = "Iniciar sesión", description = "POST del recurso auth.")
+    @Operation(summary = "Autenticar usuario con credenciales", description = "Recibe las credenciales y devuelve los datos de autenticación si son válidas.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @PostMapping("/login")
     public Usuario login(@Valid @RequestBody LoginRequest solicitud) {
         return servicio.login(solicitud.getCorreo(), solicitud.getPassword());
     }
 
-    @Operation(summary = "Iniciar sesión con Google", description = "Verifica un Google ID token, crea un cliente si es nuevo y devuelve un usuario sin contraseña. Una cuenta existente con el mismo correo debe usar su login habitual.")
+    @Operation(summary = "Autenticar mediante Google ID token", description = "Verifica el token de Google; devuelve el usuario o rechaza el token o una cuenta incompatible.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Usuario autenticado"),
             @ApiResponse(responseCode = "400", description = "Token inválido o cuenta existente")})
     @PostMapping("/google")
@@ -48,7 +48,7 @@ public class AuthController {
     }
 
     /** Comprobación rápida: GET http://localhost:8082/api/auth/salud */
-    @Operation(summary = "Comprobar estado del servicio", description = "GET del recurso auth.")
+    @Operation(summary = "Consultar salud del servicio", description = "Devuelve un JSON identificando el microservicio y su estado.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente")})
     @GetMapping("/salud")
     public Map<String, String> salud() {

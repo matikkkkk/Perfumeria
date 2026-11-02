@@ -31,7 +31,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-@Tag(name = "Orden", description = "Operaciones del recurso orden en el microservicio órdenes.")
+@Tag(name = "Orden", description = "API de órdenes: órdenes con cliente, dirección, artículos, importes y estado. Consultar cada operación para conocer sus validaciones y respuestas.")
 @RestController
 @RequestMapping("/api/ordenes")
 public class OrdenController {
@@ -45,8 +45,8 @@ public class OrdenController {
     }
 
     /** Descarga del comprobante de una orden pagada (demo académica sin autenticación de API). */
-    @Operation(summary = "Descargar boleta PDF", description = "GET del recurso orden.")
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
+    @Operation(summary = "Descargar boleta de una compra confirmada", description = "Devuelve application/pdf para órdenes Pagado, En preparación, Enviado o Entregado. Órdenes no confirmadas producen 409.")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "PDF de la boleta"), @ApiResponse(responseCode = "404", description = "Orden inexistente"), @ApiResponse(responseCode = "409", description = "La compra todavía no está confirmada")})
     @GetMapping(value = "/{id}/boleta", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> descargarBoleta(@PathVariable Long id) {
         Orden orden = servicio.obtener(id);
@@ -66,7 +66,7 @@ public class OrdenController {
     }
 
     /** GET /api/ordenes?usuarioId=20987654K&_sort=fecha&_order=desc  (historial de compras / listado admin) */
-    @Operation(summary = "Listar registros", description = "GET del recurso orden.")
+    @Operation(summary = "Listar órdenes", description = "Devuelve la lista de órdenes con cliente, dirección, artículos, importes y estado. Para filtros disponibles: usuarioId, estado, _sort y _order. Si no hay coincidencias devuelve una lista vacía.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Lista obtenida (puede estar vacía)")})
     @GetMapping
     public List<Orden> listar(@RequestParam Map<String, String> filtros) {
@@ -74,21 +74,21 @@ public class OrdenController {
     }
 
     /** Comprobación rápida: GET http://localhost:8083/api/ordenes/salud (la ruta literal gana a /{id}). */
-    @Operation(summary = "Comprobar estado del servicio", description = "GET del recurso orden.")
+    @Operation(summary = "Consultar salud del servicio", description = "Devuelve un JSON identificando el microservicio y su estado.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente")})
     @GetMapping("/salud")
     public Map<String, String> salud() {
         return Map.of("servicio", "ms-ordenes", "estado", "OK");
     }
 
-    @Operation(summary = "Consultar registro por identificador", description = "GET del recurso orden.")
+    @Operation(summary = "Consultar orden por identificador", description = "Obtiene un recurso existente; devuelve 404 cuando no se encuentra.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @GetMapping("/{id}")
     public Orden obtener(@PathVariable Long id) {
         return servicio.obtener(id);
     }
 
-    @Operation(summary = "Crear registro", description = "POST del recurso orden.")
+    @Operation(summary = "Crear orden", description = "Recibe un JSON con los campos del recurso, valida sus datos y devuelve el registro creado junto a su ubicación.")
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Recurso creado"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
     @PostMapping
     public ResponseEntity<Orden> crear(@Valid @RequestBody OrdenRequest solicitud) {
@@ -96,22 +96,22 @@ public class OrdenController {
         return ResponseEntity.created(URI.create("/api/ordenes/" + creada.getId())).body(creada);
     }
 
-    @Operation(summary = "Actualizar registro completo", description = "PUT del recurso orden.")
+    @Operation(summary = "Reemplazar orden mediante PUT", description = "Reemplaza los datos editables con el JSON completo. No sirve para editar solo un campo; se aplican las validaciones y reglas de negocio. Solo se permite reemplazar una orden editable; no se pueden reemplazar productos de una compra pagada ni saltarse las transiciones de estado.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
     @PutMapping("/{id}")
     public Orden actualizar(@PathVariable Long id, @Valid @RequestBody OrdenRequest solicitud) {
         return servicio.actualizar(id, solicitud);
     }
 
-    @Operation(summary = "Modificar campos del registro", description = "PATCH del recurso orden.")
+    @Operation(summary = "Actualizar parcialmente orden mediante PATCH", description = "Recibe un objeto JSON con los campos a cambiar. No envíes el recurso completo; campos no enviados se conservan y los no permitidos pueden generar 400. Campos permitidos en PATCH: estado (respetando las transiciones Pendiente, Pago fallido, Pagado, En preparación, Enviado, Entregado); PUT no puede reemplazar una compra pagada o despachada.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @PatchMapping("/{id}")
     public Orden modificar(@PathVariable Long id, @RequestBody JsonNode cambios) {
         return servicio.modificar(id, cambios);
     }
 
-    @Operation(summary = "Eliminar registro", description = "DELETE del recurso orden.")
-    @ApiResponses({@ApiResponse(responseCode = "204", description = "Recurso eliminado"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
+    @Operation(summary = "Eliminar orden", description = "Elimina el registro si existe y si las reglas de negocio lo permiten. Devuelve 204 sin contenido al eliminar. No se permite eliminar una compra pagada o despachada: devuelve 400.")
+    @ApiResponses({@ApiResponse(responseCode = "204", description = "Orden eliminada"), @ApiResponse(responseCode = "400", description = "Orden pagada o despachada, no se permite eliminar"), @ApiResponse(responseCode = "404", description = "Orden inexistente")})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         servicio.eliminar(id);

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
-@Tag(name = "Oferta", description = "Operaciones del recurso oferta en el microservicio catálogo.")
+@Tag(name = "Oferta", description = "API de ofertas: ofertas y descuentos asociados a productos. Consultar cada operación para conocer sus validaciones y respuestas.")
 @RestController
 @RequestMapping("/api/ofertas")
 public class OfertaController {
@@ -32,7 +32,7 @@ public class OfertaController {
     }
 
     /** GET /api/ofertas?activa=true&_expand=producto  (la forma que ya usa ofertasService.listarActivas) */
-    @Operation(summary = "Listar registros", description = "GET del recurso oferta.")
+    @Operation(summary = "Listar ofertas", description = "Devuelve la lista de ofertas y descuentos asociados a productos. Para filtros disponibles: consultar las condiciones definidas en el servicio. Si no hay coincidencias devuelve una lista vacía.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Lista obtenida (puede estar vacía)")})
     @GetMapping
     public Object listar(@RequestParam(required = false) Boolean activa,
@@ -40,14 +40,14 @@ public class OfertaController {
         return "producto".equals(expand) ? servicio.listarConProducto(activa) : servicio.listar(activa);
     }
 
-    @Operation(summary = "Consultar registro por identificador", description = "GET del recurso oferta.")
+    @Operation(summary = "Consultar oferta por identificador", description = "Obtiene un recurso existente; devuelve 404 cuando no se encuentra.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @GetMapping("/{id}")
     public Oferta obtener(@PathVariable Long id) {
         return servicio.obtener(id);
     }
 
-    @Operation(summary = "Crear registro", description = "POST del recurso oferta.")
+    @Operation(summary = "Crear oferta", description = "Recibe un JSON con los campos del recurso, valida sus datos y devuelve el registro creado junto a su ubicación.")
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Recurso creado"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
     @PostMapping
     public ResponseEntity<Oferta> crear(@Valid @RequestBody Oferta oferta) {
@@ -55,14 +55,14 @@ public class OfertaController {
         return ResponseEntity.created(URI.create("/api/ofertas/" + creada.getId())).body(creada);
     }
 
-    @Operation(summary = "Actualizar registro completo", description = "PUT del recurso oferta.")
+    @Operation(summary = "Reemplazar oferta mediante PUT", description = "Reemplaza los datos editables con el JSON completo. No sirve para editar solo un campo; se aplican las validaciones y reglas de negocio.")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Operación realizada correctamente"), @ApiResponse(responseCode = "400", description = "Solicitud inválida"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado"), @ApiResponse(responseCode = "409", description = "Conflicto con el estado del recurso")})
     @PutMapping("/{id}")
     public Oferta actualizar(@PathVariable Long id, @Valid @RequestBody Oferta oferta) {
         return servicio.actualizar(id, oferta);
     }
 
-    @Operation(summary = "Eliminar registro", description = "DELETE del recurso oferta.")
+    @Operation(summary = "Eliminar oferta", description = "Elimina el registro si existe y si las reglas de negocio lo permiten. Devuelve 204 sin contenido al eliminar.")
     @ApiResponses({@ApiResponse(responseCode = "204", description = "Recurso eliminado"), @ApiResponse(responseCode = "404", description = "Recurso no encontrado")})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {

@@ -14,7 +14,7 @@ import java.time.LocalDate;
  * guardando la contraseña con BCrypt. Solo actúa si la tabla está vacía.
  */
 @Component
-@ConditionalOnProperty(name = "luxury.seed.usuarios", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "luxury.seed.usuarios", havingValue = "true", matchIfMissing = false)
 public class SemillaUsuarios implements CommandLineRunner {
 
     private final UsuarioRepository usuarios;
