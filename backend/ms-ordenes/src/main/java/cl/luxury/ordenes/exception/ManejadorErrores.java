@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ManejadorErrores {
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorApi> servicioNoDisponible(IllegalStateException e) {
+        return responder(HttpStatus.SERVICE_UNAVAILABLE, e.getMessage());
+    }
+
     @ExceptionHandler(NoEncontradoException.class)
     public ResponseEntity<ErrorApi> noEncontrado(NoEncontradoException e) {
         return responder(HttpStatus.NOT_FOUND, e.getMessage());

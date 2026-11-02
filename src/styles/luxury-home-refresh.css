@@ -48,3 +48,106 @@
  .luxury-home-refresh .launch-carousel .launch-copy {height:auto;min-height:325px;padding:22px 20px 18px !important;}
  .luxury-home-refresh .launch-carousel .launch-title {font-size:1.65rem;}
 }
+
+/* Hero: composición centrada, logotipo de la fotografía despejado. */
+.hero-section {
+  min-height: min(100dvh, 850px);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px clamp(22px, 4.2vh, 48px);
+}
+.hero-banner-img { object-position: center center; }
+/* Oscurecemos únicamente la franja inferior, no el logotipo. */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.50) 18%, rgba(0,0,0,.15) 38%, transparent 62%);
+}
+.hero-overlay-content {
+  position: relative;
+  z-index: 2;
+  width: min(880px, 100%);
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  text-align: center;
+}
+.hero-overlay-content .hero-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #f3d88f;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .23em;
+  text-shadow: 0 2px 8px #000, 0 0 12px rgba(0,0,0,.65);
+}
+.hero-overlay-content .hero-headline {
+  margin: 0 0 6px;
+  color: #fff9ed;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2rem, 3.35vw, 3rem);
+  line-height: 1.15;
+  text-shadow: 0 3px 12px #000, 0 1px 3px #000;
+}
+.hero-overlay-content .hero-description {
+  max-width: none;
+  margin: 0 auto;
+  color: #fff4df;
+  font-size: clamp(.9rem, 1.12vw, 1.05rem);
+  line-height: 1.5;
+  text-shadow: 0 2px 8px #000, 0 1px 2px #000;
+}
+.hero-overlay-content .hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+.hero-overlay-content .hero-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 19px;
+  font-size: .73rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+.hero-overlay-content .hero-actions .btn-luxury {
+  background: #d8af43;
+  border: 1px solid #edca71;
+  color: #16100a;
+  font-weight: 700;
+}
+.hero-overlay-content .hero-actions .btn-luxury:hover { background: #f0d486; color: #100d0a; }
+.hero-overlay-content .hero-secondary-btn {
+  color: #fff1cd;
+  border: 1px solid #e8ca81;
+  background: rgba(0,0,0,.55);
+}
+.hero-overlay-content .hero-secondary-btn:hover { background: #e8ca81; color: #16100a; }
+@media (max-width: 767px) {
+  .hero-section { min-height: min(90dvh, 770px); padding: 0 16px 24px; }
+  .hero-banner-img { object-position: center center; }
+  .hero-section::after { background: linear-gradient(to top, rgba(0,0,0,.89), rgba(0,0,0,.45) 33%, transparent 68%); }
+  .hero-overlay-content .hero-headline { font-size: clamp(1.7rem, 7vw, 2.35rem); }
+  .hero-overlay-content .hero-description { max-width: 370px; }
+  .hero-overlay-content .hero-actions { gap: 8px; }
+  .hero-overlay-content .hero-actions .btn { padding: 9px 12px; font-size: .66rem; }
+}

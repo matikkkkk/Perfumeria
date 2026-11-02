@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCarrito } from "../../context/CarritoContext";
 import { ordenesService } from "../../services/ordenesService";
+import { productosService } from "../../services/productosService";
 import { formatearPrecio } from "../../utils/formato";
 import { regiones } from "../../data/regiones";
 import { formatearTarjeta, formatearVencimiento, vencimientoValido } from "../../utils/tarjetaDemo";
@@ -11,7 +12,7 @@ const inicial = { nombre: "", apellidos: "", correo: "", calle: "", departamento
 
 
 export default function Checkout() {
-  const { items, subtotal, cupon, descuento, total, vaciar, aplicarCupon, quitarCupon } = useCarrito();
+  const { items, subtotal, cupon, descuento, total, vaciar, aplicarCupon, quitarCupon, sincronizarCatalogo } = useCarrito();
   const { usuario } = useAuth();
   const navigate = useNavigate();
   const [datos, setDatos] = useState(() => ({ ...inicial, nombre: usuario?.nombre || "", apellidos: usuario?.apellidos || "", correo: usuario?.correo || "" }));
@@ -54,6 +55,28 @@ export default function Checkout() {
     if (!/^\d{13,19}$/.test(datos.tarjeta.replace(/\s/g, ""))) { setError("Ingresa un número de tarjeta válido (13 a 19 dígitos)."); return; }
     if (!vencimientoValido(datos.vencimiento) || !/^\d{3,4}$/.test(datos.cvv)) { setError("Revisa la fecha de vencimiento y el CVV."); return; }
     setProcesando(true);
+    try {
+      // Consultar catálogo justo antes de confirmar, nunca confiar en localStorage.
+      const actuales = await Promise.all(items.map((i) => productosService.obtener(i.productoId)));
+      const cambioPrecio = items.some((i, index) => Number(i.precio) !== Number(actuales[index].precio));
+      const agotado = items.find((i, index) => Number(actuales[index].stock) < Number(i.cantidad));
+      sincronizarCatalogo(actuales);
+      if (agotado) {
+        setError(`El stock de ${agotado.nombre} cambió. Revisa las cantidades del carrito antes de pagar.`);
+        return;
+      }
+      if (cambioPrecio) {
+        setError("Se actualizaron los precios del catálogo. Revisa el nuevo total y confirma nuevamente tu compra.");
+        return;
+      }
+      // El backend vuelve a comprobar los precios y rechaza cualquier cambio posterior.
+    } catch {
+      setError("No se pudo actualizar el catálogo. No se registró ningún pago; inténtalo nuevamente.");
+      return;
+    } finally {
+      setProcesando(false);
+    }
+    setProcesando(true);
     const tarjetaFinal = datos.tarjeta.replace(/\s/g, "").slice(-4);
     const orden = {
       fecha: new Date().toISOString(), estado: tarjetaFinal === "0000" ? "Pago fallido" : "Pagado",
@@ -68,7 +91,7 @@ export default function Checkout() {
       const guardada = await ordenesService.crear(orden);
       if (orden.estado === "Pagado") { vaciar(); navigate(`/pago-correcto/${guardada.id}`, { state: { orden: { ...orden, id: guardada.id } } }); }
       else navigate(`/pago-error/${guardada.id}`, { state: { orden: { ...orden, id: guardada.id } } });
-    } catch (err) { setError("No pudimos registrar la orden. Comprueba que el servicio de la API esté funcionando e inténtalo otra vez."); }
+    } catch (err) { setError(err.cuerpo?.mensaje || "No pudimos registrar la orden. Revisa los productos y vuelve a intentarlo."); }
     finally { setProcesando(false); }
   }
 

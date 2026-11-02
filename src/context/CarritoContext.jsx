@@ -40,6 +40,16 @@ export function CarritoProvider({ children }) {
     [items, setItems]
   );
 
+  // Actualizar únicamente los datos comerciales consultados al catálogo.
+  const sincronizarCatalogo = useCallback((productos) => {
+    const porId = new Map(productos.map((p) => [String(p.id), p]));
+    setItems((actuales) => actuales.map((item) => {
+      const producto = porId.get(String(item.productoId));
+      return producto ? { ...item, precio: Number(producto.precio), stock: Number(producto.stock),
+        nombre: producto.nombre, marca: producto.marca, codigo: producto.codigo, imagen: producto.imagen } : item;
+    }));
+  }, [setItems]);
+
   const quitar = useCallback((productoId) => setItems((actuales) => quitarItem(actuales, productoId)), [setItems]);
 
   // Se usa tras pagar: deja el carrito y el cupón en blanco.
@@ -79,11 +89,12 @@ export function CarritoProvider({ children }) {
       agregar,
       cambiarCantidad,
       quitar,
+      sincronizarCatalogo,
       vaciar,
       aplicarCupon,
       quitarCupon,
     };
-  }, [items, cupon, porcentaje, agregar, cambiarCantidad, quitar, vaciar, aplicarCupon, quitarCupon]);
+  }, [items, cupon, porcentaje, agregar, cambiarCantidad, quitar, sincronizarCatalogo, vaciar, aplicarCupon, quitarCupon]);
 
   return <CarritoContext.Provider value={valor}>{children}</CarritoContext.Provider>;
 }

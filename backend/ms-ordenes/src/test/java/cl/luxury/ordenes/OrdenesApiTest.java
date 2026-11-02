@@ -1,6 +1,8 @@
 package cl.luxury.ordenes;
 
 import cl.luxury.ordenes.repository.MensajeRepository;
+import cl.luxury.ordenes.service.InventarioClient;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import cl.luxury.ordenes.repository.OrdenRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -25,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OrdenesApiTest {
 
+    @MockBean InventarioClient inventario;
     @Autowired MockMvc mvc;
     @Autowired OrdenRepository ordenes;
     @Autowired MensajeRepository mensajes;
@@ -33,6 +38,9 @@ class OrdenesApiTest {
     void limpiar() {
         ordenes.deleteAll();
         mensajes.deleteAll();
+        when(inventario.consultarProducto(anyString())).thenAnswer(inv ->
+                new InventarioClient.ProductoActual(inv.getArgument(0), "LUX001", "Turathi Blue",
+                        "Afnan", "/img/a.jpg", 10000, 50));
     }
 
     /**
@@ -65,6 +73,18 @@ class OrdenesApiTest {
     private void crear(String cuerpo) throws Exception {
         mvc.perform(post("/api/ordenes").contentType(MediaType.APPLICATION_JSON).content(cuerpo))
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void rechazaPrecioDesactualizadoAntesDeRegistrarOrden() throws Exception {
+        when(inventario.consultarProducto("1")).thenReturn(
+                new InventarioClient.ProductoActual("1", "LUX001", "Turathi Blue",
+                        "Afnan", "/img/a.jpg", 12000, 50));
+        mvc.perform(post("/api/ordenes").contentType(MediaType.APPLICATION_JSON)
+                        .content(ordenPagada(null, "2026-10-05T22:40:00.000Z")))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.mensaje").value(org.hamcrest.Matchers.containsString("cambió")));
+        assertEquals(0, ordenes.count());
     }
 
     // ------------------------------------------------------------ crear
@@ -254,7 +274,7 @@ class OrdenesApiTest {
 
     @Test
     void putReemplazaLaOrdenCompletaConservandoElId() throws Exception {
-        crear(ordenPagada(null, "2026-10-05T22:40:00.000Z"));
+        crear(orden(null, "2026-10-05T22:40:00.000Z", "Pendiente", 20000, 0));
         Long id = ordenes.findAll().get(0).getId();
 
         mvc.perform(put("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
@@ -271,12 +291,25 @@ class OrdenesApiTest {
 
     @Test
     void eliminarDevuelve204YLuegoLaOrdenYaNoExiste() throws Exception {
-        crear(ordenPagada(null, "2026-10-05T22:40:00.000Z"));
+        crear(orden(null, "2026-10-05T22:40:00.000Z", "Pendiente", 20000, 0));
         Long id = ordenes.findAll().get(0).getId();
 
         mvc.perform(delete("/api/ordenes/" + id)).andExpect(status().isNoContent());
         mvc.perform(get("/api/ordenes/" + id)).andExpect(status().isNotFound());
         mvc.perform(delete("/api/ordenes/" + id)).andExpect(status().isNotFound());
+    }
+
+    @Test
+    void noSePuedeReemplazarNiEliminarUnaOrdenPagada() throws Exception {
+        crear(ordenPagada(null, "2026-10-05T22:40:00.000Z"));
+        Long id = ordenes.findAll().get(0).getId();
+
+        mvc.perform(put("/api/ordenes/" + id).contentType(MediaType.APPLICATION_JSON)
+                        .content(orden(null, "2026-10-06T10:00:00.000Z", "Pendiente", 20000, 0)))
+                .andExpect(status().isBadRequest());
+        mvc.perform(delete("/api/ordenes/" + id))
+                .andExpect(status().isBadRequest());
+        assertEquals(1, ordenes.count());
     }
 
     // ------------------------------------------------------------ mensajes y salud

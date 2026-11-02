@@ -33,10 +33,12 @@ public class OrdenService {
 
     private final OrdenRepository ordenes;
     private final ApplicationEventPublisher eventos;
+    private final InventarioClient inventario;
 
-    public OrdenService(OrdenRepository ordenes, ApplicationEventPublisher eventos) {
+    public OrdenService(OrdenRepository ordenes, ApplicationEventPublisher eventos, InventarioClient inventario) {
         this.ordenes = ordenes;
         this.eventos = eventos;
+        this.inventario = inventario;
     }
 
     /**
@@ -81,8 +83,9 @@ public class OrdenService {
     public Orden crear(OrdenRequest solicitud) {
         Orden orden = new Orden();
         aplicar(orden, solicitud);
-        Orden guardada = ordenes.save(orden);
+        Orden guardada = ordenes.saveAndFlush(orden);
         if (PAGADO.equals(guardada.getEstado())) {
+            inventario.descontar(guardada);
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
         }
         return guardada;
@@ -93,9 +96,11 @@ public class OrdenService {
     public Orden actualizar(Long id, OrdenRequest solicitud) {
         Orden orden = obtener(id);
         boolean pagadaAntes = PAGADO.equals(orden.getEstado());
+        if (pagadaAntes) throw new SolicitudInvalidaException("No se pueden reemplazar los productos de una compra ya pagada.");
         aplicar(orden, solicitud);
         Orden guardada = ordenes.save(orden);
         if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
+            inventario.descontar(guardada);
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
         }
         return guardada;
@@ -135,6 +140,7 @@ public class OrdenService {
         }
         Orden guardada = ordenes.save(orden);
         if (!pagadaAntes && PAGADO.equals(guardada.getEstado())) {
+            inventario.descontar(guardada);
             eventos.publishEvent(new OrdenPagadaEvento(guardada.getId()));
         } else if (Set.of("En preparación", "Enviado", "Entregado").contains(estado)) {
             eventos.publishEvent(new OrdenEstadoActualizadoEvento(guardada.getId(), estado));
@@ -144,12 +150,33 @@ public class OrdenService {
 
     @Transactional
     public void eliminar(Long id) {
-        ordenes.delete(obtener(id));
+        Orden orden = obtener(id);
+        if (PAGADO.equals(orden.getEstado()) || Set.of("En preparación", "Enviado", "Entregado").contains(orden.getEstado())) {
+            throw new SolicitudInvalidaException("No se puede eliminar una compra pagada o despachada sin gestionar su devolución de stock.");
+        }
+        ordenes.delete(orden);
     }
 
     // ------------------------------------------------------------------ reglas de negocio
 
     private void aplicar(Orden destino, OrdenRequest r) {
+        // El precio enviado por el navegador nunca es autoridad: contrastar con catálogo.
+        // Si cambió, solicitar al cliente revisar el nuevo total antes de pagar.
+        Set<String> ids = new java.util.HashSet<>();
+        for (OrdenRequest.ItemDto i : r.items()) {
+            if (!ids.add(i.productoId().trim())) {
+                throw new SolicitudInvalidaException("El producto " + i.productoId() + " está repetido en la orden.");
+            }
+            InventarioClient.ProductoActual actual = inventario.consultarProducto(i.productoId().trim());
+            if (!actual.precio().equals(i.precio())) {
+                throw new SolicitudInvalidaException("El precio del producto '" + actual.nombre()
+                        + "' cambió a $" + actual.precio() + ". Actualiza el carrito y confirma el nuevo total.");
+            }
+            if (actual.stock() < i.cantidad()) {
+                throw new SolicitudInvalidaException("No hay suficientes unidades de '" + actual.nombre() + "'.");
+            }
+        }
+
         // 1) Subtotales de cada línea y de la orden: se recalculan, y si el cliente envió otro valor, es un error.
         long suma = 0;
         for (OrdenRequest.ItemDto i : r.items()) {
