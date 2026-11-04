@@ -7,7 +7,7 @@ export default function ResenasProducto({ productoId, usuario, resenas = [], err
   const [texto, setTexto] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [enviando, setEnviando] = useState(false);
-  const yaOpino = resenas.some(r => String(r.usuarioId) === String(usuario?.id));
+  const yaOpino = Boolean(usuario?.id) && resenas.some(r => String(r.usuarioId) === String(usuario.id));
   async function quitar(id) {
     if (!window.confirm("¿Eliminar esta reseña?")) return;
     try { await resenasService.eliminar(id); await onNuevaResena(); }
@@ -23,7 +23,10 @@ export default function ResenasProducto({ productoId, usuario, resenas = [], err
       setTexto(""); setMensaje("¡Reseña publicada correctamente!");
       await onNuevaResena();
     } catch (e) {
-      setMensaje(e.cuerpo?.mensaje || "No se pudo publicar. Recuerda que debes haber comprado el perfume y solo puedes opinar una vez.");
+      const detalle = e.cuerpo?.mensaje;
+      setMensaje(detalle || (e.status === 0 || e.status === 503
+        ? "No pudimos comprobar la compra. Revisa que Catálogo y Órdenes estén iniciados."
+        : "No se pudo publicar. Comprueba en Mi cuenta > Mis pedidos que compraste este perfume con la misma cuenta."));
     } finally { setEnviando(false); }
   }
   return (
@@ -60,14 +63,18 @@ export default function ResenasProducto({ productoId, usuario, resenas = [], err
         {usuario?.tipo === "Cliente" && !yaOpino && (
           <form className="review-card mt-4 mx-auto" style={{ maxWidth: 600 }} onSubmit={publicar}>
             <h4 className="mb-3">Deja tu opinión</h4>
-            <p className="text-gold-light">Disponible para clientes que hayan comprado este perfume.</p>
+            <p className="text-gold-light">Puedes opinar si compraste este perfume con esta misma cuenta. La compra debe figurar en Mi cuenta &gt; Mis pedidos.</p>
             <label className="d-block mb-2" htmlFor="calificacion-resena">Calificación</label>
             <select id="calificacion-resena" className="form-select mb-3" value={estrellasValor} onChange={e => setEstrellasValor(Number(e.target.value))}>
               {[5, 4, 3, 2, 1].map(v => <option key={v} value={v}>{v} estrellas</option>)}
             </select>
             <label className="d-block mb-2" htmlFor="texto-resena">Comentario</label>
-            <textarea id="texto-resena" className="form-control mb-3" maxLength={1000} required rows={3} value={texto} onChange={e => setTexto(e.target.value)} />
-            <button className="btn btn-luxury" type="submit" disabled={enviando || !texto.trim()}>{enviando ? "Publicando..." : "Publicar reseña"}</button>
+            <textarea id="texto-resena" className="form-control mb-2" maxLength={1000} required rows={3} value={texto} onChange={e => setTexto(e.target.value)} />
+            <p className="text-gold-light small text-end mb-3">
+              {texto.trim().length === 0 ? "Escribe un comentario para habilitar el botón · " : ""}
+              {texto.length}/1000 caracteres
+            </p>
+            <button className="btn btn-luxury" type="submit" disabled={enviando || texto.trim().length === 0}>{enviando ? "Publicando..." : "Publicar reseña"}</button>
             {mensaje && <p className="mt-2" role="status">{mensaje}</p>}
           </form>
         )}

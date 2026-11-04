@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import BarraResultados from "../../components/productos/BarraResultados";
 import PanelFiltros from "../../components/productos/PanelFiltros";
 import TarjetaProducto from "../../components/producto/TarjetaProducto";
+import { CatalogoSkeleton } from "../../components/skeleton/LuxurySkeletons";
 import { useRecurso } from "../../hooks/useRecurso";
 import { categoriasService } from "../../services/categoriasService";
 import { productosService } from "../../services/productosService";
@@ -17,24 +18,29 @@ import {
   ordenarProductos,
 } from "../../utils/filtrosProductos";
 
-// Catálogo (productos.html). Qué va dónde:
-//   - Filtros de panel y orden: estado de ESTA página (useState).
-//   - Género y búsqueda: query params (?genero=, ?buscar=). El buscador del Navbar solo navega a /productos?buscar=...
-//     y esta página lo lee, igual que el HTML, así no hace falta un contexto compartido.
-//   - ?categoria=intensos (y los demás grupos) preseleccionan filtros al llegar desde otras vistas.
 export default function Productos() {
   const [params, setParams] = useSearchParams();
   const { datos: productos, cargando, error, recargar } = useRecurso(productosService);
-  const { datos: categorias } = useRecurso(categoriasService); // solo da los nombres; si falla se muestra el id
+  const { datos: categorias } = useRecurso(categoriasService);
 
   const genero = params.get("genero") ?? "";
   const buscar = params.get("buscar") ?? "";
+  const [busquedaLocal, setBusquedaLocal] = useState(buscar);
+  useEffect(() => setBusquedaLocal(buscar), [buscar]);
+  const actualizarBusqueda = (valor) => {
+    setBusquedaLocal(valor);
+    setParams((anterior) => {
+      const siguientes = new URLSearchParams(anterior);
+      if (valor.trim()) siguientes.set("buscar", valor.trim());
+      else siguientes.delete("buscar");
+      return siguientes;
+    }, { replace: true });
+  };
 
   const [seleccion, setSeleccion] = useState(() => filtrosDesdeUrl(params));
   const [orden, setOrden] = useState("destacados");
   const [rangoPrecio, setRangoPrecio] = useState(null);
 
-  // Si llegan nuevos ?categoria=/?humor=... con la página ya abierta, se actualiza la selección.
   const claveFiltrosUrl = GRUPOS.map((g) => params.get(g) ?? "").join("|");
   const esPrimeraVez = useRef(true);
   useEffect(() => {
@@ -43,18 +49,18 @@ export default function Productos() {
       return;
     }
     setSeleccion(filtrosDesdeUrl(params));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [claveFiltrosUrl]);
+  }, [claveFiltrosUrl, params]);
 
-  // El CSS del catálogo (fondo y panel de filtros) cuelga de la clase productos-page del <body>.
   useEffect(() => {
     document.body.classList.add("productos-page");
     return () => document.body.classList.remove("productos-page");
   }, []);
 
   const limitesPrecio = useMemo(() => {
-    const precios = productos.map(p => Number(p.precio)).filter(Number.isFinite);
-    return precios.length ? { min: Math.floor(Math.min(...precios) / 1000) * 1000, max: Math.ceil(Math.max(...precios) / 1000) * 1000 } : { min: 0, max: 0 };
+    const precios = productos.map((p) => Number(p.precio)).filter(Number.isFinite);
+    return precios.length
+      ? { min: Math.floor(Math.min(...precios) / 1000) * 1000, max: Math.ceil(Math.max(...precios) / 1000) * 1000 }
+      : { min: 0, max: 0 };
   }, [productos]);
   const precioMin = rangoPrecio ? rangoPrecio.min : limitesPrecio.min;
   const precioMax = rangoPrecio ? rangoPrecio.max : limitesPrecio.max;
@@ -66,21 +72,21 @@ export default function Productos() {
 
   const alternar = (grupo, valor) => setSeleccion((previa) => alternarValor(previa, grupo, valor));
 
-  // Igual que "Limpiar filtros" del HTML: borra checks, vuelve a "Destacados" y deja solo ?genero= en la URL.
   function limpiar() {
     setSeleccion(crearFiltrosVacios());
     setOrden("destacados");
     setRangoPrecio(null);
+    setBusquedaLocal("");
     setParams(genero ? { genero } : {});
   }
 
   return (
     <div className="container py-5 my-4 productos-contenedor">
       <div className="text-center mb-4 hero-header">
-        <span className="text-gold text-uppercase tracking-widest fs-7">Colección Luxury</span>
-        <h1 className="display-4 luxury-title mt-2">Nuestros productos</h1>
+        <span className="text-gold text-uppercase tracking-widest fs-7">El catálogo</span>
+        <h1 className="display-4 luxury-title mt-2">Encuentra tu próximo perfume</h1>
         <div className="gold-divider mx-auto my-3"></div>
-        <p className="text-gold-light fw-light">Elige una fragancia y añádela a tu carrito.</p>
+        <p className="text-gold-light fw-light">Explora por marca, familia olfativa o estilo. Sin apuro.</p>
       </div>
 
       <div className="row g-4">
@@ -98,11 +104,21 @@ export default function Productos() {
         />
 
         <div className="col-lg-9">
-          {cargando && (
-            <p className="text-center text-gold-light py-5 mb-0" role="status">
-              Cargando fragancias...
-            </p>
-          )}
+          <div className="catalogo-busqueda mb-3">
+            <label htmlFor="buscarEnCatalogo" className="visually-hidden">Buscar perfumes por nombre o marca</label>
+            <i className="bi bi-search" aria-hidden="true" />
+            <input
+              id="buscarEnCatalogo"
+              type="search"
+              className="form-control form-luxury"
+              placeholder="Buscar por nombre o marca..."
+              value={busquedaLocal}
+              onChange={(evento) => actualizarBusqueda(evento.target.value)}
+              autoComplete="off"
+            />
+          </div>
+
+          {cargando && <CatalogoSkeleton cantidad={6} />}
 
           {error && (
             <div className="text-center py-5" role="alert">
@@ -125,7 +141,7 @@ export default function Productos() {
                   </button>
                 </div>
               ) : (
-                <div className="row g-4 justify-content-center">
+                <div className="row g-4 justify-content-center catalogo-grid">
                   {visibles.map((p) => (
                     <TarjetaProducto key={p.id} producto={p} columna="col-12 col-md-6 col-lg-4" />
                   ))}

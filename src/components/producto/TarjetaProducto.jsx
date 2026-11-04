@@ -16,12 +16,13 @@ export default function TarjetaProducto({ producto: p, columna = "col-12 col-md-
   const agregarAlCarrito = useAgregarAlCarrito();
 
   const enWishlist = estaEnWishlist(p.id);
-  const stockCritico = p.stock <= p.stockCritico;
+  const agotado = Number(p.stock ?? 0) <= 0;
+  const stockCritico = !agotado && Number(p.stock) <= Number(p.stockCritico ?? 2);
   const productoAComprar = oferta ? { ...p, precio: oferta.precioOferta } : p;
 
   return (
     <div className={columna}>
-      <article className="card luxury-card h-100 border-0">
+      <article className="card luxury-card h-100 border-0 tarjeta-producto-uniforme">
         <span className="card-badge card-badge--left">{CONCENTRACION[p.concentracion] || ""}</span>
         <span className="card-badge card-badge--right">{TIPO[p.tipo] || ""}</span>
         <button
@@ -37,7 +38,7 @@ export default function TarjetaProducto({ producto: p, columna = "col-12 col-md-
           <span className="card-badge card-badge--ml">
             <i className="bi bi-cloud-fill"></i> {p.ml} ML
           </span>
-          <ImagenProducto key={p.imagen || p.id} src={p.imagen} className="card-img-top" alt={p.nombre} />
+          <ImagenProducto key={p.imagen || p.id} src={p.imagen} className="card-img-top" alt={p.nombre} loading="lazy" decoding="async" />
         </div>
         <div className="card-body text-center p-4 d-flex flex-column justify-content-between">
           <div>
@@ -46,6 +47,7 @@ export default function TarjetaProducto({ producto: p, columna = "col-12 col-md-
                 -{oferta.descuento}%{oferta.etiqueta ? ` · ${oferta.etiqueta}` : ""}
               </span>
             )}
+            {agotado && <span className="badge bg-secondary mb-2 d-inline-block">Agotado</span>}
             {stockCritico && <span className="badge bg-danger mb-2 d-inline-block">¡Últimas unidades!</span>}
             <span className="fs-7 text-uppercase text-gold-light tracking-wider d-block">
               {p.estacion} · {etiquetaFamilia(p.familia)}
@@ -73,8 +75,8 @@ export default function TarjetaProducto({ producto: p, columna = "col-12 col-md-
             <Link to={`/productos/${p.id}`} className="btn btn-luxury w-100 mb-2">
               Descubrir
             </Link>
-            <button type="button" className="btn btn-luxury btn-luxury--primary w-100" onClick={() => agregarAlCarrito(productoAComprar)}>
-              Añadir
+            <button type="button" className="btn btn-luxury btn-luxury--primary w-100" disabled={agotado} onClick={() => agregarAlCarrito(productoAComprar)}>
+              {agotado ? "Sin stock" : "Añadir"}
             </button>
           </div>
         </div>

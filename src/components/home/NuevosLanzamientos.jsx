@@ -10,7 +10,7 @@ const INTERVALO_MS = 6000; // data-bs-interval del HTML
 
 const mayuscula = (texto = "") => texto.charAt(0).toUpperCase() + texto.slice(1);
 
-// Carrusel grande de "Nuevos Lanzamientos": un producto por slide, avanza solo cada 6 s.
+// Carrusel grande de "Recién llegados": un producto por slide, avanza solo cada 6 s.
 export default function NuevosLanzamientos({ productos }) {
   const agregarAlCarrito = useAgregarAlCarrito();
   const { indice, siguiente, anterior, ir } = useCarrusel(productos.length, INTERVALO_MS);
@@ -18,9 +18,9 @@ export default function NuevosLanzamientos({ productos }) {
   return (
     <section className="container py-5 vh-section" aria-labelledby="titulo-lanzamientos">
       <div className="text-center mb-4">
-        <span className="section-label d-block">Recién llegados</span>
+        <span className="section-label d-block">En la vitrina</span>
         <h2 id="titulo-lanzamientos" className="luxury-title mt-2 fst-italic">
-          Nuevos Lanzamientos
+          Recién llegados
         </h2>
       </div>
 
@@ -30,7 +30,7 @@ export default function NuevosLanzamientos({ productos }) {
             <div key={p.id} className={`carousel-item${i === indice ? " active" : ""}`}>
               <div className="row g-0 align-items-center launch-slide">
                 <div className="col-md-6 launch-img-wrapper">
-                  <ImagenProducto key={p.imagen || p.id} src={p.imagen} alt={p.nombre} className="launch-img" />
+                  <ImagenProducto key={p.imagen || p.id} src={p.imagen} alt={p.nombre} className="launch-img" loading={i === 0 ? "eager" : "lazy"} decoding="async" />
                 </div>
                 <div className="col-md-6 launch-copy">
                   <span className="text-gold text-uppercase fs-7 tracking-wider">Nuevo · {mayuscula(p.estacion)}</span>

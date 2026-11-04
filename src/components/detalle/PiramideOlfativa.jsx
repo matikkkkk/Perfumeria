@@ -23,11 +23,13 @@ export default function PiramideOlfativa({ producto }) {
             return (
               <div className="col-md-4" key={clave}>
                 <div className={`piramide-etapa-card piramide-etapa-card--${clave}`}>
+                  <span className="visually-hidden">{etiqueta}</span>
                   {imagenes[clave] ? (
                     <img
                       src={imagenes[clave]}
                       alt={notas.length ? `${etiqueta}: ${notas.join(", ")}` : etiqueta}
                       className="piramide-etapa-img"
+                      loading="lazy" decoding="async"
                     />
                   ) : (
                     <>

@@ -1,5 +1,5 @@
 /* Rediseño editorial del inicio; mantiene la identidad de Luxury. */
-.luxury-home-refresh {background-color:transparent;}
+.luxury-home-refresh { background: transparent; }
 .luxury-home-refresh .container {max-width:1250px;}
 .luxury-curated-section,.luxury-gender-section,.luxury-editorial-section {padding:76px 0;}
 .luxury-editorial-card {position:relative;display:flex;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;border:1px solid rgba(210,165,72,.38);border-radius:5px;background-color:#17151a;background-size:cover;background-position:center;transition:transform .3s ease,border-color .3s ease;}
@@ -25,7 +25,6 @@
 @media(max-width:767px){.luxury-curated-section,.luxury-gender-section,.luxury-editorial-section{padding:48px 0;}.luxury-editorial-card{min-height:235px;}.luxury-editorial-feature{grid-template-columns:1fr;}.luxury-editorial-copy{padding:30px;}.luxury-editorial-visual{min-height:190px;}.luxury-editorial-shade strong{font-size:1.7rem;}}
 
 /* Home: dejar visible el fondo de mármol del body entre las tarjetas. */
-.luxury-home-refresh { background: transparent; }
 .luxury-home-refresh .luxury-curated-section,
 .luxury-home-refresh .luxury-gender-section,
 .luxury-home-refresh .luxury-editorial-section { background: transparent; }
@@ -150,4 +149,71 @@
   .hero-overlay-content .hero-description { max-width: 370px; }
   .hero-overlay-content .hero-actions { gap: 8px; }
   .hero-overlay-content .hero-actions .btn { padding: 9px 12px; font-size: .66rem; }
+}
+
+/* Distribución editorial de Blog y Guía Olfativa. */
+.luxury-editorial-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr);
+  gap: 24px;
+}
+
+.luxury-editorial-aside {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.luxury-editorial-mini-card {
+  padding: 28px 24px;
+  border: 1px solid rgba(210, 165, 72, 0.22);
+  background: rgba(15, 15, 18, 0.88);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+}
+
+.luxury-editorial-mini-card p {
+  color: #c8c2b8;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.destacados-section .luxury-title + p,
+.destacados-section .section-label + .luxury-title + p {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+@media (max-width: 1199px) {
+  .luxury-editorial-shell { grid-template-columns: 1fr; }
+}
+
+/* Correcciones: fotografías horizontales visibles en las tres colecciones. */
+.luxury-home-refresh .luxury-curated-section .luxury-editorial-card {
+  min-height: 290px;
+  width: 100%;
+  background-position: center center;
+  background-size: cover;
+}
+.luxury-home-refresh .luxury-curated-section .luxury-editorial-shade {
+  justify-content: flex-end;
+  padding: 26px;
+}
+.luxury-home-refresh .luxury-editorial-mini-card {
+  color: #f5eee3;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background .2s ease, border-color .2s ease;
+}
+.luxury-home-refresh .luxury-editorial-mini-card:hover,
+.luxury-home-refresh .luxury-editorial-mini-card:focus-visible {
+  color: #fff;
+  background: #211e1c;
+  border-color: rgba(224,186,111,.55);
+}
+.luxury-editorial-link-action { color: #e4bc61; font-size: .88rem; }
+.luxury-home-refresh .luxury-editorial-visual { min-height: 300px; }
+@media (max-width: 767.98px) {
+  .luxury-home-refresh .luxury-curated-section .luxury-editorial-card { min-height: 260px; }
 }

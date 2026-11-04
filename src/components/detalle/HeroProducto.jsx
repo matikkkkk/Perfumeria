@@ -19,7 +19,7 @@ export default function HeroProducto({ producto }) {
     return (
       <div className="hero-producto hero-producto--contain">
         <h1 className="visually-hidden">{producto.nombre}</h1>
-        <ImagenProducto key={producto.heroFondo || producto.id} src={producto.heroFondo} alt={producto.nombre} className="hero-producto--contain-img" />
+        <ImagenProducto key={producto.heroFondo || producto.id} src={producto.heroFondo} alt={producto.nombre} className="hero-producto--contain-img" loading="eager" fetchPriority="high" decoding="async" />
         {botonAroma}
       </div>
     );
@@ -30,7 +30,7 @@ export default function HeroProducto({ producto }) {
       <div className="hero-producto hero-producto--imagen">
         <h1 className="visually-hidden">{producto.nombre}</h1>
         {/* Un <img> permite detectar errores de carga, a diferencia de background-image. */}
-        <ImagenProducto key={producto.heroFondo || producto.id} src={producto.heroFondo} alt={producto.nombre} className="hero-producto--fondo-img" />
+        <ImagenProducto key={producto.heroFondo || producto.id} src={producto.heroFondo} alt={producto.nombre} className="hero-producto--fondo-img" loading="eager" fetchPriority="high" decoding="async" />
         {botonAroma}
       </div>
     );
@@ -38,7 +38,7 @@ export default function HeroProducto({ producto }) {
 
   return (
     <div className="hero-producto hero-producto--fallback">
-      <ImagenProducto key={producto.imagen || producto.id} src={producto.imagen} alt={producto.nombre} />
+      <ImagenProducto key={producto.imagen || producto.id} src={producto.imagen} alt={producto.nombre} loading="eager" fetchPriority="high" decoding="async" />
       <h1 className="hero-nombre">{producto.nombre}</h1>
       <p className="hero-tagline">{producto.descripcion || ""}</p>
       {botonAroma}

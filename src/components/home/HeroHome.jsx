@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function HeroHome() {
   return (
     <section className="hero-section">
-      <img src="/img/hero-banner.jpg" alt="Interior de Maison Luxury, perfumería de lujo" className="hero-banner-img" />
+      <img src="/img/hero-banner.jpg" alt="Interior de Maison Luxury, perfumería de lujo" className="hero-banner-img" fetchPriority="high" loading="eager" decoding="async" />
       <div className="hero-overlay-content">
         <span className="hero-eyebrow">PERFUMERÍA DE AUTOR</span>
         <h1 className="hero-headline">Encuentra tu esencia.</h1>

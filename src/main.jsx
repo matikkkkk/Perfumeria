@@ -5,6 +5,9 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./styles/style.css";
 import "./styles/responsive-polish.css";
+import "./styles/commerce-polish.css";
+import "./styles/editorial-refinement.css";
+import "./styles/luxury-home-refresh.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import AppProviders from "./context/AppProviders.jsx";
@@ -19,4 +22,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-import "./styles/luxury-home-refresh.css";

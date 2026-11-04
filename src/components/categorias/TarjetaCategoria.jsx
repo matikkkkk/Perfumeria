@@ -8,7 +8,7 @@ export default function TarjetaCategoria({ categoria, total }) {
 
   return (
     <div className="col-12 col-md-6 col-lg-4">
-      <article className="card luxury-card categoria-card h-100 border-0">
+      <article className={`card luxury-card categoria-card categoria-card--${String(categoria.nombre || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")} h-100 border-0`}>
         <img src={categoria.imagen} className="categoria-card__img" alt={categoria.nombre} />
         <div className="card-body text-center p-4 d-flex flex-column">
           <span className="section-label d-block">{textoFragancias(total)}</span>
