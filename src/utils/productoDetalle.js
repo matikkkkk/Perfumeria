@@ -14,6 +14,14 @@ export function navClaroDe(producto, tema = temaDeProducto(producto)) {
   return typeof producto.navClaro === "boolean" ? producto.navClaro : tema === "verano" || tema === "primavera";
 }
 
+
+// Familia visual para mantener identidad sin que toda la página herede el color del perfume.
+export function familiaTemaDeProducto(producto, tema = temaDeProducto(producto)) {
+  if (producto?.familiaVisual) return String(producto.familiaVisual).trim().toLowerCase();
+  const mapa = { primavera: "suave", verano: "claro", invierno: "oscuro", otono: "calido" };
+  return mapa[tema] || "oscuro";
+}
+
 // Promedio con un decimal, como texto ("4.7"). Sin reseñas devuelve "0.0".
 export function promedioResenas(resenas) {
   if (resenas.length === 0) return "0.0";

@@ -22,7 +22,7 @@ export default function PiramideOlfativa({ producto }) {
             const notas = producto.notas[clave] ?? [];
             return (
               <div className="col-md-4" key={clave}>
-                <div className={`piramide-etapa-card piramide-etapa-card--${clave}`}>
+                <div className={`piramide-etapa-card piramide-etapa-card--${clave}${imagenes[clave] ? "" : " piramide-etapa-card--texto"}`}>
                   <span className="visually-hidden">{etiqueta}</span>
                   {imagenes[clave] ? (
                     <img
