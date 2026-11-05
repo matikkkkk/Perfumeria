@@ -1,54 +1,72 @@
-# Luxury Perfumeria - ejecutar desde PowerShell: .\iniciar-perfumeria.ps1
+# Iniciar Maison Luxury desde PowerShell: .\iniciar-perfumeria.ps1
 param([switch]$SinNavegador)
 $ErrorActionPreference = 'Stop'
 $raiz = $PSScriptRoot
 Set-Location $raiz
-foreach ($cmd in @('java','mvn','npm')) {
-  if (-not (Get-Command $cmd -ErrorAction SilentlyContinue)) { throw "Falta '$cmd' en PATH. Instalalo y abre otra terminal." }
-}
-if (-not (Test-Path '.env')) { Copy-Item '.env.example' '.env' }
-if (-not (Test-Path 'node_modules')) { Write-Host 'Instalando dependencias npm...'; npm ci; if ($LASTEXITCODE -ne 0) { throw 'npm ci fallo' } }
-# H2 se crea automaticamente en cada microservicio; no requiere MySQL.
-foreach ($puerto in 8080,8081,8082,8083,5173) {
-  if (Get-NetTCPConnection -LocalPort $puerto -State Listen -ErrorAction SilentlyContinue) {
-    throw "El puerto $puerto ya esta ocupado. Deten el proceso anterior antes de iniciar otra copia."
+
+foreach ($cmd in @('java', 'mvn', 'npm')) {
+  if (-not (Get-Command $cmd -ErrorAction SilentlyContinue)) {
+    throw "Falta '$cmd' en PATH. Instalalo y vuelve a abrir la terminal."
   }
 }
-# Configuracion opcional de Gmail para enviar comprobantes PDF.
-# Las credenciales se introducen en cada ejecucion y no se escriben en archivos.
-$respuestaCorreo = Read-Host 'Activar correos Gmail (boletas, seguimiento, stock y bienvenida)? (S/N, por defecto N)'
-if ($respuestaCorreo -match '^[sS]$') {
-  $env:SMTP_HOST = 'smtp.gmail.com'
-  $env:SMTP_PORT = '587'
-  $env:SMTP_AUTH = 'true'
-  $env:SMTP_STARTTLS = 'true'
-  $correoRemitente = (Read-Host 'Direccion Gmail remitente').Trim()
-  if ($correoRemitente -notmatch '^[^@\s]+@(?:gmail\.com|googlemail\.com)$') {
-    throw 'Indica una direccion Gmail valida. Para otros proveedores usa variables SMTP externas.'
+
+if (-not (Test-Path -LiteralPath (Join-Path $raiz '.env'))) {
+  Copy-Item -LiteralPath (Join-Path $raiz '.env.example') -Destination (Join-Path $raiz '.env')
+}
+
+# Cargar las opciones SMTP privadas del .env compartido en todos los procesos Java.
+# Solo se leen nombres concretos; nunca se imprimen contrasenas en la consola.
+$clavesCorreo = @('SMTP_HOST', 'SMTP_PORT', 'SMTP_AUTH', 'SMTP_STARTTLS', 'SMTP_USER', 'SMTP_PASSWORD', 'MAIL_FROM', 'MAIL_ENABLED')
+foreach ($linea in (Get-Content -LiteralPath (Join-Path $raiz '.env') -Encoding UTF8)) {
+  $texto = $linea.Trim()
+  if ($texto -match '^([A-Za-z_][A-Za-z_0-9]*)\s*=\s*(.*)$') {
+    $nombre = $Matches[1]
+    if ($clavesCorreo -contains $nombre) {
+      $valor = $Matches[2].Trim()
+      if ($valor.Length -ge 2 -and (($valor.StartsWith('"') -and $valor.EndsWith('"')) -or ($valor.StartsWith("'") -and $valor.EndsWith("'")))) {
+        $valor = $valor.Substring(1, $valor.Length - 2)
+      }
+      [Environment]::SetEnvironmentVariable($nombre, $valor, 'Process')
+    }
   }
-  $claveSegura = Read-Host 'Contrasena de aplicacion de Google (NO tu contrasena normal)' -AsSecureString
-  $clavePtr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($claveSegura)
-  try { $claveCorreo = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($clavePtr) }
-  finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($clavePtr) }
-  $claveCorreo = $claveCorreo -replace '\s',''
-  if ([string]::IsNullOrWhiteSpace($claveCorreo)) { throw 'Falta la contrasena de aplicacion.' }
-  $env:SMTP_USER = $correoRemitente
-  $env:SMTP_PASSWORD = $claveCorreo
-  $env:MAIL_FROM = $correoRemitente
+}
+
+$correoRemitente = [string]$env:SMTP_USER
+$claveAplicacion = [string]$env:SMTP_PASSWORD
+$claveAplicacion = $claveAplicacion -replace '\s', ''
+if ($correoRemitente -match '^[^@\s]+@[^@\s]+\.[^@\s]+$' -and
+    $claveAplicacion.Length -gt 0 -and $env:MAIL_ENABLED -ne 'false') {
+  $env:SMTP_PASSWORD = $claveAplicacion
+  if ([string]::IsNullOrWhiteSpace($env:MAIL_FROM)) { $env:MAIL_FROM = $correoRemitente }
   $env:MAIL_ENABLED = 'true'
-  $claveCorreo = $null
-  Write-Host 'Gmail SMTP habilitado para los microservicios (incluye ms-usuarios) (smtp.gmail.com:587 / STARTTLS).'
+  Write-Host "Correo transaccional habilitado para Catalogo, Usuarios y Ordenes ($correoRemitente)."
 } else {
   $env:MAIL_ENABLED = 'false'
-  Write-Host 'Envio por correo desactivado para esta ejecucion.'
+  Write-Warning 'Correo desactivado: completa SMTP_USER y SMTP_PASSWORD en .env y vuelve a iniciar el proyecto.'
 }
-foreach ($svc in @('ms-catalogo','ms-usuarios','ms-ordenes','gateway')) {
+$claveAplicacion = $null
+
+if (-not (Test-Path 'node_modules')) {
+  Write-Host 'Instalando dependencias npm...'
+  npm ci
+  if ($LASTEXITCODE -ne 0) { throw 'npm ci fallo' }
+}
+
+# No iniciar servicios duplicados: las credenciales/configuracion solo se leen al arrancar.
+foreach ($puerto in 8080,8081,8082,8083,5173) {
+  if (Get-NetTCPConnection -LocalPort $puerto -State Listen -ErrorAction SilentlyContinue) {
+    throw "El puerto $puerto ya esta ocupado. Deten los procesos anteriores y reinicia el proyecto."
+  }
+}
+
+foreach ($svc in @('ms-catalogo', 'ms-usuarios', 'ms-ordenes', 'gateway')) {
   Write-Host "Iniciando $svc..."
-  Start-Process -FilePath 'powershell.exe' -WorkingDirectory (Join-Path $raiz "backend/$svc") -ArgumentList @('-NoExit','-Command','mvn spring-boot:run')
+  Start-Process -FilePath 'powershell.exe' -WorkingDirectory (Join-Path $raiz "backend/$svc") -ArgumentList @('-NoExit', '-Command', 'mvn spring-boot:run')
 }
 Write-Host 'Iniciando frontend...'
-Start-Process -FilePath 'powershell.exe' -WorkingDirectory $raiz -ArgumentList @('-NoExit','-Command','npm run dev')
-Write-Host 'Espera unos segundos a que los 5 procesos arranquen. Luego abre http://localhost:5173'
+Start-Process -FilePath 'powershell.exe' -WorkingDirectory $raiz -ArgumentList @('-NoExit', '-Command', 'npm run dev')
+Write-Host 'Abre http://localhost:5173 despues de que arranquen los servicios.'
 if (-not $SinNavegador) { Start-Sleep -Seconds 14; Start-Process 'http://localhost:5173' }
-# Limitar vida de las credenciales en la terminal principal. Los procesos Java ya las heredaron.
+
+# Los procesos Java ya heredaron la configuracion al iniciarse.
 Remove-Item Env:SMTP_PASSWORD -ErrorAction SilentlyContinue

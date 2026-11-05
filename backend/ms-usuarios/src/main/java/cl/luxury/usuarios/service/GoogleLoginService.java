@@ -1,6 +1,7 @@
 package cl.luxury.usuarios.service;
 
 import cl.luxury.usuarios.exception.SolicitudInvalidaException;
+import cl.luxury.usuarios.correo.RegistroCreadoEvent;
 import cl.luxury.usuarios.model.Usuario;
 import cl.luxury.usuarios.repository.UsuarioRepository;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -8,6 +9,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +24,15 @@ import java.util.UUID;
 public class GoogleLoginService {
     private final UsuarioRepository usuarios;
     private final PasswordEncoder encoder;
+    private final ApplicationEventPublisher eventos;
     private final GoogleIdTokenVerifier verifier;
 
     public GoogleLoginService(UsuarioRepository usuarios, PasswordEncoder encoder,
+                              ApplicationEventPublisher eventos,
                               @Value("${luxury.google.client-id}") String clientId) throws GeneralSecurityException, IOException {
         this.usuarios = usuarios;
         this.encoder = encoder;
+        this.eventos = eventos;
         if (clientId == null || clientId.isBlank()) {
             throw new IllegalStateException("Falta GOOGLE_CLIENT_ID");
         }
@@ -82,7 +87,10 @@ public class GoogleLoginService {
         usuario.setApellidos(recortar((String) payload.get("family_name"), 100, "Google"));
         usuario.setTipo("Cliente");
         usuario.setPasswordHash(encoder.encode(UUID.randomUUID().toString() + UUID.randomUUID()));
-        return usuarios.save(usuario);
+        Usuario creado = usuarios.save(usuario);
+        // Enviar bienvenida solo al crear la cuenta, no en cada inicio de sesión con Google.
+        eventos.publishEvent(new RegistroCreadoEvent(creado.getCorreo(), creado.getNombre()));
+        return creado;
     }
 
     private String recortar(String texto, int max, String defecto) {
