@@ -1,0 +1,782 @@
+/* MAISON LUXURY · Edición Navidad
+ * Tema opcional: todos los cambios dependen de body.modo-navidad.
+ * Los recursos y estilos normales siguen intactos.
+ */
+body.modo-navidad {
+  --navidad-rojo: #ad2937;
+  --navidad-borgona: #721d2b;
+  --navidad-oro: #dfb65f;
+  --navidad-marfil: #f7eada;
+}
+
+body.modo-navidad .luxury-navbar {
+  position: relative;
+  border-bottom-color: rgba(204, 157, 73, .45) !important;
+  background: rgba(10, 10, 13, .94) !important;
+  box-shadow: 0 4px 23px rgba(140, 30, 42, .15);
+}
+body.modo-navidad .luxury-navbar::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  inset-inline: 0;
+  height: 8px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10px 5px, rgba(255, 215, 113, .95) 0 2px, transparent 4px),
+    radial-gradient(circle at 37px 5px, rgba(216, 64, 64, .83) 0 2px, transparent 4px),
+    radial-gradient(circle at 63px 5px, rgba(255, 243, 177, .85) 0 2px, transparent 4px);
+  background-size: 85px 8px;
+  filter: drop-shadow(0 0 4px #e4b74d);
+}
+body.modo-navidad .luxury-navbar .brand-mark-mini {
+  position: relative;
+}
+body.modo-navidad .luxury-navbar .brand-mark-mini::after {
+  content: "✧";
+  color: #f3d887;
+  position: absolute;
+  font-size: 17px;
+  top: -13px;
+  right: -10px;
+  text-shadow: 0 0 7px #dfb65f;
+}
+body.modo-navidad .luxury-navbar .nav-link:hover,
+body.modo-navidad .luxury-navbar .nav-link.active {
+  color: #f0d394 !important;
+}
+
+/* Home: fotos del usuario. Mantener gradiente inferior para que los títulos se lean. */
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card--arabe {
+  background-image: linear-gradient(0deg, rgba(13, 6, 8, .78), transparent 72%), url('/navidad/home/arabe.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card--disenador {
+  background-image: linear-gradient(0deg, rgba(13, 6, 8, .78), transparent 72%), url('/navidad/home/disenador.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card--nicho {
+  background-image: linear-gradient(0deg, rgba(13, 6, 8, .78), transparent 72%), url('/navidad/home/nicho.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-gender-card--mujer {
+  background-image: linear-gradient(0deg, rgba(13, 6, 8, .78), transparent 72%), url('/navidad/home/ellas.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-gender-card--hombre {
+  background-image: linear-gradient(0deg, rgba(13, 6, 8, .78), transparent 72%), url('/navidad/home/ellos.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-gender-card--unisex {
+  background-image: linear-gradient(0deg, rgba(13, 6, 8, .78), transparent 72%), url('/navidad/home/unisex.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-visual {
+  background-image: linear-gradient(0deg, rgba(7, 6, 6, .62), transparent 75%), url('/navidad/home/nosotros.webp');
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-feature {
+  border-color: rgba(216, 172, 91, .57);
+}
+body.modo-navidad .luxury-home-refresh .luxury-curated-section,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section {
+  position: relative;
+  isolation: isolate;
+}
+body.modo-navidad .luxury-home-refresh .luxury-curated-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section::before {
+  position: absolute;
+  content: "";
+  width: clamp(100px, 16vw, 210px);
+  height: 108px;
+  top: 0;
+  right: 0;
+  background: url('/navidad/adornos/guirnalda.webp') no-repeat right top / contain;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .9;
+}
+body.modo-navidad .luxury-home-refresh .luxury-curated-section > .container,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section > .container,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section > .container {
+  position: relative;
+  z-index: 1;
+}
+body.modo-navidad .hero-section .hero-overlay-content .hero-eyebrow { color: #f6d28d; }
+body.modo-navidad .hero-section .hero-overlay-content .hero-headline {
+  color: #fff5e8;
+  text-shadow: 0 3px 15px #130a0a, 0 1px 4px #130a0a;
+}
+body.modo-navidad .hero-section::after {
+  background: linear-gradient(to top, rgba(6, 4, 6, .78), rgba(7, 3, 5, .48) 24%, transparent 61%);
+}
+body.modo-navidad .luxury-home-refresh .section-label,
+body.modo-navidad .luxury-home-refresh .luxury-card-action {
+  color: #ebc57c;
+}
+
+/* Gorritos pequeños en tarjetas compartidas de catálogo, destacados y relacionados. */
+body.modo-navidad .tarjeta-producto-uniforme {
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+  border: 1px solid rgba(207, 157, 79, .26) !important;
+}
+body.modo-navidad .tarjeta-producto-uniforme::before {
+  content: "";
+  position: absolute;
+  z-index: 12;
+  top: -21px;
+  left: -22px;
+  width: 68px;
+  height: 60px;
+  background: url('/navidad/adornos/gorro-santa.svg') no-repeat center / contain;
+  transform: rotate(-18deg);
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.45));
+}
+body.modo-navidad .tarjeta-producto-uniforme .card-img-wrapper { border-radius: inherit; }
+body.modo-navidad .tarjeta-producto-uniforme:hover { border-color: rgba(230, 187, 99, .66) !important; }
+
+/* Blog: ramita de pino en la esquina, sin tapar el título ni la portada. */
+body.modo-navidad .blog-card,
+body.modo-navidad .luxury-blog-detail { position: relative; isolation: isolate; }
+body.modo-navidad .blog-card::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 2px;
+  right: 0;
+  width: 116px;
+  height: 68px;
+  pointer-events: none;
+  background: url('/navidad/adornos/guirnalda.webp') center / contain no-repeat;
+}
+body.modo-navidad .blog-card { border-color: rgba(215, 173, 98, .37); }
+body.modo-navidad .luxury-blog-detail::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 120px;
+  height: 80px;
+  pointer-events: none;
+  opacity: .65;
+  background: url('/navidad/adornos/guirnalda.webp') top right / contain no-repeat;
+}
+
+/* Nieve ligera, no bloquea ningún clic. */
+.navidad-nevada { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; }
+.navidad-nevada i {
+  display: block;
+  position: absolute;
+  left: var(--pos-x);
+  top: -15px;
+  width: var(--tamano);
+  height: var(--tamano);
+  border-radius: 50%;
+  background: rgba(255, 255, 247, .78);
+  box-shadow: 0 0 6px rgba(255, 244, 215, .33);
+  animation: navidad-caida var(--duracion) linear var(--espera) infinite;
+}
+@keyframes navidad-caida { from { transform: translate3d(0,-20px,0); } to { transform: translate3d(28px,105vh,0); } }
+
+/* Arbolito fijo con regalos; se oculta con X y no invade el checkout. */
+.navidad-arbol-flotante {
+  position: fixed;
+  z-index: 85;
+  right: max(6px, env(safe-area-inset-right));
+  bottom: max(6px, env(safe-area-inset-bottom));
+  width: clamp(80px, 9vw, 148px);
+  height: auto;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.65));
+}
+.navidad-arbol-flotante img { display: block; width: 100%; height: auto; }
+.navidad-arbol-cerrar {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 1px;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 235, 182, .5);
+  border-radius: 50%;
+  background: rgba(22, 15, 19, .92);
+  color: #fff8e9;
+  font: 19px/1 system-ui,sans-serif;
+  cursor: pointer;
+}
+.navidad-arbol-cerrar:hover { background: #7f2131; }
+.navidad-arbol-cerrar:focus-visible { outline: 3px solid #e3bc70; outline-offset: 2px; }
+
+/* Un único paso de trineo por sesión, solo en Home. */
+.navidad-trineo {
+  position: fixed;
+  z-index: 91;
+  top: 8vh;
+  left: -460px;
+  width: clamp(190px, 30vw, 430px);
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 7px rgba(0,0,0,.6));
+  animation: navidad-trineo-pasa 8.5s ease-in-out both;
+}
+@keyframes navidad-trineo-pasa {
+  0% { transform: translateX(-15vw) translateY(30px); opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(calc(100vw + 580px)) translateY(-28px); opacity: 0; }
+}
+
+/* Panel de administración: selector real y persistido vía ms-catalogo. */
+.navidad-admin-form { max-width: 920px; }
+.navidad-admin-opcion {
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 18px 19px;
+  border: 1px solid rgba(217, 179, 111, .25);
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,.025);
+  transition: border-color .15s ease, background .15s ease;
+}
+.navidad-admin-opcion.elegido { border-color: #e4bd75; background: rgba(224, 183, 101, .09); }
+.navidad-admin-opcion input { margin-top: 4px; accent-color: #d8b15c; }
+.navidad-admin-opcion > i { font-size: 1.35rem; color: #dfb65f; line-height: 1.2; }
+.navidad-admin-opcion span { display: flex; flex-direction: column; gap: 4px; }
+.navidad-admin-opcion strong { color: #f6ebd8; font-weight: 600; }
+.navidad-admin-opcion small { color: #c4beb8; font-size: .88rem; line-height: 1.5; }
+.navidad-estado-pill {
+  background: rgba(105, 108, 115, .18);
+  color: #e9e7e3;
+  border: 1px solid rgba(218, 211, 199, .25);
+  padding: 7px 13px;
+  border-radius: 30px;
+  font-size: .8rem;
+}
+.navidad-estado-pill.activo { color: #ffe0a2; border-color: rgba(237, 190, 98, .53); background: rgba(107, 42, 37, .35); }
+.navidad-admin-vista { overflow: hidden; padding: 0 !important; }
+.navidad-admin-vista img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+
+@media (max-width: 767.98px) {
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section::before { width: 105px; opacity: .6; }
+  body.modo-navidad .tarjeta-producto-uniforme::before { width: 58px; height: 54px; left: -14px; top: -17px; }
+  .navidad-arbol-flotante { display: none; }
+  .navidad-trineo { top: 12vh; }
+  .navidad-nevada i:nth-child(n+6) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navidad-nevada i { animation: none; display: none; }
+  .navidad-trineo { display: none; animation: none; }
+}
+
+/* ── Christmas Edition: segunda pasada, más rojo, verde y oro ────────── */
+body.modo-navidad {
+  --navidad-rojo: #d82c41;
+  --navidad-borgona: #8c142b;
+  --navidad-verde: #164d33;
+  --navidad-oro: #f3c965;
+  --navidad-marfil: #fff2d9;
+}
+
+/* Cinta de temporada bajo el menú: visible, pero sin interferir con navegación. */
+.navidad-cinta-festiva { display: none; }
+body.modo-navidad .navidad-cinta-festiva {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.5vw, 24px);
+  padding: 9px 16px;
+  min-height: 39px;
+  text-align: center;
+  color: #fff4dc;
+  font-size: clamp(.63rem, .81vw, .78rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  line-height: 1.35;
+  background: linear-gradient(92deg, #511020 0%, #961b32 30%, #811b2b 52%, #264931 82%, #122d21 100%);
+  border-top: 1px solid #e1aa58;
+  border-bottom: 1px solid #e9be68;
+  box-shadow: 0 6px 17px rgba(0, 0, 0, .36), inset 0 1px rgba(255, 235, 176, .16);
+}
+body.modo-navidad .navidad-cinta-festiva strong {
+  font-weight: 800;
+  color: #ffdb8b;
+}
+body.modo-navidad .navidad-cinta-festiva > span:first-child,
+body.modo-navidad .navidad-cinta-festiva > span:last-child {
+  font-size: 1.15rem;
+  color: #f4d88d;
+}
+body.modo-navidad .navidad-cinta-festiva .navidad-cinta-separador {
+  color: #ffd17b;
+}
+
+/* Navbar: más brillo cálido y una guirnalda colgante visible en la base. */
+body.modo-navidad .luxury-navbar {
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid rgba(236, 179, 72, .8) !important;
+  background: linear-gradient(90deg, #140f12 0%, #151418 48%, #101b17 100%) !important;
+  box-shadow: 0 4px 20px rgba(65, 8, 18, .35), inset 0 -2px rgba(222, 171, 70, .25);
+}
+body.modo-navidad .luxury-navbar::before {
+  height: 7px;
+  background: repeating-linear-gradient(90deg, #a41e30 0 26px, #e5b34d 26px 38px, #135338 38px 64px, #e5b34d 64px 75px);
+  box-shadow: 0 0 13px rgba(229, 172, 77, .38);
+  filter: none;
+}
+body.modo-navidad .luxury-navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -22px;
+  height: 34px;
+  z-index: 2;
+  background: url('/navidad/adornos/guirnalda-horizontal.webp') repeat-x center top / auto 52px;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 7px rgba(0,0,0,.52));
+}
+body.modo-navidad .luxury-navbar .brand-mark-mini {
+  color: #f0ce78;
+  text-shadow: 0 0 12px rgba(247, 196, 83, .38);
+}
+body.modo-navidad .luxury-navbar .brand-mark-mini::after {
+  content: "✦";
+  font-size: 15px;
+  right: -9px;
+  top: -12px;
+  color: #f1dc9b;
+}
+body.modo-navidad .luxury-navbar .nav-link.active,
+body.modo-navidad .luxury-navbar .nav-link:hover {
+  color: #ffe2a1 !important;
+  text-shadow: 0 0 10px rgba(238, 185, 80, .25);
+}
+body.modo-navidad .luxury-navbar .dropdown-menu-luxury {
+  border-color: rgba(229, 176, 82, .55);
+  background: #181318;
+  box-shadow: 0 12px 32px rgba(0,0,0,.5);
+}
+
+/* Home: cada sección se siente festiva, manteniendo las imágenes originales como foco. */
+body.modo-navidad .luxury-home-refresh {
+  background:
+    radial-gradient(ellipse at 1% 23%, rgba(152, 18, 43, .2), transparent 26%),
+    radial-gradient(ellipse at 98% 60%, rgba(28, 101, 65, .18), transparent 25%),
+    radial-gradient(ellipse at 45% 86%, rgba(155, 34, 43, .11), transparent 34%);
+}
+body.modo-navidad .luxury-home-refresh .luxury-curated-section,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section,
+body.modo-navidad .luxury-home-refresh .destacados-section {
+  position: relative;
+  isolation: isolate;
+  padding-top: clamp(94px, 8vw, 122px);
+  padding-bottom: clamp(66px, 7vw, 105px);
+}
+/* Dos esquinas decoradas, no un adorno perdido. */
+body.modo-navidad .luxury-home-refresh .luxury-curated-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section::before,
+body.modo-navidad .luxury-home-refresh .destacados-section::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 0;
+  width: clamp(155px, 25vw, 280px);
+  height: clamp(118px, 17vw, 210px);
+  background: url('/navidad/adornos/guirnalda.webp') top right / contain no-repeat;
+  opacity: 1;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 5px 7px rgba(0,0,0,.37));
+}
+body.modo-navidad .luxury-home-refresh .luxury-curated-section::after,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section::after,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section::after,
+body.modo-navidad .luxury-home-refresh .destacados-section::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: clamp(155px, 25vw, 280px);
+  height: clamp(118px, 17vw, 210px);
+  background: url('/navidad/adornos/guirnalda.webp') top left / contain no-repeat;
+  transform: scaleX(-1);
+  opacity: .95;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 5px 7px rgba(0,0,0,.35));
+}
+body.modo-navidad .luxury-home-refresh .luxury-curated-section > .container,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section > .container,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section > .container,
+body.modo-navidad .luxury-home-refresh .destacados-section > .container {
+  position: relative;
+  z-index: 1;
+}
+/* Títulos más de fiesta: línea dorada, copo y brillo discreto. */
+body.modo-navidad .luxury-home-refresh .container > .text-center.mb-4 > .luxury-title {
+  color: #fff0d0;
+  text-shadow: 0 0 20px rgba(226, 160, 68, .24), 0 3px 10px rgba(0,0,0,.45);
+}
+body.modo-navidad .luxury-home-refresh .container > .text-center.mb-4::after {
+  content: "✧  ❄  ✧";
+  display: block;
+  width: fit-content;
+  margin: 11px auto 0;
+  color: #f3c76a;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: .6em;
+  text-shadow: 0 0 12px rgba(250,211,125,.4);
+}
+body.modo-navidad .luxury-home-refresh .section-label,
+body.modo-navidad .luxury-home-refresh .text-gold,
+body.modo-navidad .luxury-home-refresh .luxury-card-action {
+  color: #f7cf76 !important;
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card,
+body.modo-navidad .luxury-home-refresh .luxury-gender-card--mujer,
+body.modo-navidad .luxury-home-refresh .luxury-gender-card--hombre,
+body.modo-navidad .luxury-home-refresh .luxury-gender-card--unisex {
+  border: 2px solid #d4a447 !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.4), 0 0 13px rgba(185, 36, 51, .15);
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card:hover {
+  border-color: #ffd986 !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,.5), 0 0 18px rgba(240, 179, 83, .3);
+}
+body.modo-navidad .luxury-home-refresh .luxury-card-action {
+  border: 1px solid #e3ba69;
+  background: rgba(85, 13, 29, .88);
+  color: #fff0ca !important;
+}
+body.modo-navidad .luxury-home-refresh .luxury-card-action:hover {
+  background: #98213c;
+}
+/* La parte superior de cada tarjeta tiene un adorno ligero, no tapa el frasco. */
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  width: clamp(80px, 10vw, 144px);
+  height: clamp(58px, 8vw, 103px);
+  background: url('/navidad/adornos/guirnalda.webp') top right / contain no-repeat;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 3px 3px rgba(0,0,0,.4));
+}
+/* Los destacados y el carrusel de lanzamientos reciben ambiente navideño. */
+body.modo-navidad .luxury-home-refresh .launch-carousel {
+  border: 1px solid rgba(223, 159, 57, .8);
+  border-radius: 10px;
+  box-shadow: 0 12px 34px rgba(79, 9, 23, .38);
+  background: linear-gradient(110deg, rgba(19,36,28,.24), rgba(98,17,33,.17));
+}
+body.modo-navidad .luxury-home-refresh .mas-buscados-section {
+  background: transparent;
+}
+body.modo-navidad .luxury-home-refresh .mas-buscados-carousel {
+  border: 1px solid rgba(223, 159, 57, .8);
+  border-radius: 10px;
+  box-shadow: 0 12px 34px rgba(79, 9, 23, .38);
+  background: linear-gradient(110deg, rgba(19,36,28,.20), rgba(98,17,33,.15));
+}
+body.modo-navidad .luxury-home-refresh .launch-carousel::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 6px;
+  right: 6px;
+  height: 39px;
+  background: url('/navidad/adornos/guirnalda-horizontal.webp') repeat-x center / auto 48px;
+  pointer-events: none;
+  z-index: 5;
+  opacity: .86;
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-mini-card {
+  background: linear-gradient(110deg, rgba(50, 12, 21, .97), rgba(14, 31, 23, .95));
+  border: 1px solid #aa793b;
+  box-shadow: inset 3px 0 #9c2338, 0 9px 25px rgba(0,0,0,.24);
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-mini-card .luxury-editorial-link-action { color: #f5cf7a; }
+
+/* Todas las tarjetas: gorrito en la DERECHA, fuera de la foto y sin tapar el distintivo. */
+body.modo-navidad .tarjeta-producto-uniforme {
+  border: 1px solid rgba(216, 156, 71, .72) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.34), 0 0 9px rgba(147, 20, 39, .12);
+  background: #161315;
+}
+body.modo-navidad .tarjeta-producto-uniforme::before {
+  top: -24px;
+  right: -16px;
+  left: auto;
+  width: 70px;
+  height: 62px;
+  z-index: 14;
+  transform: rotate(24deg);
+  filter: drop-shadow(0 4px 5px rgba(0,0,0,.55));
+}
+/* El distintivo de tipo baja para que el gorrito no lo tape. */
+body.modo-navidad .tarjeta-producto-uniforme > .card-badge--right {
+  top: 39px;
+  right: 10px;
+  z-index: 3;
+  background: #211619;
+  border-color: #bc8748;
+  color: #f4cb70;
+}
+body.modo-navidad .tarjeta-producto-uniforme > .card-badge--left {
+  color: #ffe9ac;
+  border-color: rgba(230, 180, 85, .6);
+}
+body.modo-navidad .tarjeta-producto-uniforme .card-img-wrapper {
+  border-bottom: 3px solid #971f34;
+}
+body.modo-navidad .tarjeta-producto-uniforme .card-brand,
+body.modo-navidad .tarjeta-producto-uniforme .price { color: #eac476; }
+body.modo-navidad .tarjeta-producto-uniforme .btn-luxury--primary,
+body.modo-navidad .tarjeta-producto-uniforme .btn-luxury.btn-luxury--fill {
+  background: linear-gradient(100deg, #841a30, #b42a40);
+  color: #fff1d7;
+  border-color: #dc9868;
+}
+body.modo-navidad .tarjeta-producto-uniforme .btn-luxury--primary:hover:not(:disabled) {
+  background: #b42a40;
+}
+
+/* Catálogo, filtros, secciones informativas y pie también celebran Navidad. */
+body.modo-navidad .productos-contenedor .hero-header,
+body.modo-navidad .luxury-reference-page .hero-header,
+body.modo-navidad .blog-listado-hero { position: relative; }
+body.modo-navidad .productos-contenedor .hero-header::after,
+body.modo-navidad .luxury-reference-page .hero-header::after {
+  content: "✦ ❄ ✦";
+  display: block;
+  margin-top: 11px;
+  color: #f6d281;
+  letter-spacing: .55em;
+}
+body.modo-navidad .blog-card {
+  border-color: rgba(221, 164, 67, .72) !important;
+  box-shadow: 0 8px 27px rgba(90, 16, 35, .18);
+}
+body.modo-navidad .blog-card::after {
+  width: 156px;
+  height: 112px;
+  opacity: 1;
+  background-position: right top;
+}
+body.modo-navidad .luxury-blog-detail::before { width: 190px; height: 128px; opacity: 1; }
+body.modo-navidad .site-footer {
+  position: relative;
+  border-top: 2px solid rgba(221, 175, 80, .8);
+  background: linear-gradient(115deg, rgba(59,10,23,.38), rgba(12,16,17,.94) 56%, rgba(17,59,35,.32));
+}
+body.modo-navidad .site-footer::before {
+  content: "";
+  position: absolute;
+  top: -23px;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: url('/navidad/adornos/guirnalda-horizontal.webp') repeat-x center top / auto 58px;
+  opacity: .95;
+  pointer-events: none;
+}
+body.modo-navidad .site-footer .footer-heading { color: #f4d18b; }
+body.modo-navidad .site-footer a:hover { color: #f2b661; }
+
+/* Árbol mucho más decorado, con regalos. Botón X perfectamente centrado. */
+.navidad-arbol-flotante {
+  width: clamp(116px, 12.5vw, 185px);
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(10px, env(safe-area-inset-bottom));
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,.65));
+}
+.navidad-arbol-flotante img { display:block; width:100%; height:auto; }
+.navidad-arbol-cerrar {
+  top: 7px;
+  right: 1px;
+  width: 31px;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  border: 1px solid #f4cf78;
+  background: #28171d;
+  color: #fff8e7;
+  font-size: 13px;
+  box-shadow: 0 1px 8px rgba(0,0,0,.55);
+}
+.navidad-arbol-cerrar .bi { display: block; font-size: 12px; line-height: 1; margin: 0; }
+.navidad-arbol-cerrar:hover { background: #a6263b; border-color: #ffdb86; }
+
+/* Adaptación: decoraciones visibles en tablet; más discretas en móvil. */
+@media (max-width: 991.98px) {
+  body.modo-navidad .luxury-navbar::after { height: 23px; bottom: -15px; background-size: auto 36px; }
+  body.modo-navidad .navidad-cinta-festiva { flex-wrap: wrap; gap: 5px 13px; padding-block: 8px; }
+  body.modo-navidad .navidad-cinta-festiva .navidad-cinta-separador { display: none; }
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section::after,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section::after,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section::after,
+  body.modo-navidad .luxury-home-refresh .destacados-section::before,
+  body.modo-navidad .luxury-home-refresh .destacados-section::after { width: 170px; height: 118px; }
+}
+@media (max-width: 767.98px) {
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section,
+  body.modo-navidad .luxury-home-refresh .destacados-section { padding-top: 87px; padding-bottom: 65px; }
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section::after,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section::after,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section::before,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section::after,
+  body.modo-navidad .luxury-home-refresh .destacados-section::before,
+  body.modo-navidad .luxury-home-refresh .destacados-section::after { width: 90px; height: 70px; opacity: .85; }
+  body.modo-navidad .navidad-cinta-festiva { font-size: .6rem; letter-spacing: .06em; }
+  body.modo-navidad .navidad-cinta-festiva span:nth-of-type(4) { display:none; }
+  body.modo-navidad .tarjeta-producto-uniforme::before {
+    top: -20px; right: -10px; left: auto;
+    width: 58px; height: 53px;
+    transform: rotate(19deg);
+  }
+  .navidad-arbol-flotante { display: none; }
+  body.modo-navidad .luxury-home-refresh .launch-carousel::after { height: 21px; background-size: auto 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.modo-navidad .luxury-editorial-card:hover,
+  body.modo-navidad .tarjeta-producto-uniforme:hover { transform: none; }
+}
+
+/* Detalle universal: la foto de cada perfume sigue intacta y solo cambiamos los detalles. */
+body.modo-navidad .md-detail-page {
+  --md-border: rgba(229, 178, 83, .38);
+  --md-gold: #efcb85;
+}
+body.modo-navidad .md-product-photo {
+  border: 2px solid #bf914b;
+  box-shadow: 0 14px 35px rgba(0,0,0,.35), 0 0 15px rgba(155, 22, 48, .14);
+}
+body.modo-navidad .md-product-photo::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: -3px;
+  right: -4px;
+  width: 135px;
+  height: 110px;
+  background: url('/navidad/adornos/guirnalda.webp') top right / contain no-repeat;
+  pointer-events: none;
+}
+body.modo-navidad .md-detail-page .md-detail-heading h2,
+body.modo-navidad .md-product-summary h1 {
+  color: #fff0d4;
+}
+body.modo-navidad .md-detail-page .md-note {
+  background: linear-gradient(150deg, #23191c, #15241d);
+  border-color: rgba(207, 151, 66, .6);
+}
+body.modo-navidad .md-note-symbol { border-color: #e2ad5e; }
+body.modo-navidad .md-note-tags span,
+body.modo-navidad .md-inline-tags span {
+  background: rgba(93, 19, 36, .35);
+  border-color: rgba(227, 169, 88, .44);
+}
+body.modo-navidad .md-detail-page .md-detail-section { border-top-color: rgba(189, 127, 59, .45); }
+body.modo-navidad .md-detail-page .md-product-summary .btn-luxury--primary {
+  color: #fff1d9;
+  background: linear-gradient(90deg, #8b1b31, #ad2f46);
+  border-color: #d5a15c;
+}
+body.modo-navidad .md-detail-page .md-product-price { color: #f5ce7a; }
+
+/* Blog y guía: encabezados y enlaces con toques festivos sin invadir el texto. */
+body.modo-navidad .luxury-reference-page h1,
+body.modo-navidad .luxury-reference-page h2,
+body.modo-navidad .blog-card h2,
+body.modo-navidad .blog-card h3 { text-shadow: 0 0 16px rgba(248, 178, 94, .17); }
+body.modo-navidad main .btn-luxury:hover { border-color: #eac36d; }
+
+
+/* Optimización navideña Home: mantener ornamentos, bajar costo de pintado. */
+body.modo-navidad.luxury-bg:has(.luxury-home-refresh) {
+  /* El mármol deja de repintarse como textura fija durante el scroll del Home. */
+  background-attachment: scroll, scroll;
+}
+
+body.modo-navidad .luxury-home-refresh {
+  /* Un solo baño de color estático en lugar de tres gradientes gigantes superpuestos. */
+  background: linear-gradient(112deg, rgba(109, 20, 38, .10), transparent 40%, rgba(20, 79, 49, .09));
+}
+
+/* Las secciones que aún están fuera de pantalla se pintan cuando se aproximan. */
+@supports (content-visibility: auto) {
+  body.modo-navidad .luxury-home-refresh .luxury-curated-section,
+  body.modo-navidad .luxury-home-refresh .luxury-gender-section,
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-section,
+  body.modo-navidad .luxury-home-refresh .destacados-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 610px;
+  }
+}
+
+/* Los WebP sustituyen SVG complejos; la decoración ya tiene volumen y sombreado propios. */
+body.modo-navidad .luxury-navbar::after,
+body.modo-navidad .luxury-home-refresh .luxury-curated-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-curated-section::after,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-gender-section::after,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section::before,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-section::after,
+body.modo-navidad .luxury-home-refresh .destacados-section::before,
+body.modo-navidad .luxury-home-refresh .destacados-section::after,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card::after {
+  filter: none;
+}
+
+/* Los CTA quedan centrados horizontalmente y a igual altura en las tarjetas. */
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card .luxury-card-action {
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  min-width: 170px;
+  min-height: 44px;
+  padding: 0 20px;
+  text-align: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card .luxury-card-action i,
+body.modo-navidad .luxury-home-refresh .luxury-editorial-card .luxury-card-action .bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Menos copos animados, misma estética: animaciones solo con transform, sin glow por copo. */
+.navidad-nevada { contain: paint; }
+.navidad-nevada i { box-shadow: none; }
+
+@media (max-width: 767.98px) {
+  body.modo-navidad .luxury-home-refresh .luxury-editorial-card .luxury-card-action {
+    min-width: 124px;
+  }
+  .navidad-nevada i:nth-child(n+4) { display: none; }
+}

@@ -1,3 +1,4 @@
+import { TemporadaProvider } from "./TemporadaContext";
 import { AuthProvider } from "./AuthContext";
 import { CarritoProvider } from "./CarritoContext";
 import { ToastProvider } from "./ToastContext";
@@ -10,7 +11,7 @@ export default function AppProviders({ children }) {
     <AuthProvider>
       <CarritoProvider>
         <WishlistProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider><TemporadaProvider>{children}</TemporadaProvider></ToastProvider>
         </WishlistProvider>
       </CarritoProvider>
     </AuthProvider>

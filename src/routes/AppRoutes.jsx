@@ -44,6 +44,7 @@ import DetalleUsuario from "../pages/admin/DetalleUsuario";
 import EditarUsuario from "../pages/admin/EditarUsuario";
 import HistorialCompras from "../pages/admin/HistorialCompras";
 import ReportesAdmin from "../pages/admin/ReportesAdmin";
+import TemporadaAdmin from "../pages/admin/TemporadaAdmin";
 import CuponesAdmin from "../pages/admin/CuponesAdmin";
 import PanelCliente from "../pages/tienda/PanelCliente";
 
@@ -107,6 +108,7 @@ export default function AppRoutes() {
             <Route path="categorias/nueva" element={<NuevaCategoria />} />
             <Route path="categorias/:id/editar" element={<EditarCategoria />} />
             <Route path="cupones" element={<CuponesAdmin />} />
+            <Route path="temporada" element={<TemporadaAdmin />} />
             <Route path="usuarios" element={<UsuariosAdmin />} />
             <Route path="usuarios/nuevo" element={<NuevoUsuario />} />
             <Route path="usuarios/:id" element={<DetalleUsuario />} />

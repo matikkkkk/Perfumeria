@@ -8,6 +8,7 @@ import "./styles/responsive-polish.css";
 import "./styles/commerce-polish.css";
 import "./styles/editorial-refinement.css";
 import "./styles/luxury-home-refresh.css";
+import "./styles/navidad.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import AppProviders from "./context/AppProviders.jsx";

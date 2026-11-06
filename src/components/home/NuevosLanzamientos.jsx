@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import InspiradoEn from "../producto/InspiradoEn";
 import ImagenProducto from "../producto/ImagenProducto";
@@ -13,7 +14,34 @@ const mayuscula = (texto = "") => texto.charAt(0).toUpperCase() + texto.slice(1)
 // Carrusel grande de "Recién llegados": un producto por slide, avanza solo cada 6 s.
 export default function NuevosLanzamientos({ productos }) {
   const agregarAlCarrito = useAgregarAlCarrito();
-  const { indice, siguiente, anterior, ir } = useCarrusel(productos.length, INTERVALO_MS);
+  const carruselRef = useRef(null);
+  const [enPantalla, setEnPantalla] = useState(false);
+  const [pestanaVisible, setPestanaVisible] = useState(true);
+
+  // Evita cambiar slides y recargar contenido mientras el visitante ve otra sección.
+  useEffect(() => {
+    const elemento = carruselRef.current;
+    if (!elemento || typeof IntersectionObserver === "undefined") {
+      setEnPantalla(true);
+      return undefined;
+    }
+    const observador = new IntersectionObserver(([entrada]) => {
+      setEnPantalla(entrada.isIntersecting);
+    }, { rootMargin: "100px 0px", threshold: 0 });
+    observador.observe(elemento);
+    return () => observador.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const actualizar = () => setPestanaVisible(document.visibilityState !== "hidden");
+    actualizar();
+    document.addEventListener("visibilitychange", actualizar);
+    return () => document.removeEventListener("visibilitychange", actualizar);
+  }, []);
+
+  const { indice, siguiente, anterior, ir } = useCarrusel(
+    productos.length, enPantalla && pestanaVisible ? INTERVALO_MS : 0
+  );
 
   return (
     <section className="container py-5 vh-section" aria-labelledby="titulo-lanzamientos">
@@ -24,7 +52,7 @@ export default function NuevosLanzamientos({ productos }) {
         </h2>
       </div>
 
-      <div className="carousel slide launch-carousel">
+      <div ref={carruselRef} className="carousel slide launch-carousel">
         <div className="carousel-inner">
           {productos.map((p, i) => (
             <div key={p.id} className={`carousel-item${i === indice ? " active" : ""}`}>

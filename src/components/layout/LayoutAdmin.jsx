@@ -11,6 +11,7 @@ const iconosMenu = {
   Usuarios: "bi-people",
   Cupones: "bi-ticket-perforated",
   Reportes: "bi-bar-chart-line",
+  Temporadas: "bi-gift",
   Perfil: "bi-person-circle",
 };
 

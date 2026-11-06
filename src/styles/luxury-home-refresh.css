@@ -30,6 +30,72 @@
 .luxury-home-refresh .luxury-editorial-section { background: transparent; }
 .luxury-home-refresh .luxury-editorial-visual { background-position:center; background-size:cover; }
 
+
+/* Colecciones del home: CTA centrado para que respire mejor dentro de cada tarjeta. */
+.luxury-home-refresh .luxury-curated-section .luxury-card-action {
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 170px;
+  min-height: 44px;
+  padding: 0 20px;
+  margin-top: 8px;
+  line-height: 1;
+  border: 1px solid #c6a04d;
+  border-bottom: 1px solid #c6a04d;
+}
+.luxury-home-refresh .luxury-curated-section .luxury-card-action i,
+.luxury-home-refresh .luxury-curated-section .luxury-card-action .bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Ambos carruseles del home: transición visual más elegante. */
+.luxury-home-refresh .launch-carousel {
+  position: relative;
+  overflow: hidden;
+}
+.luxury-home-refresh .launch-carousel .carousel-inner {
+  position: relative;
+  min-height: 460px;
+}
+.luxury-home-refresh .launch-carousel .carousel-item {
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(24px,0,0) scale(.988);
+  transition: opacity .55s ease, transform .55s ease, visibility .55s ease;
+  pointer-events: none;
+}
+.luxury-home-refresh .launch-carousel .carousel-item.active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0,0,0) scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+.luxury-home-refresh .launch-carousel .carousel-item:not(.active) {
+  z-index: 1;
+}
+
+.mas-buscados-section .mas-buscados-copy {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+@media(max-width:767px){
+  .luxury-home-refresh .launch-carousel .carousel-inner { min-height: 0; }
+  .luxury-home-refresh .luxury-curated-section .luxury-card-action {
+    min-width: 146px;
+  }
+}
+
 /* Nuevos lanzamientos: dimensiones idénticas para cualquier producto. */
 .luxury-home-refresh .launch-carousel .carousel-item { height: 460px; }
 .luxury-home-refresh .launch-carousel .launch-slide { height: 100%; min-height:0; padding: 14px 14px 38px; }

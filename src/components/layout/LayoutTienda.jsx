@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import ScrollToTop from "./ScrollToTop";
+import DecoracionNavidad from "../navidad/DecoracionNavidad";
 
 // Marco de todas las páginas públicas: navbar arriba, footer abajo y la página en medio.
 // El fondo (luxury-bg) está en <body> (index.html), igual que en el HTML original.
@@ -12,6 +13,7 @@ export default function LayoutTienda() {
       <header>
         <Navbar />
       </header>
+      <DecoracionNavidad />
       <main className="flex-grow-1">
         <Outlet />
       </main>
