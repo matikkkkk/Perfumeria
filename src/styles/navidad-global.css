@@ -1,6 +1,6 @@
 /* Temporada compartida por tienda, cuenta, checkout y administración. */
 body.modo-navidad {--season-line:#ad8550;--season-panel:rgba(95,29,43,.13);--season-text:#e8c987;}
-body.modo-navidad.luxury-bg {background-image:url('/navidad/fondo-oscuro.webp');background-size:100% 100vh;background-size:100% 100svh;background-position:center top;background-repeat:repeat-y;}
+body.modo-navidad.luxury-bg {--navidad-fondo:url('/navidad/fondo-oscuro.webp');background-image:none!important;isolation:isolate;}
 body.modo-navidad :is(.luxury-card,.review-card,.categoria-card,.journal-feature,.journal-story,.article-related a,.luxury-editorial-feature,.md-note,.admin-panel,.admin-kpi,.accordion-item) {border-color:var(--season-line)!important;}
 body.modo-navidad main > :is(.container,.container-fluid),body.modo-navidad .maison-editorial {background-image:radial-gradient(ellipse at 100% 0,var(--season-panel),transparent 55%);}
 body.modo-navidad main h1 {padding-bottom:1.2rem;border-bottom:1px solid var(--season-line);}
@@ -22,7 +22,7 @@ body.modo-navidad .admin-menu-links a.active {border-color:#e3b868;background:#3
 body.modo-navidad .navidad-cinta-festiva {padding-block:.55rem;min-height:52px;}
 body.modo-navidad .navidad-efectos {flex-shrink:0;}
 body.modo-claro.modo-navidad {--season-line:#b49b69;--season-panel:rgba(150,48,55,.06);--season-text:#72531b;}
-body.modo-claro.modo-navidad.luxury-bg {background-image:url('/navidad/fondo-claro.webp')!important;}
+body.modo-claro.modo-navidad.luxury-bg {--navidad-fondo:url('/navidad/fondo-claro.webp');}
 body.modo-claro.modo-navidad .maison-editorial {--mj-panel:#fffdfb;--mj-line:#b49b69;}
 body.modo-claro.modo-navidad .about-manifesto {background:#fffcf5;}
 body.modo-claro.modo-navidad .luxury-navbar {background:#fffdf9f5!important;border-bottom:2px solid #ad8550!important;}
@@ -43,6 +43,10 @@ body.modo-claro.modo-navidad .luxury-home-refresh .luxury-editorial-copy p {colo
 body.modo-claro.modo-navidad .tarjeta-producto-uniforme .card-badge {background:#fff8e8!important;color:#493611!important;border-color:#9a7a3c!important;}
 body.modo-claro.modo-navidad .site-footer {background-image:url('/img/claro/footer.webp')!important;}
 
+body.modo-navidad.luxury-bg::before {
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:var(--navidad-fondo) center / 100% 100% no-repeat;
+}
 @media (orientation:portrait) {
-  body.modo-navidad.luxury-bg {background-size:auto 100vh;background-size:auto 100svh;}
+  body.modo-navidad.luxury-bg::before {background-size:cover;}
 }
