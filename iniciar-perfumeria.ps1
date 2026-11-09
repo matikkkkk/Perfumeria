@@ -33,7 +33,13 @@ foreach ($linea in (Get-Content -LiteralPath (Join-Path $raiz '.env') -Encoding 
 
 $correoRemitente = [string]$env:SMTP_USER
 $claveAplicacion = [string]$env:SMTP_PASSWORD
-$claveAplicacion = $claveAplicacion -replace '\s', ''
+if ($env:SMTP_HOST -eq 'smtp.gmail.com') {
+  $claveAplicacion = $claveAplicacion -replace '\s', ''
+  if ($claveAplicacion -and $claveAplicacion.Length -ne 16) {
+    Write-Warning 'Gmail requiere una clave de aplicacion de 16 caracteres en SMTP_PASSWORD.'
+    $claveAplicacion = ''
+  }
+}
 if ($correoRemitente -match '^[^@\s]+@[^@\s]+\.[^@\s]+$' -and
     $claveAplicacion.Length -gt 0 -and $env:MAIL_ENABLED -ne 'false') {
   $env:SMTP_PASSWORD = $claveAplicacion

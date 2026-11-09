@@ -6,6 +6,7 @@
 export const CUPONES = {
   LUXURY10: 10,
   BIENVENIDO15: 15,
+  NAVIDAD20: 20,
 };
 
 export function normalizarCodigo(codigo) {

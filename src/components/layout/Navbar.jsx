@@ -1,3 +1,4 @@
+import SelectorTema from "./SelectorTema";
 import { useEffect, useRef, useState } from "react";
 import { useDropdown } from "../../hooks/useDropdown";
 import { Link, NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
@@ -71,6 +72,7 @@ export default function Navbar() {
         </Link>
 
         <div className="d-flex align-items-center gap-1 order-lg-3">
+          <SelectorTema />
           <button
             type="button"
             className="nav-icon-btn"

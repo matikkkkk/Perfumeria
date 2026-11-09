@@ -10,11 +10,12 @@ export default function LayoutTienda() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <ScrollToTop />
+      <a className="maison-skip-link" href="#contenido-principal">Saltar al contenido</a>
       <header>
         <Navbar />
       </header>
       <DecoracionNavidad />
-      <main className="flex-grow-1">
+      <main id="contenido-principal" tabIndex={-1} className="flex-grow-1">
         <Outlet />
       </main>
       <Footer />

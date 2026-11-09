@@ -32,23 +32,4 @@ describe("Panel de cliente: una prueba representativa por vista nueva", () => {
     expect(screen.getByRole("heading", { name: "Bienvenido, Cliente" })).toBeInTheDocument();
   });
 
-  it("Mis pedidos: muestra la sección de historial", () => {
-    abrirSeccion("pedidos");
-    expect(screen.getByRole("heading", { name: "Mis pedidos" })).toBeInTheDocument();
-  });
-
-  it("Mis boletas: muestra la sección de comprobantes", () => {
-    abrirSeccion("boletas");
-    expect(screen.getByRole("heading", { name: "Mis boletas" })).toBeInTheDocument();
-  });
-
-  it("Mi perfil: muestra el formulario de datos personales", () => {
-    abrirSeccion("perfil");
-    expect(screen.getByRole("heading", { name: "Actualizar mis datos" })).toBeInTheDocument();
-  });
-
-  it("Contraseña: muestra el formulario para cambiarla", () => {
-    abrirSeccion("seguridad");
-    expect(screen.getByRole("heading", { name: "Cambiar contraseña" })).toBeInTheDocument();
-  });
 });

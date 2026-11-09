@@ -1,0 +1,42 @@
+MAISON LUXURY - ACTUALIZACION
+
+Inicio: npm ci y .\iniciar-perfumeria.ps1
+Deten primero las ventanas de los servicios antiguos para que se carguen las nuevas migraciones y configuraciones.
+No necesitas borrar las bases ni reiniciar tus datos.
+
+TEMAS
+Boton de sol/luna en la navegacion de tienda y administracion.
+El tema oscuro sigue siendo el predeterminado. La eleccion se recuerda en este navegador.
+Los cinco fondos claros estan optimizados en public/img/claro. Las fotos del catalogo y las colecciones se conservan.
+Navidad se configura como antes en Administracion > Temporadas; funciona con ambos temas.
+
+CUPON
+NAVIDAD20 aplica 20 %. Se agrega con una migracion nueva a las bases existentes y a las inicializaciones nuevas.
+Se administra desde el mismo panel de cupones. No tiene vencimiento predefinido: puedes configurarlo desde ese panel.
+
+COMPROBANTES POR CORREO
+El correo se envia al indicado en la compra, independientemente de si se inicio sesion con Google, cuenta normal o como invitado.
+Las compras confirmadas registran una tarea persistente de envio. Se procesa en segundo plano y se reintentan hasta 3 veces los fallos temporales.
+La pantalla distingue envio pendiente, aceptado por SMTP, desactivado y error. No se promete entrega si el servidor no lo acepta.
+Si hay un fallo, puedes solicitar un nuevo intento desde la confirmacion de pago o desde la boleta de administracion.
+El PDF se puede descargar aunque el correo no este disponible.
+No se han enviado correos reales durante las pruebas.
+Configura MAIL_ENABLED=true, SMTP_HOST, SMTP_PORT, SMTP_USER y SMTP_PASSWORD en .env. Gmail requiere una contrasena de aplicacion.
+Para comprobar la configuracion y conexion sin enviar mensajes: .\comprobar-correo.ps1
+Un estado aceptado por SMTP no garantiza que el proveedor del destinatario lo coloque en la bandeja de entrada: revisa tambien spam.
+
+CONTENIDO Y DATOS
+Seis articulos de mas de 600 palabras con fuentes oficiales y enlaces de consulta dentro de cada lectura.
+16 regiones y 346 comunas compartidas por registro, perfil y checkout.
+Una prueba de componente por archivo de vista en el frontend.
+
+OPTIMIZACION
+Carga por rutas, deduplicacion de consultas simultaneas, fondos e imagenes del blog en WebP, imagenes diferidas y decoracion sin dependencias adicionales.
+El JavaScript de Bootstrap se retiro porque los controles del sitio son gestionados por React.
+El modo Navidad no consulta su estado periodicamente mientras la pestana esta oculta.
+
+CORRECCION VISUAL
+Los fondos claros de pagina, footer y detalle se muestran sin capas que oculten las imagenes.
+Los distintivos de tipo, concentracion y volumen usan marfil con texto oscuro y borde dorado.
+Las etiquetas de animo tienen fondos suaves y texto oscuro.
+Santa se reemplazo por una ilustracion transparente con un trineo y dos renos; ya no se usa el SVG anterior.

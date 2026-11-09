@@ -114,7 +114,7 @@ export default function ProductosAdmin() {
                       <td>{p.categoria || "—"}</td>
                       <td className="text-end">{formatearPrecio(p.precio)}</td>
                       <td className="text-end">{p.stock ?? 0}</td>
-                      <td><span className={`admin-status ${Number(p.stock || 0) <= Number(p.stockCritico ?? 2) ? "pendiente" : "pagada"}`}>{Number(p.stock || 0) <= Number(p.stockCritico ?? 2) ? "Crítico" : "Disponible"}</span></td>
+                      <td><span className={`admin-status ${Number(p.stock || 0) <= Number(p.stockCritico ?? 2) ? "critico" : "pagada"}`}>{Number(p.stock || 0) <= Number(p.stockCritico ?? 2) ? "Crítico" : "Disponible"}</span></td>
                       <td>
                         <div className="d-flex justify-content-end gap-1">
                           <Link className="btn btn-sm btn-outline-light" to={`/admin/productos/${p.id}`} aria-label={`Ver ${p.nombre}`}><i className="bi bi-eye" /></Link>

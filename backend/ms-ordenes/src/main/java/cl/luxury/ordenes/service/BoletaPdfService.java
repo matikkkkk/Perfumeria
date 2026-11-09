@@ -18,7 +18,7 @@ import java.util.Locale;
 
 @Service
 public class BoletaPdfService {
-    private static final NumberFormat CLP = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("es-CL"));
+    private static final Locale CHILE = Locale.forLanguageTag("es-CL");
 
     public byte[] generar(Orden orden) throws IOException {
         try (PDDocument documento = new PDDocument(); ByteArrayOutputStream salida = new ByteArrayOutputStream()) {
@@ -52,7 +52,7 @@ public class BoletaPdfService {
         }
     }
 
-    private String pesos(int monto) { return CLP.format(monto); }
+    private String pesos(int monto) { return NumberFormat.getCurrencyInstance(CHILE).format(monto); }
 
     private float linea(PDPageContentStream contenido, String texto, int tamaño, float y) throws IOException {
         // Helvetica estándar usa WinAnsi: reemplazar glifos incompatibles en vez de romper el PDF.

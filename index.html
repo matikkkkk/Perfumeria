@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +13,9 @@
     />
   </head>
   <body class="luxury-bg text-light">
+    <script>
+      try { const claro = localStorage.getItem("ml-tema-v1") === "claro"; document.body.classList.toggle("modo-claro", claro); document.documentElement.dataset.bsTheme = claro ? "light" : "dark"; document.documentElement.style.colorScheme = claro ? "light" : "dark"; } catch {}
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

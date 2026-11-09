@@ -18,8 +18,20 @@ export function useCarrusel(total, intervaloMs = 0) {
   // Al reiniciar el temporizador con cada cambio de `indice`, un clic manual también reinicia la cuenta.
   useEffect(() => {
     if (!intervaloMs || total < 2) return undefined;
-    const temporizador = setTimeout(siguiente, intervaloMs);
-    return () => clearTimeout(temporizador);
+    let temporizador;
+    const movimiento = typeof window.matchMedia === "function" ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    const programar = () => {
+      clearTimeout(temporizador);
+      if (document.visibilityState !== "hidden" && !movimiento?.matches) temporizador = setTimeout(siguiente, intervaloMs);
+    };
+    programar();
+    document.addEventListener("visibilitychange", programar);
+    movimiento?.addEventListener?.("change", programar);
+    return () => {
+      clearTimeout(temporizador);
+      document.removeEventListener("visibilitychange", programar);
+      movimiento?.removeEventListener?.("change", programar);
+    };
   }, [indice, intervaloMs, total, siguiente]);
 
   return { indice, siguiente, anterior, ir };

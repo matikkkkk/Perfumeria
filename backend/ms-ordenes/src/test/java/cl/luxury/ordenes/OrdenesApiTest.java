@@ -159,8 +159,9 @@ class OrdenesApiTest {
 
     @Test
     void aceptaUnDescuentoSiElTotalLoConsidera() throws Exception {
+        when(inventario.porcentajeCupon("LUXURY10")).thenReturn(10);
         mvc.perform(post("/api/ordenes").contentType(MediaType.APPLICATION_JSON)
-                        .content(orden(null, "2026-10-05T22:40:00.000Z", "Pagado", 18000, 2000)))
+                        .content(orden(null, "2026-10-05T22:40:00.000Z", "Pagado", 18000, 2000).replace("\"cupon\": null", "\"cupon\": \"LUXURY10\"")))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.descuento").value(2000))
                 .andExpect(jsonPath("$.total").value(18000));

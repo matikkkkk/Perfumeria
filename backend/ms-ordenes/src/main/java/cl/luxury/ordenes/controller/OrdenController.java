@@ -8,6 +8,7 @@ import cl.luxury.ordenes.dto.OrdenRequest;
 import cl.luxury.ordenes.model.Orden;
 import cl.luxury.ordenes.service.OrdenService;
 import cl.luxury.ordenes.service.BoletaPdfService;
+import cl.luxury.ordenes.service.BoletaCorreoService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
@@ -38,10 +39,12 @@ public class OrdenController {
 
     private final OrdenService servicio;
     private final BoletaPdfService boletaPdfService;
+    private final BoletaCorreoService boletaCorreoService;
 
-    public OrdenController(OrdenService servicio, BoletaPdfService boletaPdfService) {
+    public OrdenController(OrdenService servicio, BoletaPdfService boletaPdfService, BoletaCorreoService boletaCorreoService) {
         this.servicio = servicio;
         this.boletaPdfService = boletaPdfService;
+        this.boletaCorreoService = boletaCorreoService;
     }
 
     /** Descarga del comprobante de una orden pagada (demo académica sin autenticación de API). */
@@ -63,6 +66,16 @@ public class OrdenController {
         } catch (IOException ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "No se pudo generar la boleta.", ex);
         }
+    }
+
+    @Operation(summary = "Consultar estado de envío del comprobante por correo")
+    @GetMapping("/{id}/boleta/correo")
+    public Map<String, Object> estadoCorreo(@PathVariable Long id) { return boletaCorreoService.consultar(id); }
+
+    @Operation(summary = "Solicitar o reintentar el envío del comprobante al correo de la orden")
+    @PostMapping("/{id}/boleta/correo")
+    public ResponseEntity<Map<String, Object>> enviarCorreo(@PathVariable Long id) {
+        return ResponseEntity.accepted().body(boletaCorreoService.solicitar(id));
     }
 
     /** GET /api/ordenes?usuarioId=20987654K&_sort=fecha&_order=desc  (historial de compras / listado admin) */

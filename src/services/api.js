@@ -41,8 +41,15 @@ async function leerCuerpoDeError(respuesta) {
 
 // Crea el CRUD completo para un recurso REST (ej: "/productos").
 export function crearRecurso(ruta) {
+  const listasEnCurso = new Map();
+  const listar = (consulta = "") => {
+    if (listasEnCurso.has(consulta)) return listasEnCurso.get(consulta);
+    const solicitud = peticion(`${ruta}${consulta}`).finally(() => listasEnCurso.delete(consulta));
+    listasEnCurso.set(consulta, solicitud);
+    return solicitud;
+  };
   return {
-    listar: (consulta = "") => peticion(`${ruta}${consulta}`), // ej: listar("?categoria=intensos")
+    listar, // ej: listar("?categoria=intensos")
     obtener: (id) => peticion(`${ruta}/${id}`),
     crear: (datos) => peticion(ruta, { method: "POST", body: JSON.stringify(datos) }),
     actualizar: (id, datos) =>
@@ -69,6 +76,7 @@ export async function descargarPdf(ruta, nombreArchivo) {
     enlace.click();
     enlace.remove();
   } finally {
-    URL.revokeObjectURL(url);
+    // Dar tiempo al navegador para iniciar la descarga antes de liberar el blob.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 }

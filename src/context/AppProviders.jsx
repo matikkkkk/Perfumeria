@@ -1,3 +1,4 @@
+import { TemaProvider } from "./TemaContext";
 import { TemporadaProvider } from "./TemporadaContext";
 import { AuthProvider } from "./AuthContext";
 import { CarritoProvider } from "./CarritoContext";
@@ -8,12 +9,12 @@ import { WishlistProvider } from "./WishlistContext";
 // Son independientes entre sí, el orden no importa.
 export default function AppProviders({ children }) {
   return (
-    <AuthProvider>
+    <TemaProvider><AuthProvider>
       <CarritoProvider>
         <WishlistProvider>
           <ToastProvider><TemporadaProvider>{children}</TemporadaProvider></ToastProvider>
         </WishlistProvider>
       </CarritoProvider>
-    </AuthProvider>
+    </AuthProvider></TemaProvider>
   );
 }

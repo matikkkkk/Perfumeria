@@ -2938,5 +2938,25 @@
       }
     }
   ],
-  "mensajes": []
+  "mensajes": [],
+  "cupones": [
+    {
+      "id": "LUXURY10",
+      "codigo": "LUXURY10",
+      "descuento": 10,
+      "activo": true
+    },
+    {
+      "id": "BIENVENIDO15",
+      "codigo": "BIENVENIDO15",
+      "descuento": 15,
+      "activo": true
+    },
+    {
+      "id": "NAVIDAD20",
+      "codigo": "NAVIDAD20",
+      "descuento": 20,
+      "activo": true
+    }
+  ]
 }

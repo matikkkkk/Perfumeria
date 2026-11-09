@@ -1,6 +1,7 @@
 // Genera mock-api/db.json a partir de los datos semilla.  Uso: npm run api:seed
 // ATENCION: sobrescribe db.json (borra lo creado desde la app). Usar solo para reiniciar los datos.
 import { writeFileSync } from "node:fs";
+import { CUPONES } from "../src/utils/cupones.js";
 import { productos } from "../seed/productos.js";
 import { usuarios } from "../seed/usuarios.js";
 import { categorias } from "../seed/categorias.js";
@@ -14,6 +15,8 @@ const db = {
   usuarios: usuarios.map((u) => ({ id: u.run, ...u, correo: u.correo.toLowerCase() })),
   ordenes,
   mensajes: [],
+  cupones: Object.entries(CUPONES).map(([codigo, descuento]) => ({ id: codigo, codigo, descuento, activo: true })),
+  temporada: { modo: "automatico", activo: false },
 };
 
 // Chequeos de integridad: si una semilla apunta a algo que no existe, se detiene antes de escribir.

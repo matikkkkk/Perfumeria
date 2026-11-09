@@ -1,3 +1,5 @@
+import SelectorTema from "./SelectorTema";
+import DecoracionNavidad from "../navidad/DecoracionNavidad";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { menuParaUsuario } from "../../routes/menuAdmin";
@@ -25,7 +27,7 @@ export default function LayoutAdmin() {
       <nav className="navbar navbar-dark py-3 border-bottom border-secondary border-opacity-25">
         <div className="container-fluid px-3 px-lg-4">
           <Link className="navbar-brand brand-logo" to="/admin" aria-label="Luxury, inicio de administración">LUXURY <span className="d-none d-sm-inline">ADMIN</span></Link>
-          <div className="d-flex align-items-center gap-2 gap-md-3">
+          <div className="d-flex align-items-center gap-2 gap-md-3"><SelectorTema />
             <div className="text-end d-none d-sm-block"><span className="d-block text-gold-light small">Sesión iniciada</span><strong className="small">{usuario?.nombre || usuario?.correo}</strong><span className="text-secondary small ms-2">{usuario?.tipo}</span></div>
             <Link className="btn btn-luxury btn-sm" to="/" aria-label="Volver a la tienda"><i className="bi bi-shop me-sm-2"/><span className="d-none d-sm-inline">Tienda</span></Link>
           </div>
@@ -33,6 +35,7 @@ export default function LayoutAdmin() {
       </nav>
     </header>
 
+    <DecoracionNavidad />
     <div className="container-fluid flex-grow-1 px-0">
       <div className="row g-0 h-100">
         <aside className="col-12 col-md-3 col-lg-2 admin-menu py-4" aria-label="Menú de administración">

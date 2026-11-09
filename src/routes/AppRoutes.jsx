@@ -1,52 +1,53 @@
-import GuiaOlfativa from "../pages/tienda/GuiaOlfativa";
-import PreguntasFrecuentesPage from "../pages/tienda/PreguntasFrecuentesPage";
+import { lazy, Suspense } from "react";
+const GuiaOlfativa = lazy(() => import("../pages/tienda/GuiaOlfativa"));
+const PreguntasFrecuentesPage = lazy(() => import("../pages/tienda/PreguntasFrecuentesPage"));
 import { Route, Routes } from "react-router-dom";
 import LayoutAdmin from "../components/layout/LayoutAdmin";
 import LayoutTienda from "../components/layout/LayoutTienda";
 import { ROLES_SOLO_ADMIN, ROLES_STAFF } from "../utils/acceso";
 import RutaProtegida from "./RutaProtegida";
 import Home from "../pages/tienda/Home";
-import Productos from "../pages/tienda/Productos";
-import DetalleProducto from "../pages/tienda/DetalleProducto";
-import Carrito from "../pages/tienda/Carrito";
-import Wishlist from "../pages/tienda/Wishlist";
-import Categorias from "../pages/tienda/Categorias";
-import CategoriaDetalle from "../pages/tienda/CategoriaDetalle";
-import Ofertas from "../pages/tienda/Ofertas";
-import Checkout from "../pages/tienda/Checkout";
-import PagoCorrecto from "../pages/tienda/PagoCorrecto";
-import PagoError from "../pages/tienda/PagoError";
-import Login from "../pages/tienda/Login";
-import Registro from "../pages/tienda/Registro";
-import Contacto from "../pages/tienda/Contacto";
-import Nosotros from "../pages/tienda/Nosotros";
-import Blogs from "../pages/tienda/Blogs";
-import DetalleBlog from "../pages/tienda/DetalleBlog";
-import AccesoDenegado from "../pages/tienda/AccesoDenegado";
-import CerrarSesion from "../pages/tienda/CerrarSesion";
-import NoEncontrada from "../pages/tienda/NoEncontrada";
-import DashboardAdmin from "../pages/admin/DashboardAdmin";
-import OrdenesAdmin from "../pages/admin/OrdenesAdmin";
-import BoletaOrden from "../pages/admin/BoletaOrden";
-import PerfilAdmin from "../pages/admin/PerfilAdmin";
-import ProductosAdmin from "../pages/admin/ProductosAdmin";
-import NuevoProducto from "../pages/admin/NuevoProducto";
-import DetalleProductoAdmin from "../pages/admin/DetalleProductoAdmin";
-import EditarProducto from "../pages/admin/EditarProducto";
-import ProductosCriticos from "../pages/admin/ProductosCriticos";
-import ReportesProductos from "../pages/admin/ReportesProductos";
-import CategoriasAdmin from "../pages/admin/CategoriasAdmin";
-import NuevaCategoria from "../pages/admin/NuevaCategoria";
-import EditarCategoria from "../pages/admin/EditarCategoria";
-import UsuariosAdmin from "../pages/admin/UsuariosAdmin";
-import NuevoUsuario from "../pages/admin/NuevoUsuario";
-import DetalleUsuario from "../pages/admin/DetalleUsuario";
-import EditarUsuario from "../pages/admin/EditarUsuario";
-import HistorialCompras from "../pages/admin/HistorialCompras";
-import ReportesAdmin from "../pages/admin/ReportesAdmin";
-import TemporadaAdmin from "../pages/admin/TemporadaAdmin";
-import CuponesAdmin from "../pages/admin/CuponesAdmin";
-import PanelCliente from "../pages/tienda/PanelCliente";
+const Productos = lazy(() => import("../pages/tienda/Productos"));
+const DetalleProducto = lazy(() => import("../pages/tienda/DetalleProducto"));
+const Carrito = lazy(() => import("../pages/tienda/Carrito"));
+const Wishlist = lazy(() => import("../pages/tienda/Wishlist"));
+const Categorias = lazy(() => import("../pages/tienda/Categorias"));
+const CategoriaDetalle = lazy(() => import("../pages/tienda/CategoriaDetalle"));
+const Ofertas = lazy(() => import("../pages/tienda/Ofertas"));
+const Checkout = lazy(() => import("../pages/tienda/Checkout"));
+const PagoCorrecto = lazy(() => import("../pages/tienda/PagoCorrecto"));
+const PagoError = lazy(() => import("../pages/tienda/PagoError"));
+const Login = lazy(() => import("../pages/tienda/Login"));
+const Registro = lazy(() => import("../pages/tienda/Registro"));
+const Contacto = lazy(() => import("../pages/tienda/Contacto"));
+const Nosotros = lazy(() => import("../pages/tienda/Nosotros"));
+const Blogs = lazy(() => import("../pages/tienda/Blogs"));
+const DetalleBlog = lazy(() => import("../pages/tienda/DetalleBlog"));
+const AccesoDenegado = lazy(() => import("../pages/tienda/AccesoDenegado"));
+const CerrarSesion = lazy(() => import("../pages/tienda/CerrarSesion"));
+const NoEncontrada = lazy(() => import("../pages/tienda/NoEncontrada"));
+const DashboardAdmin = lazy(() => import("../pages/admin/DashboardAdmin"));
+const OrdenesAdmin = lazy(() => import("../pages/admin/OrdenesAdmin"));
+const BoletaOrden = lazy(() => import("../pages/admin/BoletaOrden"));
+const PerfilAdmin = lazy(() => import("../pages/admin/PerfilAdmin"));
+const ProductosAdmin = lazy(() => import("../pages/admin/ProductosAdmin"));
+const NuevoProducto = lazy(() => import("../pages/admin/NuevoProducto"));
+const DetalleProductoAdmin = lazy(() => import("../pages/admin/DetalleProductoAdmin"));
+const EditarProducto = lazy(() => import("../pages/admin/EditarProducto"));
+const ProductosCriticos = lazy(() => import("../pages/admin/ProductosCriticos"));
+const ReportesProductos = lazy(() => import("../pages/admin/ReportesProductos"));
+const CategoriasAdmin = lazy(() => import("../pages/admin/CategoriasAdmin"));
+const NuevaCategoria = lazy(() => import("../pages/admin/NuevaCategoria"));
+const EditarCategoria = lazy(() => import("../pages/admin/EditarCategoria"));
+const UsuariosAdmin = lazy(() => import("../pages/admin/UsuariosAdmin"));
+const NuevoUsuario = lazy(() => import("../pages/admin/NuevoUsuario"));
+const DetalleUsuario = lazy(() => import("../pages/admin/DetalleUsuario"));
+const EditarUsuario = lazy(() => import("../pages/admin/EditarUsuario"));
+const HistorialCompras = lazy(() => import("../pages/admin/HistorialCompras"));
+const ReportesAdmin = lazy(() => import("../pages/admin/ReportesAdmin"));
+const TemporadaAdmin = lazy(() => import("../pages/admin/TemporadaAdmin"));
+const CuponesAdmin = lazy(() => import("../pages/admin/CuponesAdmin"));
+const PanelCliente = lazy(() => import("../pages/tienda/PanelCliente"));
 
 // Mapa de rutas del proyecto (Figura 2 de las instrucciones: tienda + administrador).
 // Reglas de acceso:
@@ -56,6 +57,7 @@ import PanelCliente from "../pages/tienda/PanelCliente";
 //     (en el HTML el Vendedor tampoco veía Nuevo producto ni Usuarios).
 export default function AppRoutes() {
   return (
+    <Suspense fallback={<div className="container py-5" role="status">Cargando página…</div>}>
     <Routes>
       {/* ---------- Tienda ---------- */}
       <Route element={<LayoutTienda />}>
@@ -118,5 +120,6 @@ export default function AppRoutes() {
         </Route>
       </Route>
     </Routes>
+    </Suspense>
   );
 }

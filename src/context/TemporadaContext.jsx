@@ -52,7 +52,7 @@ export function TemporadaProvider({ children }) {
 
   useEffect(() => {
     recargar();
-    const intervalo = window.setInterval(recargar, 60000);
+    const intervalo = window.setInterval(() => { if (document.visibilityState === "visible") recargar(); }, 60000);
     const alVolver = () => {
       if (document.visibilityState === "visible") recargar();
     };

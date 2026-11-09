@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTemporada } from "../../context/TemporadaContext";
 
+import { useTema } from "../../context/TemaContext";
+
 const modos = [
   {
     id: "automatico", titulo: "Automático",
@@ -21,6 +23,7 @@ const modos = [
 ];
 
 export default function TemporadaAdmin() {
+  const { tema } = useTema();
   const { modo, activo, error: errorCarga, cargando, recargar, guardarModo } = useTemporada();
   const [seleccion, setSeleccion] = useState(modo);
   const [guardando, setGuardando] = useState(false);
@@ -78,7 +81,7 @@ export default function TemporadaAdmin() {
         </div>
         <div className="col-12 col-xl-5">
           <div className="admin-panel navidad-admin-vista">
-            <img src="/navidad/home/hero.webp" alt="Vista previa de la boutique Maison Luxury decorada en Navidad" loading="lazy" />
+            <img src={tema === "claro" ? "/navidad/home/hero-claro.webp" : "/navidad/home/hero.webp"} alt="Vista previa de la boutique Maison Luxury decorada en Navidad" loading="lazy" />
             <div className="p-4"><span className="admin-eyebrow">EDICIÓN ESTACIONAL</span><h2 className="h4 luxury-title mt-2">Maison Luxury Christmas</h2><p className="text-gold-light mb-0">Árbol navideño, guirnaldas, nuevas imágenes del Home, gorritos en las tarjetas y un pequeño trineo de bienvenida.</p></div>
           </div>
         </div>
