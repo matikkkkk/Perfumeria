@@ -1,0 +1,22 @@
+Maison Luxury | Configuración para Firebase con PostgreSQL
+
+Esta variante usa la instancia Cloud SQL for PostgreSQL vinculada a Firebase Data Connect. Spring Boot accede por JDBC. El navegador sigue usando la API REST del gateway. No usa colecciones Firestore ni sustituye el login de Maison por Firebase Authentication.
+
+1. En tu proyecto Firebase, habilita el servicio relacional Data Connect y vincula una instancia PostgreSQL. Revisa los costos y condiciones de facturación antes de crear recursos. Anota el nombre de conexión de la instancia y la base de datos.
+2. Configura un usuario PostgreSQL con permiso CONNECT y CREATE en esa base para que Flyway cree los tres esquemas maison_catalogo, maison_usuarios y maison_ordenes. Utiliza una base de desarrollo vacía.
+3. Desde una cuenta Google con permiso Cloud SQL Client e inicio de sesión local de Application Default Credentials, ejecuta Cloud SQL Auth Proxy en tu PC:
+   cloud-sql-proxy --address 127.0.0.1 --port 5433 PROYECTO:REGION:INSTANCIA
+   Deja esa ventana abierta.
+4. En Perfumeria/.env agrega los valores locales, conservando la configuración SMTP que ya te funciona:
+   MAISON_PG_URL=jdbc:postgresql://127.0.0.1:5433/NOMBRE_BASE
+   MAISON_PG_USER=USUARIO_POSTGRES
+   MAISON_PG_PASSWORD=CLAVE_POSTGRES
+5. Con Java 21, Maven y npm en PATH, abre otra ventana de PowerShell en Perfumeria:
+   .\iniciar-perfumeria.ps1 -Firebase
+   El primer inicio crea los esquemas y carga los datos iniciales. Sin -Firebase se usa el modo H2 anterior.
+6. Comprueba el catálogo en la tienda. Haz una compra de prueba y revisa que la orden figure en el panel admin. En Cloud SQL Studio verifica:
+   SELECT COUNT(*) FROM maison_catalogo.productos;
+   SELECT id, estado, total FROM maison_ordenes.ordenes ORDER BY id DESC LIMIT 5;
+   SELECT COUNT(*) FROM maison_usuarios.usuarios;
+
+Las compras, reseñas y usuarios creados después de la carga inicial de H2 requieren una transferencia aparte. Conserva las carpetas backend/ms-*/data y tu .env local. No publiques archivos .env ni bases con datos personales en GitHub.

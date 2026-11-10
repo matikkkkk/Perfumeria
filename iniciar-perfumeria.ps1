@@ -1,5 +1,5 @@
 # Iniciar Maison Luxury desde PowerShell: .\iniciar-perfumeria.ps1
-param([switch]$SinNavegador)
+param([switch]$SinNavegador, [switch]$Firebase)
 $ErrorActionPreference = 'Stop'
 $raiz = $PSScriptRoot
 Set-Location $raiz
@@ -54,7 +54,7 @@ $claveAplicacion = $null
 
 if (-not (Test-Path 'node_modules')) {
   Write-Host 'Instalando dependencias npm...'
-  npm ci
+  npm.cmd ci
   if ($LASTEXITCODE -ne 0) { throw 'npm ci fallo' }
 }
 
@@ -65,12 +65,16 @@ foreach ($puerto in 8080,8081,8082,8083,5173) {
   }
 }
 
+if ($Firebase) {
+  $env:SPRING_PROFILES_ACTIVE = 'firebase'
+  Write-Host 'Iniciando los servicios con el perfil Firebase PostgreSQL.'
+}
 foreach ($svc in @('ms-catalogo', 'ms-usuarios', 'ms-ordenes', 'gateway')) {
   Write-Host "Iniciando $svc..."
   Start-Process -FilePath 'powershell.exe' -WorkingDirectory (Join-Path $raiz "backend/$svc") -ArgumentList @('-NoExit', '-Command', 'mvn spring-boot:run')
 }
 Write-Host 'Iniciando frontend...'
-Start-Process -FilePath 'powershell.exe' -WorkingDirectory $raiz -ArgumentList @('-NoExit', '-Command', 'npm run dev')
+Start-Process -FilePath 'powershell.exe' -WorkingDirectory $raiz -ArgumentList @('-NoExit', '-Command', 'npm.cmd run dev')
 Write-Host 'Abre http://localhost:5173 despues de que arranquen los servicios.'
 if (-not $SinNavegador) { Start-Sleep -Seconds 14; Start-Process 'http://localhost:5173' }
 

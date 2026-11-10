@@ -151,7 +151,9 @@ button.nav-icon-btn.selector-tema {
 button.selector-tema .bi {display:grid;place-items:center;margin:0;}
 button.selector-tema .bi::before {display:block;line-height:1;vertical-align:0;}
 
-
+body.modo-claro .md-detail-page::before {
+  background-image:linear-gradient(105deg,#fffaf266,#fffaf29c),url('/img/claro/detalle.webp');
+}
 body.modo-claro .md-detail-page .md-product-price {color:#5c4018;font-weight:600;font-variant-numeric:tabular-nums;}
 body.modo-claro .md-detail-page .md-stock {color:#225338;background:#e6f1e7;border-radius:1rem;padding:.3rem .7rem;}
 body.modo-claro .md-detail-page .md-stock--empty {color:#772e28;background:#f8e7e1;}
