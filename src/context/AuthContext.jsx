@@ -1,4 +1,5 @@
-import { createContext, useCallback, useContext, useMemo } from "react";
+import { createContext, useEffect, useCallback, useContext, useMemo } from "react";
+import { guardarStorage } from "../utils/storage";
 import { useStorage } from "../hooks/useStorage";
 import { usuariosService } from "../services/usuariosService";
 import { ROLES_STAFF } from "../utils/acceso";
@@ -12,11 +13,18 @@ export function AuthProvider({ children }) {
   // Clave "usuarioActual": la misma que usaba el HTML. Nunca contiene password (login() ya la descarta).
   const [usuario, setUsuario] = useStorage("usuarioActual", null);
 
+  useEffect(() => {
+    const caducar = () => setUsuario(null);
+    window.addEventListener("maison-sesion-vencida", caducar);
+    return () => window.removeEventListener("maison-sesion-vencida", caducar);
+  }, [setUsuario]);
+
   // Lanza ErrorAuth { campo: "correo" | "password" } si las credenciales fallan:
   // el formulario de login lo captura y muestra el mensaje bajo el campo correcto.
   const iniciarSesion = useCallback(
     async (correo, password) => {
       const encontrado = await usuariosService.login(correo, password);
+      guardarStorage("usuarioActual", encontrado);
       setUsuario(encontrado);
       return encontrado;
     },
@@ -25,11 +33,15 @@ export function AuthProvider({ children }) {
 
   const iniciarSesionGoogle = useCallback(async (credential) => {
     const encontrado = await usuariosService.loginGoogle(credential);
-    setUsuario(encontrado);
+    guardarStorage("usuarioActual", encontrado);
+      setUsuario(encontrado);
     return encontrado;
   }, [setUsuario]);
 
-  const cerrarSesion = useCallback(() => setUsuario(null), [setUsuario]);
+  const cerrarSesion = useCallback(() => {
+    guardarStorage("usuarioActual", null);
+    setUsuario(null);
+  }, [setUsuario]);
 
   // Para cuando el perfil cambia datos del usuario logueado (etapa 11).
   const actualizarSesion = useCallback(

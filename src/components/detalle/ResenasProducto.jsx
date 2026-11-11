@@ -53,7 +53,7 @@ export default function ResenasProducto({ productoId, usuario, resenas = [], err
                   <span className="review-nombre">{r.nombre}</span>
                 </div>
                 <small className="text-gold-light">{r.fecha ? new Date(r.fecha).toLocaleDateString("es-CL") : ""}</small>
-                {["Administrador", "Vendedor"].includes(usuario?.tipo) && (
+                {(usuario?.tipo === "Administrador") && (
                   <button className="btn btn-outline-danger btn-sm d-block mt-2" type="button" onClick={() => quitar(r.id)}>Eliminar reseña</button>
                 )}
               </article>
@@ -78,7 +78,7 @@ export default function ResenasProducto({ productoId, usuario, resenas = [], err
             {mensaje && <p className="mt-2" role="status">{mensaje}</p>}
           </form>
         )}
-        {mensaje && ["Administrador", "Vendedor"].includes(usuario?.tipo) && <p role="status">{mensaje}</p>}
+        {mensaje && (usuario?.tipo === "Administrador") && <p role="status">{mensaje}</p>}
         {yaOpino && <p className="mt-3 text-center text-gold-light">Ya publicaste tu opinión sobre este perfume.</p>}
       </div>
     </section>

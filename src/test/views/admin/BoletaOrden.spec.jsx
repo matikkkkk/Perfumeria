@@ -4,6 +4,8 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import BoletaOrden from "../../../pages/admin/BoletaOrden";
 import { ordenesService } from "../../../services/ordenesService";
 
+vi.mock("../../../context/AuthContext", () => ({ useAuth: () => ({ esAdministrador: true }) }));
+
 vi.mock("../../../services/ordenesService", () => ({ ordenesService: { obtener: vi.fn() } }));
 
 describe("BoletaOrden", () => {

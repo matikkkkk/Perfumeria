@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import ScrollToTop from "./ScrollToTop";
@@ -7,6 +8,9 @@ import DecoracionNavidad from "../navidad/DecoracionNavidad";
 // Marco de todas las páginas públicas: navbar arriba, footer abajo y la página en medio.
 // El fondo (luxury-bg) está en <body> (index.html), igual que en el HTML original.
 export default function LayoutTienda() {
+  const { esVendedor } = useAuth();
+  const { pathname } = useLocation();
+  if (esVendedor && pathname !== "/logout") return <Navigate replace to="/admin/productos" />;
   return (
     <div className="d-flex flex-column min-vh-100">
       <ScrollToTop />

@@ -85,23 +85,6 @@ export default function Registro() {
     try {
       const correoNormalizado = datos.correo.trim().toLowerCase();
       const runNormalizado = limpiarRun(datos.run);
-      const [porCorreo, porRun] = await Promise.all([
-        usuariosService.listar(`?correo=${encodeURIComponent(correoNormalizado)}`),
-        usuariosService.listar(`?run=${encodeURIComponent(runNormalizado)}`),
-      ]);
-
-      if (porCorreo.length) {
-        setErrores((previo) => ({ ...previo, correo: "Ya existe una cuenta registrada con ese correo." }));
-        setTocados((previo) => ({ ...previo, correo: true }));
-        return;
-      }
-
-      if (porRun.length) {
-        setErrores((previo) => ({ ...previo, run: "Ya existe una cuenta registrada con ese RUN." }));
-        setTocados((previo) => ({ ...previo, run: true }));
-        return;
-      }
-
       await usuariosService.crear({
         run: runNormalizado,
         nombre: datos.nombre.trim(),
@@ -120,8 +103,8 @@ export default function Registro() {
       setErrores({});
       setTocados({});
       setTimeout(() => navigate("/login"), 900);
-    } catch {
-      setMensajeGeneral("No se pudo crear la cuenta. Verifica que la API esté disponible e inténtalo nuevamente.");
+    } catch (error) {
+      setMensajeGeneral(error.cuerpo?.mensaje || "No se pudo crear la cuenta. Revisa los datos e inténtalo nuevamente.");
     } finally {
       setGuardando(false);
     }

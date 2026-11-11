@@ -4,6 +4,8 @@ import { MemoryRouter } from "react-router-dom";
 import OrdenesAdmin from "../../../pages/admin/OrdenesAdmin";
 import { ordenesService } from "../../../services/ordenesService";
 
+vi.mock("../../../context/AuthContext", () => ({ useAuth: () => ({ esAdministrador: true }) }));
+
 vi.mock("../../../services/ordenesService", () => ({ ordenesService: { listar: vi.fn() } }));
 
 describe("OrdenesAdmin", () => {

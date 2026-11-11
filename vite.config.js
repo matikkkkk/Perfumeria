@@ -8,7 +8,7 @@ test: {
   globals: true,
   setupFiles: "./src/setupTests.js",
   css: false,
-  env: { VITE_API_URL: "http://localhost:8080/api" },
+  env: { VITE_API_URL: "http://localhost:8080/api/v1" },
   include: ["src/**/*.{spec,test}.{js,jsx}"],
   exclude: [
     "node_modules/**",

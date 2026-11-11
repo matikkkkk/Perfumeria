@@ -29,7 +29,7 @@ export default function LayoutAdmin() {
           <Link className="navbar-brand brand-logo" to="/admin" aria-label="Luxury, inicio de administración">LUXURY <span className="d-none d-sm-inline">ADMIN</span></Link>
           <div className="d-flex align-items-center gap-2 gap-md-3"><SelectorTema />
             <div className="text-end d-none d-sm-block"><span className="d-block text-gold-light small">Sesión iniciada</span><strong className="small">{usuario?.nombre || usuario?.correo}</strong><span className="text-secondary small ms-2">{usuario?.tipo}</span></div>
-            <Link className="btn btn-luxury btn-sm" to="/" aria-label="Volver a la tienda"><i className="bi bi-shop me-sm-2"/><span className="d-none d-sm-inline">Tienda</span></Link>
+            {usuario?.tipo === "Administrador" && <Link className="btn btn-luxury btn-sm" to="/" aria-label="Volver a la tienda"><i className="bi bi-shop me-sm-2"/><span className="d-none d-sm-inline">Tienda</span></Link>}
           </div>
         </div>
       </nav>

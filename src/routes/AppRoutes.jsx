@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
 const GuiaOlfativa = lazy(() => import("../pages/tienda/GuiaOlfativa"));
 const PreguntasFrecuentesPage = lazy(() => import("../pages/tienda/PreguntasFrecuentesPage"));
-import { Route, Routes } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { Navigate, Route, Routes } from "react-router-dom";
 import LayoutAdmin from "../components/layout/LayoutAdmin";
 import LayoutTienda from "../components/layout/LayoutTienda";
 import { ROLES_SOLO_ADMIN, ROLES_STAFF } from "../utils/acceso";
@@ -56,6 +57,7 @@ const PanelCliente = lazy(() => import("../pages/tienda/PanelCliente"));
 //   - Dentro de /admin, categorías, usuarios y crear/editar productos son solo del Administrador
 //     (en el HTML el Vendedor tampoco veía Nuevo producto ni Usuarios).
 export default function AppRoutes() {
+  const { esVendedor } = useAuth();
   return (
     <Suspense fallback={<div className="container py-5" role="status">Cargando página…</div>}>
     <Routes>
@@ -92,18 +94,18 @@ export default function AppRoutes() {
       {/* ---------- Administrador / Vendedor ---------- */}
       <Route path="admin" element={<RutaProtegida roles={ROLES_STAFF} />}>
         <Route element={<LayoutAdmin />}>
-          <Route index element={<DashboardAdmin />} />
+          <Route index element={esVendedor ? <Navigate replace to="/admin/productos" /> : <DashboardAdmin />} />
           <Route path="ordenes" element={<OrdenesAdmin />} />
           <Route path="ordenes/:id" element={<BoletaOrden />} />
           <Route path="productos" element={<ProductosAdmin />} />
-          <Route path="productos/criticos" element={<ProductosCriticos />} />
-          <Route path="productos/reportes" element={<ReportesProductos />} />
           <Route path="productos/:id" element={<DetalleProductoAdmin />} />
-          <Route path="reportes" element={<ReportesAdmin />} />
-          <Route path="perfil" element={<PerfilAdmin />} />
 
           {/* Solo Administrador */}
           <Route element={<RutaProtegida roles={ROLES_SOLO_ADMIN} />}>
+          <Route path="productos/criticos" element={<ProductosCriticos />} />
+          <Route path="productos/reportes" element={<ReportesProductos />} />
+          <Route path="reportes" element={<ReportesAdmin />} />
+          <Route path="perfil" element={<PerfilAdmin />} />
             <Route path="productos/nuevo" element={<NuevoProducto />} />
             <Route path="productos/:id/editar" element={<EditarProducto />} />
             <Route path="categorias" element={<CategoriasAdmin />} />

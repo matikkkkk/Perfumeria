@@ -1,3 +1,4 @@
+import { useAuth } from "../../context/AuthContext";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { AdminStatsSkeleton, AdminTableSkeleton } from "../../components/skeleton/LuxurySkeletons";
@@ -5,6 +6,8 @@ import { productosService } from "../../services/productosService";
 import { formatearPrecio } from "../../utils/formato";
 
 export default function ProductosAdmin() {
+  const { esAdministrador } = useAuth();
+
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
@@ -66,9 +69,9 @@ export default function ProductosAdmin() {
           <p className="text-gold-light mb-0">Administra fragancias, precios y disponibilidad.</p>
         </div>
         <div className="d-flex flex-wrap gap-2">
-          <Link className="btn btn-outline-light" to="/admin/productos/criticos"><i className="bi bi-exclamation-triangle me-2" />Stock crítico</Link>
-          <Link className="btn btn-outline-light" to="/admin/productos/reportes"><i className="bi bi-bar-chart me-2" />Reportes</Link>
-          <Link className="btn btn-luxury" to="/admin/productos/nuevo"><i className="bi bi-plus-lg me-2" />Nuevo producto</Link>
+          {esAdministrador && <Link className="btn btn-outline-light" to="/admin/productos/criticos"><i className="bi bi-exclamation-triangle me-2" />Stock crítico</Link>}
+          {esAdministrador && <Link className="btn btn-outline-light" to="/admin/productos/reportes"><i className="bi bi-bar-chart me-2" />Reportes</Link>}
+          {esAdministrador && <Link className="btn btn-luxury" to="/admin/productos/nuevo"><i className="bi bi-plus-lg me-2" />Nuevo producto</Link>}
         </div>
       </div>
 
@@ -118,8 +121,8 @@ export default function ProductosAdmin() {
                       <td>
                         <div className="d-flex justify-content-end gap-1">
                           <Link className="btn btn-sm btn-outline-light" to={`/admin/productos/${p.id}`} aria-label={`Ver ${p.nombre}`}><i className="bi bi-eye" /></Link>
-                          <Link className="btn btn-sm btn-outline-light" to={`/admin/productos/${p.id}/editar`} aria-label={`Editar ${p.nombre}`}><i className="bi bi-pencil" /></Link>
-                          <button className="btn btn-sm btn-outline-danger" onClick={() => eliminar(p)} disabled={eliminando !== null} aria-label={`Eliminar ${p.nombre}`}>{eliminando === p.id ? <span className="spinner-border spinner-border-sm" aria-hidden="true" /> : <i className="bi bi-trash" />}</button>
+                          {esAdministrador && <Link className="btn btn-sm btn-outline-light" to={`/admin/productos/${p.id}/editar`} aria-label={`Editar ${p.nombre}`}><i className="bi bi-pencil" /></Link>}
+                          {esAdministrador && <button className="btn btn-sm btn-outline-danger" onClick={() => eliminar(p)} disabled={eliminando !== null} aria-label={`Eliminar ${p.nombre}`}>{eliminando === p.id ? <span className="spinner-border spinner-border-sm" aria-hidden="true" /> : <i className="bi bi-trash" />}</button>}
                         </div>
                       </td>
                     </tr>
@@ -128,7 +131,7 @@ export default function ProductosAdmin() {
               </table>
             </div>
           ) : (
-            <div className="admin-empty-state"><i className="bi bi-box-seam" /><h2 className="h5 luxury-title">No hay productos</h2><p>Prueba con otra búsqueda o crea un producto nuevo.</p><Link className="btn btn-luxury" to="/admin/productos/nuevo">Crear producto</Link></div>
+            <div className="admin-empty-state"><i className="bi bi-box-seam" /><h2 className="h5 luxury-title">No hay productos</h2><p>Prueba con otra búsqueda o crea un producto nuevo.</p>{esAdministrador && <Link className="btn btn-luxury" to="/admin/productos/nuevo">Crear producto</Link>}</div>
           )}
 
           <p className="small text-gold-light mb-0 mt-3">Mostrando {filtrados.length} de {productos.length} productos.</p>

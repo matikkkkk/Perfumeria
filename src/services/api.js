@@ -1,15 +1,25 @@
 // Cliente HTTP unico del frontend. Todo el acceso a la base de datos pasa por aqui:
 // React -> services -> API REST (backend) -> base de datos.
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+import { leerStorage } from "../utils/storage";
+
+const configurada = (import.meta.env.VITE_API_URL || "http://localhost:8080/api/v1").replace(/\/$/, "");
+const BASE_URL = configurada.endsWith("/api") ? configurada + "/v1" : configurada;
+
+function autorizacion(ruta) {
+  if (ruta.startsWith("/auth/")) return {};
+  const orden = ruta.match(/^\/ordenes\/(\d+)(?:\/|$)/);
+  const token = (orden && sessionStorage.getItem("boleta:" + orden[1])) || leerStorage("usuarioActual", null)?.accessToken;
+  return token ? { Authorization: "Bearer " + token } : {};
+}
 
 export async function peticion(ruta, opciones = {}) {
   const metodo = opciones.method || "GET";
   let respuesta;
   try {
     respuesta = await fetch(`${BASE_URL}${ruta}`, {
-      headers: { "Content-Type": "application/json" },
       ...opciones,
+      headers: { "Content-Type": "application/json", ...autorizacion(ruta), ...opciones.headers },
     });
   } catch (causa) {
     // Sin respuesta HTTP: gateway apagado, microservicio caido o CORS mal configurado (el navegador lo reporta igual).
@@ -19,6 +29,9 @@ export async function peticion(ruta, opciones = {}) {
     throw error;
   }
 
+  if (respuesta.status === 401 && !ruta.startsWith("/auth/") && leerStorage("usuarioActual", null)) {
+    window.dispatchEvent(new Event("maison-sesion-vencida"));
+  }
   if (!respuesta.ok) {
     // `status` permite distinguir un 404 (no existe) de una API caída sin leer el texto del mensaje.
     const error = new Error(`Error ${respuesta.status} en ${metodo} ${ruta}`);
@@ -28,7 +41,12 @@ export async function peticion(ruta, opciones = {}) {
     throw error;
   }
   // DELETE normalmente no devuelve cuerpo
-  return respuesta.status === 204 ? null : respuesta.json();
+  const datos = respuesta.status === 204 ? null : await respuesta.json();
+  if (ruta === "/ordenes" && metodo === "POST" && datos?.id) {
+    const permiso = respuesta.headers?.get("X-Boleta-Token");
+    if (permiso) sessionStorage.setItem("boleta:" + datos.id, permiso);
+  }
+  return datos;
 }
 
 async function leerCuerpoDeError(respuesta) {
@@ -62,7 +80,7 @@ export function crearRecurso(ruta) {
 
 // Respuestas binarias: las boletas PDF no se pueden leer con respuesta.json().
 export async function descargarPdf(ruta, nombreArchivo) {
-  const respuesta = await fetch(`${BASE_URL}${ruta}`);
+  const respuesta = await fetch(`${BASE_URL}${ruta}`, { headers: autorizacion(ruta) });
   if (!respuesta.ok) {
     throw new Error(`No se pudo descargar la boleta (HTTP ${respuesta.status}).`);
   }
