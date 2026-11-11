@@ -1,0 +1,43 @@
+/* Temporada compartida por tienda, cuenta, checkout y administración. */
+body.modo-navidad {--season-line:#ad8550;--season-panel:rgba(95,29,43,.13);--season-text:#e8c987;}
+body.modo-navidad.luxury-bg {background-image:linear-gradient(120deg,rgba(35,10,18,.92),rgba(11,21,18,.93)),url('/img/fondo-marmol.jpg');background-attachment:scroll;}
+body.modo-navidad :is(.luxury-card,.review-card,.categoria-card,.journal-feature,.journal-story,.article-related a,.luxury-editorial-feature,.md-note,.admin-panel,.admin-kpi,.accordion-item) {border-color:var(--season-line)!important;}
+body.modo-navidad main > :is(.container,.container-fluid),body.modo-navidad .maison-editorial {background-image:radial-gradient(ellipse at 100% 0,var(--season-panel),transparent 55%);}
+body.modo-navidad main h1 {padding-bottom:1.2rem;border-bottom:1px solid var(--season-line);}
+body.modo-navidad .hero-section h1 {border:0;padding-bottom:0;}
+body.modo-navidad .md-detail-section {border-color:var(--season-line);background:linear-gradient(90deg,rgba(91,19,37,.06),transparent,rgba(18,72,43,.07));}
+body.modo-navidad .maison-discover {background:linear-gradient(110deg,rgba(125,26,48,.12),rgba(23,78,48,.12));padding-inline:1.5rem;}
+body.modo-navidad :is(.journal-feature,.about-discovery) {position:relative;}
+body.modo-navidad :is(.journal-feature,.about-discovery)::after {content:"";position:absolute;right:0;top:0;width:100px;height:78px;background:url('/navidad/adornos/guirnalda.webp') right top/contain no-repeat;pointer-events:none;}
+body.modo-navidad .journal-story {border-top:2px solid #925a42;padding-top:1.5rem;}
+body.modo-navidad :is(.admin-header,.admin-menu) {border-color:var(--season-line)!important;}
+body.modo-navidad .admin-header {background:linear-gradient(100deg,#32141e,#172b22);border-top:5px solid #a43545;}
+body.modo-navidad .admin-menu-links a.active {border-color:#e3b868;background:#3b2028;}
+.navidad-promocion {display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;padding:.7rem 1rem;background:#142d22;color:#f9eed5;border-bottom:1px solid #9b7b43;font-size:.85rem;text-align:center;}
+.navidad-promocion code {font:600 .95rem inherit;letter-spacing:.06em;color:#ffde92;background:#ffffff10;padding:.2rem .6rem;border:1px dashed #d5b36d;border-radius:3px;}
+.navidad-promocion a {color:#ffe4a5;text-underline-offset:4px;}
+.navidad-trineo {top:clamp(155px,23vh,240px);width:clamp(170px,25vw,330px);filter:drop-shadow(0 2px 5px #0008);}
+.navidad-arbol-flotante {width:clamp(105px,10vw,155px);}
+body.modo-navidad .navidad-cinta-festiva {padding-block:.55rem;min-height:52px;}
+body.modo-navidad .navidad-efectos {flex-shrink:0;}
+body.modo-claro.modo-navidad {--season-line:#b49b69;--season-panel:rgba(150,48,55,.06);--season-text:#72531b;}
+body.modo-claro.modo-navidad.luxury-bg {background-image:url('/img/claro/marmol.webp')!important;}
+body.modo-claro.modo-navidad .maison-editorial {--mj-panel:#fffdfb;--mj-line:#b49b69;}
+body.modo-claro.modo-navidad .about-manifesto {background:#fffcf5;}
+body.modo-claro.modo-navidad .luxury-navbar {background:#fffdf9f5!important;border-bottom:2px solid #ad8550!important;}
+body.modo-claro.modo-navidad .luxury-navbar .nav-link:is(.active,:hover) {color:#873346!important;text-shadow:none;}
+body.modo-claro.modo-navidad .luxury-navbar .dropdown-menu-luxury {background:#fff!important;}
+body.modo-claro.modo-navidad .maison-season-note {background:#fff5ec;border-color:#ad8550;}
+body.modo-claro.modo-navidad .maison-season-note :is(strong,a,i) {color:#78303f;}
+body.modo-claro.modo-navidad .md-detail-page :is(h1,h2) {color:#26323c!important;}
+body.modo-claro.modo-navidad .site-footer {border-top-color:#ad8550;}
+body.modo-claro.modo-navidad .admin-header {background:#fffdf9;}
+body.modo-claro.modo-navidad .admin-menu-links a.active {background:#f4ebe2;color:#793548;}
+body.modo-claro.modo-navidad .luxury-home-refresh :is(.text-gold,.section-label) {color:#806023!important;}
+body.modo-claro.modo-navidad .luxury-home-refresh .container > .text-center.mb-4 > .luxury-title {color:#26323c;text-shadow:none;}
+body.modo-claro.modo-navidad .luxury-home-refresh .luxury-editorial-copy p {color:#535d65;}
+@media(max-width:767px){.navidad-promocion {gap:.4rem .8rem;font-size:.78rem;}.navidad-trineo {top:180px;}body.modo-navidad .navidad-cinta-festiva {letter-spacing:.025em;}.navidad-promocion a {display:inline-flex;align-items:center;min-height:36px;}}
+@media print {header,.site-footer,.navidad-cinta-festiva,.navidad-promocion,.navidad-nevada,.navidad-arbol-flotante,.navidad-trineo,.no-print {display:none!important;}body.luxury-bg{background:#fff!important;color:#000!important;}}
+
+body.modo-claro.modo-navidad .tarjeta-producto-uniforme .card-badge {background:#fff8e8!important;color:#493611!important;border-color:#9a7a3c!important;}
+body.modo-claro.modo-navidad .site-footer {background-image:url('/img/claro/footer.webp')!important;}

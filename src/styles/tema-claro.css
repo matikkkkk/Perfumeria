@@ -1,0 +1,181 @@
+/* Blanco hielo y oro envejecido: el contraste del texto es independiente de las fotos. */
+body.modo-claro {
+  --bg-dark:#f4f7f8; --card-bg:#fff; --gold:#806023; --gold-light:#72531b; --text-muted:#535d65;
+  --bs-body-color:#26323c; --bs-body-bg:#f4f7f8; --bs-secondary-color:#535d65;
+  --editorial-ivory:#24313b; --editorial-muted:#535d65; --editorial-gold:#806023;
+  --luxury-section-text:#26323c; --luxury-section-muted:#535d65; --luxury-section-accent:#806023;
+  --luxury-card-text:#26323c; --luxury-card-muted:#535d65; --luxury-card-surface:#fff;
+  --luxury-card-accent:#806023; --luxury-card-button-text:#72531b; --luxury-on-accent:#fff;
+  --tema-dorado:#806023; --tema-texto:#26323c; --tema-texto-secundario:#535d65;
+  color:#26323c!important;
+  background-color:#f4f7f8;
+  background-image:url('/img/claro/marmol.webp')!important;
+  background-size:cover; background-position:center; background-attachment:fixed;
+}
+body.modo-claro :is(h1,h2,h3,h4,h5,h6,.luxury-title,.card-title,.luxury-blog-paragraph,.form-label,.form-check-label,.lead) {color:#26323c;}
+body.modo-claro :is(.text-light,.text-white) {color:#26323c!important;}
+body.modo-claro :is(.text-secondary,.text-muted,.text-gold-light,.card-text,.section-description) {color:#535d65!important;}
+body.modo-claro :is(.text-gold,.text-tema-dorado,.price,.card-brand,.section-label,.admin-eyebrow) {color:#806023!important;}
+body.modo-claro a:not(.btn):hover {color:#6b4b13;}
+body.modo-claro :is(.luxury-card,.tarjeta-producto-uniforme,.review-card,.categoria-card,.card,.wishlist-item,.resumen-carrito,.carrito-resumen,.admin-kpi,.admin-panel,.stat-card) {
+  color:#26323c!important; background:#ffffffed!important; border-color:#c8b78e!important; box-shadow:0 8px 24px rgba(49,64,72,.06);
+}
+body.modo-claro .luxury-card:hover {box-shadow:0 12px 28px rgba(49,64,72,.1);border-color:#98773b!important;}
+body.modo-claro :is(.form-control,.form-select,.form-luxury,.catalogo-busqueda input,.nav-search-form .form-control) {
+  color:#26323c!important;background:#fff!important;border-color:#a9a293!important;color-scheme:light;
+}
+body.modo-claro :is(input,textarea)::placeholder {color:#68727a!important;opacity:1;}
+body.modo-claro :is(input,select,textarea):focus {border-color:#806023!important;box-shadow:0 0 0 3px #80602320!important;}
+body.modo-claro input[type=checkbox] {accent-color:#806023;}
+body.modo-claro :is(.btn-luxury,.btn-outline-secondary) {color:#72531b;border-color:#927438;background:transparent;}
+body.modo-claro .btn-luxury:hover {background:#806023;color:#fff;}
+body.modo-claro :is(.btn-luxury--primary,.btn-luxury--fill) {background:#806023!important;color:#fff!important;border-color:#806023!important;}
+body.modo-claro .btn-luxury:disabled {color:#5b6268;opacity:.65;}
+body.modo-claro :is(.luxury-navbar,.admin-header,.admin-header .navbar) {background:#f8fbfcf5!important;border-color:#c8b78e!important;}
+body.modo-claro :is(.luxury-navbar .nav-link,.nav-icon-btn,.nav-search-close,.brand-mark-mini,.brand-logo) {color:#6e541f!important;}
+body.modo-claro :is(.luxury-navbar .nav-link.active,.luxury-navbar .nav-link:hover) {color:#30240c!important;}
+body.modo-claro .navbar-toggler-icon {filter:brightness(0);}
+body.modo-claro :is(.dropdown-menu-luxury,.nav-search-box) {background:#fff!important;border-color:#c8b78e;color:#26323c;box-shadow:0 8px 20px #26323c15;}
+body.modo-claro :is(.dropdown-menu-luxury .dropdown-item,.dropdown-item-title,.dropdown-item-text) {color:#26323c!important;}
+body.modo-claro .dropdown-item-sub {color:#535d65!important;}
+body.modo-claro .dropdown-menu-luxury .dropdown-item:hover {background:#f3efe5;color:#6e541f!important;}
+body.modo-claro .nav-icon-badge {color:#fff;background:#806023;}
+body.modo-claro .selector-tema {border:1px solid #bfae87;border-radius:50%;}
+body.modo-claro .site-footer {color:#26323c;background:#f4f0e8 url('/img/claro/footer.webp') center/cover no-repeat!important;border-top-color:#c8b78e;}
+body.modo-claro .site-footer :is(a,p,span,.footer-heading,.footer-title) {color:#394750;}
+body.modo-claro :is(.luxury-reference-page,.faq-section,.diccionario-section,.destacados-section,.mas-buscados-section,.productos-contenedor) {background:transparent;}
+body.modo-claro :is(.filtros-panel,.panel-filtros,.catalogo-filtros,.filtros-luxury) {background:linear-gradient(#fffffff0,#fffffff0),url('/img/claro/filtros.webp') center/cover!important;color:#26323c;border-color:#bfae87;}
+body.modo-claro :is(.accordion,.accordion-item,.accordion-button,.accordion-body) {color:#26323c;background:#fff;border-color:#c8b78e;--bs-accordion-active-bg:#f4efe3;--bs-accordion-active-color:#72531b;}
+body.modo-claro .luxury-editorial-feature {background:#fff;border-color:#c8b78e;}
+body.modo-claro .luxury-home-refresh .luxury-editorial-copy :is(p,small) {color:#535d65;}
+body.modo-claro :is(.launch-carousel,.mas-buscados-carousel) {background:#ffffffd9;border-color:#c8b78e;box-shadow:none;}
+body.modo-claro :is(.launch-title,.launch-brand,.launch-price,.launch-slide .luxury-title) {color:#72531b;}
+body.modo-claro :is(.luxury-editorial-mini-card,.manifiesto-card,.faq-card,.dictionary-card,.diccionario-card,.modal-content) {background:#fff!important;color:#26323c;border-color:#c8b78e;}
+body.modo-claro :is(.table,.table-dark) {--bs-table-color:#26323c;--bs-table-bg:#fff;--bs-table-border-color:#ddd5c3;--bs-table-striped-bg:#f5f4ef;--bs-table-striped-color:#26323c;--bs-table-hover-bg:#f1eadc;--bs-table-hover-color:#26323c;}
+body.modo-claro :is(.admin-menu,.admin-menu-links,.admin-header,.admin-surface,.dashboard-panel,.admin-card) {background:#f9fbfc!important;color:#26323c;}
+body.modo-claro .admin-menu a {color:#4d5660;}
+body.modo-claro .admin-menu a.active {background:#eee8d9;color:#72531b;border-color:#806023;}
+body.modo-claro :is(.lux-chart-donut>div,.lux-chart-bar-track) {background:#f4f3ee;}
+body.modo-claro :is(.lux-chart-bar-number,.lux-chart-bar-item small,.lux-chart-donut strong,.lux-inventory-stat span) {color:#72531b;}
+body.modo-claro :is(.toast,.toast-body,.alert-dark) {background:#fff;color:#26323c;border-color:#c8b78e;}
+body.modo-claro .btn-close {filter:none;}
+body.modo-claro .maison-editorial {--mj-ink:#26323c;--mj-muted:#535d65;--mj-gold:#806023;--mj-line:#c8b78e;--mj-panel:#ffffffed;}
+body.modo-claro .journal-filters button[aria-pressed=true] {background:#806023;color:#fff;}
+body.modo-claro .about-manifesto {background:#ffffffdb;}
+body.modo-claro .article-prose .notes-block {background:#f9f7f0;}
+body.modo-claro .article-prose .note-pill {background:#f4efe1;border-color:#bfae87;color:#4e3d1c;}
+body.modo-claro .blog-cta-card {background:#fff;border-color:#c8b78e;}
+body.modo-claro .md-detail-page {--md-cream:#26323c;--md-muted:#535d65;--md-gold:#806023;--md-panel:#fff;--md-border:#c8b78e;background:#f4f7f8;color:#26323c;}
+body.modo-claro .md-detail-page::before {background-image:url('/img/claro/detalle.webp');background-attachment:scroll;position:fixed;}
+body.modo-claro .md-product-photo {background:radial-gradient(ellipse at 50% 30%,#fff,#eeece4);}
+body.modo-claro .md-detail-page :is(h1,h2,h3,.md-product-attributes strong,.md-note h3,.review-card label,.review-card h4,.review-card p) {color:#26323c!important;}
+body.modo-claro .md-detail-page :is(p,.md-product-description,.md-buy-label,.md-product-attributes span,.md-summary-footnote,.breadcrumb-luxury,.breadcrumb-luxury a,.md-occasion-group h3) {color:#535d65;}
+body.modo-claro .md-detail-page :is(.review-card) {background:#fff!important;color:#394750!important;border-color:#c8b78e;}
+body.modo-claro .md-stock {color:#286245;}.modo-claro .md-stock--empty {color:#a33333;}
+body.modo-claro :focus-visible {outline-color:#806023;}
+/* Las fotos de colecciones conservan el contraste original. */
+body.modo-claro :is(.luxury-editorial-shade,.luxury-editorial-visual,.categoria-overlay,.category-overlay) {color:#fff;}
+body.modo-claro .luxury-editorial-shade :is(strong,small,h2,h3,.text-gold-light),body.modo-claro .luxury-editorial-visual span {color:#fff4df!important;}
+body.modo-claro .luxury-editorial-shade .luxury-card-action {color:#ffe3a1!important;border-color:#e6c27a;background:#17130f99;}
+body.modo-claro .hero-section .hero-overlay-content :is(.hero-eyebrow,.hero-headline,.hero-description) {color:#fff7e4!important;text-shadow:0 2px 12px #151515;}
+body.modo-claro .hero-section .hero-overlay-content .btn-luxury {background:#fff7e9;color:#4d3712;border-color:#e4c784;}
+body.modo-claro .hero-section .hero-secondary-btn {color:#fff;border-color:#fff7e9;}
+@media(max-width:575px){.luxury-navbar .brand-mark-mini{font-size:1.35rem;}}
+body.modo-claro .filtros-sidebar {background:#fff;border-color:#c8b78e;}
+body.modo-claro.productos-page .filtros-sidebar::before {background-image:url('/img/claro/filtros.webp');filter:none;opacity:1;}
+body.modo-claro.productos-page .filtros-sidebar::after {background:#ffffff30;}
+body.modo-claro.productos-page :is(.filtros-titulo,.filtro-seccion-titulo,.btn-outline-luxury) {color:#72531b;border-color:#bfae87;}
+body.modo-claro :is(.admin-input,.admin-select,.diccionario-modal-content,.bg-dark,.bg-black) {color:#26323c!important;background-color:#fff!important;}
+body.modo-claro :is(.luxury-skeleton-panel,.luxury-skeleton-frame) {background:#e3e5e4;}
+body.modo-claro .luxury-home-refresh :is(.launch-slide p.text-gold-light,.mas-buscados-copy p) {color:#535d65!important;}
+body.modo-claro :is(.luxury-editorial-link-action,.luxury-editorial-mini-card strong,.diccionario-card h3) {color:#72531b;}
+body.modo-claro :is(.detalle-relacionados-encabezado,.diccionario-grid,.faq-container) {background:#ffffffda;}
+body.modo-claro .detalle-relacionados-encabezado :is(.luxury-title,span) {color:#72531b;}
+
+/* Distintivos sobre fotografías: su contraste no depende del fondo ni del tema estacional. */
+body.modo-claro .tarjeta-producto-uniforme .card-badge {
+  color:#493611!important; background:#fff8e8!important; border:1px solid #9a7a3c!important;
+  font-weight:600; text-shadow:none; box-shadow:0 1px 5px #14141426; opacity:1; line-height:1.5;
+}
+body.modo-claro .tarjeta-producto-uniforme .card-badge--ml {background:#fff8e8!important;color:#493611!important;}
+body.modo-claro .tarjeta-producto-uniforme .card-badge i {color:inherit;}
+body.modo-claro .tarjeta-producto-uniforme .card-body {background:#fffdf9;}
+body.modo-claro .tarjeta-producto-uniforme .price {color:#72531b!important;text-shadow:none;font-weight:600;}
+body.modo-claro .tarjeta-producto-uniforme .card-brand {color:#72531b!important;opacity:1;}
+body.modo-claro .tarjeta-producto-uniforme .wishlist-heart {background:#fff8e8;color:#493611;border:1px solid #9a7a3c;}
+body.modo-claro .tarjeta-producto-uniforme .wishlist-heart.activo {color:#903748;}
+body.modo-claro .mood-chip {--chip-bg:#f2ead8;--chip-text:#624913;--chip-border:#c7b184;}
+body.modo-claro .mood-chip--fresco {--chip-bg:#e2f2f5;--chip-text:#215564;--chip-border:#97bdc5;}
+body.modo-claro .mood-chip--relajado {--chip-bg:#e8f1e4;--chip-text:#2c5831;--chip-border:#a4bea0;}
+body.modo-claro .mood-chip--romantico {--chip-bg:#f7e8ee;--chip-text:#7c3852;--chip-border:#d6a8b9;}
+body.modo-claro .mood-chip--poderoso {--chip-bg:#fae9e5;--chip-text:#873326;--chip-border:#d7a79c;}
+body.modo-claro .mood-chip--misterioso {--chip-bg:#eee8f8;--chip-text:#5d448d;--chip-border:#bdacd8;}
+body.modo-claro :is(#destacadosGrid,#carruselMujerInner,#carruselHombreInner,#carruselUnisexInner,.tarjeta-producto-uniforme) .mood-chip {
+  background:var(--chip-bg)!important; color:var(--chip-text)!important; border-color:var(--chip-border)!important;
+  box-shadow:none; font-weight:600;
+}
+body.modo-claro .site-footer :is(.brand-logo,.footer-text,.footer-heading,.footer-list a,.footer-bottom,small,span,p) {text-shadow:none!important;}
+body.modo-claro .site-footer .brand-logo {color:#72531b!important;}
+@media (max-width:767px) {
+  body.modo-claro.luxury-bg {background-attachment:scroll;}
+  body.modo-claro .md-detail-page::before {position:absolute;background-size:auto 100vh;background-repeat:repeat-y;}
+}
+
+/* Superficies de administración, mensajes y controles sobre el mármol claro. */
+body.modo-claro :is(.admin-stat-card,.admin-profile-card,.toast-luxury,.modal-content,.lux-chart-donut > div) {
+  background: #fffdf8 !important;
+  color: #302d27 !important;
+  border-color: #b5a17c !important;
+}
+body.modo-claro :is(.admin-stat-card strong,.navidad-admin-opcion strong,.lux-chart-donut strong) {color:#43351f;}
+body.modo-claro :is(.admin-stat-card small,.navidad-admin-opcion small,.admin-table thead th,.lux-chart-bar-item small,.lux-chart-bar-number,.lux-inventory-stat span) {color:#5a544b;}
+body.modo-claro :is(.admin-input-addon,.admin-input option,.admin-avatar,.admin-role-pill,.navidad-estado-pill,.navidad-admin-opcion.elegido) {background:#f6ecd7;color:#634915;border-color:#a98d57;}
+body.modo-claro .navidad-admin-opcion > i {color:#805b20;}
+body.modo-claro .navidad-admin-opcion input {accent-color:#79541d;}
+body.modo-claro .admin-status {background:#e7edf1;color:#304957;font-weight:600;}
+body.modo-claro .admin-status:is(.pagado,.pagada,.completado,.entregado,.aprobado),body.modo-claro .navidad-estado-pill.activo {background:#deeee3;color:#245538;}
+body.modo-claro .admin-status:is(.pendiente,.en-preparación) {background:#fff0cc;color:#684707;}
+body.modo-claro .admin-status:is(.pago-fallido,.cancelado,.critico) {background:#f9e5df;color:#812e22;}
+body.modo-claro :is(.btn-outline-light,.btn-outline-warning) {background:#fffcf5;color:#60471f;border-color:#997c4b;}
+body.modo-claro :is(.btn-outline-light,.btn-outline-warning):is(:hover,:focus-visible),
+body.modo-claro .btn-warning {background:#715222;color:white;border-color:#715222;}
+body.modo-claro .nav-link[aria-current="page"].bg-secondary,
+body.modo-claro .admin-menu-links > a.active {background:#f3e7ce!important;color:#4d3918!important;box-shadow:inset 3px 0 #89652a;}
+body.modo-claro .toast-luxury {box-shadow:0 4px 18px #382c1829;}
+
+/* Un círculo de tamaño constante también en el menú móvil y administración. */
+button.nav-icon-btn.selector-tema {
+  display:inline-grid; place-items:center; width:40px; height:40px;
+  flex:0 0 40px; padding:0; line-height:1; border-radius:50%;
+}
+button.selector-tema .bi {display:grid;place-items:center;margin:0;}
+button.selector-tema .bi::before {display:block;line-height:1;vertical-align:0;}
+
+body.modo-claro .md-detail-page::before {
+  background-image:linear-gradient(105deg,#fffaf266,#fffaf29c),url('/img/claro/detalle.webp');
+}
+body.modo-claro .md-detail-page .md-product-price {color:#5c4018;font-weight:600;font-variant-numeric:tabular-nums;}
+body.modo-claro .md-detail-page .md-stock {color:#225338;background:#e6f1e7;border-radius:1rem;padding:.3rem .7rem;}
+body.modo-claro .md-detail-page .md-stock--empty {color:#772e28;background:#f8e7e1;}
+body.modo-claro .md-detail-page .md-actions .btn-outline-luxury {
+  background:#fffcf4;color:#543e1f;border:1px solid #876c42;
+}
+body.modo-claro .md-detail-page .md-actions .btn-outline-luxury:hover {background:#efe3ca;}
+body.modo-claro .md-detail-page .md-note {
+  background:transparent;border:0;border-radius:0;min-height:0;
+}
+body.modo-claro .md-detail-page .md-notes-grid {gap:0;}
+body.modo-claro .md-detail-page .md-note + .md-note {border-inline-start:1px solid #9f8767;}
+body.modo-claro .md-detail-page :is(.md-note-number,.breadcrumb-luxury li.active) {color:#62491e;}
+body.modo-claro .md-note-symbol,body.modo-claro .md-note-symbol::after {border-color:#84632e;}
+body.modo-claro .md-detail-page :is(.md-note-tags,.md-inline-tags) span {
+  color:#423423;background:#fff9eebf;border:0;border-radius:1rem;padding:.3rem .75rem;
+}
+body.modo-claro .md-note p,body.modo-claro .md-story p {color:#403c35;}
+body.modo-claro :is(.admin-table,.table) .text-end.text-gold {white-space:nowrap;font-variant-numeric:tabular-nums;}
+body.modo-claro .btn-outline-luxury {color:#604721;border-color:#92754d;}
+body.modo-claro .btn-outline-luxury:is(:hover,:focus-visible) {color:#fff;background:#70532b;}
+@media(max-width:767px) {
+  body.modo-claro .md-detail-page .md-note + .md-note {border-inline-start:0;border-top:1px solid #b8a687;}
+  .md-buy-box {align-items:center;flex-wrap:wrap;}
+}

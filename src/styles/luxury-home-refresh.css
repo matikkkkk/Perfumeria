@@ -1,0 +1,285 @@
+/* Rediseño editorial del inicio; mantiene la identidad de Luxury. */
+.luxury-home-refresh { background: transparent; }
+.luxury-home-refresh .container {max-width:1250px;}
+.luxury-curated-section,.luxury-gender-section,.luxury-editorial-section {padding:76px 0;}
+.luxury-editorial-card {position:relative;display:flex;min-height:300px;overflow:hidden;color:#fff;text-decoration:none;border:1px solid rgba(210,165,72,.38);border-radius:5px;background-color:#17151a;background-size:cover;background-position:center;transition:transform .3s ease,border-color .3s ease;}
+.luxury-editorial-card:hover {transform:translateY(-5px);border-color:#dab759;color:#fff;}
+.luxury-editorial-card--arabe {background-image:linear-gradient(90deg,rgba(15,7,3,.67),transparent),url('/img/fondo-arabe.jpg');}
+.luxury-editorial-card--disenador {background-image:linear-gradient(90deg,rgba(8,15,23,.78),rgba(9,12,20,.25)),url('/img/fondo-disenador.jpg');}
+.luxury-editorial-card--nicho {background-image:linear-gradient(90deg,rgba(26,16,8,.76),rgba(15,10,8,.25)),url('/img/fondo-nicho.jpg');}
+.luxury-gender-card--mujer {background-image:linear-gradient(90deg,rgba(36,7,20,.72),rgba(35,7,20,.08)),url('/img/fondo-ellas.jpg');}
+.luxury-gender-card--hombre {background-image:linear-gradient(90deg,rgba(8,14,23,.78),rgba(8,14,23,.08)),url('/img/fondo-ellos.jpg');}
+.luxury-gender-card--unisex {background-image:linear-gradient(90deg,rgba(20,11,26,.76),rgba(20,11,26,.08)),url('/img/fondo-unisex.jpg');}
+.luxury-editorial-shade {display:flex;flex-direction:column;align-items:flex-start;justify-content:end;width:100%;padding:28px;background:linear-gradient(0deg,rgba(0,0,0,.78),transparent 70%);}
+.luxury-editorial-shade strong {font-family:Georgia,serif;font-size:2rem;line-height:1.3;font-weight:500;}
+.luxury-editorial-shade small {max-width:240px;font-size:.9rem;color:#e0d6c9;margin:7px 0 20px;}
+.luxury-card-action {display:inline-flex;gap:13px;align-items:center;border:1px solid #c6a04d;color:#e4c16a;padding:9px 17px;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;}
+.luxury-editorial-feature {display:grid;grid-template-columns:1fr 1fr;min-height:345px;border:1px solid rgba(210,165,72,.35);background:#101114;}
+.luxury-editorial-copy {display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px;}
+.luxury-editorial-copy p {color:#bdc0c7;max-width:360px;}
+.luxury-editorial-visual {display:flex;align-items:end;justify-content:center;padding:35px;background:linear-gradient(0deg,rgba(7,6,6,.8),transparent),url('/img/fondo-nosotros.jpg') center / cover;}
+.luxury-editorial-visual span {font-family:Georgia,serif;color:#e5c377;font-size:1.25rem;letter-spacing:.12em;text-align:center;}
+.luxury-reference-page {min-height:65vh;background:rgba(8,9,12,.6);}
+.luxury-reference-page .faq-section,.luxury-reference-page .diccionario-section {min-height:auto!important;}
+.luxury-home-refresh .launch-slide p.text-gold-light {display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+@media(max-width:767px){.luxury-curated-section,.luxury-gender-section,.luxury-editorial-section{padding:48px 0;}.luxury-editorial-card{min-height:235px;}.luxury-editorial-feature{grid-template-columns:1fr;}.luxury-editorial-copy{padding:30px;}.luxury-editorial-visual{min-height:190px;}.luxury-editorial-shade strong{font-size:1.7rem;}}
+
+/* Home: dejar visible el fondo de mármol del body entre las tarjetas. */
+.luxury-home-refresh .luxury-curated-section,
+.luxury-home-refresh .luxury-gender-section,
+.luxury-home-refresh .luxury-editorial-section { background: transparent; }
+.luxury-home-refresh .luxury-editorial-visual { background-position:center; background-size:cover; }
+
+
+/* Colecciones del home: CTA centrado para que respire mejor dentro de cada tarjeta. */
+.luxury-home-refresh .luxury-curated-section .luxury-card-action {
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 170px;
+  min-height: 44px;
+  padding: 0 20px;
+  margin-top: 8px;
+  line-height: 1;
+  border: 1px solid #c6a04d;
+  border-bottom: 1px solid #c6a04d;
+}
+.luxury-home-refresh .luxury-curated-section .luxury-card-action i,
+.luxury-home-refresh .luxury-curated-section .luxury-card-action .bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Ambos carruseles del home: transición visual más elegante. */
+.luxury-home-refresh .launch-carousel {
+  position: relative;
+  overflow: hidden;
+}
+.luxury-home-refresh .launch-carousel .carousel-inner {
+  position: relative;
+  min-height: 460px;
+}
+.luxury-home-refresh .launch-carousel .carousel-item {
+  display: block;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(24px,0,0) scale(.988);
+  transition: opacity .55s ease, transform .55s ease, visibility .55s ease;
+  pointer-events: none;
+}
+.luxury-home-refresh .launch-carousel .carousel-item.active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0,0,0) scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+.luxury-home-refresh .launch-carousel .carousel-item:not(.active) {
+  z-index: 1;
+}
+
+.mas-buscados-section .mas-buscados-copy {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+@media(max-width:767px){
+  .luxury-home-refresh .launch-carousel .carousel-inner { min-height: 0; }
+  .luxury-home-refresh .luxury-curated-section .luxury-card-action {
+    min-width: 146px;
+  }
+}
+
+/* Nuevos lanzamientos: dimensiones idénticas para cualquier producto. */
+.luxury-home-refresh .launch-carousel .carousel-item { height: 460px; }
+.luxury-home-refresh .launch-carousel .launch-slide { height: 100%; min-height:0; padding: 14px 14px 38px; }
+.luxury-home-refresh .launch-carousel .launch-img-wrapper { height:100%; min-height:0; border-radius:9px; }
+.luxury-home-refresh .launch-carousel .launch-img { width:100%; height:100%; object-fit:cover; }
+.luxury-home-refresh .launch-carousel .launch-copy { height:100%; min-width:0; padding: 22px 28px 16px 42px !important; display:flex;flex-direction:column;justify-content:center;align-items:flex-start; }
+.luxury-home-refresh .launch-carousel .launch-title { font-size:clamp(1.55rem,2.6vw,2.45rem);line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden; }
+.luxury-home-refresh .launch-carousel .launch-description { display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
+.luxury-home-refresh .launch-carousel .launch-actions { display:flex; flex-wrap:wrap;gap:8px; }
+.luxury-home-refresh .launch-carousel .launch-actions .btn { margin:0 !important; }
+@media(max-width:767px){
+ .luxury-home-refresh .launch-carousel .carousel-item {height:auto;min-height:0;}
+ .luxury-home-refresh .launch-carousel .launch-slide {height:auto;padding:12px 12px 45px;}
+ .luxury-home-refresh .launch-carousel .launch-img-wrapper {height:250px;}
+ .luxury-home-refresh .launch-carousel .launch-copy {height:auto;min-height:325px;padding:22px 20px 18px !important;}
+ .luxury-home-refresh .launch-carousel .launch-title {font-size:1.65rem;}
+}
+
+/* Hero: composición centrada, logotipo de la fotografía despejado. */
+.hero-section {
+  min-height: min(100dvh, 850px);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px clamp(22px, 4.2vh, 48px);
+}
+.hero-banner-img { object-position: center center; }
+/* Oscurecemos únicamente la franja inferior, no el logotipo. */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.50) 18%, rgba(0,0,0,.15) 38%, transparent 62%);
+}
+.hero-overlay-content {
+  position: relative;
+  z-index: 2;
+  width: min(880px, 100%);
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  text-align: center;
+}
+.hero-overlay-content .hero-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: #f3d88f;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .23em;
+  text-shadow: 0 2px 8px #000, 0 0 12px rgba(0,0,0,.65);
+}
+.hero-overlay-content .hero-headline {
+  margin: 0 0 6px;
+  color: #fff9ed;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2rem, 3.35vw, 3rem);
+  line-height: 1.15;
+  text-shadow: 0 3px 12px #000, 0 1px 3px #000;
+}
+.hero-overlay-content .hero-description {
+  max-width: none;
+  margin: 0 auto;
+  color: #fff4df;
+  font-size: clamp(.9rem, 1.12vw, 1.05rem);
+  line-height: 1.5;
+  text-shadow: 0 2px 8px #000, 0 1px 2px #000;
+}
+.hero-overlay-content .hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+.hero-overlay-content .hero-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 19px;
+  font-size: .73rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+.hero-overlay-content .hero-actions .btn-luxury {
+  background: #d8af43;
+  border: 1px solid #edca71;
+  color: #16100a;
+  font-weight: 700;
+}
+.hero-overlay-content .hero-actions .btn-luxury:hover { background: #f0d486; color: #100d0a; }
+.hero-overlay-content .hero-secondary-btn {
+  color: #fff1cd;
+  border: 1px solid #e8ca81;
+  background: rgba(0,0,0,.55);
+}
+.hero-overlay-content .hero-secondary-btn:hover { background: #e8ca81; color: #16100a; }
+@media (max-width: 767px) {
+  .hero-section { min-height: min(90dvh, 770px); padding: 0 16px 24px; }
+  .hero-banner-img { object-position: center center; }
+  .hero-section::after { background: linear-gradient(to top, rgba(0,0,0,.89), rgba(0,0,0,.45) 33%, transparent 68%); }
+  .hero-overlay-content .hero-headline { font-size: clamp(1.7rem, 7vw, 2.35rem); }
+  .hero-overlay-content .hero-description { max-width: 370px; }
+  .hero-overlay-content .hero-actions { gap: 8px; }
+  .hero-overlay-content .hero-actions .btn { padding: 9px 12px; font-size: .66rem; }
+}
+
+/* Distribución editorial de Blog y Guía Olfativa. */
+.luxury-editorial-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, .85fr);
+  gap: 24px;
+}
+
+.luxury-editorial-aside {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.luxury-editorial-mini-card {
+  padding: 28px 24px;
+  border: 1px solid rgba(210, 165, 72, 0.22);
+  background: rgba(15, 15, 18, 0.88);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+}
+
+.luxury-editorial-mini-card p {
+  color: #c8c2b8;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.destacados-section .luxury-title + p,
+.destacados-section .section-label + .luxury-title + p {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+@media (max-width: 1199px) {
+  .luxury-editorial-shell { grid-template-columns: 1fr; }
+}
+
+/* Correcciones: fotografías horizontales visibles en las tres colecciones. */
+.luxury-home-refresh .luxury-curated-section .luxury-editorial-card {
+  min-height: 290px;
+  width: 100%;
+  background-position: center center;
+  background-size: cover;
+}
+.luxury-home-refresh .luxury-curated-section .luxury-editorial-shade {
+  justify-content: flex-end;
+  padding: 26px;
+}
+.luxury-home-refresh .luxury-editorial-mini-card {
+  color: #f5eee3;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background .2s ease, border-color .2s ease;
+}
+.luxury-home-refresh .luxury-editorial-mini-card:hover,
+.luxury-home-refresh .luxury-editorial-mini-card:focus-visible {
+  color: #fff;
+  background: #211e1c;
+  border-color: rgba(224,186,111,.55);
+}
+.luxury-editorial-link-action { color: #e4bc61; font-size: .88rem; }
+.luxury-home-refresh .luxury-editorial-visual { min-height: 300px; }
+@media (max-width: 767.98px) {
+  .luxury-home-refresh .luxury-curated-section .luxury-editorial-card { min-height: 260px; }
+}

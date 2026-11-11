@@ -1,0 +1,123 @@
+/* Acabado editorial: menos efectos decorativos y más protagonismo del producto. */
+:root {
+  --editorial-ivory: #eee8dc;
+  --editorial-muted: #bdb4a5;
+  --editorial-gold: #c8a867;
+}
+
+/* Menos brillo artificial: la interacción se distingue por contraste y movimiento breve. */
+.luxury-card,
+.luxury-editorial-card,
+.btn-luxury {
+  transition: border-color .22s ease, background-color .22s ease,
+              color .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+.luxury-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200, 168, 103, .38) !important;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, .26);
+}
+.luxury-card:hover .card-img-top { transform: scale(1.025); }
+.btn-luxury:hover { box-shadow: none; }
+
+/* Tarjetas comerciales: información más ordenada, menos adornos que compiten. */
+.tarjeta-producto-uniforme {
+  background: #151516;
+  border-color: rgba(214, 191, 150, .2) !important;
+}
+.tarjeta-producto-uniforme .card-body { padding: 1.35rem 1.25rem 1.5rem !important; }
+.tarjeta-producto-uniforme .card-brand {
+  font-size: .71rem !important;
+  letter-spacing: .12em;
+  color: var(--editorial-gold);
+  opacity: 1;
+}
+.tarjeta-producto-uniforme .card-title {
+  color: var(--editorial-ivory);
+  line-height: 1.25;
+  font-weight: 500;
+  margin-top: .4rem;
+}
+.tarjeta-producto-uniforme .card-img-top { transition-duration: .3s; }
+.tarjeta-producto-uniforme .card-badge {
+  border-color: rgba(200, 168, 103, .25);
+  background: rgba(14, 14, 15, .88);
+  font-size: .65rem;
+  letter-spacing: .075em;
+}
+.tarjeta-producto-uniforme .card-badge--ml {
+  background: rgba(25, 23, 21, .84);
+  border-radius: 3px;
+}
+.tarjeta-producto-uniforme .price { letter-spacing: -.02em; }
+.tarjeta-producto-uniforme .btn-luxury {
+  letter-spacing: .095em;
+  font-weight: 500;
+  min-height: 42px;
+}
+
+/* Editorial del Home: imágenes reales, titulares claros, sin recuadros dorados. */
+.luxury-home-refresh .luxury-curated-section,
+.luxury-home-refresh .luxury-gender-section,
+.luxury-home-refresh .luxury-editorial-section { padding-block: clamp(52px, 6vw, 86px); }
+.luxury-home-refresh .luxury-editorial-card {
+  border: 1px solid rgba(222, 205, 174, .22);
+  border-radius: 2px;
+  box-shadow: none;
+}
+.luxury-home-refresh .luxury-editorial-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(222, 205, 174, .55);
+}
+.luxury-home-refresh .luxury-editorial-shade { padding: 28px 26px; }
+.luxury-home-refresh .luxury-editorial-shade strong {
+  font-size: clamp(1.75rem, 2.2vw, 2.25rem);
+  letter-spacing: -.015em;
+}
+.luxury-home-refresh .luxury-editorial-shade small {
+  line-height: 1.55;
+  font-size: .87rem;
+  color: #eee7dc;
+}
+.luxury-home-refresh .luxury-card-action {
+  border: 0;
+  border-bottom: 1px solid rgba(235, 214, 174, .8);
+  padding: 0 0 7px;
+  letter-spacing: .12em;
+  color: #f1dbb2;
+}
+.luxury-home-refresh .luxury-editorial-feature {
+  border-color: rgba(222, 205, 174, .22);
+  background: #141416;
+}
+.luxury-home-refresh .luxury-editorial-copy { padding: clamp(28px, 4.5vw, 64px); }
+.luxury-home-refresh .luxury-editorial-copy p { line-height: 1.8; color: #ccc3b7; }
+.luxury-home-refresh .luxury-editorial-visual span {
+  font-size: .93rem;
+  color: #f1e3c5;
+  letter-spacing: .08em;
+}
+.luxury-home-refresh .launch-carousel { box-shadow: none; }
+.luxury-home-refresh .launch-carousel .launch-title { letter-spacing: -.02em; }
+
+/* Catálogo: la búsqueda y el recuento deben quedar en segundo plano. */
+.catalogo-busqueda input {
+  border-radius: 2px;
+  border-color: rgba(211, 185, 137, .32);
+  background: rgba(19, 18, 18, .92);
+}
+.catalogo-busqueda input:focus { box-shadow: 0 0 0 2px rgba(200, 168, 103, .12); }
+.productos-contenedor .hero-header .luxury-title { letter-spacing: -.015em; }
+
+/* En móvil se prioriza la imagen sin reducir demasiado la zona pulsable. */
+@media (max-width: 767.98px) {
+  .luxury-home-refresh .luxury-editorial-shade { padding: 22px; }
+  .luxury-home-refresh .luxury-editorial-card { min-height: 255px; }
+  .tarjeta-producto-uniforme .card-body { padding: 1.15rem !important; }
+  .tarjeta-producto-uniforme .btn-luxury { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .luxury-card, .luxury-editorial-card, .btn-luxury,
+  .luxury-card .card-img-top { transition: none !important; }
+  .luxury-card:hover, .luxury-editorial-card:hover { transform: none !important; }
+}

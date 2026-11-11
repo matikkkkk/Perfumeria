@@ -1,0 +1,202 @@
+/* Luxury Perfumería · pulido visual responsive (EVA3, octubre 2026).
+   Solo presentación: no modifica la lógica de la tienda. */
+:root { --luxury-focus: #e6ca65; }
+html { scroll-padding-top: 5rem; }
+body { min-width: 320px; }
+img, video, svg { max-width: 100%; }
+.container, .container-fluid, .row > *, main, section { min-width: 0; }
+.luxury-title, .admin-page h1, .admin-page h2 { overflow-wrap: break-word; }
+.btn, button, input, select, textarea { max-width: 100%; }
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--luxury-focus);
+  outline-offset: 3px;
+}
+/* Formularios: consistencia y superficies táctiles cómodas */
+.form-control, .form-select, .admin-input { min-height: 44px; }
+textarea.form-control { min-height: 90px; }
+.form-control:disabled, .form-select:disabled { cursor: not-allowed; }
+.form-label { line-height: 1.45; }
+/* Tablas: el scroll debe ser local, no ensanchar la página. */
+.table-responsive { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.admin-table td, .admin-table th { vertical-align: middle; }
+.admin-table td { overflow-wrap: anywhere; }
+/* Mantener legibles los formularios de filtros y paneles. */
+.admin-panel, .admin-stat-card, .admin-profile-card { min-width: 0; }
+.admin-page .d-flex, .productos-contenedor .d-flex { min-width: 0; }
+/* Los inputs del rango conservan un área de toque accesible */
+.rango-precio-doble { touch-action: pan-y; }
+.rango-precio-doble input[type="range"]::-webkit-slider-thumb { width: 22px; height: 22px; margin-top: -9px; }
+.rango-precio-doble input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; }
+@media (max-width: 991.98px) {
+  .navbar-brand, .brand-logo { letter-spacing: .13em; font-size: clamp(1.15rem, 3vw, 1.55rem); }
+  .navbar-collapse { padding-top: .85rem; }
+  .navbar-nav { align-items: stretch; justify-content: flex-start; gap: .15rem; }
+  .navbar-nav .nav-link { white-space: normal; padding-block: .65rem; }
+  .admin-page .display-5 { font-size: clamp(1.75rem, 4vw, 2.6rem); }
+  .admin-panel { max-width: 100%; }
+}
+@media (max-width: 767.98px) {
+  body.luxury-bg { background-attachment: scroll, scroll; }
+  .container, .container-fluid { padding-left: 1rem; padding-right: 1rem; }
+  .admin-page.container-fluid { padding-inline: 0; }
+  .admin-menu { min-height: auto; }
+  .admin-menu-links { display: flex; flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; padding-bottom: .5rem; -webkit-overflow-scrolling: touch; }
+  .admin-menu-links > a { flex: 0 0 auto; white-space: nowrap; }
+  .admin-page .admin-panel { padding: 1.15rem; }
+  .admin-stat-card { padding: 1rem; }
+  .admin-stat-card strong { font-size: clamp(1.2rem, 4vw, 1.7rem); }
+  .luxury-card:hover { transform: none; }
+  .card-img-wrapper { height: clamp(190px, 49vw, 280px); }
+  .site-footer .row > * { margin-bottom: .5rem; }
+  .table-responsive { margin-inline: -.25rem; width: calc(100% + .5rem); }
+  .admin-table { min-width: 640px; }
+  .admin-table .btn { white-space: nowrap; }
+}
+@media (max-width: 575.98px) {
+  .luxury-title.display-5, .admin-page h1.display-5 { font-size: clamp(1.65rem, 7vw, 2.15rem); }
+  .admin-panel, .luxury-card { overflow-wrap: anywhere; }
+  .admin-page .btn, .admin-page .form-control, .admin-page .form-select { font-size: .9rem; }
+  .admin-page .d-flex.justify-content-between { gap: .75rem; flex-wrap: wrap; }
+  .admin-page .admin-profile-card { padding: 1.1rem; }
+  .rango-precio-doble { margin-inline: 10px; }
+  .btn { white-space: normal; }
+  .modal-dialog { margin: .6rem; }
+  .modal-body { overflow-wrap: anywhere; }
+  .footer-bottom { line-height: 1.6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .luxury-card, .categoria-card__img, .btn { transition-duration: .01ms !important; }
+  html { scroll-behavior: auto !important; }
+}
+@media print {
+  .table-responsive { overflow: visible !important; }
+  .admin-table { min-width: 0 !important; }
+}
+
+/* Detalle del perfume: los banners incluyen texto y composición en la propia
+   fotografía. En tablet/móvil deben mostrarse íntegros, sin cover ni alturas vh.
+   La altura del hero viene dada por la proporción natural de la imagen. */
+@media (max-width: 991.98px) {
+  #heroProducto, #heroProducto .hero-producto--imagen,
+  #heroProducto .hero-producto--contain {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  #heroProducto .hero-producto--imagen,
+  #heroProducto .hero-producto--contain {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+    overflow: visible;
+  }
+
+  #heroProducto .hero-producto--imagen > .hero-producto--fondo-img,
+  #heroProducto .hero-producto--contain > .hero-producto--contain-img {
+    position: static;
+    display: block;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    flex: 0 0 auto;
+  }
+
+  /* El CTA sigue disponible sin obligar al banner a ocupar todo el viewport. */
+  #heroProducto .hero-producto--imagen > .hero-scroll-btn,
+  #heroProducto .hero-producto--contain > .hero-scroll-btn {
+    position: static;
+    inset: auto;
+    transform: none;
+    align-self: center;
+    flex: 0 0 auto;
+    margin: 9px auto 11px;
+    padding: 9px 18px;
+    text-align: center;
+    font-size: .68rem;
+  }
+
+  /* Si no se pudo cargar un banner, conservar el placeholder legible. */
+  #heroProducto .hero-producto--imagen > .imagen-producto-pendiente,
+  #heroProducto .hero-producto--contain > .imagen-producto-pendiente {
+    min-height: 200px;
+    padding: 1.5rem;
+  }
+}
+
+
+/* Buscador del encabezado: panel flotante que no modifica el ancho ni
+   la distribución de los enlaces. Contraste independiente del perfume. */
+.luxury-navbar {
+  position: relative;
+  isolation: isolate;
+  z-index: 1050;
+}
+.luxury-navbar > .container {
+  flex-wrap: wrap;
+}
+.luxury-navbar .nav-search-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1051;
+  border-top: 1px solid rgba(212, 175, 55, .35);
+  border-bottom: 1px solid rgba(212, 175, 55, .38);
+  background: #15171c;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .32);
+}
+.luxury-navbar .nav-search-box .container { max-width: 1200px; }
+.luxury-navbar .nav-search-form {
+  align-items: center;
+  width: min(100%, 760px);
+  margin-inline: auto;
+}
+.luxury-navbar .nav-search-form .form-control {
+  min-width: 0;
+  flex: 1 1 auto;
+  background: #22252b;
+  color: #fff;
+  border: 1px solid #9f833d;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.luxury-navbar .nav-search-form .form-control::placeholder { color: #bfc3cb; opacity: 1; }
+.luxury-navbar .nav-search-form .form-control:focus {
+  border-color: #e6ca65;
+  box-shadow: 0 0 0 .15rem rgba(212,175,55,.23);
+}
+.luxury-navbar .nav-search-form .nav-search-submit {
+  flex: 0 0 auto;
+  min-height: 44px;
+  min-width: 48px;
+}
+.luxury-navbar .nav-search-close {
+  flex: 0 0 44px;
+  height: 44px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(212,175,55,.45);
+  border-radius: 4px;
+  color: #f3e4b7;
+  background: #292c32;
+  cursor: pointer;
+}
+.luxury-navbar .nav-search-close:hover,
+.luxury-navbar .nav-search-close:focus-visible {
+  background: #37312a;
+  color: #fff;
+}
+@media (max-width: 575.98px) {
+  .luxury-navbar .nav-search-box .container { padding: .75rem 1rem !important; }
+  .luxury-navbar .nav-search-form { gap: .45rem !important; }
+  .luxury-navbar .nav-search-close { flex-basis: 40px; width: 40px; height: 44px; }
+  .luxury-navbar .nav-search-form .nav-search-submit { min-width: 44px; }
+}

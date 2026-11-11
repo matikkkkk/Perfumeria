@@ -1,0 +1,271 @@
+/* Legibilidad adaptativa del detalle: no altera el diseño global de la tienda. */
+body.detalle-tema-adaptativo {
+  --luxury-section-text: #fffaf2;
+  --luxury-section-muted: #e4dbd0;
+  --luxury-section-accent: #e6c478;
+  --luxury-card-text: #fffaf2;
+  --luxury-card-muted: #e4dbd0;
+  --luxury-card-surface: #242126;
+  --luxury-on-accent: #181619;
+  --luxury-modal-accent: #e6c478;
+  --luxury-card-accent: #e6c478;
+  --luxury-card-button-text: #e6c478;
+  --luxury-page-base: #111217;
+  --luxury-page-glow: rgba(196, 157, 82, 0.14);
+  --luxury-page-soft: rgba(255, 255, 255, 0.03);
+  --luxury-neutral-section-bg: linear-gradient(180deg, rgba(15, 16, 21, 0.92), rgba(13, 13, 18, 0.96));
+  --luxury-neutral-section-border: rgba(228, 196, 133, 0.18);
+  --luxury-reading-surface: rgba(15, 16, 21, .88);
+  --luxury-reading-border: rgba(228, 196, 133, .2);
+}
+
+/* Familias visuales: el perfume aporta el acento, pero la página usa una base controlada. */
+body.detalle-tema-adaptativo.detalle-familia-oscuro {
+  --luxury-page-base: #10131b;
+  --luxury-page-glow: rgba(91, 131, 185, 0.18);
+  --luxury-page-soft: rgba(255, 255, 255, 0.02);
+  --luxury-neutral-section-bg: linear-gradient(180deg, rgba(10, 14, 22, 0.94), rgba(12, 16, 25, 0.98));
+}
+
+body.detalle-tema-adaptativo.detalle-familia-claro {
+  --luxury-page-base: #f3ede3;
+  --luxury-page-glow: rgba(183, 151, 92, 0.18);
+  --luxury-page-soft: rgba(255, 255, 255, 0.72);
+  --luxury-neutral-section-bg: linear-gradient(180deg, rgba(255, 250, 244, 0.9), rgba(250, 244, 234, 0.96));
+  --luxury-neutral-section-border: rgba(171, 136, 76, 0.22);
+  --luxury-reading-surface: rgba(31, 27, 25, 0.9);
+  --luxury-reading-border: rgba(191, 155, 92, 0.28);
+}
+
+body.detalle-tema-adaptativo.detalle-familia-calido {
+  --luxury-page-base: #f1e4d4;
+  --luxury-page-glow: rgba(181, 95, 44, 0.18);
+  --luxury-page-soft: rgba(255, 247, 238, 0.6);
+  --luxury-neutral-section-bg: linear-gradient(180deg, rgba(255, 248, 241, 0.9), rgba(248, 236, 223, 0.96));
+  --luxury-neutral-section-border: rgba(161, 98, 55, 0.22);
+  --luxury-reading-surface: rgba(35, 24, 20, 0.9);
+  --luxury-reading-border: rgba(198, 129, 72, 0.26);
+}
+
+body.detalle-tema-adaptativo.detalle-familia-suave {
+  --luxury-page-base: #f5e8e6;
+  --luxury-page-glow: rgba(196, 126, 148, 0.18);
+  --luxury-page-soft: rgba(255, 250, 250, 0.7);
+  --luxury-neutral-section-bg: linear-gradient(180deg, rgba(255, 249, 246, 0.9), rgba(252, 243, 241, 0.96));
+  --luxury-neutral-section-border: rgba(183, 125, 142, 0.2);
+  --luxury-reading-surface: rgba(39, 30, 34, 0.92);
+  --luxury-reading-border: rgba(225, 188, 198, 0.34);
+}
+
+body.detalle-tema-adaptativo.luxury-bg {
+  background-color: var(--luxury-page-base) !important;
+  background-image:
+    radial-gradient(circle at 12% 14%, var(--luxury-page-soft) 0%, transparent 32%),
+    radial-gradient(circle at 86% 18%, var(--luxury-page-glow) 0%, transparent 29%),
+    radial-gradient(circle at 50% 100%, color-mix(in srgb, var(--luxury-page-base) 92%, white) 0%, transparent 38%),
+    linear-gradient(180deg, color-mix(in srgb, var(--luxury-page-base) 95%, white) 0%, var(--luxury-page-base) 100%) !important;
+}
+
+/* Superficies de color: los valores se calculan según la luminosidad efectiva. */
+body.detalle-tema-adaptativo #heroProducto .hero-producto--fallback .hero-nombre,
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto,
+body.detalle-tema-adaptativo #maridajeProducto .maridaje-contenido,
+body.detalle-tema-adaptativo #historiaProducto .historia-producto--fallback .historia-contenido,
+body.detalle-tema-adaptativo #ctaProducto .cta-producto--fallback .cta-contenido {
+  color: var(--luxury-section-text);
+}
+body.detalle-tema-adaptativo #heroProducto .hero-producto--fallback .hero-tagline,
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-texto {
+  color: var(--luxury-section-muted);
+}
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto .piramide-etapa-titulo,
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto .piramide-etapa-notas {
+  color: var(--luxury-section-text);
+}
+body.detalle-tema-adaptativo #historiaProducto .historia-producto--fallback .titulo,
+body.detalle-tema-adaptativo #ctaProducto .cta-producto--fallback h3,
+body.detalle-tema-adaptativo #ctaProducto .cta-producto--fallback p,
+body.detalle-tema-adaptativo #maridajeProducto .luxury-title {
+  color: var(--luxury-section-text);
+}
+
+/* Las fotografías pueden tener zonas claras y oscuras en la misma imagen.
+   Por eso los encabezados se leen sobre una placa controlada. */
+body.detalle-tema-adaptativo #piramideProducto .piramide-section > .container > .text-center,
+body.detalle-tema-adaptativo #reviewsProducto .reviews-section > .container > .text-center,
+body.detalle-tema-adaptativo #maridajeProducto .maridaje-contenido {
+  width: fit-content;
+  max-width: min(100%, 760px);
+  margin-inline: auto;
+  padding: 18px 26px;
+  border-radius: 6px;
+  background: var(--luxury-reading-surface);
+  border: 1px solid var(--luxury-reading-border);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+}
+body.detalle-tema-adaptativo #piramideProducto .piramide-section > .container > .text-center .luxury-title,
+body.detalle-tema-adaptativo #reviewsProducto .reviews-section > .container > .text-center .luxury-title,
+body.detalle-tema-adaptativo #maridajeProducto .maridaje-contenido .luxury-title {
+  color: #fffaf2;
+  text-shadow: none;
+}
+body.detalle-tema-adaptativo #piramideProducto .piramide-section > .container > .text-center .text-tema-dorado,
+body.detalle-tema-adaptativo #reviewsProducto .reviews-section > .container > .text-center .text-tema-dorado,
+body.detalle-tema-adaptativo #maridajeProducto .maridaje-contenido > .text-tema-dorado {
+  color: #f1cf83;
+}
+body.detalle-tema-adaptativo #reviewsProducto .reviews-section > .container > .text-center .text-gold-light {
+  color: #e8ded0;
+}
+
+/* Secciones neutras: reseñas, maridaje y relacionados no se tiñen completo con el perfume. */
+body.detalle-tema-adaptativo .detalle-seccion-neutra {
+  position: relative;
+  background: var(--luxury-neutral-section-bg);
+  border-top: 1px solid var(--luxury-neutral-section-border);
+  border-bottom: 1px solid var(--luxury-neutral-section-border);
+}
+body.detalle-tema-adaptativo .detalle-seccion-neutra::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 10%, var(--luxury-page-soft) 0%, transparent 24%),
+    radial-gradient(circle at 85% 100%, var(--luxury-page-glow) 0%, transparent 28%);
+  opacity: .9;
+}
+body.detalle-tema-adaptativo .detalle-seccion-neutra > * {
+  position: relative;
+  z-index: 1;
+}
+body.detalle-tema-adaptativo #maridajeProducto {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+body.detalle-tema-adaptativo #maridajeProducto .maridaje-section {
+  min-height: auto;
+  padding-inline: 1rem;
+}
+body.detalle-tema-adaptativo #maridajeProducto .maridaje-contenido {
+  min-width: min(100%, 540px);
+}
+body.detalle-tema-adaptativo #maridajeProducto .occasion-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(241, 207, 131, 0.2);
+}
+body.detalle-tema-adaptativo.detalle-familia-suave #maridajeProducto .occasion-chip,
+body.detalle-tema-adaptativo.detalle-familia-claro #maridajeProducto .occasion-chip,
+body.detalle-tema-adaptativo.detalle-familia-calido #maridajeProducto .occasion-chip {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Tarjetas de reseñas: color basado en --tema-card, no en --tema-bg. */
+body.detalle-tema-adaptativo #reviewsProducto .review-card {
+  background-color: var(--luxury-card-surface);
+  color: var(--luxury-card-text);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card h4,
+body.detalle-tema-adaptativo #reviewsProducto .review-card label,
+body.detalle-tema-adaptativo #reviewsProducto .review-card .review-nombre,
+body.detalle-tema-adaptativo #reviewsProducto .review-card p:not(.text-gold-light) {
+  color: var(--luxury-card-text);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .text-gold-light,
+body.detalle-tema-adaptativo #reviewsProducto .review-card small {
+  color: var(--luxury-card-muted);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .estrellas {
+  color: var(--luxury-card-accent);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .review-avatar {
+  background: var(--luxury-card-accent);
+  color: var(--luxury-on-accent);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .btn-luxury {
+  border-color: var(--luxury-card-button-text);
+  color: var(--luxury-card-button-text);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .btn-luxury:hover:not(:disabled) {
+  background: var(--luxury-card-button-text);
+  color: var(--luxury-on-accent);
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .form-control,
+body.detalle-tema-adaptativo #reviewsProducto .review-card .form-select {
+  background-color: #fff;
+  color: #202025;
+  border-color: #b7a994;
+}
+body.detalle-tema-adaptativo #reviewsProducto .review-card .form-control:focus,
+body.detalle-tema-adaptativo #reviewsProducto .review-card .form-select:focus {
+  border-color: var(--luxury-card-accent);
+  box-shadow: 0 0 0 3px rgba(126, 102, 67, .16);
+}
+
+/* Lectura protegida cuando el fondo de historia o CTA es fotográfico. */
+body.detalle-tema-adaptativo #historiaProducto .historia-producto:not(.historia-producto--fallback) .historia-contenido,
+body.detalle-tema-adaptativo #ctaProducto .cta-producto:not(.cta-producto--fallback) .cta-contenido {
+  background: linear-gradient(90deg, rgba(10, 10, 12, .85), rgba(10, 10, 12, .58));
+  border-radius: 5px;
+}
+body.detalle-tema-adaptativo #historiaProducto .historia-producto:not(.historia-producto--fallback) .titulo {
+  color: #f1cf83;
+}
+body.detalle-tema-adaptativo #historiaProducto .historia-producto:not(.historia-producto--fallback) p,
+body.detalle-tema-adaptativo #ctaProducto .cta-producto:not(.cta-producto--fallback) .cta-contenido p,
+body.detalle-tema-adaptativo #ctaProducto .cta-producto:not(.cta-producto--fallback) .cta-contenido h3 {
+  color: #fff7eb;
+}
+
+@media (max-width: 575.98px) {
+  body.detalle-tema-adaptativo #piramideProducto .piramide-section > .container > .text-center,
+  body.detalle-tema-adaptativo #reviewsProducto .reviews-section > .container > .text-center,
+  body.detalle-tema-adaptativo #maridajeProducto .maridaje-contenido {
+    padding: 16px 18px;
+  }
+}
+
+/* Elementos que se dibujan directamente sobre una fotografía. */
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto {
+  background: rgba(17, 18, 22, .95);
+  border-color: rgba(241, 207, 131, .23);
+}
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto .piramide-etapa-titulo,
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto .piramide-etapa-notas {
+  color: #fffaf2;
+}
+body.detalle-tema-adaptativo #piramideProducto .piramide-etapa-card--texto .piramide-etapa-texto {
+  color: #e8ded0;
+}
+body.detalle-tema-adaptativo #reviewsProducto .reviews-section > .container > p:not(.visually-hidden) {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 9px 14px;
+  border-radius: 4px;
+  background: var(--luxury-reading-surface);
+  color: #f4eadb;
+}
+body.detalle-tema-adaptativo .breadcrumb-luxury,
+body.detalle-tema-adaptativo .breadcrumb-luxury a {
+  color: var(--luxury-section-muted);
+}
+body.detalle-tema-adaptativo .breadcrumb-luxury li.active {
+  color: var(--luxury-section-accent);
+}
+
+body.detalle-tema-adaptativo #heroProducto .hero-scroll-btn {
+  background: rgba(13, 13, 17, .9);
+  color: #fff9ed;
+  border-color: #edd59e;
+}
+body.detalle-tema-adaptativo #heroProducto .hero-scroll-btn:hover {
+  background: #e6c681;
+  color: #171417;
+  border-color: #e6c681;
+}
+body.detalle-tema-adaptativo #historiaProducto .historia-producto:not(.historia-producto--fallback) .text-tema-dorado {
+  color: #f1cf83;
+}
+body.detalle-tema-adaptativo .modal-compra .precio-modal {
+  color: var(--luxury-modal-accent);
+}
