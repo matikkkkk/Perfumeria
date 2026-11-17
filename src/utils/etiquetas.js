@@ -32,13 +32,14 @@ export const FAMILIA = {
   frutal: "Frutal",
   avainillado: "Avainillado",
   atalcados: "Atalcado",
+  ambarado: "Ambarado",
 };
 
 export const TIPO = { disenador: "Diseñador", nicho: "Nicho", arabe: "Árabe" };
 
-export const CONCENTRACION = { edt: "EDT", edp: "EDP", parfum: "Parfum", edc: "EDC", eau_cologne: "Eau de Cologne" };
+export const CONCENTRACION = { edt: "EDT", edp: "EDP", parfum: "Parfum", edc: "EDC", eau_cologne: "Eau de Cologne", extrait: "Extrait" };
 
-export const ESTACION = { primavera: "Primavera", verano: "Verano", otono: "Otoño", invierno: "Invierno" };
+export const ESTACION = { primavera: "Primavera", verano: "Verano", otono: "Otoño", invierno: "Invierno", todo_el_ano: "Todo el año" };
 
 // Si la clave no existe en el diccionario se devuelve tal cual (igual que `HUMOR_LABELS[tag] || tag` del HTML).
 const textoDe = (diccionario) => (clave) => diccionario[clave] || clave;
