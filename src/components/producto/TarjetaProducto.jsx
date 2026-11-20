@@ -34,7 +34,7 @@ export default function TarjetaProducto({ producto: p, columna = "col-12 col-md-
         >
           <i className={`bi ${enWishlist ? "bi-heart-fill" : "bi-heart"}`}></i>
         </button>
-        <div className="card-img-wrapper">
+        <div className="card-img-wrapper producto-foto-cuadrada">
           <span className="card-badge card-badge--ml">
             <i className="bi bi-cloud-fill"></i> {p.ml} ML
           </span>

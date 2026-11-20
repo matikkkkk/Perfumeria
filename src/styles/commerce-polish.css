@@ -140,3 +140,31 @@
 @media (max-width: 575.98px) {
   .detalle-relacionados .detalle-relacionados-encabezado { padding: 15px 18px; }
 }
+
+/* La misma proporción de fotografía en catálogo, ofertas y relacionados.
+   Se sustituyen los tamaños circulares heredados de las grillas por ID. */
+.tarjeta-producto-uniforme .producto-foto-cuadrada {
+  position:relative;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1 / 1;
+  flex:0 0 auto;
+  margin:0!important;
+  padding:0!important;
+  border-radius:0!important;
+  overflow:hidden;
+  box-shadow:none!important;
+}
+.tarjeta-producto-uniforme .producto-foto-cuadrada > img,
+.tarjeta-producto-uniforme .producto-foto-cuadrada > .imagen-producto-pendiente {
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center;
+  border-radius:0!important;
+}
