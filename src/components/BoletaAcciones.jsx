@@ -44,7 +44,7 @@ export default function BoletaAcciones({ ordenId }) {
     {error && <p role="alert" className="text-danger">{error}</p>}
     <div className="d-flex flex-wrap gap-2 justify-content-center">
       <button type="button" className="btn btn-luxury" disabled={ocupado} onClick={descargar}><i className="bi bi-file-earmark-pdf me-2" aria-hidden="true" />Descargar boleta PDF</button>
-      {estado && ["ERROR", "DESACTIVADO", "SIN_SOLICITAR"].includes(estado.estado) && <button type="button" className="btn btn-outline-secondary" disabled={ocupado} onClick={solicitar}>Solicitar envío por correo</button>}
+      {estado && ["ERROR", "DESACTIVADO", "SIN_SOLICITAR"].includes(estado.estado) && <button type="button" className="btn btn-luxury" disabled={ocupado} onClick={solicitar}>{estado.estado === "ERROR" ? "Reintentar envío por correo" : "Solicitar envío por correo"}</button>}
       {error && <button type="button" className="btn btn-outline-secondary" onClick={() => setRevision(r => r + 1)}>Actualizar estado</button>}
     </div>
   </section>;

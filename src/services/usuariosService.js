@@ -17,9 +17,9 @@ export const usuariosService = {
     });
   },
 
-  loginGoogle(credential) {
+  loginGoogle(credential, datos = {}) {
     return peticion("/auth/google", {
-      method: "POST", body: JSON.stringify({ credential }),
+      method: "POST", body: JSON.stringify({ credential, ...datos }),
     });
   },
 

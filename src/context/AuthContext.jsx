@@ -24,17 +24,19 @@ export function AuthProvider({ children }) {
   const iniciarSesion = useCallback(
     async (correo, password) => {
       const encontrado = await usuariosService.login(correo, password);
-      guardarStorage("usuarioActual", encontrado);
-      setUsuario(encontrado);
+      if (encontrado.requiereCompletarPerfil) return encontrado;
+    guardarStorage("usuarioActual", encontrado);
+    setUsuario(encontrado);
       return encontrado;
     },
     [setUsuario]
   );
 
-  const iniciarSesionGoogle = useCallback(async (credential) => {
-    const encontrado = await usuariosService.loginGoogle(credential);
+  const iniciarSesionGoogle = useCallback(async (credential, datos) => {
+    const encontrado = await usuariosService.loginGoogle(credential, datos);
+    if (encontrado.requiereCompletarPerfil) return encontrado;
     guardarStorage("usuarioActual", encontrado);
-      setUsuario(encontrado);
+    setUsuario(encontrado);
     return encontrado;
   }, [setUsuario]);
 

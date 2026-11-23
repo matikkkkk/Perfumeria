@@ -63,7 +63,7 @@ export default function UsuariosAdmin() {
                   {filtrados.map((u) => (
                     <tr key={u.id}>
                       <td className="fw-semibold">{u.nombre} {u.apellidos}</td>
-                      <td>{u.run || u.id}</td>
+                      <td>{u.run || "Pendiente"}</td>
                       <td>{u.correo}</td>
                       <td><span className="badge text-bg-secondary">{u.tipo || "Cliente"}</span></td>
                       <td className="text-end text-nowrap"><Link className="btn btn-sm btn-outline-light me-2" to={`/admin/usuarios/${u.id}`}>Ver</Link><Link className="btn btn-sm btn-outline-light" to={`/admin/usuarios/${u.id}/editar`} aria-label={`Editar ${u.nombre}`}><i className="bi bi-pencil" /></Link></td>

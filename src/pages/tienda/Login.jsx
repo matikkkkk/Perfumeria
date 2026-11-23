@@ -9,6 +9,8 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [googlePendiente, setGooglePendiente] = useState(null);
+  const [perfilGoogle, setPerfilGoogle] = useState({ run: "", password: "", passwordConfirm: "" });
   const googleRef = useRef(null);
   const googleLoginRef = useRef(null);
   googleLoginRef.current = iniciarSesionGoogle;
@@ -31,6 +33,11 @@ export default function Login() {
           setCargando(true);
           try {
             const usuario = await googleLoginRef.current(credential);
+            if (usuario.requiereCompletarPerfil) {
+              setPerfilGoogle({ run: "", password: "", passwordConfirm: "" });
+              setGooglePendiente(credential);
+              return;
+            }
             const destino = destinoRef.current || (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor" ? "/admin" : "/");
             navigateRef.current(destino, { replace: true });
           } catch (error) {
@@ -119,6 +126,24 @@ export default function Login() {
     }
   }
 
+  async function completarGoogle(evento) {
+    evento.preventDefault();
+    const error = reglasCampos.run(perfilGoogle.run) || reglasCampos.password(perfilGoogle.password)
+      || reglasCampos.passwordConfirm(perfilGoogle.passwordConfirm, perfilGoogle);
+    setMensajeGeneral(error);
+    if (error) return;
+    setCargando(true);
+    try {
+      const usuario = await iniciarSesionGoogle(googlePendiente, { run: perfilGoogle.run, password: perfilGoogle.password });
+      if (usuario.requiereCompletarPerfil) throw new Error("Completa todos los datos para continuar.");
+      setGooglePendiente(null);
+      setPerfilGoogle({ run: "", password: "", passwordConfirm: "" });
+      navigate(destinoRef.current || "/", { replace: true });
+    } catch (error) {
+      setMensajeGeneral(error?.cuerpo?.mensaje || error?.message || "No se pudo completar tu cuenta.");
+    } finally { setCargando(false); }
+  }
+
   return (
     <section className="container py-5 my-4" style={{ maxWidth: 760 }}>
       <div className="text-center mb-5 hero-header">
@@ -129,7 +154,21 @@ export default function Login() {
       </div>
 
       <div className="card luxury-card p-4 p-md-5 auth-card">
-        <form className="luxury-form" onSubmit={enviar} noValidate>
+        {googlePendiente ? <form className="luxury-form" onSubmit={completarGoogle} noValidate>
+          <h2 className="h4 luxury-title">Completa tu cuenta</h2>
+          <p>Google ya confirmó tu identidad. Ingresa tu RUT y elige una contraseña para Maison Luxury. Después podrás entrar con Google o con tu correo y esta contraseña.</p>
+          <p className="small">La contraseña es para esta tienda; no ingreses la de tu cuenta de Google.</p>
+          {[{name:"run", label:"RUT", type:"text"}, {name:"password", label:"Contraseña para la tienda", type:"password"}, {name:"passwordConfirm", label:"Confirmar contraseña", type:"password"}].map(c => <div className="mb-3" key={c.name}>
+            <label className="form-label form-label-luxury" htmlFor={`google-${c.name}`}>{c.label}</label>
+            <input id={`google-${c.name}`} className="form-control form-luxury" type={c.type} name={c.name}
+              autoComplete={c.type === "password" ? "new-password" : "off"} required value={perfilGoogle[c.name]}
+              onChange={e => setPerfilGoogle(p => ({...p, [c.name]:e.target.value}))} disabled={cargando}/>
+          </div>)}
+          <p className="small">Contraseña de 4 a 10 caracteres.</p>
+          {mensajeGeneral && <div className="alert alert-danger" role="alert">{mensajeGeneral}</div>}
+          <button className="btn btn-luxury w-100" disabled={cargando}>{cargando ? "Guardando…" : "Guardar y continuar"}</button>
+          <button className="btn btn-link text-gold-light mt-3" type="button" disabled={cargando} onClick={() => {setGooglePendiente(null);setPerfilGoogle({run:"",password:"",passwordConfirm:""});setMensajeGeneral("");}}>Cancelar y volver</button>
+        </form> : <form className="luxury-form" onSubmit={enviar} noValidate>
           <div className="mb-3">
             <label className="form-label form-label-luxury" htmlFor="login-correo">Correo electrónico</label>
             <input
@@ -169,10 +208,10 @@ export default function Login() {
           <button className="btn btn-luxury w-100 mt-2" type="submit" disabled={cargando}>
             {cargando ? "Ingresando…" : "Ingresar"}
           </button>
-        </form>
+        </form>}
 
         {import.meta.env.VITE_GOOGLE_CLIENT_ID && (
-          <div className="mt-4 text-center">
+          <div className="mt-4 text-center" hidden={!!googlePendiente}>
             <p className="text-gold-light mb-3">O continúa con</p>
             <div ref={googleRef} className="d-flex justify-content-center" aria-label="Iniciar sesión con Google" />
           </div>
